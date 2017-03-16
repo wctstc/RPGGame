@@ -5,8 +5,10 @@
 
 
 #include <vector>
+#include <string>
 
 using std::vector;
+using std::string;
 
 #define FrameCorner     "+"
 #define FrameHorizontal "-"
@@ -47,6 +49,23 @@ struct OptionsPosition
 {
 	Direction direction;
 	vector< Position > positions;
+};
+
+struct OptionsData
+{
+	unsigned int frame_id;
+	string option_discription;
+};
+
+struct FrameData
+{
+	unsigned int id;
+	Position postion;
+	Size size;
+	string discription;
+	Direction direction;
+	int m_gap;
+	vector<OptionsData> m_options;
 };
 
 

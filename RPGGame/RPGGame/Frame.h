@@ -17,6 +17,7 @@ public:
 	~Frame(void);
 
 public:
+	
 	bool Init(Position postion, Size size,string discription,Direction &direction, int gap, vector< string > options);
 	void Show();
 	OptionsPosition GetOptionsPosition();

@@ -3,8 +3,9 @@
 #include <conio.h>
 #include "Struct.h"
 #include "UIBase.h"
+#include "Singleton.h"
 
-class OptionsArrow
+class OptionsArrow : public Singleton<OptionsArrow>
 {
 public:
 	OptionsArrow(void);

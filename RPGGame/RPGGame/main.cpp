@@ -3,10 +3,11 @@
 
 #include "Frame.h"
 #include "Option.h"
+#include "App.h"
 
 
 #include <conio.h>
-int main1()
+int main()
 {
 	Frame frame;
 	OptionsArrow option;
@@ -24,11 +25,16 @@ int main1()
 
 	frame.Init( postion,size,discription,direction,gap,options );
 
-	frame.Show();
+	//frame.Show();
 
-	option.Init( frame.GetOptionsPosition() );
+	//option.Init( frame.GetOptionsPosition() );
 
-	printf( "option:%d", option.SelectOption() );
+	//printf( "option:%d", option.SelectOption() );
+
+	App app;
+	app.Init();
+	app.Start();
+
 
 	system("pause");
 	return 0;

@@ -121,17 +121,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Config.cpp" />
     <ClCompile Include="Frame.cpp" />
+    <ClCompile Include="FrameLoader.cpp" />
+    <ClCompile Include="FrameManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Option.cpp" />
     <ClCompile Include="proto\google\protobuf\stubs\common.cpp" />
     <ClCompile Include="proto\point.pb.cc" />
+    <ClCompile Include="Req.cpp" />
+    <ClCompile Include="App.cpp" />
+    <ClCompile Include="Rsp.cpp" />
     <ClCompile Include="UIBase.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cmd.h" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="Frame.h" />
+    <ClInclude Include="FrameLoader.h" />
+    <ClInclude Include="FrameManager.h" />
+    <ClInclude Include="Manager.h" />
     <ClInclude Include="Option.h" />
     <ClInclude Include="proto\point.pb.h" />
+    <ClInclude Include="Req.h" />
+    <ClInclude Include="App.h" />
+    <ClInclude Include="Rsp.h" />
+    <ClInclude Include="Singleton.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="UIBase.h" />
   </ItemGroup>
