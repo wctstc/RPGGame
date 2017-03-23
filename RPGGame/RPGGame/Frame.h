@@ -10,6 +10,13 @@
 using std::string;
 using std::vector;
 
+using data::Size;
+using data::Position;
+using data::Direction;
+using data::OptionData;
+using data::FrameData;
+using data::OptionData;
+
 class Frame
 {
 public:
@@ -18,29 +25,34 @@ public:
 
 public:
 	
-	bool Init(Position postion, Size size,string discription,Direction &direction, int gap, vector< string > options);
+	bool Init( int iID, Position postion, Size size,string discription,Direction &direction, int gap, vector< OptionData > options);
 	void Show();
-	OptionsPosition GetOptionsPosition();
+	int GetFrameIdByOptionIndex( int iIndex );
+	data::OptionsPosition GetOptionsPosition();
 public:
-	inline Position       &GetPostion(){ return m_postion; }
-	inline Size           &GetSize(){ return m_size; }
-	inline string         &GetDiscription(){ return m_discription; }
-	inline Direction      &GetDirection(){ return m_direction; }
-	inline int             GetGap(){ return m_gap; }
-	inline vector<string> &GetOptions(){ return m_options; }
+	inline const int        GetID() const { return m_iID; }
+	inline const Position&  GetPostion() const { return m_oPostion; }
+	inline const Size&      GetSize() const { return m_oSize; }
+	inline const string&    GetDiscription() const { return m_sDiscription; }
+	inline const Direction& GetDirection() const { return m_eDirection; }
+	inline const int        GetGap() const { return m_iGap; }
+	inline const vector<OptionData>& GetOptions() const { return m_vOptions; }
 
-	inline void SetPosition( Position &position ){ m_postion = position; }
-	inline void SetSize( Size &size ){ m_size = size; }
-	inline void SetDiscription( string &discription ){ m_discription = discription; }
-	inline void SetDirection( Direction &direction ){ m_direction = direction; }
-	inline void SetGap( int gap ){ m_gap = gap; }
-	inline void SetOptions( vector<string> &options ){ m_options = options; }
+	inline void SetID(const int iID) { m_iID = iID; }
+	inline void SetPosition( const Position &position ){ m_oPostion = position; }
+	inline void SetSize(const Size &size ){ m_oSize = size; }
+	inline void SetDiscription(const string &discription ){ m_sDiscription = discription; }
+	inline void SetDirection(const Direction &direction ){ m_eDirection = direction; }
+	inline void SetGap(const int iGap ){ m_iGap = iGap; }
+	inline void SetOptions(const vector<OptionData> &vOptions ){ m_vOptions = vOptions; }
 private:
-	Position m_postion;
-	Size m_size;
-	string m_discription;
-	Direction m_direction;
-	int m_gap;
-	vector< string > m_options;
+	int m_iID;
+	Position m_oPostion;
+	Size m_oSize;
+	string m_sDiscription;
+	Direction m_eDirection;
+	int m_iGap;
+	vector< OptionData > m_vOptions;
+
 };
 

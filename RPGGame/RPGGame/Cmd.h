@@ -5,7 +5,8 @@ namespace cmd
 {
 	enum Command
 	{
-		ENUM_CMD_START,
+		COMMAND_IDLE,
+		COMMAND_START,
 
 	};
 }

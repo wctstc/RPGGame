@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// https://developers.google.com/protocol-buffers/
+// http://code.google.com/p/protobuf/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -43,7 +43,6 @@
 
 namespace google {
 namespace protobuf {
-using internal::NewCallback;
 namespace {
 
 class OnceInitTest : public testing::Test {
@@ -128,11 +127,10 @@ class OnceInitTest : public testing::Test {
   };
 
   TestThread* RunInitOnceInNewThread() {
-    return new TestThread(internal::NewCallback(this, &OnceInitTest::InitOnce));
+    return new TestThread(NewCallback(this, &OnceInitTest::InitOnce));
   }
   TestThread* RunInitRecursiveOnceInNewThread() {
-    return new TestThread(
-        internal::NewCallback(this, &OnceInitTest::InitRecursiveOnce));
+    return new TestThread(NewCallback(this, &OnceInitTest::InitRecursiveOnce));
   }
 
   enum State {

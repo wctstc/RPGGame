@@ -1,6 +1,8 @@
 #ifndef __FRAMEMANAGER_H__
 #define __FRAMEMANAGER_H__
 
+#include <list>
+
 #include "Singleton.h"
 #include "Manager.h"
 #include "Cmd.h"
@@ -8,6 +10,7 @@
 #include "Frame.h"
 #include "Option.h"
 
+using std::list;
 using cmd::Command;
 
 class FrameManager : public Singleton<FrameManager>, public Manager
@@ -21,9 +24,13 @@ public:
 	virtual int Stop();
 	virtual void Finish();
 public:
-	int HandleStart(Req &oReq, Rsp &oRsp);
+	int HandleIdle(Req &oReq);
+	int HandleStart(Req &oReq);
 private:
-	virtual int Handle(int iCmd, Req &oReq, Rsp &oRsp);
+	virtual int Handle(int iCmd, Req &oReq);
+
+private:
+	list<Frame*> m_lsFrames;
 };
 
 #endif // __FRAMEMANAGER_H__

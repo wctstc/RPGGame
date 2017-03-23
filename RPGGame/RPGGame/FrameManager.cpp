@@ -20,8 +20,9 @@ bool FrameManager::Init(App* pApp, Config *pConfig)
 	if (!bRet)
 		return false;
 
-	
-	RegiterCmd(cmd::ENUM_CMD_START);
+
+	RegisterCmd(cmd::COMMAND_IDLE);
+	RegisterCmd(cmd::COMMAND_START);
 
 	return true;
 }
@@ -49,25 +50,66 @@ void FrameManager::Finish()
 
 }
 
-int FrameManager::HandleStart(Req &oReq, Rsp &oRsp)
+int FrameManager::HandleIdle(Req &oReq)
 {
-	Frame *frame = FrameLoader::GetInstance().GetFrameByID(0);
+	return 1;
+}
 
-	frame->Show();
+int FrameManager::HandleStart(Req &oReq)
+{
+	Frame *pFrame = FrameLoader::GetInstance().GetFrameByID(0);
+	int iFrameID;
+	m_lsFrames.push_back(pFrame);
+	bool bFlash = true;
+	list<Frame*>::const_iterator cpIt;
+	int iSelected;
+	while (true)
+	{
+		pFrame = m_lsFrames.back();
 
-	OptionsArrow::GetInstance().Init( frame->GetOptionsPosition() );
+		//Ë¢ÐÂÊÓÍ¼
+		if (bFlash)
+		{
+			clear();
+			for (cpIt = m_lsFrames.begin();cpIt != m_lsFrames.end();++cpIt)
+				(*cpIt)->Show();
+		}
+		pFrame->Show();
 
-	cout << OptionsArrow::GetInstance().SelectOption()<<  endl;
+		OptionsArrow &oOptionsArrow = OptionsArrow::GetInstance();
+		oOptionsArrow.Init(pFrame->GetOptionsPosition());
+		iSelected = oOptionsArrow.SelectOption();
+		if (iSelected >= 0)
+		{
+			iFrameID = pFrame->GetFrameIdByOptionIndex(iSelected);
+			pFrame   = FrameLoader::GetInstance().GetFrameByID(iFrameID);
+			if (pFrame != NULL)
+			{
+				m_lsFrames.push_back(pFrame);
+				bFlash = false;
+			}
+			else
+			{
+				m_lsFrames.pop_back();
+				bFlash = true;
+			}
+		}
+		else
+		{
+			m_lsFrames.pop_back();
+			bFlash = true;
+		}
+	}
 
 	return 0;
 }
 
-int FrameManager::Handle(int iCmd, Req &oReq, Rsp &oRsp)
+int FrameManager::Handle(int iCmd, Req &oReq)
 {
 	switch (iCmd)
 	{
-	case cmd::ENUM_CMD_START:
-		return HandleStart(oReq, oRsp);
+	case cmd::COMMAND_START:
+		return HandleStart(oReq);
 		break;
 	}
 	return 0;

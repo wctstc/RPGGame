@@ -33,3 +33,6 @@ RPGGame/RPGGame/Debug/vc140.idb
 *.db
 RPGGame/Debug/RPGGame.ilk
 *.suo
+*.py
+*.pyc
+*.opendb

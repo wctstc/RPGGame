@@ -5,6 +5,8 @@
 #include "UIBase.h"
 #include "Singleton.h"
 
+using data::OptionsPosition;
+
 class OptionsArrow : public Singleton<OptionsArrow>
 {
 public:

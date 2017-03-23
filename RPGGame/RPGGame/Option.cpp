@@ -20,10 +20,11 @@ int OptionsArrow::SelectOption()
 {
 	int input;
 	int selected = 0;
-	gotoxy( m_optionsPosition.positions[selected].x, m_optionsPosition.positions[selected].y );
+	gotoxy( m_optionsPosition.positions[selected].iX, m_optionsPosition.positions[selected].iY );
 	printf(OptionArrow);
 	while( true )
 	{
+		Sleep(100);
 		if( _kbhit( ) )
 		{
 			input = _getch( );
@@ -39,9 +40,9 @@ int OptionsArrow::SelectOption()
 				if( _kbhit() )
 				{
 					input = _getch();
-					gotoxy( m_optionsPosition.positions[selected].x, m_optionsPosition.positions[selected].y );
+					gotoxy( m_optionsPosition.positions[selected].iX, m_optionsPosition.positions[selected].iY );
 					printf(OptionClearArrow);
-					if( m_optionsPosition.direction == Direction::Horizontal )
+					if( m_optionsPosition.direction == data::DIRECTION_HORIZONTAL )
 					{
 						switch( input )//ÒÆ¶¯
 						{
@@ -49,7 +50,7 @@ int OptionsArrow::SelectOption()
 						case 77:if( selected<m_optionsPosition.positions.size()-1 )++selected;break;//ÓÒ
 						}
 					}
-					else if( m_optionsPosition.direction == Direction::Vertical )
+					else if( m_optionsPosition.direction == data::DIRECTION_VERTICAL )
 					{
 						switch( input )
 						{
@@ -58,7 +59,7 @@ int OptionsArrow::SelectOption()
 						}
 
 					}
-					gotoxy( m_optionsPosition.positions[selected].x, m_optionsPosition.positions[selected].y );
+					gotoxy( m_optionsPosition.positions[selected].iX, m_optionsPosition.positions[selected].iY );
 					printf(OptionArrow);
 				}
 			}

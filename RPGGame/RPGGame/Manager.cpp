@@ -10,11 +10,11 @@ Manager::~Manager()
 {
 }
 
-bool Manager::Init(App* app, Config *config)
+bool Manager::Init(App* pApp, Config *pConfig)
 {
-	if (!app)
+	if (!pApp)
 		return false;
-	m_app = app;
+	m_pApp = pApp;
 
 	return true;
 }
@@ -34,17 +34,17 @@ void Manager::Finish()
 
 }
 
-void Manager::Ask(int cmd, Req &req, Rsp &rsp)
+void Manager::Request(int iCmd, Req &oReq)
 {
-	m_app->AddAsk(cmd, req, rsp);
+	m_pApp->Request(iCmd, oReq);
 }
 
-void Manager::RegiterCmd(int cmd)
+void Manager::RegisterCmd(int iCmd)
 {
-	m_app->AddCmd(cmd,*this);
+	m_pApp->AddCmdHandle(iCmd,*this);
 }
 
-void Manager::UnRegiterCmd(int cmd)
+void Manager::UnRegisterCmd(int iCmd)
 {
-	m_app->RemoveCmd(cmd);
+	m_pApp->RemoveCmdHandle(iCmd,*this);
 }

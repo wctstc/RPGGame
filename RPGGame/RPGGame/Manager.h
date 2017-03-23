@@ -8,6 +8,7 @@
  */
 
 #include "Config.h"
+#include "Cmd.h"
 #include "Req.h"
 #include "Rsp.h"
 
@@ -18,21 +19,19 @@ public:
 	Manager();
 	virtual ~Manager();
 public:
-	virtual bool Init(App* app,Config *config);
+	virtual bool Init(App* pApp,Config *pConfig);
 	virtual int Start();
 	virtual int Stop();
 	virtual void Finish();
 public:
-	void Ask(int cmd, Req &req, Rsp &rsp);
+	void Request(int iCmd, Req &oReq);
 public:
-	virtual int Handle(int cmd, Req &req, Rsp &rsp) = 0;
+	virtual int Handle(int iCmd, Req &oReq) = 0;
 protected:
-	void RegiterCmd(int cmd);
-	void UnRegiterCmd(int cmd);
-
-
+	void RegisterCmd(int iCmd);
+	void UnRegisterCmd(int iCmd);
 private:
-	App *m_app;
+	App *m_pApp;
 };
 
 

@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// https://developers.google.com/protocol-buffers/
+// http://code.google.com/p/protobuf/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -155,7 +155,7 @@ void ExtensionGenerator::GenerateDefinition(io::Printer* printer) {
   // Likewise, class members need to declare the field constant variable.
   if (descriptor_->extension_scope() != NULL) {
     printer->Print(vars,
-      "#if !defined(_MSC_VER) || _MSC_VER >= 1900\n"
+      "#ifndef _MSC_VER\n"
       "const int $scope$$constant_name$;\n"
       "#endif\n");
   }

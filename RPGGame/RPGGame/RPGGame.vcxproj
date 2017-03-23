@@ -78,13 +78,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>proto;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>proto\src;pthread\include;proto;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_STRUCT_TIMESPEC;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>proto/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libprotobufd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>proto/lib;pthread/lib/x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libprotobuf.lib;pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -122,33 +122,40 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Config.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="FrameLoader.cpp" />
     <ClCompile Include="FrameManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Option.cpp" />
-    <ClCompile Include="proto\google\protobuf\stubs\common.cpp" />
-    <ClCompile Include="proto\point.pb.cc" />
+    <ClCompile Include="proto\src\proto\dataconfig_frame.pb.cc" />
     <ClCompile Include="Req.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Rsp.cpp" />
+    <ClCompile Include="Schedule.cpp" />
+    <ClCompile Include="Thread.cpp" />
     <ClCompile Include="UIBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cmd.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="EventManager.h" />
     <ClInclude Include="Frame.h" />
     <ClInclude Include="FrameLoader.h" />
     <ClInclude Include="FrameManager.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Option.h" />
-    <ClInclude Include="proto\point.pb.h" />
+    <ClInclude Include="proto\src\proto\dataconfig_frame.pb.h" />
     <ClInclude Include="Req.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="Rsp.h" />
+    <ClInclude Include="Schedule.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Struct.h" />
+    <ClInclude Include="Thread.h" />
     <ClInclude Include="UIBase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

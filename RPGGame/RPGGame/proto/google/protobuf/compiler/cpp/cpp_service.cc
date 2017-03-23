@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// https://developers.google.com/protocol-buffers/
+// http://code.google.com/p/protobuf/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -298,15 +298,13 @@ void ServiceGenerator::GenerateGetPrototype(RequestOrResponse which,
       "      return $type$::default_instance();\n");
   }
 
-  printer->Print(
+  printer->Print(vars_,
     "    default:\n"
     "      GOOGLE_LOG(FATAL) << \"Bad method index; this should never happen.\";\n"
-    "      return *::google::protobuf::MessageFactory::generated_factory()\n"
-    "          ->GetPrototype(method->$input_or_output$_type());\n"
+    "      return *reinterpret_cast< ::google::protobuf::Message*>(NULL);\n"
     "  }\n"
     "}\n"
-    "\n",
-    "input_or_output", which == REQUEST ? "input" : "output");
+    "\n");
 }
 
 void ServiceGenerator::GenerateStubMethods(io::Printer* printer) {

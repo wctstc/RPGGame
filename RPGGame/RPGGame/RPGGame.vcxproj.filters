@@ -16,28 +16,31 @@
     <Filter Include="proto">
       <UniqueIdentifier>{523ef514-f17d-48b3-aaab-8e8091135a4d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Frame">
-      <UniqueIdentifier>{cc662fb6-d47b-4c56-8ed1-2a3f9b764897}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Framework">
       <UniqueIdentifier>{e672db6e-d241-43d0-af19-1c278c34d282}</UniqueIdentifier>
     </Filter>
     <Filter Include="Base">
       <UniqueIdentifier>{ff216131-e30d-4b93-8dc7-14c8f71270ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{8e9c95c2-48b1-4c1f-b688-5ba55327899f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Frame">
+      <UniqueIdentifier>{cc662fb6-d47b-4c56-8ed1-2a3f9b764897}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Event">
+      <UniqueIdentifier>{5bf5f736-60d5-4353-9eaa-21010e087314}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="proto\point.pb.cc">
-      <Filter>proto</Filter>
-    </ClCompile>
     <ClCompile Include="FrameManager.cpp">
-      <Filter>Frame</Filter>
+      <Filter>Manager\Frame</Filter>
     </ClCompile>
     <ClCompile Include="Frame.cpp">
-      <Filter>Frame</Filter>
+      <Filter>Manager\Frame</Filter>
     </ClCompile>
     <ClCompile Include="Manager.cpp">
       <Filter>Framework</Filter>
@@ -58,24 +61,33 @@
       <Filter>Base</Filter>
     </ClCompile>
     <ClCompile Include="Option.cpp">
-      <Filter>Frame</Filter>
+      <Filter>Manager\Frame</Filter>
     </ClCompile>
     <ClCompile Include="FrameLoader.cpp">
-      <Filter>Frame</Filter>
+      <Filter>Manager\Frame</Filter>
     </ClCompile>
-    <ClCompile Include="proto\google\protobuf\stubs\common.cpp">
-      <Filter>Base</Filter>
+    <ClCompile Include="Thread.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Schedule.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Manager\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="proto\src\proto\dataconfig_frame.pb.cc">
+      <Filter>proto</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="proto\point.pb.h">
-      <Filter>proto</Filter>
-    </ClInclude>
     <ClInclude Include="FrameManager.h">
-      <Filter>Frame</Filter>
+      <Filter>Manager\Frame</Filter>
     </ClInclude>
     <ClInclude Include="Frame.h">
-      <Filter>Frame</Filter>
+      <Filter>Manager\Frame</Filter>
     </ClInclude>
     <ClInclude Include="Manager.h">
       <Filter>Framework</Filter>
@@ -99,16 +111,31 @@
       <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="Option.h">
-      <Filter>Frame</Filter>
+      <Filter>Manager\Frame</Filter>
     </ClInclude>
     <ClInclude Include="FrameLoader.h">
-      <Filter>Frame</Filter>
+      <Filter>Manager\Frame</Filter>
     </ClInclude>
     <ClInclude Include="Cmd.h">
       <Filter>Framework</Filter>
     </ClInclude>
     <ClInclude Include="Struct.h">
-      <Filter>Frame</Filter>
+      <Filter>Manager\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Thread.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Schedule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Manager\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="proto\src\proto\dataconfig_frame.pb.h">
+      <Filter>proto</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

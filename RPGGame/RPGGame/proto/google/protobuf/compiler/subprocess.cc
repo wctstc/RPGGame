@@ -1,6 +1,6 @@
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
-// https://developers.google.com/protocol-buffers/
+// http://code.google.com/p/protobuf/
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -42,11 +42,9 @@
 #include <signal.h>
 #endif
 
-#include <google/protobuf/stubs/logging.h>
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/message.h>
 #include <google/protobuf/stubs/substitute.h>
-
 
 namespace google {
 namespace protobuf {
@@ -173,7 +171,7 @@ bool Subprocess::Communicate(const Message& input, Message* output,
     DWORD wait_result =
         WaitForMultipleObjects(handle_count, handles, FALSE, INFINITE);
 
-    HANDLE signaled_handle = NULL;
+    HANDLE signaled_handle;
     if (wait_result >= WAIT_OBJECT_0 &&
         wait_result < WAIT_OBJECT_0 + handle_count) {
       signaled_handle = handles[wait_result - WAIT_OBJECT_0];
@@ -361,7 +359,7 @@ bool Subprocess::Communicate(const Message& input, Message* output,
   string output_data;
 
   int input_pos = 0;
-  int max_fd = std::max(child_stdin_, child_stdout_);
+  int max_fd = max(child_stdin_, child_stdout_);
 
   while (child_stdout_ != -1) {
     fd_set read_fds;
@@ -451,7 +449,7 @@ bool Subprocess::Communicate(const Message& input, Message* output,
   }
 
   if (!output->ParseFromString(output_data)) {
-    *error = "Plugin output is unparseable: " + CEscape(output_data);
+    *error = "Plugin output is unparseable.";
     return false;
   }
 

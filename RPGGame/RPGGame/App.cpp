@@ -6,6 +6,8 @@ bool App::Init()
 {
 	Config config;
 
+	m_bIsRuning = false;
+
 	if (!g_FrameLoader.Init())
 	{
 		return false;
@@ -20,7 +22,7 @@ bool App::Init()
 
 int App::Start()
 {
-	if (m_is_running == true)
+	if (m_bIsRuning == true)
 		return -1;
 
 	int iRet;
@@ -31,26 +33,30 @@ int App::Start()
 
 	Req req;
 	Rsp rsp;
-	g_FrameManager.Ask(cmd::ENUM_CMD_START, req, rsp);
+	g_FrameManager.Request(cmd::COMMAND_START, req);
 
 	
-	m_is_running = true;
+	m_bIsRuning = true;
+
+	ReqData sReqData;
 	while (true)
 	{
-		if (!m_is_running)
+		if (!m_bIsRuning)
 			break;
+		if (!m_qRequestDatas.empty())
+		{
+			sReqData = m_qRequestDatas.front();
+			m_qRequestDatas.pop();
+		}
+		else
+		{
+			sReqData.cmd = cmd::COMMAND_IDLE;
+		}
+		pair<MMIter, MMIter> pairFound = m_mmapCmdToManagers.equal_range(sReqData.cmd);
 
-		if (m_ask_queue.empty())
-			break;
+		for (MMIter it = pairFound.first; it != pairFound.second; ++it)
+			it->second.Handle(sReqData.cmd, sReqData.req);
 
-		ASK ask = m_ask_queue.front();
-		m_ask_queue.pop();
-
-		map<int,Manager&>::iterator it = m_cmd_map.find(ask.cmd);
-		if(it==m_cmd_map.end())
-			continue;
-
-		(it->second).Handle(ask.cmd, ask.req, ask.rsp);
 	}
 	return 0;
 }
@@ -70,31 +76,30 @@ void App::Finish()
 	g_FrameManager.Finish();
 }
 
-int App::AddCmd(int cmd, Manager& manager)
+
+int App::AddCmdHandle(int iCmd, Manager& oManager)
 {
-	map<int, Manager&>::iterator it = m_cmd_map.find(cmd);
-	if (it == m_cmd_map.end())
+	m_mmapCmdToManagers.insert(pair<int, Manager&>(iCmd, oManager));
+	return 0;
+}
+
+int App::RemoveCmdHandle(int iCmd,Manager &oManager)
+{
+	pair<MMIter,MMIter> pairFound = m_mmapCmdToManagers.equal_range(iCmd);
+	for ( MMIter it = pairFound.first; it != pairFound.second; ++it )
 	{
-		m_cmd_map.insert(pair<int, Manager&>(cmd, manager));
-		return 0;
+		if (&(it->second) == &oManager) 
+		{
+			m_mmapCmdToManagers.erase(it);
+			return 0;
+		}
 	}
 	return -1;
 }
 
-int App::RemoveCmd(int cmd)
+int App::Request(int iCmd, Req &oReq)
 {
-	map<int, Manager&>::iterator it = m_cmd_map.find(cmd);
-	if (it != m_cmd_map.end())
-	{
-		
-		return 0;
-	}
-	return -1;
-}
-
-int App::AddAsk(int iCmd, Req &oReq, Rsp &oRsp)
-{
-	ASK ask = { iCmd,oReq,oRsp };
-	m_ask_queue.push(ask);
+	ReqData sReqData = { iCmd, oReq };
+	m_qRequestDatas.push(sReqData);
 	return 0;
 }

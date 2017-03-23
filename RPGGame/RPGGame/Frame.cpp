@@ -10,14 +10,22 @@ Frame::~Frame(void)
 {
 }
 
-bool Frame::Init( Position postion, Size size,string discription,Direction &direction,int gap,vector< string > options )
+bool Frame::Init( 
+	int iID,
+	Position oPostion, 
+	Size oSize,
+	string sDiscription,
+	Direction &eDirection,
+	int iGap,
+	vector< OptionData > vOptions )
 {
-	m_postion     = postion;
-	m_size        = size;
-	m_discription = discription;
-	m_direction   = direction;
-	m_gap         = gap;
-	m_options     = options;
+	m_iID          = iID;
+	m_oPostion     = oPostion;
+	m_oSize        = oSize;
+	m_sDiscription = sDiscription;
+	m_eDirection   = eDirection;
+	m_iGap         = iGap;
+	m_vOptions     = vOptions;
 
 	return true;
 }
@@ -30,12 +38,12 @@ void Frame::Show()
 	int offset_discription = 0;
 
 	//打印第一行
-	gotoxy( m_postion.x, m_postion.y );
-	for( offset_x = 0; offset_x < m_size.width; ++offset_x )
+	gotoxy( m_oPostion.iX, m_oPostion.iY );
+	for( offset_x = 0; offset_x < m_oSize.iWidth; ++offset_x )
 	{
 		if( offset_x == 0 )
 			printf( FrameCorner );
-		else if( offset_x == m_size.width-1 )
+		else if( offset_x == m_oSize.iWidth-1 )
 			printf( FrameCorner );
 		else
 			printf( FrameHorizontal );
@@ -43,22 +51,22 @@ void Frame::Show()
 	//打印描述
 	do 
 	{
-		if( offset_discription + m_size.width - 2 < m_discription.length() )
-			sub_discription = m_discription.substr( offset_discription, m_size.width - 2 );
+		if( offset_discription + m_oSize.iWidth - 2 < m_sDiscription.length() )
+			sub_discription = m_sDiscription.substr( offset_discription, m_oSize.iWidth - 2 );
 		else
-			sub_discription = m_discription.substr( offset_discription );
+			sub_discription = m_sDiscription.substr( offset_discription );
 		
 
 		++offset_y;
-		gotoxy( m_postion.x, m_postion.y+offset_y );
+		gotoxy( m_oPostion.iX, m_oPostion.iY+offset_y );
 		printf( FrameVertical );
 		printf( sub_discription.c_str() );
-		gotoxy( m_postion.x+m_size.width-1, m_postion.y+offset_y );
+		gotoxy( m_oPostion.iX+m_oSize.iWidth-1, m_oPostion.iY+offset_y );
 		printf( FrameVertical );
 
-		offset_discription += m_size.width- 2;
+		offset_discription += m_oSize.iWidth- 2;
 		
-		if( offset_discription >= m_discription.length())
+		if( offset_discription >= m_sDiscription.length())
 			break;
 	} 
 	while( true );
@@ -67,61 +75,70 @@ void Frame::Show()
 	//打印选项
 	++offset_y;
 
-	if( m_direction == Direction::Horizontal )//水平
+	if( m_eDirection == Direction::DIRECTION_HORIZONTAL )//水平
 	{
-		gotoxy( m_postion.x, m_postion.y+offset_y );
+		gotoxy( m_oPostion.iX, m_oPostion.iY+offset_y );
 		printf( FrameVertical );
-		for( int i = 0; i < m_options.size(); ++i )
+		for( int i = 0; i < m_vOptions.size(); ++i )
 		{
-			gotoxy( m_postion.x+i*m_gap+3, m_postion.y+offset_y );
-			printf( m_options[i].c_str() );
+			gotoxy( m_oPostion.iX+i*m_iGap+3, m_oPostion.iY+offset_y );
+			printf( m_vOptions[i].description.c_str() );
 		}
-		gotoxy( m_postion.x+m_size.width-1, m_postion.y+offset_y );
+		gotoxy( m_oPostion.iX+m_oSize.iWidth-1, m_oPostion.iY+offset_y );
 		printf( FrameVertical );
 		++offset_y;
 	}
-	else if( m_direction == Direction::Vertical )//垂直
+	else if( m_eDirection == Direction::DIRECTION_VERTICAL )//垂直
 	{
-		for( int i = 0; i < m_options.size(); ++i )
+		for( int i = 0; i < m_vOptions.size(); ++i )
 		{
-			gotoxy( m_postion.x, m_postion.y+offset_y );
+			gotoxy( m_oPostion.iX, m_oPostion.iY+offset_y );
 			printf( FrameVertical );
-			gotoxy( m_postion.x+3, m_postion.y+offset_y );
-			printf( m_options[i].c_str() );
-			gotoxy( m_postion.x+m_size.width-1, m_postion.y+offset_y );
+			gotoxy( m_oPostion.iX+3, m_oPostion.iY+offset_y );
+			printf( m_vOptions[i].description.c_str() );
+			gotoxy( m_oPostion.iX+m_oSize.iWidth-1, m_oPostion.iY+offset_y );
 			printf( FrameVertical );
 			++offset_y;
 		}
 	}
 	//打印最后一行
-	gotoxy( m_postion.x, m_postion.y+offset_y );
-	for( offset_x = 0; offset_x < m_size.width; ++offset_x )
+	gotoxy( m_oPostion.iX, m_oPostion.iY+offset_y );
+	for( offset_x = 0; offset_x < m_oSize.iWidth; ++offset_x )
 	{
 		if( offset_x == 0 )
 			printf( FrameCorner );
-		else if( offset_x == m_size.width-1 )
+		else if( offset_x == m_oSize.iWidth-1 )
 			printf( FrameCorner );
 		else
 			printf( FrameHorizontal );
 	}
 }
 
-OptionsPosition Frame::GetOptionsPosition()
+int Frame::GetFrameIdByOptionIndex(int iIndex)
 {
-	OptionsPosition optionsPosition;
-	Position position = m_postion;
-	position.x += 1;
-	position.y += 1+m_discription.length()/(m_size.width-2)+1;
-
-	for( int i = 0; i < m_options.size(); ++i )
+	if (iIndex >=0 && iIndex < m_vOptions.size())
 	{
-		optionsPosition.positions.push_back(position);
-		if ( m_direction == Direction::Horizontal )//水平
-			position.x += m_gap;
-		else
-			position.y += m_gap;
+		return m_vOptions[iIndex].frame_id;
 	}
-	optionsPosition.direction = m_direction;
+	return -1;
+}
 
-	return optionsPosition;
+data::OptionsPosition Frame::GetOptionsPosition()
+{
+	data::OptionsPosition oOptionsPosition;
+	Position oPosition = m_oPostion;
+	oPosition.iX += 1;
+	oPosition.iY += 1+m_sDiscription.length()/(m_oSize.iWidth-2)+1;
+
+	for( int i = 0; i < m_vOptions.size(); ++i )
+	{
+		oOptionsPosition.positions.push_back(oPosition);
+		if ( m_eDirection == Direction::DIRECTION_HORIZONTAL )//水平
+			oPosition.iX += m_iGap;
+		else
+			oPosition.iY += m_iGap;
+	}
+	oOptionsPosition.direction = m_eDirection;
+
+	return oOptionsPosition;
 }
