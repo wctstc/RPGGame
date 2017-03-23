@@ -66,9 +66,6 @@
     <ClCompile Include="FrameLoader.cpp">
       <Filter>Manager\Frame</Filter>
     </ClCompile>
-    <ClCompile Include="Schedule.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Event.cpp">
       <Filter>Manager\Event</Filter>
     </ClCompile>
@@ -118,9 +115,6 @@
     </ClInclude>
     <ClInclude Include="Struct.h">
       <Filter>Manager\Frame</Filter>
-    </ClInclude>
-    <ClInclude Include="Schedule.h">
-      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Event.h">
       <Filter>Manager\Event</Filter>

@@ -12,7 +12,6 @@ using std::queue;
 #include "FrameManager.h"
 #include "Singleton.h"
 #include "Cmd.h"
-#include "Thread.h"
 
 using cmd::Command;
 

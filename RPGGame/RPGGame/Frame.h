@@ -24,35 +24,27 @@ public:
 	~Frame(void);
 
 public:
-	
-	bool Init( int iID, Position postion, Size size,string discription,Direction &direction, int gap, vector< OptionData > options);
-	void Show();
-	int GetFrameIdByOptionIndex( int iIndex );
-	data::OptionsPosition GetOptionsPosition();
+	bool Init( const FrameData &oFrameData );
+	const Position GetOptionPosition();
+	void Show()const;
 public:
-	inline const int        GetID() const { return m_iID; }
-	inline const Position&  GetPostion() const { return m_oPostion; }
-	inline const Size&      GetSize() const { return m_oSize; }
-	inline const string&    GetDiscription() const { return m_sDiscription; }
-	inline const Direction& GetDirection() const { return m_eDirection; }
-	inline const int        GetGap() const { return m_iGap; }
-	inline const vector<OptionData>& GetOptions() const { return m_vOptions; }
+	inline const int        GetID()          const { return m_oFrameData.iID; }
+	inline const Position&  GetPostion()     const { return m_oFrameData.oPosition; }
+	inline const Size&      GetSize()        const { return m_oFrameData.oSize; }
+	inline const string&    GetDiscription() const { return m_oFrameData.sDiscription; }
+	inline const Direction& GetDirection()   const { return m_oFrameData.eDirection; }
+	//inline const int        GetGap()         const { return m_oFrameData.iGap; }
+	inline const vector<OptionData>& GetOptions() const { return m_oFrameData.vOptions; }
 
-	inline void SetID(const int iID) { m_iID = iID; }
-	inline void SetPosition( const Position &position ){ m_oPostion = position; }
-	inline void SetSize(const Size &size ){ m_oSize = size; }
-	inline void SetDiscription(const string &discription ){ m_sDiscription = discription; }
-	inline void SetDirection(const Direction &direction ){ m_eDirection = direction; }
-	inline void SetGap(const int iGap ){ m_iGap = iGap; }
-	inline void SetOptions(const vector<OptionData> &vOptions ){ m_vOptions = vOptions; }
+	inline void SetID(const int iID) { m_oFrameData.iID = iID; }
+	inline void SetPosition( const Position &position ){ m_oFrameData.oPosition = position; }
+	inline void SetSize(const Size &size ){ m_oFrameData.oSize = size; }
+	inline void SetDiscription(const string &discription ){ m_oFrameData.sDiscription = discription; }
+	inline void SetDirection(const Direction &direction ){ m_oFrameData.eDirection = direction; }
+	//inline void SetGap(const int iGap ){ m_oFrameData.iGap = iGap; }
+	inline void SetOptions(const vector<OptionData> &vOptions ){ m_oFrameData.vOptions = vOptions; }
 private:
-	int m_iID;
-	Position m_oPostion;
-	Size m_oSize;
-	string m_sDiscription;
-	Direction m_eDirection;
-	int m_iGap;
-	vector< OptionData > m_vOptions;
+	FrameData m_oFrameData;
 
 };
 

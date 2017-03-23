@@ -77,11 +77,14 @@ int FrameManager::HandleStart(Req &oReq)
 		pFrame->Show();
 
 		OptionsArrow &oOptionsArrow = OptionsArrow::GetInstance();
-		oOptionsArrow.Init(pFrame->GetOptionsPosition());
-		iSelected = oOptionsArrow.SelectOption();
+		oOptionsArrow.Init( 
+			pFrame->GetDirection(), 
+			pFrame->GetOptionPosition(), 
+			pFrame->GetOptions() );
+		iSelected = oOptionsArrow.GetSelectIndex();
 		if (iSelected >= 0)
 		{
-			iFrameID = pFrame->GetFrameIdByOptionIndex(iSelected);
+			iFrameID = oOptionsArrow.GetOptionByIndex(iSelected).ulFrameID;
 			pFrame   = FrameLoader::GetInstance().GetFrameByID(iFrameID);
 			if (pFrame != NULL)
 			{

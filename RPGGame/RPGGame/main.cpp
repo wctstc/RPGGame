@@ -7,7 +7,6 @@
 
 
 #include <conio.h>
-#include <pthread.h>
 #include <iostream>
 #include <stdio.h>
 #include <io.h>
@@ -52,19 +51,19 @@ int main()
 	aFrames.ParseFromFileDescriptor(file);
 	
 
-	for (int i = 0; i < aFrames.items().size(); ++i)
-	{
-		FRAME sFrame = aFrames.items().Get(i);
-		printf("%d: \n id:%d", i, sFrame.id());
-		if (sFrame.has_is_exist())
-			printf("is_exist:%d", sFrame.is_exist());
-		if (sFrame.has_description())
-			printf("description:%s", sFrame.description().c_str());
-		printf("\n");
-	}
+	//for (int i = 0; i < aFrames.items().size(); ++i)
+	//{
+	//	FRAME sFrame = aFrames.items().Get(i);
+	//	printf("%d: \n id:%d", i, sFrame.id());
+	//	if (sFrame.has_is_exist())
+	//		printf("is_exist:%d", sFrame.is_exist());
+	//	if (sFrame.has_description())
+	//		printf("description:%s", sFrame.description().c_str());
+	//	printf("\n");
+	//}
 
-	system("pause");
-	return 0;
+	//system("pause");
+	//return 0;
 
 
 	Frame oFrame;
@@ -81,12 +80,14 @@ int main()
 	int frame_id[] = { 1,2,3 };
 	for (int i = 0; i < 3; ++i)
 	{
-		oOptionData.index = i;
-		oOptionData.description = description[i];
-		oOptionData.frame_id = frame_id[i];
+		//oOptionData.index = i;
+		oOptionData.sDescription = description[i];
+		oOptionData.ulFrameID = frame_id[i];
 	}
 
-	oFrame.Init( 0, postion,size,discription,direction,gap,options );
+
+
+	//oFrame.Init( 0, postion,size,discription,direction,gap,options );
 
 	//frame.Show();
 
@@ -97,9 +98,6 @@ int main()
 	App app;
 	app.Init();
 	app.Start();
-
-	pthread_t pt;
-	pthread_create( &pt, NULL, thread, "hello world"  );
 
 	system("pause");
 	return 0;

@@ -6,9 +6,17 @@
 using std::map;
 using std::pair;
 
+#include "dataconfig_frame.pb.h"
+
 #include "Singleton.h"
 #include "Frame.h"
 
+#define FRAMEFIEL "proto/data/dataconfig_frame.data"
+
+using dataconfig::FRAME;
+using dataconfig::FRAMEArray;
+
+using data::Direction;
 
 class FrameLoader : public Singleton<FrameLoader>
 {
