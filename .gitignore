@@ -1,38 +1,19 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Workspace Files 工程文件
+RPGGame/.*
+RPGGame/RPGGame.VC.*
 
-# Precompiled Headers
-*.gch
-*.pch
+# Compiled Temp Files 编译临时文件
+RPGGame/RPGGame/Debug/*
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+# Compiled Object Files 编译文件
+RPGGame/Debug/*.ilk
+RPGGame/Debug/*.pdb
 
-# Fortran module files
-*.mod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-*.tlog
-*.log
-*.pdb
-RPGGame/RPGGame/Debug/vc140.idb
-*.db
-RPGGame/Debug/RPGGame.ilk
-*.suo
-*.py
-*.pyc
-*.opendb
+# Protobuf Temp Files
+RPGGame/RPGGame/proto/data/*
+RPGGame/RPGGame/proto/json/*
+RPGGame/RPGGame/proto/proto/*
+RPGGame/RPGGame/proto/python/*
+RPGGame/RPGGame/proto/src/*
+RPGGame/RPGGame/proto/xls/~$*
+RPGGame/RPGGame/proto/xls_deploy_tool.log
