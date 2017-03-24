@@ -68,11 +68,12 @@ int FrameManager::HandleStart(Req &oReq)
 		pFrame = m_lsFrames.back();
 
 		//刷新视图
-		if (bFlash)
+		//if (bFlash)
+		if(true)
 		{
 			clear();
-			for (cpIt = m_lsFrames.begin();cpIt != m_lsFrames.end();++cpIt)
-				(*cpIt)->Show();
+//			for (cpIt = m_lsFrames.begin();cpIt != m_lsFrames.end();++cpIt)
+//				(*cpIt)->Show();
 		}
 		pFrame->Show();
 
@@ -82,26 +83,36 @@ int FrameManager::HandleStart(Req &oReq)
 			pFrame->GetOptionPosition(), 
 			pFrame->GetOptions() );
 		iSelected = oOptionsArrow.GetSelectIndex();
-		if (iSelected >= 0)
+		do
 		{
+			//没有选中
+			if (iSelected < 0)
+			{
+				//非主界面弹出栈
+				if (m_lsFrames.size() > 1)
+				{
+					m_lsFrames.pop_back();
+					bFlash = true;
+				}
+				break;
+			}
 			iFrameID = oOptionsArrow.GetOptionByIndex(iSelected).ulFrameID;
 			pFrame   = FrameLoader::GetInstance().GetFrameByID(iFrameID);
-			if (pFrame != NULL)
-			{
-				m_lsFrames.push_back(pFrame);
-				bFlash = false;
-			}
-			else
+			//选中选项无后续菜单
+			if (pFrame == NULL)
 			{
 				m_lsFrames.pop_back();
 				bFlash = true;
+				break;
 			}
-		}
-		else
-		{
-			m_lsFrames.pop_back();
-			bFlash = true;
-		}
+			//选中选项有后续菜单
+			else
+			{
+				m_lsFrames.push_back(pFrame);
+				bFlash = false;
+				break;
+			}
+		} while (false);
 	}
 
 	return 0;

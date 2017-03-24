@@ -130,6 +130,32 @@ namespace data
 		/*!< 选项数据 */
 		vector<OptionData> vOptions;
 	};
+
+
+	/**
+	* @brief 物品数据
+	*/
+	struct ItemData
+	{
+		/*!< 编号 */
+		unsigned int iID;
+
+		/*!< 描述 */
+		string sDescription;
+	};
 };
+
+
+#define SET_GET(type,abbr_type,name,field)\
+inline const type Get##name( )const\
+{\
+	return field;\
+}\
+inline void Set##name( type abbr_type##name )\
+{\
+	field = abbr_type##name;\
+}
+
+
 
 #endif

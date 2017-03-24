@@ -121,22 +121,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bag.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="FrameLoader.cpp" />
     <ClCompile Include="FrameManager.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Option.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerLoader.cpp" />
+    <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="proto\src\proto\dataconfig_frame.pb.cc" />
+    <ClCompile Include="QueryBag.cpp" />
+    <ClCompile Include="QueryBase.cpp" />
+    <ClCompile Include="QueryLoader.cpp" />
     <ClCompile Include="Req.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Rsp.cpp" />
     <ClCompile Include="UIBase.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bag.h" />
     <ClInclude Include="Cmd.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Event.h" />
@@ -144,9 +153,16 @@
     <ClInclude Include="Frame.h" />
     <ClInclude Include="FrameLoader.h" />
     <ClInclude Include="FrameManager.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Option.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerLoader.h" />
+    <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="proto\src\proto\dataconfig_frame.pb.h" />
+    <ClInclude Include="QueryBag.h" />
+    <ClInclude Include="QueryBase.h" />
+    <ClInclude Include="QueryLoader.h" />
     <ClInclude Include="Req.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="Rsp.h" />

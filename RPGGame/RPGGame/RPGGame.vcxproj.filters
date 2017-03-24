@@ -31,6 +31,15 @@
     <Filter Include="Manager\Event">
       <UniqueIdentifier>{5bf5f736-60d5-4353-9eaa-21010e087314}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager\Query">
+      <UniqueIdentifier>{b399d807-3419-47a8-bef2-8bcfc7da9aa9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Player">
+      <UniqueIdentifier>{3373c040-6255-4cb9-9496-200667dc31d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Item">
+      <UniqueIdentifier>{3ed3a0d2-ec43-44b1-873c-d29ae46f65f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -69,11 +78,35 @@
     <ClCompile Include="Event.cpp">
       <Filter>Manager\Event</Filter>
     </ClCompile>
-    <ClCompile Include="EventManager.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="proto\src\proto\dataconfig_frame.pb.cc">
       <Filter>proto</Filter>
+    </ClCompile>
+    <ClCompile Include="QueryLoader.cpp">
+      <Filter>Manager\Query</Filter>
+    </ClCompile>
+    <ClCompile Include="QueryBase.cpp">
+      <Filter>Manager\Query</Filter>
+    </ClCompile>
+    <ClCompile Include="QueryBag.cpp">
+      <Filter>Manager\Query</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Manager\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>Manager\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Bag.cpp">
+      <Filter>Manager\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerLoader.cpp">
+      <Filter>Manager\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerManager.cpp">
+      <Filter>Manager\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Manager\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,11 +152,35 @@
     <ClInclude Include="Event.h">
       <Filter>Manager\Event</Filter>
     </ClInclude>
-    <ClInclude Include="EventManager.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="proto\src\proto\dataconfig_frame.pb.h">
       <Filter>proto</Filter>
+    </ClInclude>
+    <ClInclude Include="QueryLoader.h">
+      <Filter>Manager\Query</Filter>
+    </ClInclude>
+    <ClInclude Include="QueryBag.h">
+      <Filter>Manager\Query</Filter>
+    </ClInclude>
+    <ClInclude Include="QueryBase.h">
+      <Filter>Manager\Query</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Manager\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="EventManager.h">
+      <Filter>Manager\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Bag.h">
+      <Filter>Manager\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerLoader.h">
+      <Filter>Manager\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerManager.h">
+      <Filter>Manager\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Manager\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
