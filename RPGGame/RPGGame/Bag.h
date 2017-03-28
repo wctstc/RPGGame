@@ -20,7 +20,12 @@ public:
 	/**
 	 * @brief 添加物品
 	 */
-	bool AddItem(const Item& oItem );
+	bool AddItem(const Item& oItem);
+
+	/**
+	 * @brief 移除物品
+	 */
+	bool RemoveItem(const int iIndex, Item &oItem);
 
 	/**
 	 * @brief 获取物品编号

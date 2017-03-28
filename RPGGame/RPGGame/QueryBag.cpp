@@ -13,7 +13,7 @@ QueryBag::~QueryBag()
 
 string QueryBag::GetFrameDescription()
 {
-	return "this is bag"
+	return "this is bag";
 }
 
 vector<string> QueryBag::GetOptionsDescription()
