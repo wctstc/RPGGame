@@ -33,6 +33,7 @@ public:
 	int AddCmdHandle(int iCmd, Manager& oManager);
 	int RemoveCmdHandle(int iCmd, Manager& oManager);
 	int Request(int iCmd, Req &oReq);
+	int Handler(int iCmd, Req &oReq, Rsp &oRsp);
 	//int AddTimeHandle(Manager &manager);
 	//int RemoveTimeHandle(Manager &manager);
 private:

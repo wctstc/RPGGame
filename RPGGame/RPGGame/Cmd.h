@@ -8,6 +8,7 @@ namespace cmd
 		COMMAND_IDLE,
 		COMMAND_START,
 
+		COMMAND_SHOW_BAG=10001,
 	};
 }
 

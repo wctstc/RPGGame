@@ -121,18 +121,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="ActorData.cpp" />
     <ClCompile Include="Bag.cpp" />
     <ClCompile Include="Config.cpp" />
+    <ClCompile Include="Equipment.cpp" />
+    <ClCompile Include="EquipmentData.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="FrameLoader.cpp" />
     <ClCompile Include="FrameManager.cpp" />
+    <ClCompile Include="HanderBase.cpp" />
+    <ClCompile Include="HandlerManager.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Option.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerHandler.cpp" />
     <ClCompile Include="PlayerLoader.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="proto\src\proto\dataconfig_frame.pb.cc" />
@@ -142,21 +149,31 @@
     <ClCompile Include="Req.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Rsp.cpp" />
+    <ClCompile Include="Skill.cpp" />
+    <ClCompile Include="SkillData.cpp" />
     <ClCompile Include="UIBase.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actor.h" />
+    <ClInclude Include="ActorData.h" />
     <ClInclude Include="Bag.h" />
     <ClInclude Include="Cmd.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="Equipment.h" />
+    <ClInclude Include="EquipmentData.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="Frame.h" />
     <ClInclude Include="FrameLoader.h" />
     <ClInclude Include="FrameManager.h" />
+    <ClInclude Include="HanderBase.h" />
+    <ClInclude Include="HanderConst.h" />
+    <ClInclude Include="HandlerManager.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Option.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerHandler.h" />
     <ClInclude Include="PlayerLoader.h" />
     <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="proto\src\proto\dataconfig_frame.pb.h" />
@@ -167,6 +184,8 @@
     <ClInclude Include="App.h" />
     <ClInclude Include="Rsp.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="Skill.h" />
+    <ClInclude Include="SkillData.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="UIBase.h" />
   </ItemGroup>

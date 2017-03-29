@@ -34,7 +34,11 @@ bool FrameLoader::Init()
 		for (int j = 0; j < pFrame->option().size(); ++j )
 		{
 			oOptionData.sDescription = pFrame->option(j).description();
-			oOptionData.ulFrameID = pFrame->option(j).frame_id();
+			oOptionData.iFrameID = pFrame->option(j).frame_id();
+			if (pFrame->option().has_handle_id())
+				oOptionData.iHandleID = pFrame->option(j).handle_id();
+			else
+				oOptionData.iHandleID = 0;
 			vOptions.push_back(oOptionData);
 		}
 		oFrameData.vOptions = vOptions;

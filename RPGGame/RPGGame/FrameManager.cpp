@@ -59,11 +59,13 @@ int FrameManager::HandleStart(Req &oReq)
 {
 	Frame *pFrame = FrameLoader::GetInstance().GetFrameByID(0);
 	int iFrameID;
+	int iHandleID;
 	m_lsFrames.push_back(pFrame);
 	bool bFlash = true;
 	list<Frame*>::const_iterator cpIt;
 	int iSelected;
-	while (true)
+	bool bIsRuning = true;
+	while (bIsRuning)
 	{
 		pFrame = m_lsFrames.back();
 
@@ -96,13 +98,16 @@ int FrameManager::HandleStart(Req &oReq)
 				}
 				break;
 			}
-			iFrameID = oOptionsArrow.GetOptionByIndex(iSelected).ulFrameID;
+			iFrameID = oOptionsArrow.GetOptionByIndex(iSelected).iFrameID;
 			pFrame   = FrameLoader::GetInstance().GetFrameByID(iFrameID);
 			//选中选项无后续菜单
 			if (pFrame == NULL)
 			{
 				m_lsFrames.pop_back();
 				bFlash = true;
+				iHandleID = FrameLoader::GetInstance().GetFrameByID();
+				Request(iHandleID, Req);
+				bIsRuning = false;
 				break;
 			}
 			//选中选项有后续菜单

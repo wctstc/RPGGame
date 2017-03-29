@@ -40,6 +40,18 @@
     <Filter Include="Manager\Item">
       <UniqueIdentifier>{3ed3a0d2-ec43-44b1-873c-d29ae46f65f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager\Handle">
+      <UniqueIdentifier>{9eec8273-e71c-4847-89d5-e7b62a332f1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Handle\Player">
+      <UniqueIdentifier>{01a3fa65-df3d-4000-ac88-db7d2a3319cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Player\Skill">
+      <UniqueIdentifier>{fcf9a914-85bb-4d96-85d0-f3b58082151b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Player\Equipment">
+      <UniqueIdentifier>{65c67196-c9fa-4d99-b5d2-b2bba3709213}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -107,6 +119,33 @@
     </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Manager\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandler.cpp">
+      <Filter>Manager\Handle\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="HandlerManager.cpp">
+      <Filter>Manager\Handle</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Manager\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="ActorData.cpp">
+      <Filter>Manager\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Skill.cpp">
+      <Filter>Manager\Player\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="SkillData.cpp">
+      <Filter>Manager\Player\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="Equipment.cpp">
+      <Filter>Manager\Player\Equipment</Filter>
+    </ClCompile>
+    <ClCompile Include="EquipmentData.cpp">
+      <Filter>Manager\Player\Equipment</Filter>
+    </ClCompile>
+    <ClCompile Include="HanderBase.cpp">
+      <Filter>Manager\Handle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +220,36 @@
     </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>Manager\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandler.h">
+      <Filter>Manager\Handle\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="HandlerManager.h">
+      <Filter>Manager\Handle</Filter>
+    </ClInclude>
+    <ClInclude Include="ActorData.h">
+      <Filter>Manager\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Manager\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Skill.h">
+      <Filter>Manager\Player\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillData.h">
+      <Filter>Manager\Player\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="Equipment.h">
+      <Filter>Manager\Player\Equipment</Filter>
+    </ClInclude>
+    <ClInclude Include="EquipmentData.h">
+      <Filter>Manager\Player\Equipment</Filter>
+    </ClInclude>
+    <ClInclude Include="HanderBase.h">
+      <Filter>Manager\Handle</Filter>
+    </ClInclude>
+    <ClInclude Include="HanderConst.h">
+      <Filter>Manager\Handle</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -103,3 +103,11 @@ int App::Request(int iCmd, Req &oReq)
 	m_qRequestDatas.push(sReqData);
 	return 0;
 }
+
+int App::Handler(int iCmd, Req &oReq, Rsp &oRsp)
+{
+	pair<MMIter, MMIter> pairFound = m_mmapCmdToManagers.equal_range(iCmd);
+
+	for (MMIter it = pairFound.first; it != pairFound.second; ++it)
+		it->second.Handle(iCmd, oReq, oRsp);
+}

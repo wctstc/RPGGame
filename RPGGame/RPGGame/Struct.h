@@ -101,7 +101,10 @@ namespace data
 		//Position oPosition;
 
 		/*!< 选中后对应框的编号 */
-		unsigned int ulFrameID;
+		int iFrameID;
+
+		/*!< 选中后对处理的编号 */
+		int iHandleID;
 	};
 
 	/**

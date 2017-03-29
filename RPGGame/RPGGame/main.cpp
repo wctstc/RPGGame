@@ -82,7 +82,7 @@ int main()
 	{
 		//oOptionData.index = i;
 		oOptionData.sDescription = description[i];
-		oOptionData.ulFrameID = frame_id[i];
+		oOptionData.iFrameID = frame_id[i];
 	}
 
 

@@ -26,7 +26,7 @@ public:
 public:
 	void Request(int iCmd, Req &oReq);
 public:
-	virtual int Handle(int iCmd, Req &oReq) = 0;
+	virtual int Handle(int iCmd, Req &oReq, Rsp &oRsp) = 0;
 protected:
 	void RegisterCmd(int iCmd);
 	void UnRegisterCmd(int iCmd);
