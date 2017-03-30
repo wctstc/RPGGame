@@ -39,6 +39,11 @@ void Manager::Request(int iCmd, Req &oReq)
 	m_pApp->Request(iCmd, oReq);
 }
 
+int Manager::Forword(int iCmd, Req &oReq, Rsp &oRsp)
+{
+	return m_pApp->Handler(iCmd, oReq, oRsp);
+}
+
 void Manager::RegisterCmd(int iCmd)
 {
 	m_pApp->AddCmdHandle(iCmd,*this);

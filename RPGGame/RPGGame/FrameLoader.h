@@ -24,8 +24,11 @@ public:
 	bool Init();
 public:
 	Frame *GetFrameByID(int iID);
+	void ReleaseFrame(Frame *pFrame);
 private:
-	map<int, Frame> m_frame_data;
+	Frame *CreateFrameInstanceByID(const int iID);
+private:
+	map<int, FrameData> m_mapFrameDatas;
 };
 
 

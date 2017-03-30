@@ -6,6 +6,8 @@
 #include "Struct.h"
 #include "UIBase.h"
 
+#include "Req.h"
+#include "Rsp.h"
 
 using std::string;
 using std::vector;
@@ -17,6 +19,10 @@ using data::Option;
 using data::FrameData;
 using data::Option;
 
+
+/**
+* @brief 框
+*/
 class Frame
 {
 public:
@@ -24,15 +30,42 @@ public:
 	~Frame(void);
 
 public:
+	/**
+	* @brief 初始化
+	*/
 	bool Init( const FrameData &oFrameData );
+
+	/**
+	* @brief 获取第一个选项位置
+	*/
 	const Position GetOptionPosition();
+
+	/**
+	* @brief 展示框
+	*/
 	void Show()const;
+
+public:
+	/**
+	* @brief 准备数据
+	*/
+	virtual int PrepareData();
+
+
+private:
+	/**
+	* @brief 准备请求数据
+	*/
+	virtual void PrepareReq( Req &oReq );
+
+
 public:
 	SET_GET(int,             i, ID,          m_oFrameData.iID);
 	SET_GET(Position&,       o, Position,    m_oFrameData.oPosition);
 	SET_GET(Size&,           o, Size,        m_oFrameData.oSize);
 	SET_GET(string,          s, Description, m_oFrameData.sDescription);
 	SET_GET(Direction,       e, Direction,   m_oFrameData.eDirection);
+	SET_GET(int,             i, Handler,     m_oFrameData.iHandlerID);
 	SET_GET(vector<Option>&, v, Options,     m_oFrameData.vOptions);
 private:
 	FrameData m_oFrameData;

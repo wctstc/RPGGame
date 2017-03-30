@@ -1,7 +1,6 @@
 #include "FrameLoader.h"
 
 
-
 bool FrameLoader::Init()
 {
 	FRAMEArray ayFrames;
@@ -15,35 +14,34 @@ bool FrameLoader::Init()
 
 	ayFrames.ParseFromArray(buffer, length);
 
-	const FRAME *pFrame;
-	Frame oFrame;
+	const FRAME *pFrameConfig;
+	Frame *pFrame;
 	FrameData oFrameData;
 	Option oOptionData;
 	vector<Option> vOptions;
 	for (int i = 0; i < ayFrames.items_size(); ++i)
 	{
 		vOptions.clear();
-		pFrame = &(ayFrames.items(i));
-		oFrameData.iID = pFrame->id();
-		oFrameData.eDirection = static_cast<Direction>(pFrame->direction());
-		oFrameData.oPosition.iX = pFrame->x();
-		oFrameData.oPosition.iY = pFrame->y();
-		oFrameData.oSize.iWidth = pFrame->width();
-		oFrameData.oSize.iHeigth = pFrame->height();
-		oFrameData.sDescription = pFrame->description().c_str();
-		if (pFrame->has_handle_id())
-			oFrameData.iHandlerID = pFrame->handle_id();
+		pFrameConfig = &(ayFrames.items(i));
+		oFrameData.iID = pFrameConfig->id();
+		oFrameData.eDirection = static_cast<Direction>(pFrameConfig->direction());
+		oFrameData.oPosition.iX = pFrameConfig->x();
+		oFrameData.oPosition.iY = pFrameConfig->y();
+		oFrameData.oSize.iWidth = pFrameConfig->width();
+		oFrameData.oSize.iHeigth = pFrameConfig->height();
+		oFrameData.sDescription = pFrameConfig->description().c_str();
+		if (pFrameConfig->has_handle_id())
+			oFrameData.iHandlerID = pFrameConfig->handle_id();
 		else
-			oFrameData.iHandlerID = 0;
-		for (int j = 0; j < pFrame->option().size(); ++j )
+			oFrameData.iHandlerID = NO_HANDLER;
+		for (int j = 0; j < pFrameConfig->option().size(); ++j )
 		{
-			oOptionData.sDescription = pFrame->option(j).description();
-			oOptionData.iFrameID = pFrame->option(j).frame_id();
+			oOptionData.sDescription = pFrameConfig->option(j).description();
+			oOptionData.iFrameID = pFrameConfig->option(j).frame_id();
 			vOptions.push_back(oOptionData);
 		}
 		oFrameData.vOptions = vOptions;
-		oFrame.Init(oFrameData);
-		m_frame_data.insert(pair<int, Frame>(oFrame.GetID(), oFrame));
+		m_mapFrameDatas.insert(pair<int, FrameData>(oFrameData.iID, oFrameData));
 	}
 // 
 // 	Frame frame;
@@ -154,8 +152,31 @@ bool FrameLoader::Init()
 
 Frame *FrameLoader::GetFrameByID(int iID)
 {
-	map<int, Frame>::iterator it = m_frame_data.find(iID);
-	if (it == m_frame_data.end())
-		return nullptr;
-	return &(it->second);
+	Frame *pFrame = NULL;
+	map<int, FrameData>::iterator it = m_mapFrameDatas.find(iID);
+	if (it != m_mapFrameDatas.end())
+	{
+		pFrame = CreateFrameInstanceByID(iID);
+		pFrame->Init(it->second);
+	}
+	return pFrame;
+}
+
+void FrameLoader::ReleaseFrame(Frame *pFrame)
+{
+	if (pFrame != NULL)
+		delete pFrame;
+}
+
+Frame * FrameLoader::CreateFrameInstanceByID(const int iID)
+{
+	Frame *pFrame = NULL;
+	switch (iID)
+	{
+	case 4:
+		break;
+	default:
+		pFrame = new Frame();
+	}
+	return pFrame;
 }

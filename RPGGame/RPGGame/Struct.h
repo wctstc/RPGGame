@@ -32,6 +32,9 @@ using std::string;
 #define OptionArrowGap 3
 
 
+/*!< 无处理 */
+#define NO_HANDLER 0
+
 namespace data
 {
 	//-枚举结构----------------------------------------------------//

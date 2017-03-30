@@ -1,5 +1,5 @@
 #include "Frame.h"
-
+#include "App.h"
 
 Frame::Frame(void)
 {
@@ -110,4 +110,49 @@ void Frame::Show() const
 		else
 			printf( FrameHorizontal );
 	}
+}
+
+int Frame::PrepareData()
+{
+	
+	if (m_oFrameData.iHandlerID == NO_HANDLER)
+	{//不需要准备数据
+		return 0;
+	}
+	
+	Req oReq;
+	Rsp oRsp;
+
+	//请求数据
+	if (0 < App::GetInstance().Handler(m_oFrameData.iHandlerID, oReq, oRsp))
+		return -1;
+
+
+	//设置框的描述
+	string sDescription = oReq.GetString("description");
+	if (sDescription != "")
+		m_oFrameData.sDescription = sDescription;
+
+
+	//设置框的选项
+	vector<Req> vReqOptions = oReq.GetVector("options");
+	if (vReqOptions.size() > 0)
+	{
+		vector<Req>::const_iterator it;
+		Option oOption;
+
+		m_oFrameData.vOptions.clear();
+		for (it = vReqOptions.begin(); it != vReqOptions.end(); ++it)
+		{
+			oOption.sDescription = it->GetString("description");
+			oOption.iFrameID = it->GetInt("frame_id");
+			m_oFrameData.vOptions.push_back(oOption);
+		}
+	}
+}
+
+
+void Frame::PrepareReq(Req &oReq)
+{
+	return;
 }

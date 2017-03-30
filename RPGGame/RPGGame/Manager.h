@@ -25,6 +25,7 @@ public:
 	virtual void Finish();
 public:
 	void Request(int iCmd, Req &oReq);
+	int Forword(int iCmd, Req &oReq, Rsp &oRsp);
 public:
 	virtual int Handle(int iCmd, Req &oReq, Rsp &oRsp) = 0;
 protected:

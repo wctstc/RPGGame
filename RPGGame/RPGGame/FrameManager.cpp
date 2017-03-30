@@ -57,56 +57,29 @@ int FrameManager::HandleIdle(Req &oReq)
 
 int FrameManager::HandleStart(Req &oReq)
 {
-	Frame *pFrame = FrameLoader::GetInstance().GetFrameByID(0);
-	int iFrameID;
-	int iHandleID;
+	FrameLoader &oFrameLoader = FrameLoader::GetInstance();
+	Frame *pFrame = oFrameLoader.GetFrameByID(0);
 	m_lsFrames.push_back(pFrame);
+
+
+	int iFrameID;
 	bool bFlash = true;
-	list<Frame*>::const_iterator cpIt;
 	int iSelected;
 
 	bool bIsRuning = true;
-
-
-
-
 	while (bIsRuning)
 	{
 		pFrame = m_lsFrames.back();
-
-
-		Option oOption;
-		vector<Option> vOptions;
-		string sOptionDescription;
-		string sDescription = oReq.GetString("description");
-
-		//设置框的描述
-		if (sDescription != "")
-			pFrame->SetDirection(sDescription);
-		//设置框的选项
-		vector<Req> vOptions = oReq.GetVector("options");
-		if (vOptions.size() > 0)
-		{
-			vector<Req>::const_iterator it;
-			for (it = vOptions.begin(); it != vOptions.end(); ++it)
-			{
-				oOption.sDescription = it->GetString("description");
-				oOption.iFrameID = it->GetInt("frame_id");
-				oOption.iHandleID = it->GetInt("handle_id");
-				vOptions.push_back(oOption);
-			}
-			pFrame->SetOptions(oOption);
-		}
-
-		
 		//刷新视图
 		//if (bFlash)
 		if(true)
 		{
 			clear();
+//			list<Frame*>::const_iterator cpIt;
 //			for (cpIt = m_lsFrames.begin();cpIt != m_lsFrames.end();++cpIt)
 //				(*cpIt)->Show();
 		}
+		pFrame->PrepareData();
 		pFrame->Show();
 
 		OptionsArrow &oOptionsArrow = OptionsArrow::GetInstance();
@@ -124,6 +97,7 @@ int FrameManager::HandleStart(Req &oReq)
 				if (m_lsFrames.size() > 1)
 				{
 					m_lsFrames.pop_back();
+					oFrameLoader.ReleaseFrame(pFrame);
 					bFlash = true;
 				}
 				break;
@@ -134,13 +108,13 @@ int FrameManager::HandleStart(Req &oReq)
 			if (pFrame == NULL)
 			{
 				m_lsFrames.pop_back();
+				oFrameLoader.ReleaseFrame(pFrame);
 				bFlash = true;
 				break;
 			}
 			//选中选项有后续菜单
 			else
 			{
-				iHandleID = oOptionsArrow.GetOptionByIndex(iSelected).iHandleID;
 				m_lsFrames.push_back(pFrame);
 				bFlash = false;
 				break;
@@ -151,7 +125,7 @@ int FrameManager::HandleStart(Req &oReq)
 	return 0;
 }
 
-int FrameManager::Handle(int iCmd, Req &oReq)
+int FrameManager::Handle(int iCmd, Req &oReq, Rsp &oRsp)
 {
 	switch (iCmd)
 	{
