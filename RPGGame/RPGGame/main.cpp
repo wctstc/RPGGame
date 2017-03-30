@@ -74,15 +74,15 @@ int main()
 	string discription = "hello worldhello worldhello worldhello worldhello worldhello world";
 	Direction direction = Direction::DIRECTION_VERTICAL;
 	int gap = 1;
-	vector< OptionData > options;
-	OptionData oOptionData;
+	vector< Option > options;
+	Option oOption;
 	string description[] = { "show bag","show author","show hello" };
 	int frame_id[] = { 1,2,3 };
 	for (int i = 0; i < 3; ++i)
 	{
 		//oOptionData.index = i;
-		oOptionData.sDescription = description[i];
-		oOptionData.iFrameID = frame_id[i];
+		oOption.sDescription = description[i];
+		oOption.iFrameID = frame_id[i];
 	}
 
 

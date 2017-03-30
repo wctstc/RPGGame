@@ -14,7 +14,7 @@ public:
 	Item();
 	~Item();
 public:
-	SET_GET(int,    u, ID,          m_oItemData.iID);
+	SET_GET(int,    i, ID,          m_oItemData.iID);
 	SET_GET(string, s, Description, m_oItemData.sDescription);
 public:
 	/*!< 物品数据 */

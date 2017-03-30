@@ -64,11 +64,41 @@ int FrameManager::HandleStart(Req &oReq)
 	bool bFlash = true;
 	list<Frame*>::const_iterator cpIt;
 	int iSelected;
+
 	bool bIsRuning = true;
+
+
+
+
 	while (bIsRuning)
 	{
 		pFrame = m_lsFrames.back();
 
+
+		Option oOption;
+		vector<Option> vOptions;
+		string sOptionDescription;
+		string sDescription = oReq.GetString("description");
+
+		//设置框的描述
+		if (sDescription != "")
+			pFrame->SetDirection(sDescription);
+		//设置框的选项
+		vector<Req> vOptions = oReq.GetVector("options");
+		if (vOptions.size() > 0)
+		{
+			vector<Req>::const_iterator it;
+			for (it = vOptions.begin(); it != vOptions.end(); ++it)
+			{
+				oOption.sDescription = it->GetString("description");
+				oOption.iFrameID = it->GetInt("frame_id");
+				oOption.iHandleID = it->GetInt("handle_id");
+				vOptions.push_back(oOption);
+			}
+			pFrame->SetOptions(oOption);
+		}
+
+		
 		//刷新视图
 		//if (bFlash)
 		if(true)
@@ -105,14 +135,12 @@ int FrameManager::HandleStart(Req &oReq)
 			{
 				m_lsFrames.pop_back();
 				bFlash = true;
-				iHandleID = FrameLoader::GetInstance().GetFrameByID();
-				Request(iHandleID, Req);
-				bIsRuning = false;
 				break;
 			}
 			//选中选项有后续菜单
 			else
 			{
+				iHandleID = oOptionsArrow.GetOptionByIndex(iSelected).iHandleID;
 				m_lsFrames.push_back(pFrame);
 				bFlash = false;
 				break;

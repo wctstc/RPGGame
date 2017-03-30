@@ -22,7 +22,7 @@ const Position Frame::GetOptionPosition()
 	oPosition.iX = 2 + m_oFrameData.oPosition.iX;
 	oPosition.iY = m_oFrameData.oPosition.iY;
 
-	oPosition.iY += (m_oFrameData.sDiscription.size() / (m_oFrameData.oSize.iWidth - 2)) + 1 + 1;
+	oPosition.iY += (m_oFrameData.sDescription.size() / (m_oFrameData.oSize.iWidth - 2)) + 1 + 1;
 	return oPosition;
 }
 
@@ -47,10 +47,10 @@ void Frame::Show() const
 	//¥Ú”°√Ë ˆ
 	do 
 	{
-		if( offset_discription + m_oFrameData.oSize.iWidth - 2 < m_oFrameData.sDiscription.length() )
-			sub_discription = m_oFrameData.sDiscription.substr( offset_discription, m_oFrameData.oSize.iWidth - 2 );
+		if( offset_discription + m_oFrameData.oSize.iWidth - 2 < m_oFrameData.sDescription.length() )
+			sub_discription = m_oFrameData.sDescription.substr( offset_discription, m_oFrameData.oSize.iWidth - 2 );
 		else
-			sub_discription = m_oFrameData.sDiscription.substr( offset_discription );
+			sub_discription = m_oFrameData.sDescription.substr( offset_discription );
 		
 
 		++offset_y;
@@ -62,7 +62,7 @@ void Frame::Show() const
 
 		offset_discription += m_oFrameData.oSize.iWidth- 2;
 		
-		if( offset_discription >= m_oFrameData.sDiscription.length())
+		if( offset_discription >= m_oFrameData.sDescription.length())
 			break;
 	} 
 	while( true );

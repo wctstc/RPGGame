@@ -18,8 +18,8 @@ bool FrameLoader::Init()
 	const FRAME *pFrame;
 	Frame oFrame;
 	FrameData oFrameData;
-	OptionData oOptionData;
-	vector<OptionData> vOptions;
+	Option oOptionData;
+	vector<Option> vOptions;
 	for (int i = 0; i < ayFrames.items_size(); ++i)
 	{
 		vOptions.clear();
@@ -30,15 +30,15 @@ bool FrameLoader::Init()
 		oFrameData.oPosition.iY = pFrame->y();
 		oFrameData.oSize.iWidth = pFrame->width();
 		oFrameData.oSize.iHeigth = pFrame->height();
-		oFrameData.sDiscription = pFrame->discription().c_str();
+		oFrameData.sDescription = pFrame->description().c_str();
+		if (pFrame->has_handle_id())
+			oFrameData.iHandlerID = pFrame->handle_id();
+		else
+			oFrameData.iHandlerID = 0;
 		for (int j = 0; j < pFrame->option().size(); ++j )
 		{
 			oOptionData.sDescription = pFrame->option(j).description();
 			oOptionData.iFrameID = pFrame->option(j).frame_id();
-			if (pFrame->option().has_handle_id())
-				oOptionData.iHandleID = pFrame->option(j).handle_id();
-			else
-				oOptionData.iHandleID = 0;
 			vOptions.push_back(oOptionData);
 		}
 		oFrameData.vOptions = vOptions;

@@ -34,6 +34,7 @@ using std::string;
 
 namespace data
 {
+	//-枚举结构----------------------------------------------------//
 	/**
 	 * @brief 方向枚举
 	 */
@@ -64,7 +65,25 @@ namespace data
 		DIRECTION_BOTTOM = 7
 	};
 
+	/**
+	 * @brief 装备类型
+	 */
+	enum EquipmentType
+	{
+		/*!< 武器 */
+		EQUIPMENT_TYPE_WEAPON = 0,
+		/*!< 防具 */
+		EQUIPMENT_TYPE_AEMOR = 1,
+		/*!< 饰品 */
+		EQUIPMENT_TYPE_ACCESSORY = 2,
+		/*!< 类型最大值 */
+		EQUIPMENT_TYPE_MAX = 3,
+	};
 
+
+
+
+	//-简单结构----------------------------------------------------//
 	/**
 	 * @brief 位置
 	 */
@@ -90,9 +109,9 @@ namespace data
 	};
 
 	/**
-	 * @brief 选项数据
+	 * @brief 选项
 	 */
-	struct OptionData
+	struct Option
 	{
 		/*!< 文字描述 */
 		string sDescription;
@@ -102,18 +121,19 @@ namespace data
 
 		/*!< 选中后对应框的编号 */
 		int iFrameID;
-
-		/*!< 选中后对处理的编号 */
-		int iHandleID;
 	};
 
+	
+
+
+	//-数据结构----------------------------------------------------//
 	/**
 	 * @brief 框数据
 	 */
 	struct FrameData
 	{
 		/*!< 编号 */
-		unsigned int iID;
+		int iID;
 
 		/*!< 位置 */
 		Position oPosition;
@@ -122,18 +142,17 @@ namespace data
 		Size oSize;
 
 		/*!< 描述文字 */
-		string sDiscription;
+		string sDescription;
 
 		/*!< 选项方向 */
 		Direction eDirection;
 
-		/*!< 选项间间隔 */
-		//int iGap;
+		/*!< 处理编号 */
+		int iHandlerID;
 
 		/*!< 选项数据 */
-		vector<OptionData> vOptions;
+		vector<Option> vOptions;
 	};
-
 
 	/**
 	* @brief 物品数据
@@ -141,10 +160,47 @@ namespace data
 	struct ItemData
 	{
 		/*!< 编号 */
-		unsigned int iID;
+		int iID;
 
 		/*!< 描述 */
 		string sDescription;
+	};
+
+	/**
+	 * @brief 行动者数据
+	 */
+	struct ActorData
+	{
+		/*!< 编号 */
+		int iID;
+		/*!< 名字 */
+		string sName;
+		/*!< 生命 */
+		int iHp;
+		/*!< 生命上限 */
+		int iMaxHp;
+		/*!< 攻击力 */
+		int iAttack;
+		/*!< 防御力 */
+		int iDefance;
+	};
+
+
+	/**
+	 * @brief 装备数据
+	 */
+	class EquipmentData
+	{
+		/*!< 编号 */
+		int iID;
+		/*!< 类型 */
+		EquipmentType eType;
+		/*!< 附加生命上限 */
+		int iMaxHp;
+		/*!< 附加攻击力 */
+		int iAttack;
+		/*!< 附加防御力 */
+		int iDefance;
 	};
 };
 
@@ -154,7 +210,7 @@ inline const type Get##name( )const\
 {\
 	return field;\
 }\
-inline void Set##name( type abbr_type##name )\
+inline void Set##name( const type abbr_type##name )\
 {\
 	field = abbr_type##name;\
 }

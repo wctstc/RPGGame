@@ -27,7 +27,7 @@ public:
 	int HandleIdle(Req &oReq);
 	int HandleStart(Req &oReq);
 private:
-	virtual int Handle(int iCmd, Req &oReq);
+	virtual int Handle(int iCmd, Req &oReq, Rsp &oRsp)
 
 private:
 	list<Frame*> m_lsFrames;

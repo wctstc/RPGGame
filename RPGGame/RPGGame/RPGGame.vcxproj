@@ -122,11 +122,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
-    <ClCompile Include="ActorData.cpp" />
     <ClCompile Include="Bag.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Equipment.cpp" />
-    <ClCompile Include="EquipmentData.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="Frame.cpp" />
@@ -155,12 +153,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
-    <ClInclude Include="ActorData.h" />
     <ClInclude Include="Bag.h" />
     <ClInclude Include="Cmd.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Equipment.h" />
-    <ClInclude Include="EquipmentData.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="Frame.h" />

@@ -11,10 +11,12 @@ Equipment::~Equipment()
 {
 }
 
-bool Equipment::Init(int iBaseMaxHp, int iBaseAttack, int iBaseDefance)
+bool Equipment::Init(int iID, EquipmentType eType, int iMaxHp, int iAttack, int iDefance)
 {
-	SetMaxHp(0);
-	SetAttack(0);
-	SetDefance(0);
+	m_oEquipmentData.iID      = iID;
+	m_oEquipmentData.eType    = eType;
+	m_oEquipmentData.iMaxHp   = iMaxHp;
+	m_oEquipmentData.iAttack  = iAttack;
+	m_oEquipmentData.iDefance = iDefance;
 	return true;
 }

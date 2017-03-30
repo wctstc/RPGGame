@@ -8,7 +8,7 @@
 
 using data::Direction;
 using data::Position;
-using data::OptionData;
+using data::Option;
 
 using std::vector;
 
@@ -21,13 +21,13 @@ public:
 	bool Init(
 		const Direction eDiresction,
 		const Position oPosition,
-		const vector<OptionData> &vOptions);
+		const vector<Option> &vOptions);
 	int GetSelectIndex();
-	data::OptionData GetOptionByIndex( int iIndex );
+	data::Option GetOptionByIndex( int iIndex );
 	
 private:
 	Direction m_eDirection;
 	Position m_oPosition;
-	vector<OptionData> m_vOptions;
+	vector<Option> m_vOptions;
 };
 

@@ -15,7 +15,7 @@ OptionsArrow::~OptionsArrow(void)
 bool OptionsArrow::Init( 
 	const Direction eDiresction, 
 	const Position oPosition,
-	const vector<OptionData> &vOptions)
+	const vector<Option> &vOptions)
 {
 	m_eDirection = eDiresction;
 	m_oPosition  = oPosition;
@@ -98,9 +98,9 @@ int OptionsArrow::GetSelectIndex()
 	}
 }
 
-data::OptionData OptionsArrow::GetOptionByIndex( int iIndex )
+data::Option OptionsArrow::GetOptionByIndex( int iIndex )
 {
 	if (iIndex >= 0 && iIndex < m_vOptions.size())
 		return m_vOptions[iIndex];
-	return OptionData();
+	return Option();
 }

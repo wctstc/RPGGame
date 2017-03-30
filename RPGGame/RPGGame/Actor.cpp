@@ -11,9 +11,13 @@ Actor::~Actor()
 {
 }
 
-bool Actor::Init(int iMaxHp, int iAttack, int iDefance)
+bool Actor::Init(int iID, int iHp, int iMaxHp, int iAttack, int iDefance)
 {
-	m_oActorData.Init(iMaxHp, iMaxHp, iAttack, iDefance);
+	m_oActorData.iID      = iID;
+	m_oActorData.iHp      = iHp;
+	m_oActorData.iMaxHp   = iMaxHp;
+	m_oActorData.iAttack  = iAttack;
+	m_oActorData.iDefance = iDefance;
 
 	for (int i = 0; i < EquipmentType::EQUIPMENT_TYPE_MAX; ++i)
 		m_ayEquipments[i].bIsEquip = false;
@@ -23,10 +27,13 @@ bool Actor::Init(int iMaxHp, int iAttack, int iDefance)
 
 void Actor::Reset()
 {
-	m_oActorData.SetHp(GetMaxHp());
+	m_oActorData.iHp = GetMaxHp();
 }
 
-EquipmentOperator Actor::Equip(const EquipmentOperator eEquipmentOperator, const Equipment &oNewEquipment, Equipment &oOldEuipment)
+EquipmentOperator Actor::Equip(
+	const EquipmentOperator eEquipmentOperator,
+	const Equipment &oNewEquipment, 
+	Equipment &oOldEuipment)
 {
 	EquipmentOperator eRet;
 	EquipmentState *oTempEquipment = NULL;
@@ -65,7 +72,7 @@ void Actor::Defance(int iDamage)
 	int iRealDamage = iDamage - GetDefance();
 	if (iRealDamage <= 0)
 		iRealDamage = 1;
-	m_oActorData.SetHp(m_oActorData.GetHp() - iRealDamage);
+	m_oActorData.iHp -= iRealDamage;
 }
 
 int Actor::Attack()
@@ -75,7 +82,7 @@ int Actor::Attack()
 
 bool Actor::IsDie()
 {
-	return m_oActorData.GetHp() <= 0;
+	return m_oActorData.iHp <= 0;
 }
 
 bool Actor::AddItemToBag(const Item &oItem)
@@ -85,12 +92,12 @@ bool Actor::AddItemToBag(const Item &oItem)
 
 int Actor::GetHp()
 {
-	return m_oActorData.GetHp();
+	return m_oActorData.iHp;
 }
 
 int Actor::GetMaxHp()
 {
-	int iTotalMaxHp = m_oActorData.GetMaxHp();
+	int iTotalMaxHp = m_oActorData.iMaxHp;
 
 	for (int i = 0; i < EquipmentType::EQUIPMENT_TYPE_MAX; ++i)
 		if( m_ayEquipments[i].bIsEquip )
@@ -101,7 +108,7 @@ int Actor::GetMaxHp()
 
 int Actor::GetAttack()
 {
-	int iTotalAttack = m_oActorData.GetAttack();
+	int iTotalAttack = m_oActorData.iAttack;
 
 	for (int i = 0; i < EquipmentType::EQUIPMENT_TYPE_MAX; ++i)
 		if (m_ayEquipments[i].bIsEquip)
@@ -112,28 +119,13 @@ int Actor::GetAttack()
 
 int Actor::GetDefance()
 {
-	int iTotalDefance = m_oActorData.GetDefance();
+	int iTotalDefance = m_oActorData.iDefance;
 
 	for (int i = 0; i < EquipmentType::EQUIPMENT_TYPE_MAX; ++i)
 		if (m_ayEquipments[i].bIsEquip)
 			iTotalDefance += m_ayEquipments[i].oEquipment.GetDefance();
 
 	return iTotalDefance;
-}
-
-int Actor::GetBaseMaxHp()
-{
-	return m_oActorData.GetMaxHp();
-}
-
-int Actor::GetBaseAttack()
-{
-	return m_oActorData.GetAttack();
-}
-
-int Actor::GetBaseDefance()
-{
-	return m_oActorData.GetDefance();
 }
 
 int Actor::GetExtendMaxHp()

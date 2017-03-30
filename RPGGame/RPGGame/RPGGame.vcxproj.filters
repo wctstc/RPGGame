@@ -129,9 +129,6 @@
     <ClCompile Include="Actor.cpp">
       <Filter>Manager\Player</Filter>
     </ClCompile>
-    <ClCompile Include="ActorData.cpp">
-      <Filter>Manager\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Skill.cpp">
       <Filter>Manager\Player\Skill</Filter>
     </ClCompile>
@@ -139,9 +136,6 @@
       <Filter>Manager\Player\Skill</Filter>
     </ClCompile>
     <ClCompile Include="Equipment.cpp">
-      <Filter>Manager\Player\Equipment</Filter>
-    </ClCompile>
-    <ClCompile Include="EquipmentData.cpp">
       <Filter>Manager\Player\Equipment</Filter>
     </ClCompile>
     <ClCompile Include="HanderBase.cpp">
@@ -227,9 +221,6 @@
     <ClInclude Include="HandlerManager.h">
       <Filter>Manager\Handle</Filter>
     </ClInclude>
-    <ClInclude Include="ActorData.h">
-      <Filter>Manager\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Actor.h">
       <Filter>Manager\Player</Filter>
     </ClInclude>
@@ -240,9 +231,6 @@
       <Filter>Manager\Player\Skill</Filter>
     </ClInclude>
     <ClInclude Include="Equipment.h">
-      <Filter>Manager\Player\Equipment</Filter>
-    </ClInclude>
-    <ClInclude Include="EquipmentData.h">
       <Filter>Manager\Player\Equipment</Filter>
     </ClInclude>
     <ClInclude Include="HanderBase.h">
