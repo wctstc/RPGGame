@@ -13,47 +13,56 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="proto">
-      <UniqueIdentifier>{523ef514-f17d-48b3-aaab-8e8091135a4d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Framework">
       <UniqueIdentifier>{e672db6e-d241-43d0-af19-1c278c34d282}</UniqueIdentifier>
     </Filter>
     <Filter Include="Base">
       <UniqueIdentifier>{ff216131-e30d-4b93-8dc7-14c8f71270ff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager">
-      <UniqueIdentifier>{8e9c95c2-48b1-4c1f-b688-5ba55327899f}</UniqueIdentifier>
+    <Filter Include="Game">
+      <UniqueIdentifier>{97e58f34-76c4-4ab5-8a20-149e191e7fc2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI">
+    <Filter Include="Game\UI">
       <UniqueIdentifier>{cc662fb6-d47b-4c56-8ed1-2a3f9b764897}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\PlayerFrame">
+    <Filter Include="Game\UI\PlayerFrame">
       <UniqueIdentifier>{d171b03c-dba0-49b5-b85e-9eb03682afc8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Frame">
+    <Filter Include="Game\UI\Frame">
       <UniqueIdentifier>{4252cc46-dc8d-4d45-9237-9ea0043777ff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data">
+    <Filter Include="Game\Data">
       <UniqueIdentifier>{5a5a3bff-e087-4287-91e2-f07f2834e93c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data\Item">
+    <Filter Include="Game\Data\Item">
       <UniqueIdentifier>{3ed3a0d2-ec43-44b1-873c-d29ae46f65f6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data\Actor">
+    <Filter Include="Game\Data\Actor">
       <UniqueIdentifier>{f3b222c0-bef6-4aa9-9e07-23c85379e257}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data\Actor\Player">
+    <Filter Include="Game\Data\Actor\Player">
       <UniqueIdentifier>{3373c040-6255-4cb9-9496-200667dc31d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data\Actor\Player\Skill">
+    <Filter Include="Game\Data\Actor\Player\Skill">
       <UniqueIdentifier>{fcf9a914-85bb-4d96-85d0-f3b58082151b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data\Actor\Player\Bag">
+    <Filter Include="Game\Data\Actor\Player\Bag">
       <UniqueIdentifier>{807e9290-1721-4703-807c-973a1915baae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data\Actor\Player\Equipment">
+    <Filter Include="Game\Data\Actor\Player\Equipment">
       <UniqueIdentifier>{65c67196-c9fa-4d99-b5d2-b2bba3709213}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Manager">
+      <UniqueIdentifier>{8e9c95c2-48b1-4c1f-b688-5ba55327899f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Config">
+      <UniqueIdentifier>{cef2a378-8f14-4d37-95fc-b7d8eebf34fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Config\proto">
+      <UniqueIdentifier>{523ef514-f17d-48b3-aaab-8e8091135a4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\UI\Item">
+      <UniqueIdentifier>{efb0a965-143c-411f-be1a-d835d82a9860}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -72,56 +81,59 @@
     <ClCompile Include="Config.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
-    <ClCompile Include="App.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="UIBase.cpp">
       <Filter>Base</Filter>
     </ClCompile>
     <ClCompile Include="proto\src\proto\dataconfig_frame.pb.cc">
-      <Filter>proto</Filter>
+      <Filter>Game\Config\proto</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Data\Actor\Player</Filter>
+      <Filter>Game\Data\Actor\Player</Filter>
     </ClCompile>
     <ClCompile Include="PlayerLoader.cpp">
-      <Filter>Data\Actor\Player</Filter>
+      <Filter>Game\Data\Actor\Player</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
-      <Filter>Data\Item</Filter>
+      <Filter>Game\Data\Item</Filter>
     </ClCompile>
     <ClCompile Include="Skill.cpp">
-      <Filter>Data\Actor\Player\Skill</Filter>
+      <Filter>Game\Data\Actor\Player\Skill</Filter>
     </ClCompile>
     <ClCompile Include="SkillData.cpp">
-      <Filter>Data\Actor\Player\Skill</Filter>
+      <Filter>Game\Data\Actor\Player\Skill</Filter>
     </ClCompile>
     <ClCompile Include="Equipment.cpp">
-      <Filter>Data\Actor\Player\Equipment</Filter>
+      <Filter>Game\Data\Actor\Player\Equipment</Filter>
     </ClCompile>
     <ClCompile Include="Bag.cpp">
-      <Filter>Data\Actor\Player\Bag</Filter>
+      <Filter>Game\Data\Actor\Player\Bag</Filter>
     </ClCompile>
     <ClCompile Include="BagFrame.cpp">
-      <Filter>UI\PlayerFrame</Filter>
+      <Filter>Game\UI\PlayerFrame</Filter>
     </ClCompile>
     <ClCompile Include="Frame.cpp">
-      <Filter>UI\Frame</Filter>
+      <Filter>Game\UI\Frame</Filter>
     </ClCompile>
     <ClCompile Include="FrameLoader.cpp">
-      <Filter>UI\Frame</Filter>
+      <Filter>Game\UI\Frame</Filter>
     </ClCompile>
     <ClCompile Include="FrameManager.cpp">
-      <Filter>UI\Frame</Filter>
+      <Filter>Game\UI\Frame</Filter>
     </ClCompile>
     <ClCompile Include="Option.cpp">
-      <Filter>UI\Frame</Filter>
+      <Filter>Game\UI\Frame</Filter>
     </ClCompile>
     <ClCompile Include="Actor.cpp">
-      <Filter>Data\Actor</Filter>
+      <Filter>Game\Data\Actor</Filter>
     </ClCompile>
     <ClCompile Include="PlayerManager.cpp">
-      <Filter>Manager</Filter>
+      <Filter>Game\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="App.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemFrame.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -137,9 +149,6 @@
     <ClInclude Include="Config.h">
       <Filter>Framework</Filter>
     </ClInclude>
-    <ClInclude Include="App.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="UIBase.h">
       <Filter>Base</Filter>
     </ClInclude>
@@ -150,52 +159,58 @@
       <Filter>Framework</Filter>
     </ClInclude>
     <ClInclude Include="proto\src\proto\dataconfig_frame.pb.h">
-      <Filter>proto</Filter>
+      <Filter>Game\Config\proto</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Data\Actor\Player</Filter>
+      <Filter>Game\Data\Actor\Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayerLoader.h">
-      <Filter>Data\Actor\Player</Filter>
+      <Filter>Game\Data\Actor\Player</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
-      <Filter>Data\Item</Filter>
+      <Filter>Game\Data\Item</Filter>
     </ClInclude>
     <ClInclude Include="Skill.h">
-      <Filter>Data\Actor\Player\Skill</Filter>
+      <Filter>Game\Data\Actor\Player\Skill</Filter>
     </ClInclude>
     <ClInclude Include="SkillData.h">
-      <Filter>Data\Actor\Player\Skill</Filter>
+      <Filter>Game\Data\Actor\Player\Skill</Filter>
     </ClInclude>
     <ClInclude Include="Equipment.h">
-      <Filter>Data\Actor\Player\Equipment</Filter>
+      <Filter>Game\Data\Actor\Player\Equipment</Filter>
     </ClInclude>
     <ClInclude Include="Bag.h">
-      <Filter>Data\Actor\Player\Bag</Filter>
+      <Filter>Game\Data\Actor\Player\Bag</Filter>
     </ClInclude>
     <ClInclude Include="BagFrame.h">
-      <Filter>UI\PlayerFrame</Filter>
+      <Filter>Game\UI\PlayerFrame</Filter>
     </ClInclude>
     <ClInclude Include="Frame.h">
-      <Filter>UI\Frame</Filter>
+      <Filter>Game\UI\Frame</Filter>
     </ClInclude>
     <ClInclude Include="FrameLoader.h">
-      <Filter>UI\Frame</Filter>
+      <Filter>Game\UI\Frame</Filter>
     </ClInclude>
     <ClInclude Include="FrameManager.h">
-      <Filter>UI\Frame</Filter>
+      <Filter>Game\UI\Frame</Filter>
     </ClInclude>
     <ClInclude Include="Option.h">
-      <Filter>UI\Frame</Filter>
+      <Filter>Game\UI\Frame</Filter>
     </ClInclude>
     <ClInclude Include="Actor.h">
-      <Filter>Data\Actor</Filter>
+      <Filter>Game\Data\Actor</Filter>
     </ClInclude>
     <ClInclude Include="Struct.h">
-      <Filter>Data</Filter>
+      <Filter>Game\Data</Filter>
     </ClInclude>
     <ClInclude Include="PlayerManager.h">
-      <Filter>Manager</Filter>
+      <Filter>Game\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="App.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemFrame.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

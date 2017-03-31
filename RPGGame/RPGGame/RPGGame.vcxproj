@@ -130,6 +130,7 @@
     <ClCompile Include="FrameLoader.cpp" />
     <ClCompile Include="FrameManager.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemFrame.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Option.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="FrameLoader.h" />
     <ClInclude Include="FrameManager.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemFrame.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Option.h" />
     <ClInclude Include="Player.h" />
