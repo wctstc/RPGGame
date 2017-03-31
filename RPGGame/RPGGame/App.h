@@ -10,6 +10,8 @@ using std::queue;
 
 #include "Manager.h"
 #include "FrameManager.h"
+#include "PlayerManager.h"
+
 #include "Singleton.h"
 #include "Cmd.h"
 
@@ -20,8 +22,9 @@ class App : public Singleton<App>
 private:
 	typedef struct ReqData_
 	{
-		int cmd;
-		Req req;
+		int iCmd;
+		Req oReq;
+		Rsp oRsp;
 	}ReqData;
 public:
 	virtual bool Init();
@@ -46,6 +49,7 @@ private:
 private:
 #define g_FrameLoader FrameLoader::GetInstance()
 #define g_FrameManager FrameManager::GetInstance()
+#define g_PlayerManger PlayerManager::GetInstance()
 };
 
 

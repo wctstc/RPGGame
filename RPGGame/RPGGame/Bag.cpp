@@ -45,7 +45,7 @@ unsigned int Bag::GetItemID(int iIndex)const
 
 const string Bag::GetItemDescription(int iIndex)const
 {
-	if (iIndex > 0 && iIndex < m_vItems.size())
+	if (iIndex >= 0 && iIndex < m_vItems.size())
 		return m_vItems[iIndex].GetDescription();
 	return "";
 }

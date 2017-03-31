@@ -10,6 +10,7 @@ public:
 	Player();
 	~Player();
 public:
+	bool Init();
 	bool AddItemToBag( const Item &oItem );
 public:
 	const Bag& GetBag()const;

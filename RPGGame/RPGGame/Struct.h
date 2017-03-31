@@ -192,7 +192,7 @@ namespace data
 	/**
 	 * @brief 装备数据
 	 */
-	class EquipmentData
+	struct EquipmentData
 	{
 		/*!< 编号 */
 		int iID;

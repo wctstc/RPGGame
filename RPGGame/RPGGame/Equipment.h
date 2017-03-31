@@ -3,6 +3,7 @@
 
 #include "Struct.h"
 
+using data::EquipmentType;
 using data::EquipmentData;
 
 class Equipment

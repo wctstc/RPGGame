@@ -2,11 +2,14 @@
 #define __PLAYERMANAGER_H__
 
 #include "Cmd.h"
+#include "Manager.h"
+#include "Actor.h"
+#include "Singleton.h"
 
 using cmd::Command;
 
 
-class PlayerManager:public Manager
+class PlayerManager:public Singleton<PlayerManager>, public Manager
 {
 public:
 	PlayerManager();
@@ -18,6 +21,9 @@ public:
 
 private:
 	int HandleShowBag(int iCmd, Req &oReq, Rsp &oRsp);
+
+private:
+	Actor m_oActor;
 };
 
 #endif // __PLAYERMANAGER_H__

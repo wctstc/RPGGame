@@ -38,7 +38,7 @@ EquipmentOperator Actor::Equip(
 	EquipmentOperator eRet;
 	EquipmentState *oTempEquipment = NULL;
 	if (oNewEquipment.GetType() >= 0
-		&& oNewEquipment.GetType() < EQUIPMENT_TYPE_MAX)
+		&& oNewEquipment.GetType() < data::EQUIPMENT_TYPE_MAX)
 	{
 		oTempEquipment = &m_ayEquipments[oNewEquipment.GetType()];
 		switch (eEquipmentOperator)
@@ -99,7 +99,7 @@ int Actor::GetMaxHp()
 {
 	int iTotalMaxHp = m_oActorData.iMaxHp;
 
-	for (int i = 0; i < EquipmentType::EQUIPMENT_TYPE_MAX; ++i)
+	for (int i = 0; i < data::EQUIPMENT_TYPE_MAX; ++i)
 		if( m_ayEquipments[i].bIsEquip )
 			iTotalMaxHp += m_ayEquipments[i].oEquipment.GetMaxHp();
 
@@ -110,7 +110,7 @@ int Actor::GetAttack()
 {
 	int iTotalAttack = m_oActorData.iAttack;
 
-	for (int i = 0; i < EquipmentType::EQUIPMENT_TYPE_MAX; ++i)
+	for (int i = 0; i < data::EQUIPMENT_TYPE_MAX; ++i)
 		if (m_ayEquipments[i].bIsEquip)
 			iTotalAttack += m_ayEquipments[i].oEquipment.GetAttack();
 
@@ -121,7 +121,7 @@ int Actor::GetDefance()
 {
 	int iTotalDefance = m_oActorData.iDefance;
 
-	for (int i = 0; i < EquipmentType::EQUIPMENT_TYPE_MAX; ++i)
+	for (int i = 0; i < data::EQUIPMENT_TYPE_MAX; ++i)
 		if (m_ayEquipments[i].bIsEquip)
 			iTotalDefance += m_ayEquipments[i].oEquipment.GetDefance();
 
@@ -131,7 +131,7 @@ int Actor::GetDefance()
 int Actor::GetExtendMaxHp()
 {
 	int iExtendMaxHp = 0;
-	for (int i = 0; i < EquipmentType::EQUIPMENT_TYPE_MAX; ++i)
+	for (int i = 0; i < data::EQUIPMENT_TYPE_MAX; ++i)
 		if (m_ayEquipments[i].bIsEquip)
 			iExtendMaxHp += m_ayEquipments[i].oEquipment.GetMaxHp();
 	return iExtendMaxHp;
@@ -140,7 +140,7 @@ int Actor::GetExtendMaxHp()
 int Actor::GetExtendAttack()
 {
 	int iExtendAttack = 0;
-	for (int i = 0; i < EquipmentType::EQUIPMENT_TYPE_MAX; ++i)
+	for (int i = 0; i < data::EQUIPMENT_TYPE_MAX; ++i)
 		if (m_ayEquipments[i].bIsEquip)
 			iExtendAttack += m_ayEquipments[i].oEquipment.GetAttack();
 	return iExtendAttack;
@@ -149,7 +149,7 @@ int Actor::GetExtendAttack()
 int Actor::GetExtendDefance()
 {
 	int iExtendDefance = 0;
-	for (int i = 0; i < EquipmentType::EQUIPMENT_TYPE_MAX; ++i)
+	for (int i = 0; i < data::EQUIPMENT_TYPE_MAX; ++i)
 		if (m_ayEquipments[i].bIsEquip)
 			iExtendDefance += m_ayEquipments[i].oEquipment.GetDefance();
 	return iExtendDefance;

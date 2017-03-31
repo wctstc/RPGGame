@@ -79,7 +79,6 @@ int FrameManager::HandleStart(Req &oReq)
 //			for (cpIt = m_lsFrames.begin();cpIt != m_lsFrames.end();++cpIt)
 //				(*cpIt)->Show();
 		}
-		pFrame->PrepareData();
 		pFrame->Show();
 
 		OptionsArrow &oOptionsArrow = OptionsArrow::GetInstance();
@@ -115,6 +114,7 @@ int FrameManager::HandleStart(Req &oReq)
 			//选中选项有后续菜单
 			else
 			{
+				pFrame->PrepareData(iSelected);
 				m_lsFrames.push_back(pFrame);
 				bFlash = false;
 				break;

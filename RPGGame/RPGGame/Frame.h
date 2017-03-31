@@ -33,7 +33,7 @@ public:
 	/**
 	* @brief 初始化
 	*/
-	bool Init( const FrameData &oFrameData );
+	virtual bool Init( const FrameData &oFrameData );
 
 	/**
 	* @brief 获取第一个选项位置
@@ -45,20 +45,21 @@ public:
 	*/
 	void Show()const;
 
-public:
 	/**
 	* @brief 准备数据
 	*/
-	virtual int PrepareData();
-
+	int PrepareData(int iSelected);
 
 private:
 	/**
-	* @brief 准备请求数据
+	* @brief 生成请求数据
 	*/
-	virtual void PrepareReq( Req &oReq );
+	virtual void PrepareReq(Req &oReq);
 
-
+	/**
+	 * @brief 处理响应数据
+	 */
+	virtual void PrepareRsp(const Rsp &oRsp);
 public:
 	SET_GET(int,             i, ID,          m_oFrameData.iID);
 	SET_GET(Position&,       o, Position,    m_oFrameData.oPosition);

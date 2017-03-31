@@ -17,6 +17,11 @@ bool App::Init()
 	{
 		return false;
 	}
+
+	if (!g_PlayerManger.Init(this, &config))
+	{
+		return false;
+	}
 	return true;
 }
 
@@ -50,12 +55,12 @@ int App::Start()
 		}
 		else
 		{
-			sReqData.cmd = cmd::COMMAND_IDLE;
+			sReqData.iCmd = cmd::COMMAND_IDLE;
 		}
-		pair<MMIter, MMIter> pairFound = m_mmapCmdToManagers.equal_range(sReqData.cmd);
+		pair<MMIter, MMIter> pairFound = m_mmapCmdToManagers.equal_range(sReqData.iCmd);
 
 		for (MMIter it = pairFound.first; it != pairFound.second; ++it)
-			it->second.Handle(sReqData.cmd, sReqData.req);
+			it->second.Handle(sReqData.iCmd, sReqData.oReq, sReqData.oRsp);
 
 	}
 	return 0;
@@ -106,8 +111,12 @@ int App::Request(int iCmd, Req &oReq)
 
 int App::Handler(int iCmd, Req &oReq, Rsp &oRsp)
 {
+	int iRet = 0;
 	pair<MMIter, MMIter> pairFound = m_mmapCmdToManagers.equal_range(iCmd);
 
 	for (MMIter it = pairFound.first; it != pairFound.second; ++it)
-		it->second.Handle(iCmd, oReq, oRsp);
+		if ((iRet = it->second.Handle(iCmd, oReq, oRsp)) != 0)
+			break;
+
+	return iRet;
 }

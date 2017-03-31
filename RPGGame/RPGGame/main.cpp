@@ -95,7 +95,7 @@ int main()
 
 	//printf( "option:%d", option.SelectOption() );
 
-	App app;
+	App &app = App::GetInstance();
 	app.Init();
 	app.Start();
 

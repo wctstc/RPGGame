@@ -25,43 +25,40 @@
     <Filter Include="Manager">
       <UniqueIdentifier>{8e9c95c2-48b1-4c1f-b688-5ba55327899f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager\Frame">
+    <Filter Include="UI">
       <UniqueIdentifier>{cc662fb6-d47b-4c56-8ed1-2a3f9b764897}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager\Event">
-      <UniqueIdentifier>{5bf5f736-60d5-4353-9eaa-21010e087314}</UniqueIdentifier>
+    <Filter Include="UI\PlayerFrame">
+      <UniqueIdentifier>{d171b03c-dba0-49b5-b85e-9eb03682afc8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager\Query">
-      <UniqueIdentifier>{b399d807-3419-47a8-bef2-8bcfc7da9aa9}</UniqueIdentifier>
+    <Filter Include="UI\Frame">
+      <UniqueIdentifier>{4252cc46-dc8d-4d45-9237-9ea0043777ff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager\Player">
-      <UniqueIdentifier>{3373c040-6255-4cb9-9496-200667dc31d7}</UniqueIdentifier>
+    <Filter Include="Data">
+      <UniqueIdentifier>{5a5a3bff-e087-4287-91e2-f07f2834e93c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager\Item">
+    <Filter Include="Data\Item">
       <UniqueIdentifier>{3ed3a0d2-ec43-44b1-873c-d29ae46f65f6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager\Handle">
-      <UniqueIdentifier>{9eec8273-e71c-4847-89d5-e7b62a332f1f}</UniqueIdentifier>
+    <Filter Include="Data\Actor">
+      <UniqueIdentifier>{f3b222c0-bef6-4aa9-9e07-23c85379e257}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager\Handle\Player">
-      <UniqueIdentifier>{01a3fa65-df3d-4000-ac88-db7d2a3319cd}</UniqueIdentifier>
+    <Filter Include="Data\Actor\Player">
+      <UniqueIdentifier>{3373c040-6255-4cb9-9496-200667dc31d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager\Player\Skill">
+    <Filter Include="Data\Actor\Player\Skill">
       <UniqueIdentifier>{fcf9a914-85bb-4d96-85d0-f3b58082151b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager\Player\Equipment">
+    <Filter Include="Data\Actor\Player\Bag">
+      <UniqueIdentifier>{807e9290-1721-4703-807c-973a1915baae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Actor\Player\Equipment">
       <UniqueIdentifier>{65c67196-c9fa-4d99-b5d2-b2bba3709213}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameManager.cpp">
-      <Filter>Manager\Frame</Filter>
-    </ClCompile>
-    <ClCompile Include="Frame.cpp">
-      <Filter>Manager\Frame</Filter>
     </ClCompile>
     <ClCompile Include="Manager.cpp">
       <Filter>Framework</Filter>
@@ -81,74 +78,53 @@
     <ClCompile Include="UIBase.cpp">
       <Filter>Base</Filter>
     </ClCompile>
-    <ClCompile Include="Option.cpp">
-      <Filter>Manager\Frame</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameLoader.cpp">
-      <Filter>Manager\Frame</Filter>
-    </ClCompile>
-    <ClCompile Include="Event.cpp">
-      <Filter>Manager\Event</Filter>
-    </ClCompile>
     <ClCompile Include="proto\src\proto\dataconfig_frame.pb.cc">
       <Filter>proto</Filter>
     </ClCompile>
-    <ClCompile Include="QueryLoader.cpp">
-      <Filter>Manager\Query</Filter>
-    </ClCompile>
-    <ClCompile Include="QueryBase.cpp">
-      <Filter>Manager\Query</Filter>
-    </ClCompile>
-    <ClCompile Include="QueryBag.cpp">
-      <Filter>Manager\Query</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Manager\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="EventManager.cpp">
-      <Filter>Manager\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="Bag.cpp">
-      <Filter>Manager\Player</Filter>
+      <Filter>Data\Actor\Player</Filter>
     </ClCompile>
     <ClCompile Include="PlayerLoader.cpp">
-      <Filter>Manager\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerManager.cpp">
-      <Filter>Manager\Player</Filter>
+      <Filter>Data\Actor\Player</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
-      <Filter>Manager\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerHandler.cpp">
-      <Filter>Manager\Handle\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="HandlerManager.cpp">
-      <Filter>Manager\Handle</Filter>
-    </ClCompile>
-    <ClCompile Include="Actor.cpp">
-      <Filter>Manager\Player</Filter>
+      <Filter>Data\Item</Filter>
     </ClCompile>
     <ClCompile Include="Skill.cpp">
-      <Filter>Manager\Player\Skill</Filter>
+      <Filter>Data\Actor\Player\Skill</Filter>
     </ClCompile>
     <ClCompile Include="SkillData.cpp">
-      <Filter>Manager\Player\Skill</Filter>
+      <Filter>Data\Actor\Player\Skill</Filter>
     </ClCompile>
     <ClCompile Include="Equipment.cpp">
-      <Filter>Manager\Player\Equipment</Filter>
+      <Filter>Data\Actor\Player\Equipment</Filter>
     </ClCompile>
-    <ClCompile Include="HanderBase.cpp">
-      <Filter>Manager\Handle</Filter>
+    <ClCompile Include="Bag.cpp">
+      <Filter>Data\Actor\Player\Bag</Filter>
+    </ClCompile>
+    <ClCompile Include="BagFrame.cpp">
+      <Filter>UI\PlayerFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="Frame.cpp">
+      <Filter>UI\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameLoader.cpp">
+      <Filter>UI\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameManager.cpp">
+      <Filter>UI\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Option.cpp">
+      <Filter>UI\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Data\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FrameManager.h">
-      <Filter>Manager\Frame</Filter>
-    </ClInclude>
-    <ClInclude Include="Frame.h">
-      <Filter>Manager\Frame</Filter>
-    </ClInclude>
     <ClInclude Include="Manager.h">
       <Filter>Framework</Filter>
     </ClInclude>
@@ -170,74 +146,56 @@
     <ClInclude Include="Singleton.h">
       <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="Option.h">
-      <Filter>Manager\Frame</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameLoader.h">
-      <Filter>Manager\Frame</Filter>
-    </ClInclude>
     <ClInclude Include="Cmd.h">
       <Filter>Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Struct.h">
-      <Filter>Manager\Frame</Filter>
-    </ClInclude>
-    <ClInclude Include="Event.h">
-      <Filter>Manager\Event</Filter>
     </ClInclude>
     <ClInclude Include="proto\src\proto\dataconfig_frame.pb.h">
       <Filter>proto</Filter>
     </ClInclude>
-    <ClInclude Include="QueryLoader.h">
-      <Filter>Manager\Query</Filter>
-    </ClInclude>
-    <ClInclude Include="QueryBag.h">
-      <Filter>Manager\Query</Filter>
-    </ClInclude>
-    <ClInclude Include="QueryBase.h">
-      <Filter>Manager\Query</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Manager\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="EventManager.h">
-      <Filter>Manager\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="Bag.h">
-      <Filter>Manager\Player</Filter>
+      <Filter>Data\Actor\Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayerLoader.h">
-      <Filter>Manager\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerManager.h">
-      <Filter>Manager\Player</Filter>
+      <Filter>Data\Actor\Player</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
-      <Filter>Manager\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerHandler.h">
-      <Filter>Manager\Handle\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="HandlerManager.h">
-      <Filter>Manager\Handle</Filter>
-    </ClInclude>
-    <ClInclude Include="Actor.h">
-      <Filter>Manager\Player</Filter>
+      <Filter>Data\Item</Filter>
     </ClInclude>
     <ClInclude Include="Skill.h">
-      <Filter>Manager\Player\Skill</Filter>
+      <Filter>Data\Actor\Player\Skill</Filter>
     </ClInclude>
     <ClInclude Include="SkillData.h">
-      <Filter>Manager\Player\Skill</Filter>
+      <Filter>Data\Actor\Player\Skill</Filter>
     </ClInclude>
     <ClInclude Include="Equipment.h">
-      <Filter>Manager\Player\Equipment</Filter>
+      <Filter>Data\Actor\Player\Equipment</Filter>
     </ClInclude>
-    <ClInclude Include="HanderBase.h">
-      <Filter>Manager\Handle</Filter>
+    <ClInclude Include="Bag.h">
+      <Filter>Data\Actor\Player\Bag</Filter>
     </ClInclude>
-    <ClInclude Include="HanderConst.h">
-      <Filter>Manager\Handle</Filter>
+    <ClInclude Include="BagFrame.h">
+      <Filter>UI\PlayerFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="Frame.h">
+      <Filter>UI\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameLoader.h">
+      <Filter>UI\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameManager.h">
+      <Filter>UI\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Option.h">
+      <Filter>UI\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Data\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

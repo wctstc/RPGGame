@@ -15,7 +15,7 @@ int HandlerManager::Handle(int iCmd, Req &oReq, Rsp &oRsp)
 {
 	switch (iCmd)
 	{
-	case :
+	case 1:
 		break;
 	default:
 		return -1;

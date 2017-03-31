@@ -112,9 +112,8 @@ void Frame::Show() const
 	}
 }
 
-int Frame::PrepareData()
+int Frame::PrepareData(int iSelected)
 {
-	
 	if (m_oFrameData.iHandlerID == NO_HANDLER)
 	{//不需要准备数据
 		return 0;
@@ -123,11 +122,20 @@ int Frame::PrepareData()
 	Req oReq;
 	Rsp oRsp;
 
+	//生成请求数据
+	//PrepareReq(oReq);
+	oReq.Add("selected", iSelected);
+
 	//请求数据
 	if (0 < App::GetInstance().Handler(m_oFrameData.iHandlerID, oReq, oRsp))
 		return -1;
 
+	//处理响应数据
+	PrepareRsp(oRsp);
 
+
+	/*
+	
 	//设置框的描述
 	string sDescription = oReq.GetString("description");
 	if (sDescription != "")
@@ -149,10 +157,18 @@ int Frame::PrepareData()
 			m_oFrameData.vOptions.push_back(oOption);
 		}
 	}
+	*/
+
+	return 0;
 }
 
 
 void Frame::PrepareReq(Req &oReq)
+{
+	return;
+}
+
+void Frame::PrepareRsp(const Rsp &oRsp)
 {
 	return;
 }

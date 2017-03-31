@@ -11,6 +11,11 @@ Player::~Player()
 {
 }
 
+bool Player::Init()
+{
+	return true;
+}
+
 bool Player::AddItemToBag(const Item &oItem)
 {
 	return m_oBag.AddItem(oItem);
