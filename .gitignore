@@ -10,10 +10,10 @@ RPGGame/Debug/*.ilk
 RPGGame/Debug/*.pdb
 
 # Protobuf Temp Files
-RPGGame/RPGGame/proto/data/*
-RPGGame/RPGGame/proto/json/*
-RPGGame/RPGGame/proto/proto/*
-RPGGame/RPGGame/proto/python/*
-RPGGame/RPGGame/proto/src/*
+RPGGame/RPGGame/proto/data/*.*
+RPGGame/RPGGame/proto/json/*.*
+RPGGame/RPGGame/proto/proto/*.*
+RPGGame/RPGGame/proto/python/*.*
+RPGGame/RPGGame/proto/src/proto/*.*
 RPGGame/RPGGame/proto/xls/~$*
 RPGGame/RPGGame/proto/xls_deploy_tool.log
