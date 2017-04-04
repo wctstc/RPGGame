@@ -1,13 +1,7 @@
 #include "FrameLoader.h"
 
-#include "BagFrame.h"
 
 
-enum FrameType
-{
-	FRAME_TYPE_NORMAL = 0,
-	FRAME_TYPE_BAG = 4,
-};
 
 bool FrameLoader::Init()
 {
@@ -31,19 +25,20 @@ bool FrameLoader::Init()
 		vOptions.clear();
 		pFrameConfig = &(ayFrames.items(i));
 		oFrameData.iID = pFrameConfig->id();
+		oFrameData.iType = pFrameConfig->type();
 		oFrameData.eDirection = static_cast<Direction>(pFrameConfig->direction());
 		oFrameData.oPosition.iX = pFrameConfig->x();
 		oFrameData.oPosition.iY = pFrameConfig->y();
 		oFrameData.oSize.iWidth = pFrameConfig->width();
 		oFrameData.oSize.iHeigth = pFrameConfig->height();
-		oFrameData.sDescription = pFrameConfig->description().c_str();
+		oFrameData.sDescription = UTF_82ASCII(pFrameConfig->description()).c_str();
 		if (pFrameConfig->has_handle_id())
 			oFrameData.iHandlerID = pFrameConfig->handle_id();
 		else
 			oFrameData.iHandlerID = NO_HANDLER;
 		for (int j = 0; j < pFrameConfig->option().size(); ++j )
 		{
-			oOptionData.sDescription = pFrameConfig->option(j).description();
+			oOptionData.sDescription = UTF_82ASCII(pFrameConfig->option(j).description());
 			oOptionData.iFrameID = pFrameConfig->option(j).frame_id();
 			vOptions.push_back(oOptionData);
 		}
@@ -60,7 +55,7 @@ Frame *FrameLoader::GetFrameByID(int iID)
 	map<int, FrameData>::iterator it = m_mapFrameDatas.find(iID);
 	if (it != m_mapFrameDatas.end())
 	{
-		pFrame = CreateFrameInstanceByID(iID);
+		pFrame = CreateFrameInstanceByType(it->second.iType);
 		pFrame->Init(it->second);
 	}
 	return pFrame;
@@ -72,15 +67,22 @@ void FrameLoader::ReleaseFrame(Frame *pFrame)
 		delete pFrame;
 }
 
-Frame * FrameLoader::CreateFrameInstanceByID(const int iID)
+
+Frame * FrameLoader::CreateFrameInstanceByType(const int iType)
 {
 	Frame *pFrame = NULL;
-	switch (iID)
+	switch (iType)
 	{
-	case 1:
+	case data::FRAME_TYPE_NORMAL:
+		pFrame = new Frame();
+		break;
+	case data::FRAME_TYPE_BAG:
 		pFrame = new BagFrame();
 		break;
-	default:
+	case data::FRAME_TYPE_ITEM:
+		pFrame = new ItemFrame();
+		break;
+	default://FRAME_TYPE_NORMAL
 		pFrame = new Frame();
 	}
 	return pFrame;

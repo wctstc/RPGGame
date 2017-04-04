@@ -1,25 +1,26 @@
-#include "FrameManager.h"
+#include "FrameHander.h"
+#include "ArrowManager.h"
+#include "Cmd.h"
+#include "FrameLoader.h"
 
 #include <iostream>
 
 using namespace std;
 
-FrameManager::FrameManager()
+FrameHander::FrameHander()
 {
 
 }
 
-FrameManager::~FrameManager()
+FrameHander::~FrameHander()
 {
 
 }
 
-bool FrameManager::Init(App* pApp, Config *pConfig)
+bool FrameHander::Init(Config *pConfig)
 {
-	bool bRet = Manager::Init(pApp, pConfig);
-	if (!bRet)
+	if (!FrameLoader::GetInstance().Init())
 		return false;
-
 
 	RegisterCmd(cmd::COMMAND_IDLE);
 	RegisterCmd(cmd::COMMAND_START);
@@ -27,35 +28,35 @@ bool FrameManager::Init(App* pApp, Config *pConfig)
 	return true;
 }
 
-int FrameManager::Start()
+int FrameHander::Start()
 {
-	int iRet = Manager::Start();
+	int iRet = Hander::Start();
 	if (iRet != 0)
 		return iRet;
 	//todo
 	return 0;
 }
 
-int FrameManager::Stop()
+int FrameHander::Stop()
 {
-	int iRet = Manager::Stop();
+	int iRet = Hander::Stop();
 	if (iRet != 0)
 		return iRet;
 	//todo
 	return 0;
 }
 
-void FrameManager::Finish()
+void FrameHander::Finish()
 {
 
 }
 
-int FrameManager::HandleIdle(Req &oReq)
+int FrameHander::HandleIdle(Req &oReq)
 {
 	return 1;
 }
 
-int FrameManager::HandleStart(Req &oReq)
+int FrameHander::HandleStart(Req &oReq)
 {
 	FrameLoader &oFrameLoader = FrameLoader::GetInstance();
 	Frame *pFrame = oFrameLoader.GetFrameByID(0);
@@ -81,12 +82,12 @@ int FrameManager::HandleStart(Req &oReq)
 		}
 		pFrame->Show();
 
-		OptionsArrow &oOptionsArrow = OptionsArrow::GetInstance();
-		oOptionsArrow.Init( 
+		ArrowManager &oArrowManager = ArrowManager::GetInstance();
+		oArrowManager.Init(
 			pFrame->GetDirection(), 
 			pFrame->GetOptionPosition(), 
 			pFrame->GetOptions() );
-		iSelected = oOptionsArrow.GetSelectIndex();
+		iSelected = oArrowManager.GetSelectIndex();
 		do
 		{
 			//没有选中
@@ -101,7 +102,7 @@ int FrameManager::HandleStart(Req &oReq)
 				}
 				break;
 			}
-			iFrameID = oOptionsArrow.GetOptionByIndex(iSelected).iFrameID;
+			iFrameID = oArrowManager.GetOptionByIndex(iSelected).iFrameID;
 			pFrame   = FrameLoader::GetInstance().GetFrameByID(iFrameID);
 			//选中选项无后续菜单
 			if (pFrame == NULL)
@@ -114,7 +115,15 @@ int FrameManager::HandleStart(Req &oReq)
 			//选中选项有后续菜单
 			else
 			{
-				pFrame->PrepareData(iSelected);
+				Req oReq;
+				Rsp oRsp;
+				//请求数据;
+				pFrame->PrepareReq(iSelected, oReq);
+				if (0 < Forword(pFrame->GetHandler(), oReq, oRsp))
+					return -1;
+				pFrame->PrepareRsp(oRsp);
+
+				//入栈
 				m_lsFrames.push_back(pFrame);
 				bFlash = false;
 				break;
@@ -125,7 +134,7 @@ int FrameManager::HandleStart(Req &oReq)
 	return 0;
 }
 
-int FrameManager::Handle(int iCmd, Req &oReq, Rsp &oRsp)
+int FrameHander::Handle(int iCmd, Req &oReq, Rsp &oRsp)
 {
 	switch (iCmd)
 	{

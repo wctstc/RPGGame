@@ -14,26 +14,13 @@ echo =========Compilation of %XLS_NAME%=========
 ::---------------------------------------------------
 ::第一步，将xls经过xls_deploy_tool转成data和proto
 ::---------------------------------------------------
-set STEP1_SERVER_XLS=../xls
-set STEP2_SERVER_PYTHON=../python
-set STEP2_SERVER_PROTO=../proto
-set STEP2_SERVER_DATA=../data
-set STEP2_SERVER_JSON=../json
-set STEP2_SERVER_SRC=../src
+set STEP1_SERVER_XLS=..\xls
+set STEP2_SERVER_PYTHON=..\python
+set STEP2_SERVER_PROTO=..\proto
+set STEP2_SERVER_DATA=..\data
+set STEP2_SERVER_JSON=..\json
 @echo on
 
-@echo off
-echo TRY TO DELETE TEMP FILES:
-del %STEP2_SERVER_PYTHON%\*_pb2.py
-del %STEP2_SERVER_PYTHON%\*_pb2.pyc
-del %STEP2_SERVER_PROTO%\*.proto
-del %STEP2_SERVER_DATA%\*.data
-del %STEP2_SERVER_JSON%\*.data
-del %STEP2_SERVER_SRC%\proto\*.pb.cc
-del %STEP2_SERVER_SRC%\proto\*.pb.h
-::del *.log
-::del *.txt
-@echo on
 
 call python xls_deploy_tool.py %SHEET_NAME% %STEP1_SERVER_XLS%\%XLS_NAME% s
 
@@ -65,19 +52,4 @@ move *.proto   %STEP2_SERVER_PROTO%\
 move *_pb2.py  %STEP2_SERVER_PYTHON%\
 move *_pb2.pyc %STEP2_SERVER_PYTHON%\
 move *.txt     %STEP2_SERVER_JSON%\
-@echo on
-
-::---------------------------------------------------
-::第三步：将生成c++源代码
-::---------------------------------------------------
-
-echo =========Compilation of Proto=========
-call protoc.exe --cpp_out=.  %STEP2_SERVER_PROTO%\*.proto --proto_path=%STEP2_SERVER_PROTO%
-@echo off
-if  %errorlevel% LSS 0 ( echo  "Failed" & pause & exit ) else ( echo  "OK" )
-@echo on
-@echo off
-IF NOT EXIST "%STEP2_SERVER_SRC%\proto" MD "%STEP2_SERVER_SRC%\proto"
-move *.pb.cc %STEP2_SERVER_SRC%\proto\
-move *.pb.h %STEP2_SERVER_SRC%\proto\
 @echo on

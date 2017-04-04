@@ -3,6 +3,10 @@
 
 
 #include "Frame.h"
+
+/**
+* @brief ±³°ü¿òÀà
+*/
 class BagFrame :public Frame
 {
 public:

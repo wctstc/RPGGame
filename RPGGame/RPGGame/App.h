@@ -2,54 +2,70 @@
 #define __RPGAPP_H__
 
 #include <map>
-#include <queue>
 
 using std::multimap;
 using std::pair;
-using std::queue;
-
-#include "Manager.h"
-#include "FrameManager.h"
-#include "PlayerManager.h"
 
 #include "Singleton.h"
-#include "Cmd.h"
+#include "FrameHander.h"
+#include "ManagerHander.h"
 
-using cmd::Command;
 
+/*!< 框实例 */
+#define g_FrameHander FrameHander::GetInstance()
+
+/*!< 处理实例 */
+#define g_ManagerHander ManagerHander::GetInstance()
+
+/*!< 应用实例 */
+#define g_App App::GetInstance()
+
+/**
+* @brief 应用类，用来管理各个模块
+*/
 class App : public Singleton<App>
 {
-private:
-	typedef struct ReqData_
-	{
-		int iCmd;
-		Req oReq;
-		Rsp oRsp;
-	}ReqData;
 public:
+	/**
+	* @brief 初始化
+	*/
 	virtual bool Init();
+	/**
+	* @brief 启动应用服务
+	*/
 	virtual int Start();
+	/**
+	* @brief 停止应用服务
+	*/
 	virtual int Stop();
+	/**
+	* @brief 清理应用服务
+	*/
 	virtual void Finish();
 
 public:
-	int AddCmdHandle(int iCmd, Manager& oManager);
-	int RemoveCmdHandle(int iCmd, Manager& oManager);
-	int Request(int iCmd, Req &oReq);
-	int Handler(int iCmd, Req &oReq, Rsp &oRsp);
-	//int AddTimeHandle(Manager &manager);
-	//int RemoveTimeHandle(Manager &manager);
-private:
-	typedef multimap <int, Manager&>::const_iterator MMIter;
-	multimap<int, Manager&> m_mmapCmdToManagers;
-	queue<ReqData> m_qRequestDatas;
-	bool m_bIsRuning;
+	/**
+	* @brief 添加命令的处理函数
+	*/
+	int AddCmdHandle(int iCmd, Hander& oManager);
 
-	
+	/**
+	* @brief 移除命令的处理函数
+	*/
+	int RemoveCmdHandle(int iCmd, Hander& oManager);
+
+	/**
+	* @brief 处理命令
+	*/
+	int Handler(int iCmd, Req &oReq, Rsp &oRsp);
+
 private:
-#define g_FrameLoader FrameLoader::GetInstance()
-#define g_FrameManager FrameManager::GetInstance()
-#define g_PlayerManger PlayerManager::GetInstance()
+	typedef multimap <int, Hander&>::const_iterator MMIter;
+	/*!< 命令和处理函数的映射关系 */
+	multimap<int, Hander&> m_mmapCmdToHanders;
+
+	/*!< 是否运行 */
+	bool m_bIsRuning;
 };
 
 

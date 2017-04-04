@@ -1,28 +1,31 @@
 #ifndef __PLAYERMANAGER_H__
 #define __PLAYERMANAGER_H__
 
-#include "Cmd.h"
-#include "Manager.h"
 #include "Actor.h"
 #include "Singleton.h"
 
-using cmd::Command;
 
-
-class PlayerManager:public Singleton<PlayerManager>, public Manager
+/**
+* @brief 玩家管理
+*/
+class PlayerManager:public Singleton<PlayerManager>
 {
 public:
 	PlayerManager();
 	~PlayerManager();
 public:
-	virtual bool Init(App* pApp, Config *pConfig);
+	/**
+	* @brief 初始化
+	*/
+	virtual bool Init();
 public:
-	virtual int Handle(int iCmd, Req &oReq, Rsp &oRsp);
+	/**
+	* @brief 获取背包
+	*/
+	const Bag &GetBag();
 
 private:
-	int HandleShowBag(int iCmd, Req &oReq, Rsp &oRsp);
-
-private:
+	/*!< 玩家 */
 	Actor m_oActor;
 };
 

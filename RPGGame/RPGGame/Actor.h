@@ -131,9 +131,12 @@ public:
 	SET_GET(int,    i, BaseMaxHp,   m_oActorData.iMaxHp);
 	SET_GET(int,    i, BaseAttack,  m_oActorData.iAttack);
 	SET_GET(int,    i, BaseDefance, m_oActorData.iDefance);
-private:
+protected:
+	/*!< 行动者数据 */
 	ActorData m_oActorData;
+	/*!< 装备状态数组 */
 	EquipmentState m_ayEquipments[EquipmentType::EQUIPMENT_TYPE_MAX];
+	/*!< 背包 */
 	Bag m_oBag;
 };
 

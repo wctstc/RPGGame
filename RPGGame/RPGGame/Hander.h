@@ -1,11 +1,5 @@
 #ifndef __MANAGER_H__
 #define __MANAGER_H__
-/**
- * @file Manager.h
- * @author Lost
- * @date 三月 2017
- * @brief 
- */
 
 #include "Config.h"
 #include "Cmd.h"
@@ -13,26 +7,51 @@
 #include "Rsp.h"
 
 class App;
-class Manager
+/**
+* @brief 处理类
+*/
+class Hander
 {
 public:
-	Manager();
-	virtual ~Manager();
+	Hander();
+	virtual ~Hander();
 public:
-	virtual bool Init(App* pApp,Config *pConfig);
+	/**
+	* @brief 初始化
+	*/
+	virtual bool Init(Config *pConfig);
+	/**
+	* @brief 启动模块
+	*/
 	virtual int Start();
+	/**
+	* @brief 停止模块
+	*/
 	virtual int Stop();
+	/**
+	* @brief 释放模块
+	*/
 	virtual void Finish();
 public:
-	void Request(int iCmd, Req &oReq);
+	/**
+	* @brief 转发发送的命令
+	*/
 	int Forword(int iCmd, Req &oReq, Rsp &oRsp);
 public:
+	/**
+	* @brief 路由命令到处理函数
+	*/
 	virtual int Handle(int iCmd, Req &oReq, Rsp &oRsp) = 0;
 protected:
+	/**
+	* @brief 注册处理函数
+	*/
 	void RegisterCmd(int iCmd);
+
+	/**
+	* @brief 注销处理函数
+	*/
 	void UnRegisterCmd(int iCmd);
-private:
-	App *m_pApp;
 };
 
 

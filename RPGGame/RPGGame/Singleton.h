@@ -2,9 +2,16 @@
 #define __SINGLETON_H__
 
 template<class T>
+
+/**
+* @brief 单例设计模式
+*/
 class Singleton
 {
 public:
+	/**
+	* @brief 获取实例
+	*/
 	inline static T& GetInstance()
 	{
 		static T t;

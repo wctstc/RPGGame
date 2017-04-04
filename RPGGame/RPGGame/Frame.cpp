@@ -22,7 +22,7 @@ const Position Frame::GetOptionPosition()
 	oPosition.iX = 2 + m_oFrameData.oPosition.iX;
 	oPosition.iY = m_oFrameData.oPosition.iY;
 
-	oPosition.iY += (m_oFrameData.sDescription.size() / (m_oFrameData.oSize.iWidth - 2)) + 1 + 1;
+	oPosition.iY += ((m_oFrameData.sDescription.size()-1) / (m_oFrameData.oSize.iWidth - 2)) + 1 + 1;
 	return oPosition;
 }
 
@@ -112,59 +112,10 @@ void Frame::Show() const
 	}
 }
 
-int Frame::PrepareData(int iSelected)
-{
-	if (m_oFrameData.iHandlerID == NO_HANDLER)
-	{//不需要准备数据
-		return 0;
-	}
-	
-	Req oReq;
-	Rsp oRsp;
 
-	//生成请求数据
-	//PrepareReq(oReq);
+void Frame::PrepareReq(const int iSelected, Req &oReq)
+{
 	oReq.Add("selected", iSelected);
-
-	//请求数据
-	if (0 < App::GetInstance().Handler(m_oFrameData.iHandlerID, oReq, oRsp))
-		return -1;
-
-	//处理响应数据
-	PrepareRsp(oRsp);
-
-
-	/*
-	
-	//设置框的描述
-	string sDescription = oReq.GetString("description");
-	if (sDescription != "")
-		m_oFrameData.sDescription = sDescription;
-
-
-	//设置框的选项
-	vector<Req> vReqOptions = oReq.GetVector("options");
-	if (vReqOptions.size() > 0)
-	{
-		vector<Req>::const_iterator it;
-		Option oOption;
-
-		m_oFrameData.vOptions.clear();
-		for (it = vReqOptions.begin(); it != vReqOptions.end(); ++it)
-		{
-			oOption.sDescription = it->GetString("description");
-			oOption.iFrameID = it->GetInt("frame_id");
-			m_oFrameData.vOptions.push_back(oOption);
-		}
-	}
-	*/
-
-	return 0;
-}
-
-
-void Frame::PrepareReq(Req &oReq)
-{
 	return;
 }
 

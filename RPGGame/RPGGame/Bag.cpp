@@ -38,7 +38,7 @@ bool Bag::RemoveItem(const int iIndex, Item &oItem)
 
 unsigned int Bag::GetItemID(int iIndex)const
 {
-	if (iIndex > 0 && iIndex < m_vItems.size())
+	if (iIndex >= 0 && iIndex < m_vItems.size())
 		return m_vItems[iIndex].GetID();
 	return 0;
 }

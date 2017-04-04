@@ -2,7 +2,7 @@
 #include "UIBase.h"
 
 #include "Frame.h"
-#include "Option.h"
+#include "ArrowManager.h"
 #include "App.h"
 
 
@@ -30,7 +30,6 @@ int main()
 {
 	FRAMEArray aFrames;
 //	FILE *file;
-	
 // 	file = fopen( "proto/data/dataconfig_frame.data", "rb" );
 // 	if (file == NULL )
 // 		return 0;
@@ -67,7 +66,7 @@ int main()
 
 
 	Frame oFrame;
-	OptionsArrow option;
+	ArrowManager option;
 
 	Position postion = {2,4};
 	Size size = {20,4};

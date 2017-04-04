@@ -12,11 +12,11 @@ using data::Option;
 
 using std::vector;
 
-class OptionsArrow : public Singleton<OptionsArrow>
+class ArrowManager : public Singleton<ArrowManager>
 {
 public:
-	OptionsArrow(void);
-	~OptionsArrow(void);
+	ArrowManager(void);
+	~ArrowManager(void);
 public:
 	bool Init(
 		const Direction eDiresction,

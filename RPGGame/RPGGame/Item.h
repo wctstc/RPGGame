@@ -14,6 +14,11 @@ public:
 	Item();
 	~Item();
 public:
+	/**
+	* @brief ≥ı ºªØ
+	*/
+	virtual bool Init(const ItemData &oItemData);
+public:
 	SET_GET(int,    i, ID,          m_oItemData.iID);
 	SET_GET(string, s, Description, m_oItemData.sDescription);
 public:

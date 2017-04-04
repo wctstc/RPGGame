@@ -5,10 +5,8 @@
 void gotoxy(int x,int y)
 {
 	COORD c;
-
 	c.X=x;c.Y=y;
 	SetConsoleCursorPosition (GetStdHandle(STD_OUTPUT_HANDLE),c);
-
 }
 
 void print( char c )
@@ -23,9 +21,6 @@ void print( int x, int y, char c )
 void print( int x, int y, char *buffer )
 {
 	gotoxy( x, y );
-	
-//	for( int i = 0; buffer[i] != '\0'; i++ )
-//		printf( "%c", buffer[i] );
 	printf( "%s", buffer );
 }
 void clearxy( int x, int y )
@@ -34,7 +29,7 @@ void clearxy( int x, int y )
 	printf( " " );
 }
 
-void clearxy( int x1, int x2, int y1, int y2 )
+void clearxy( int x1, int y1, int x2, int y2 )
 {
 	if( ( x2 - x1 ) < 0 || ( y2 - y1 ) < 0 )
 		return;

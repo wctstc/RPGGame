@@ -5,7 +5,7 @@
 #include "Frame.h"
 
 /**
- * @brief 物品框
+ * @brief 物品框类
  */
 class ItemFrame :public Frame
 {

@@ -6,6 +6,9 @@
 using data::EquipmentType;
 using data::EquipmentData;
 
+/**
+* @brief 装备类
+*/
 class Equipment
 {
 public:
@@ -23,6 +26,7 @@ public:
 	SET_GET(int,           i, Attack,  m_oEquipmentData.iAttack);
 	SET_GET(int,           i, Defance, m_oEquipmentData.iDefance);
 private:
+	/*!< 装备数据 */
 	EquipmentData m_oEquipmentData;
 };
 

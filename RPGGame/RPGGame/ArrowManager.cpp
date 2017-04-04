@@ -1,18 +1,18 @@
-#include "Option.h"
+#include "ArrowManager.h"
 
 
-OptionsArrow::OptionsArrow(void)
+ArrowManager::ArrowManager(void)
 {
 }
 
 
-OptionsArrow::~OptionsArrow(void)
+ArrowManager::~ArrowManager(void)
 {
 }
 
 
 
-bool OptionsArrow::Init( 
+bool ArrowManager::Init( 
 	const Direction eDiresction, 
 	const Position oPosition,
 	const vector<Option> &vOptions)
@@ -23,7 +23,7 @@ bool OptionsArrow::Init(
 	return true;
 }
 
-int OptionsArrow::GetSelectIndex()
+int ArrowManager::GetSelectIndex()
 {
 	int input;
 	int selected = 0;
@@ -98,7 +98,7 @@ int OptionsArrow::GetSelectIndex()
 	}
 }
 
-data::Option OptionsArrow::GetOptionByIndex( int iIndex )
+data::Option ArrowManager::GetOptionByIndex( int iIndex )
 {
 	if (iIndex >= 0 && iIndex < m_vOptions.size())
 		return m_vOptions[iIndex];

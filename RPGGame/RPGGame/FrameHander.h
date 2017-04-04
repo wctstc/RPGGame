@@ -4,32 +4,58 @@
 #include <list>
 
 #include "Singleton.h"
-#include "Manager.h"
-#include "Cmd.h"
-#include "FrameLoader.h"
+#include "Hander.h"
 #include "Frame.h"
-#include "Option.h"
 
 using std::list;
 using cmd::Command;
 
-class FrameManager : public Singleton<FrameManager>, public Manager
+/**
+* @brief 框处理类
+*/
+class FrameHander : public Singleton<FrameHander>,public Hander
 {
 public:
-	FrameManager();
-	virtual ~FrameManager();
+	FrameHander();
+	virtual ~FrameHander();
 public:
-	virtual bool Init(App* pApp, Config *pConfig);
+	/**
+	* @brief 初始化
+	*/
+	virtual bool Init(Config *pConfig);
+
+	/**
+	* @brief 启动模块
+	*/
 	virtual int Start();
+
+	/**
+	* @brief 停止模块
+	*/
 	virtual int Stop();
+
+	/**
+	* @brief 释放模块
+	*/
 	virtual void Finish();
 public:
+	/**
+	 * @brief 处理空闲界面
+	 */
 	int HandleIdle(Req &oReq);
+
+	/**
+	 * @brief 处理开始界面
+	 */
 	int HandleStart(Req &oReq);
 private:
+	/**
+	 * @brief 处理命令路由
+	 */
 	virtual int Handle(int iCmd, Req &oReq, Rsp &oRsp);
 
 private:
+	/*!< 显示框的栈 */
 	list<Frame*> m_lsFrames;
 };
 

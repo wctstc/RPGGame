@@ -83,8 +83,29 @@ namespace data
 		EQUIPMENT_TYPE_MAX = 3,
 	};
 
+	/**
+	* @brief 物品类型
+	*/
+	enum ItemType
+	{
+		/*!< 普通类型 */
+		ITEM_TYPE_NORMAL = 0,
+	};
+	
+	/**
+	* @brief 框类型
+	*/
+	enum FrameType
+	{
+		/*!< 普通类型 */
+		FRAME_TYPE_NORMAL = 0,
 
+		/*!< 背包类型 */
+		FRAME_TYPE_BAG = 1,
 
+		/*!< 物品类型 */
+		FRAME_TYPE_ITEM = 4,
+	};
 
 	//-简单结构----------------------------------------------------//
 	/**
@@ -138,6 +159,9 @@ namespace data
 		/*!< 编号 */
 		int iID;
 
+		/*!< 类型 */
+		int iType;
+
 		/*!< 位置 */
 		Position oPosition;
 
@@ -164,6 +188,9 @@ namespace data
 	{
 		/*!< 编号 */
 		int iID;
+
+		/*!< 类型 */
+		int iType;
 
 		/*!< 描述 */
 		string sDescription;

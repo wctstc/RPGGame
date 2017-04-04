@@ -20,8 +20,9 @@ using data::FrameData;
 using data::Option;
 
 
+
 /**
-* @brief 框
+* @brief 框类
 */
 class Frame
 {
@@ -46,15 +47,9 @@ public:
 	void Show()const;
 
 	/**
-	* @brief 准备数据
-	*/
-	int PrepareData(int iSelected);
-
-private:
-	/**
 	* @brief 生成请求数据
 	*/
-	virtual void PrepareReq(Req &oReq);
+	virtual void PrepareReq(const int iSelected, Req &oReq);
 
 	/**
 	 * @brief 处理响应数据
@@ -62,6 +57,7 @@ private:
 	virtual void PrepareRsp(const Rsp &oRsp);
 public:
 	SET_GET(int,             i, ID,          m_oFrameData.iID);
+	SET_GET(int,             i, Type,        m_oFrameData.iType);
 	SET_GET(Position&,       o, Position,    m_oFrameData.oPosition);
 	SET_GET(Size&,           o, Size,        m_oFrameData.oSize);
 	SET_GET(string,          s, Description, m_oFrameData.sDescription);

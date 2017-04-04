@@ -1,21 +1,20 @@
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
 
-#include "Bag.h"
-
-
-class Player
+#include "Actor.h"
+/**
+* @brief ÕÊº“¿‡
+*/
+class Player :public Actor
 {
 public:
 	Player();
 	~Player();
 public:
-	bool Init();
-	bool AddItemToBag( const Item &oItem );
 public:
-	const Bag& GetBag()const;
+
+public:
 private:
-	Bag m_oBag;
 };
 
 
