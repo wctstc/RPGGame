@@ -16,6 +16,16 @@ using std::pair;
 */
 class Rsp
 {
+/**
+* @brief 响应码枚举
+*/
+public:
+    enum RetCode
+    {
+        RETCODE_SUCCEED = 0,
+        RETCODE_NO_ITEM,
+    };
+
 public:
 	Rsp();
 	~Rsp();
@@ -64,6 +74,10 @@ public:
 	* @brief 是否有指定数组参数
 	*/
 	const bool HasVector(string sKey)const;
+
+public:
+    /*!< 响应码 */
+    const static string RetCode;
 private:
 	/*!< 整型参数映射 */
 	map<string, int> m_mapIntArg;

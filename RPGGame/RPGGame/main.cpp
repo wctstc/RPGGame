@@ -12,6 +12,7 @@
 #include <io.h>
 #include <fcntl.h>
 
+#include "Pointer.h"
 
 using namespace std;
 
@@ -98,6 +99,53 @@ int main()
 	app.Init();
 	app.Start();
 
+	{
+		CPointer<App> oPointer = new App();
+
+		if (oPointer->Init())
+			cout << "init succeed" << endl;
+
+		CPointer<App>::LogCount();
+		CPointer<App> oPointer1;
+		CPointer<App>::LogCount();
+		CPointer<App> oPointer2 = oPointer;
+		CPointer<App>::LogCount();
+		CPointer<App> oPointer3 = oPointer1;
+		CPointer<App>::LogCount();
+
+		CPointer<App> oPointer4;
+		CPointer<App>::LogCount();
+		oPointer4 = oPointer;
+		CPointer<App>::LogCount();
+
+		CPointer<App> oPointer5;
+		CPointer<App>::LogCount();
+		oPointer5 = new App();
+		CPointer<App>::LogCount();
+
+		CPointer<App> oPointer6;
+		CPointer<App>::LogCount();
+		oPointer6 = oPointer;
+		CPointer<App>::LogCount();
+		oPointer6 = oPointer6;
+		CPointer<App>::LogCount();
+
+
+		App* pApp = NULL;
+		CPointer<App>::LogCount();
+		pApp = oPointer1;
+		CPointer<App>::LogCount();
+		pApp = oPointer;
+		CPointer<App>::LogCount();
+
+	}
+	CPointer<App>::LogCount();
+
+
+
 	system("pause");
+
+
+	
 	return 0;
 }

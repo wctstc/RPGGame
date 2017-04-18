@@ -23,7 +23,7 @@ public:
 		const Position oPosition,
 		const vector<Option> &vOptions);
 	int GetSelectIndex();
-	data::Option GetOptionByIndex( int iIndex );
+	data::Option GetOptionByIndex( unsigned int iIndex );
 	
 private:
 	Direction m_eDirection;

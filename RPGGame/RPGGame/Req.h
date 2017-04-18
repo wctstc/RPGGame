@@ -10,6 +10,8 @@ using std::vector;
 using std::string;
 using std::pair;
 
+#include "Cmd.h"
+
 /**
 * @brief 请求类
 */
@@ -19,6 +21,16 @@ public:
 	Req();
 	~Req();
 public:
+    /**
+     * @brief 初始化
+     */
+    virtual bool Init(cmd::Command eCmd);
+
+    /**
+     * @brief 获取指令
+     */
+    cmd::Command GetCmd();
+
 	/**
 	* @brief 添加整型参数
 	*/
@@ -64,12 +76,15 @@ public:
 	*/
 	const bool HasVector(string sKey)const;
 private:
-	/*!< 整型参数映射 */
+	/*!< 指令 */
+    cmd::Command m_eCmd;
+    /*!< 整型参数映射 */
 	map<string, int> m_mapIntArg;
 	/*!< 字符串参数映射 */
 	map<string, string> m_mapStringArg;
 	/*!< 数组参数映射 */
 	map<string, vector<Req>> m_mapVectorArg;
+
 };
 
 

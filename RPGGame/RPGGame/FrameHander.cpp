@@ -84,7 +84,7 @@ int FrameHander::HandleStart(Req &oReq)
 
 		ArrowManager &oArrowManager = ArrowManager::GetInstance();
 		oArrowManager.Init(
-			pFrame->GetDirection(), 
+			pFrame->GetDirection( ), 
 			pFrame->GetOptionPosition(), 
 			pFrame->GetOptions() );
 		iSelected = oArrowManager.GetSelectIndex();
@@ -109,6 +109,7 @@ int FrameHander::HandleStart(Req &oReq)
 			{
 				m_lsFrames.pop_back();
 				oFrameLoader.ReleaseFrame(pFrame);
+                pFrame = NULL;
 				bFlash = true;
 				break;
 			}
@@ -119,7 +120,7 @@ int FrameHander::HandleStart(Req &oReq)
 				Rsp oRsp;
 				//ÇëÇóÊý¾Ý;
 				pFrame->PrepareReq(iSelected, oReq);
-				if (0 < Forword(pFrame->GetHandler(), oReq, oRsp))
+				if (0 < Forword(oReq.GetCmd(), oReq, oRsp))
 					return -1;
 				pFrame->PrepareRsp(oRsp);
 
@@ -134,9 +135,9 @@ int FrameHander::HandleStart(Req &oReq)
 	return 0;
 }
 
-int FrameHander::Handle(int iCmd, Req &oReq, Rsp &oRsp)
+int FrameHander::Handle(cmd::Command eCmd, Req &oReq, Rsp &oRsp)
 {
-	switch (iCmd)
+	switch (eCmd)
 	{
 	case cmd::COMMAND_START:
 		return HandleStart(oReq);

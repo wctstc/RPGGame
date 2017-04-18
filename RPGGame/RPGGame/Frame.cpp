@@ -123,3 +123,24 @@ void Frame::PrepareRsp(const Rsp &oRsp)
 {
 	return;
 }
+
+bool Frame::CheckRsp(const Rsp &oRsp)
+{
+    vector<Option> vOptions;
+    Option oOption;
+    if (!oRsp.HasInt(Rsp::RetCode))
+    {
+        SetDescription("Unknown Error");
+        oOption.sDescription = "back";
+        oOption.iFrameID = -1;
+        vOptions.push_back(oOption);
+        SetOptions(vOptions);
+        return false;
+    }
+    if (oRsp.GetInt(Rsp::RetCode) != Rsp::RETCODE_SUCCEED)
+    {
+        char sErrorBuffer[256];
+        sprintf_s(sErrorBuffer,"error code:%d",oRsp.GetInt(Rsp::RetCode));
+       // SetDescription = sErrorBuffer
+    }
+}

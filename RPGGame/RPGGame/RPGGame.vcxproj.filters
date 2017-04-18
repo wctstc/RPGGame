@@ -70,6 +70,9 @@
     <Filter Include="Game\Hander">
       <UniqueIdentifier>{b28fe9b4-4882-4fb0-90ad-ed54daa8375a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Data\Frame\ShowFrame">
+      <UniqueIdentifier>{f5310251-5c99-4323-83d9-4f915a704c28}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -155,6 +158,9 @@
     </ClCompile>
     <ClCompile Include="ArrowManager.cpp">
       <Filter>Game\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopFrame.cpp">
+      <Filter>Game\Data\Frame\ShowFrame</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +253,12 @@
     </ClInclude>
     <ClInclude Include="ArrowManager.h">
       <Filter>Game\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Pointer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopFrame.h">
+      <Filter>Game\Data\Frame\ShowFrame</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -146,6 +146,7 @@
     <ClCompile Include="Req.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Rsp.cpp" />
+    <ClCompile Include="ShopFrame.cpp" />
     <ClCompile Include="Skill.cpp" />
     <ClCompile Include="SkillData.cpp" />
     <ClCompile Include="UIBase.cpp" />
@@ -170,11 +171,13 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerLoader.h" />
     <ClInclude Include="PlayerManager.h" />
+    <ClInclude Include="Pointer.h" />
     <ClInclude Include="proto\src\proto\dataconfig_frame.pb.h" />
     <ClInclude Include="proto\src\proto\dataconfig_item.pb.h" />
     <ClInclude Include="Req.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="Rsp.h" />
+    <ClInclude Include="ShopFrame.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Skill.h" />
     <ClInclude Include="SkillData.h" />

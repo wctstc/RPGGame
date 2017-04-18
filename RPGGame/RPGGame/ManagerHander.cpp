@@ -34,21 +34,21 @@ bool ManagerHander::Init(Config *pConfig)
 	return true;
 }
 
-int ManagerHander::Handle(int iCmd, Req &oReq, Rsp &oRsp)
+int ManagerHander::Handle(cmd::Command eCmd, Req &oReq, Rsp &oRsp)
 {
-	switch (iCmd)
+	switch (eCmd)
 	{
 	case cmd::COMMAND_SHOW_BAG:
-		return HandleShowBag(iCmd, oReq, oRsp);
+		return HandleShowBag(eCmd, oReq, oRsp);
 	case cmd::COMMAND_SHOW_ITEM:
-		return HandleShowItem(iCmd, oReq, oRsp);
+		return HandleShowItem(eCmd, oReq, oRsp);
 	default:
 		break;
 	}
 	return -1;
 }
 
-int ManagerHander::HandleShowBag(int iCmd, Req &oReq, Rsp &oRsp)
+int ManagerHander::HandleShowBag(cmd::Command eCmd, Req &oReq, Rsp &oRsp)
 {
 	const Bag &bag = PlayerManager::GetInstance().GetBag();
 
@@ -61,12 +61,20 @@ int ManagerHander::HandleShowBag(int iCmd, Req &oReq, Rsp &oRsp)
 
 		vRsps.push_back(tmp);
 	}
-	oRsp.Add("bag", vRsps);
+    if (vRsps.size() == 0)
+    {
+        oRsp.Add(Rsp::RetCode, Rsp::RETCODE_NO_ITEM);
+    }
+    else
+    {
+        oRsp.Add(Rsp::RetCode, 0);
+        oRsp.Add("bag", vRsps);
+    }
 
 	return 0;
 }
 
-int ManagerHander::HandleShowItem(int iCmd, Req &oReq, Rsp &oRsp)
+int ManagerHander::HandleShowItem(cmd::Command eCmd, Req &oReq, Rsp &oRsp)
 {
 	int iSelected = oReq.GetInt("selected");
 	const Bag &bag = PlayerManager::GetInstance().GetBag();

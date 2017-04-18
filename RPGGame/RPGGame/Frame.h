@@ -55,6 +55,11 @@ public:
 	 * @brief 处理响应数据
 	 */
 	virtual void PrepareRsp(const Rsp &oRsp);
+
+    /**
+     * @brief 检查回报响应码
+     */
+    bool CheckRsp(const Rsp &oRsp);
 public:
 	SET_GET(int,             i, ID,          m_oFrameData.iID);
 	SET_GET(int,             i, Type,        m_oFrameData.iType);

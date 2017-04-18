@@ -1,6 +1,6 @@
 #include "Rsp.h"
 
-
+const string Rsp::RetCode = "retcode";
 
 Rsp::Rsp()
 {

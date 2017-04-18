@@ -6,6 +6,7 @@
 using std::multimap;
 using std::pair;
 
+#include "Cmd.h"
 #include "Singleton.h"
 #include "FrameHander.h"
 #include "ManagerHander.h"
@@ -47,22 +48,22 @@ public:
 	/**
 	* @brief 添加命令的处理函数
 	*/
-	int AddCmdHandle(int iCmd, Hander& oManager);
+	int AddCmdHandle(cmd::Command eCmd, Hander& oManager);
 
 	/**
 	* @brief 移除命令的处理函数
 	*/
-	int RemoveCmdHandle(int iCmd, Hander& oManager);
+	int RemoveCmdHandle(cmd::Command eCmd, Hander& oManager);
 
 	/**
 	* @brief 处理命令
 	*/
-	int Handler(int iCmd, Req &oReq, Rsp &oRsp);
+	int Handler(cmd::Command eCmd, Req &oReq, Rsp &oRsp);
 
 private:
-	typedef multimap <int, Hander&>::const_iterator MMIter;
+	typedef multimap <cmd::Command, Hander&>::const_iterator MMapIt;
 	/*!< 命令和处理函数的映射关系 */
-	multimap<int, Hander&> m_mmapCmdToHanders;
+	multimap<cmd::Command, Hander&> m_mmapCmdToHanders;
 
 	/*!< 是否运行 */
 	bool m_bIsRuning;

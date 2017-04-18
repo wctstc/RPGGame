@@ -12,7 +12,7 @@ namespace cmd
 	enum Command
 	{
 		/*!< 空 */
-		COMMAND_IDLE,
+		COMMAND_IDLE = 0,
 
 		/*!< 开始 */
 		COMMAND_START,
@@ -20,10 +20,12 @@ namespace cmd
 		/*!< 展示背包 */
 		COMMAND_SHOW_BAG = 10001,
 
-		/*!< 展示物品 */
-		COMMAND_SHOW_ITEM = 10002,
-	};
+        /*!< 展示物品 */
+        COMMAND_SHOW_ITEM = 10002,
 
+        /*!< 展示商店 */
+        COMMAND_SHOW_SHOP = 10003,
+	};
 }
 
 

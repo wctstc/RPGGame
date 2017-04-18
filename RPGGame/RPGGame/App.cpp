@@ -74,16 +74,16 @@ void App::Finish()
 }
 
 
-int App::AddCmdHandle(int iCmd, Hander& oManager)
+int App::AddCmdHandle(cmd::Command eCmd, Hander& oManager)
 {
-	m_mmapCmdToHanders.insert(pair<int, Hander&>(iCmd, oManager));
+	m_mmapCmdToHanders.insert(pair<cmd::Command, Hander&>(eCmd, oManager));
 	return 0;
 }
 
-int App::RemoveCmdHandle(int iCmd,Hander &oManager)
+int App::RemoveCmdHandle(cmd::Command eCmd,Hander &oManager)
 {
-	pair<MMIter,MMIter> pairFound = m_mmapCmdToHanders.equal_range(iCmd);
-	for ( MMIter it = pairFound.first; it != pairFound.second; ++it )
+	pair<MMapIt,MMapIt> pairFound = m_mmapCmdToHanders.equal_range(eCmd);
+	for ( MMapIt it = pairFound.first; it != pairFound.second; ++it )
 	{
 		if (&(it->second) == &oManager) 
 		{
@@ -95,13 +95,13 @@ int App::RemoveCmdHandle(int iCmd,Hander &oManager)
 }
 
 
-int App::Handler(int iCmd, Req &oReq, Rsp &oRsp)
+int App::Handler(cmd::Command eCmd, Req &oReq, Rsp &oRsp)
 {
 	int iRet = 0;
-	pair<MMIter, MMIter> pairFound = m_mmapCmdToHanders.equal_range(iCmd);
+	pair<MMapIt, MMapIt> pairFound = m_mmapCmdToHanders.equal_range(eCmd);
 
-	for (MMIter it = pairFound.first; it != pairFound.second; ++it)
-		if ((iRet = it->second.Handle(iCmd, oReq, oRsp)) != 0)
+	for (MMapIt it = pairFound.first; it != pairFound.second; ++it)
+		if ((iRet = it->second.Handle(eCmd, oReq, oRsp)) != 0)
 			break;
 
 	return iRet;

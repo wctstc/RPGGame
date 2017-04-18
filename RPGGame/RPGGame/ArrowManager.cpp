@@ -26,7 +26,7 @@ bool ArrowManager::Init(
 int ArrowManager::GetSelectIndex()
 {
 	int input;
-	int selected = 0;
+	unsigned int selected = 0;
 	gotoxy( m_oPosition.iX, m_oPosition.iY );
 	printf(OptionArrow);
 	while( true )
@@ -98,9 +98,9 @@ int ArrowManager::GetSelectIndex()
 	}
 }
 
-data::Option ArrowManager::GetOptionByIndex( int iIndex )
+data::Option ArrowManager::GetOptionByIndex( unsigned int iIndex )
 {
-	if (iIndex >= 0 && iIndex < m_vOptions.size())
+	if ( iIndex < m_vOptions.size())
 		return m_vOptions[iIndex];
 	return Option();
 }

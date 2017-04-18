@@ -52,7 +52,7 @@ private:
 	/**
 	 * @brief 处理命令路由
 	 */
-	virtual int Handle(int iCmd, Req &oReq, Rsp &oRsp);
+	virtual int Handle(cmd::Command eCmd, Req &oReq, Rsp &oRsp);
 
 private:
 	/*!< 显示框的栈 */

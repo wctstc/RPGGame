@@ -57,9 +57,10 @@ void clear( )
 }
 void readxy( int x, int y, char &character )
 {
-
 	DWORD read;
-	COORD coord = {x, y};
+	COORD coord;
+	coord.X = x;
+	coord.Y = y;
 	ReadConsoleOutputCharacter( GetStdHandle( STD_OUTPUT_HANDLE ), &character, 1, coord, &read );
 }
 

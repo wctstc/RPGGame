@@ -11,6 +11,20 @@ Req::~Req()
 {
 }
 
+bool Req::Init(cmd::Command eCmd)
+{
+    m_eCmd = eCmd;
+    m_mapIntArg.clear();
+    m_mapStringArg.clear();
+    m_mapVectorArg.clear();
+    return true;
+}
+
+cmd::Command Req::GetCmd()
+{
+    return m_eCmd;
+}
+
 void Req::Add(string sKey, int iValue)
 {
 	m_mapIntArg.insert(pair<string, int>(sKey, iValue));
