@@ -22,125 +22,23 @@ void *thread(void *arg)
 	return NULL;
 }
 
+#include "StrUtil.h"
 #include "proto\dataconfig_frame.pb.h"
+
+#include "TestUnit.h"
 
 using dataconfig::FRAME;
 using dataconfig::FRAMEArray;
 
 int main()
 {
-	FRAMEArray aFrames;
-//	FILE *file;
-// 	file = fopen( "proto/data/dataconfig_frame.data", "rb" );
-// 	if (file == NULL )
-// 		return 0;
-// 	char buffer[1024];
-// 	int length = fread( buffer, 1, 1024, file );
-// 	printf("length:%d", length);
-// 
-// 	aFrames.ParseFromArray(buffer,length);
+    TestUnit test;
+   // test.Run();
 
-	int file;
-	file = open("proto/data/dataconfig_frame.data", O_RDONLY|O_BINARY);
-	if (file <= 0)
-		return 0;
-	char buffer[1024];
-	//int length = read(file, buffer, 1024);
-	//printf("length:%d", length);
-
-	aFrames.ParseFromFileDescriptor(file);
-	
-
-	//for (int i = 0; i < aFrames.items().size(); ++i)
-	//{
-	//	FRAME sFrame = aFrames.items().Get(i);
-	//	printf("%d: \n id:%d", i, sFrame.id());
-	//	if (sFrame.has_is_exist())
-	//		printf("is_exist:%d", sFrame.is_exist());
-	//	if (sFrame.has_description())
-	//		printf("description:%s", sFrame.description().c_str());
-	//	printf("\n");
-	//}
-
-	//system("pause");
-	//return 0;
-
-
-	Frame oFrame;
-	ArrowManager option;
-
-	Position postion = {2,4};
-	Size size = {20,4};
-	string discription = "hello worldhello worldhello worldhello worldhello worldhello world";
-	Direction direction = Direction::DIRECTION_VERTICAL;
-	int gap = 1;
-	vector< Option > options;
-	Option oOption;
-	string description[] = { "show bag","show author","show hello" };
-	int frame_id[] = { 1,2,3 };
-	for (int i = 0; i < 3; ++i)
-	{
-		//oOptionData.index = i;
-		oOption.sDescription = description[i];
-		oOption.iFrameID = frame_id[i];
-	}
-
-
-
-	//oFrame.Init( 0, postion,size,discription,direction,gap,options );
-
-	//frame.Show();
-
-	//option.Init( frame.GetOptionsPosition() );
-
-	//printf( "option:%d", option.SelectOption() );
 
 	App &app = App::GetInstance();
 	app.Init();
 	app.Start();
-
-	{
-		CPointer<App> oPointer = new App();
-
-		if (oPointer->Init())
-			cout << "init succeed" << endl;
-
-		CPointer<App>::LogCount();
-		CPointer<App> oPointer1;
-		CPointer<App>::LogCount();
-		CPointer<App> oPointer2 = oPointer;
-		CPointer<App>::LogCount();
-		CPointer<App> oPointer3 = oPointer1;
-		CPointer<App>::LogCount();
-
-		CPointer<App> oPointer4;
-		CPointer<App>::LogCount();
-		oPointer4 = oPointer;
-		CPointer<App>::LogCount();
-
-		CPointer<App> oPointer5;
-		CPointer<App>::LogCount();
-		oPointer5 = new App();
-		CPointer<App>::LogCount();
-
-		CPointer<App> oPointer6;
-		CPointer<App>::LogCount();
-		oPointer6 = oPointer;
-		CPointer<App>::LogCount();
-		oPointer6 = oPointer6;
-		CPointer<App>::LogCount();
-
-
-		App* pApp = NULL;
-		CPointer<App>::LogCount();
-		pApp = oPointer1;
-		CPointer<App>::LogCount();
-		pApp = oPointer;
-		CPointer<App>::LogCount();
-
-	}
-	CPointer<App>::LogCount();
-
 
 
 	system("pause");

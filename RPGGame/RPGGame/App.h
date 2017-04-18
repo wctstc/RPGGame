@@ -58,7 +58,7 @@ public:
 	/**
 	* @brief ´¦ÀíÃüÁî
 	*/
-	int Handler(cmd::Command eCmd, Req &oReq, Rsp &oRsp);
+	int Handler(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
 
 private:
 	typedef multimap <cmd::Command, Hander&>::const_iterator MMapIt;

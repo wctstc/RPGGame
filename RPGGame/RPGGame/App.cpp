@@ -28,8 +28,8 @@ int App::Start()
 		return iRet;
 	}
 
-	Req req;
-	Rsp rsp;
+	req::Req req;
+    rsp::Rsp rsp;
 	g_FrameHander.Forword(cmd::COMMAND_START, req, rsp);
 
 	
@@ -95,7 +95,7 @@ int App::RemoveCmdHandle(cmd::Command eCmd,Hander &oManager)
 }
 
 
-int App::Handler(cmd::Command eCmd, Req &oReq, Rsp &oRsp)
+int App::Handler(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 {
 	int iRet = 0;
 	pair<MMapIt, MMapIt> pairFound = m_mmapCmdToHanders.equal_range(eCmd);

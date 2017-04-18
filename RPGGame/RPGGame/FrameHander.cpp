@@ -3,10 +3,6 @@
 #include "Cmd.h"
 #include "FrameLoader.h"
 
-#include <iostream>
-
-using namespace std;
-
 FrameHander::FrameHander()
 {
 
@@ -51,12 +47,12 @@ void FrameHander::Finish()
 
 }
 
-int FrameHander::HandleIdle(Req &oReq)
+int FrameHander::HandleIdle(req::Req &oReq)
 {
 	return 1;
 }
 
-int FrameHander::HandleStart(Req &oReq)
+int FrameHander::HandleStart(req::Req &oReq)
 {
 	FrameLoader &oFrameLoader = FrameLoader::GetInstance();
 	Frame *pFrame = oFrameLoader.GetFrameByID(0);
@@ -116,8 +112,8 @@ int FrameHander::HandleStart(Req &oReq)
 			//选中选项有后续菜单
 			else
 			{
-				Req oReq;
-				Rsp oRsp;
+				req::Req oReq;
+				rsp::Rsp oRsp;
 				//请求数据;
 				pFrame->PrepareReq(iSelected, oReq);
 				if (0 < Forword(oReq.GetCmd(), oReq, oRsp))
@@ -135,7 +131,7 @@ int FrameHander::HandleStart(Req &oReq)
 	return 0;
 }
 
-int FrameHander::Handle(cmd::Command eCmd, Req &oReq, Rsp &oRsp)
+int FrameHander::Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 {
 	switch (eCmd)
 	{

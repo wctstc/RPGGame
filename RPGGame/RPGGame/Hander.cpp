@@ -30,17 +30,17 @@ void Hander::Finish()
 
 }
 
-int Hander::Forword(Command eCmd, Req &oReq, Rsp &oRsp)
+int Hander::Forword(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 {
 	return g_App.Handler(eCmd, oReq, oRsp);
 }
 
-void Hander::RegisterCmd(Command eCmd)
+void Hander::RegisterCmd(cmd::Command eCmd)
 {
 	g_App.AddCmdHandle(eCmd,*this);
 }
 
-void Hander::UnRegisterCmd(Command eCmd)
+void Hander::UnRegisterCmd(cmd::Command eCmd)
 {
 	g_App.RemoveCmdHandle(eCmd,*this);
 }

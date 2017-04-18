@@ -1,17 +1,16 @@
 #include "Req.h"
 
 
-
-Req::Req()
+req::Req::Req()
 {
 }
 
 
-Req::~Req()
+req::Req::~Req()
 {
 }
 
-bool Req::Init(cmd::Command eCmd)
+bool req::Req::Init(cmd::Command eCmd)
 {
     m_eCmd = eCmd;
     m_mapIntArg.clear();
@@ -20,27 +19,27 @@ bool Req::Init(cmd::Command eCmd)
     return true;
 }
 
-cmd::Command Req::GetCmd()
+cmd::Command req::Req::GetCmd()
 {
     return m_eCmd;
 }
 
-void Req::Add(string sKey, int iValue)
+void req::Req::Add(string sKey, int iValue)
 {
 	m_mapIntArg.insert(pair<string, int>(sKey, iValue));
 }
 
-void Req::Add(string sKey, string sValue)
+void req::Req::Add(string sKey, string sValue)
 {
 	m_mapStringArg.insert(pair<string, string>(sKey, sValue));
 }
 
-void Req::Add(string sKey, vector<Req> vValue)
+void req::Req::Add(string sKey, vector<req::Req> vValue)
 {
-	m_mapVectorArg.insert(pair<string, vector<Req>>(sKey, vValue));
+	m_mapVectorArg.insert(pair<string, vector<req::Req>>(sKey, vValue));
 }
 
-const int Req::GetInt(string sKey) const
+const int req::Req::GetInt(string sKey) const
 {
 	map<string, int>::const_iterator it = m_mapIntArg.find(sKey);
 	if (it != m_mapIntArg.end())
@@ -49,7 +48,7 @@ const int Req::GetInt(string sKey) const
 		return 0;
 }
 
-const string Req::GetString(string sKey) const
+const string req::Req::GetString(string sKey) const
 {
 	map<string, string>::const_iterator it = m_mapStringArg.find(sKey);
 	if (it != m_mapStringArg.end())
@@ -58,26 +57,26 @@ const string Req::GetString(string sKey) const
 		return "";
 }
 
-const vector<Req> Req::GetVector(string sKey) const
+const vector<req::Req> req::Req::GetVector(string sKey) const
 {
-	map<string, vector<Req>>::const_iterator it = m_mapVectorArg.find(sKey);
+	map<string, vector<req::Req>>::const_iterator it = m_mapVectorArg.find(sKey);
 	if (it != m_mapVectorArg.end())
 		return it->second;
 	else
-		return vector<Req>();
+		return vector<req::Req>();
 }
 
-const bool Req::HasInt(string sKey) const
+const bool req::Req::HasInt(string sKey) const
 {
 	return m_mapIntArg.find(sKey) == m_mapIntArg.end();
 }
 
-const bool Req::HasString(string sKey) const
+const bool req::Req::HasString(string sKey) const
 {
 	return m_mapStringArg.find(sKey) == m_mapStringArg.end();
 }
 
-const bool Req::HasVector(string sKey) const
+const bool req::Req::HasVector(string sKey) const
 {
 	return m_mapVectorArg.find(sKey) == m_mapVectorArg.end();
 }

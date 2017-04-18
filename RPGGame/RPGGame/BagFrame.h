@@ -16,12 +16,12 @@ private:
 	/**
 	* @brief 生成请求数据
 	*/
-	virtual void PrepareReq(Req &oReq);
+	virtual void PrepareReq(req::Req &oReq);
 
 	/**
 	* @brief 处理响应数据
 	*/
-	virtual void PrepareRsp(const Rsp &oRsp);
+	virtual void PrepareRsp(const rsp::Rsp &oRsp);
 };
 
 

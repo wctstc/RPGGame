@@ -147,8 +147,11 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Rsp.cpp" />
     <ClCompile Include="ShopFrame.cpp" />
+    <ClCompile Include="ShopManager.cpp" />
     <ClCompile Include="Skill.cpp" />
     <ClCompile Include="SkillData.cpp" />
+    <ClCompile Include="StrUtil.cpp" />
+    <ClCompile Include="TestUnit.cpp" />
     <ClCompile Include="UIBase.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -178,11 +181,14 @@
     <ClInclude Include="App.h" />
     <ClInclude Include="Rsp.h" />
     <ClInclude Include="ShopFrame.h" />
+    <ClInclude Include="ShopManager.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Skill.h" />
     <ClInclude Include="SkillData.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="Platform.h" />
+    <ClInclude Include="StrUtil.h" />
+    <ClInclude Include="TestUnit.h" />
     <ClInclude Include="UIBase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

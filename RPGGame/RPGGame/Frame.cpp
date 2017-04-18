@@ -1,5 +1,6 @@
 #include "Frame.h"
 #include "App.h"
+#include "StrUtil.h"
 
 Frame::Frame(void)
 {
@@ -28,12 +29,16 @@ const Position Frame::GetOptionPosition()
 
 void Frame::Show() const
 {
-	int offset_x = 0;
-	int offset_y = 0;
-	string sub_discription;
-	int offset_discription = 0;
 
-	//打印第一行
+    clearxy(
+        m_oFrameData.oPosition.iX,
+        m_oFrameData.oPosition.iY,
+        m_oFrameData.oPosition.iX+m_oFrameData.oSize.iWidth,
+        m_oFrameData.oPosition.iY+m_oFrameData.oSize.iHeigth);
+
+    //打印第一行
+    int offset_x = 0;
+    int offset_y = 0;
 	gotoxy( m_oFrameData.oPosition.iX, m_oFrameData.oPosition.iY );
 	for( offset_x = 0; offset_x < m_oFrameData.oSize.iWidth; ++offset_x )
 	{
@@ -44,28 +49,34 @@ void Frame::Show() const
 		else
 			printf( FrameHorizontal );
 	}
-	//打印描述
-	do 
-	{
-		if( offset_discription + m_oFrameData.oSize.iWidth - 2 < m_oFrameData.sDescription.length() )
-			sub_discription = m_oFrameData.sDescription.substr( offset_discription, m_oFrameData.oSize.iWidth - 2 );
-		else
-			sub_discription = m_oFrameData.sDescription.substr( offset_discription );
-		
+    //打印描述
+    vector<string> vDescription;
+    StrUtil::Split(m_oFrameData.sDescription, "\n", vDescription);
+    for (vector<string>::iterator it = vDescription.begin(); it != vDescription.end(); ++it)
+    {
+        string sub_description;
+        int offset_description = 0;
+        do
+        {
+            if (offset_description + m_oFrameData.oSize.iWidth - 2 < (*it).length())
+                sub_description = (*it).substr(offset_description, m_oFrameData.oSize.iWidth - 2);
+            else
+                sub_description = (*it).substr(offset_description);
 
-		++offset_y;
-		gotoxy( m_oFrameData.oPosition.iX, m_oFrameData.oPosition.iY+offset_y );
-		printf( FrameVertical );
-		printf( sub_discription.c_str() );
-		gotoxy( m_oFrameData.oPosition.iX+m_oFrameData.oSize.iWidth-1, m_oFrameData.oPosition.iY+offset_y );
-		printf( FrameVertical );
 
-		offset_discription += m_oFrameData.oSize.iWidth- 2;
-		
-		if( offset_discription >= m_oFrameData.sDescription.length())
-			break;
-	} 
-	while( true );
+            ++offset_y;
+            gotoxy(m_oFrameData.oPosition.iX, m_oFrameData.oPosition.iY + offset_y);
+            printf(FrameVertical);
+            printf(sub_description.c_str());
+            gotoxy(m_oFrameData.oPosition.iX + m_oFrameData.oSize.iWidth - 1, m_oFrameData.oPosition.iY + offset_y);
+            printf(FrameVertical);
+
+            offset_description += m_oFrameData.oSize.iWidth - 2;
+
+            if (offset_description >= (*it).length())
+                break;
+        } while (true);
+    }
 
 
 	//打印选项
@@ -113,22 +124,22 @@ void Frame::Show() const
 }
 
 
-void Frame::PrepareReq(const int iSelected, Req &oReq)
+void Frame::PrepareReq(const int iSelected, req::Req &oReq)
 {
 	oReq.Add("selected", iSelected);
 	return;
 }
 
-void Frame::PrepareRsp(const Rsp &oRsp)
+void Frame::PrepareRsp(const rsp::Rsp &oRsp)
 {
 	return;
 }
 
-bool Frame::CheckRsp(const Rsp &oRsp)
+bool Frame::CheckRsp(const rsp::Rsp &oRsp)
 {
     vector<Option> vOptions;
     Option oOption;
-    if (!oRsp.HasInt(Rsp::RetCode))
+    if (!oRsp.HasInt(rsp::i_RetCode))
     {
         SetDescription("Unknown Error");
         oOption.sDescription = "back";
@@ -137,10 +148,17 @@ bool Frame::CheckRsp(const Rsp &oRsp)
         SetOptions(vOptions);
         return false;
     }
-    if (oRsp.GetInt(Rsp::RetCode) != Rsp::RETCODE_SUCCEED)
+
+    if (oRsp.GetInt(rsp::i_RetCode) != rsp::Rsp::RETCODE_SUCCEED)
     {
         char sErrorBuffer[256];
-        sprintf_s(sErrorBuffer,"error code:%d",oRsp.GetInt(Rsp::RetCode));
-       // SetDescription = sErrorBuffer
+        sprintf_s(sErrorBuffer,"error code:%d",oRsp.GetInt(rsp::i_RetCode));
+        SetDescription(sErrorBuffer);
+        oOption.sDescription = "back";
+        oOption.iFrameID = -1;
+        vOptions.push_back(oOption);
+        SetOptions(vOptions);
+        return false;
     }
+    return true;
 }

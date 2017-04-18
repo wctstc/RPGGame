@@ -10,6 +10,14 @@ using std::cout;
 using std::endl;
 
 /**
+* @brief 智能指针引用
+*/
+class CPointRef
+{
+
+};
+
+/**
  * @brief 智能指针
  */
 template< class Type>

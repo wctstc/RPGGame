@@ -14,6 +14,7 @@ using std::pair;
 #include "Frame.h"
 #include "BagFrame.h"
 #include "ItemFrame.h"
+#include "ShopFrame.h"
 
 
 #define FRAMEFIEL "proto/data/dataconfig_frame.data"
@@ -23,7 +24,6 @@ using dataconfig::FRAMEArray;
 
 using data::FrameType;
 using data::Direction;
-using platform::UTF_82ASCII;
 
 /**
 * @brief øÚº”‘ÿ¿‡

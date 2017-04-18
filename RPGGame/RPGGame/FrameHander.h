@@ -8,7 +8,6 @@
 #include "Frame.h"
 
 using std::list;
-using cmd::Command;
 
 /**
 * @brief 框处理类
@@ -42,17 +41,17 @@ public:
 	/**
 	 * @brief 处理空闲界面
 	 */
-	int HandleIdle(Req &oReq);
+	int HandleIdle(req::Req &oReq);
 
 	/**
 	 * @brief 处理开始界面
 	 */
-	int HandleStart(Req &oReq);
+	int HandleStart(req::Req &oReq);
 private:
 	/**
 	 * @brief 处理命令路由
 	 */
-	virtual int Handle(cmd::Command eCmd, Req &oReq, Rsp &oRsp);
+	virtual int Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
 
 private:
 	/*!< 显示框的栈 */

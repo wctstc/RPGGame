@@ -49,17 +49,17 @@ public:
 	/**
 	* @brief 生成请求数据
 	*/
-	virtual void PrepareReq(const int iSelected, Req &oReq);
+	virtual void PrepareReq(const int iSelected, req::Req &oReq);
 
 	/**
 	 * @brief 处理响应数据
 	 */
-	virtual void PrepareRsp(const Rsp &oRsp);
+	virtual void PrepareRsp(const rsp::Rsp &oRsp);
 
     /**
      * @brief 检查回报响应码
      */
-    bool CheckRsp(const Rsp &oRsp);
+    bool CheckRsp(const rsp::Rsp &oRsp);
 public:
 	SET_GET(int,             i, ID,          m_oFrameData.iID);
 	SET_GET(int,             i, Type,        m_oFrameData.iType);

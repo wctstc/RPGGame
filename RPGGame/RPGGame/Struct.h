@@ -103,8 +103,14 @@ namespace data
 		/*!< 背包类型 */
 		FRAME_TYPE_BAG = 1,
 
-		/*!< 物品类型 */
-		FRAME_TYPE_ITEM = 4,
+        /*!< 物品类型 */
+        FRAME_TYPE_ITEM = 2,
+
+        /*!< 商店类型 */
+        FRAME_TYPE_SHOP = 3,
+
+        /*!< 商店物品类型 */
+        FRAME_TYPE_SHOP_ITEM = 4,
 	};
 
 	//-简单结构----------------------------------------------------//
@@ -140,8 +146,8 @@ namespace data
 		/*!< 文字描述 */
 		string sDescription;
 
-		/*!< 位置 */
-		//Position oPosition;
+		/*!< 数据编号 */
+		int iData;
 
 		/*!< 选中后对应框的编号 */
 		int iFrameID;
@@ -232,6 +238,19 @@ namespace data
 		/*!< 附加防御力 */
 		int iDefance;
 	};
+
+    /**
+     * @brief 商品数据
+     */
+    struct GoodsData
+    {
+        /*!< 物品编号 */
+        int iItemID;
+        /*!< 单次购买数量 */
+        int iAmount;
+        /*!< 单次购买价格 */
+        int iPrice;
+    };
 };
 
 

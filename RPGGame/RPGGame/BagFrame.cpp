@@ -11,23 +11,23 @@ BagFrame::~BagFrame()
 {
 }
 
-void BagFrame::PrepareReq(Req &oReq)
+void BagFrame::PrepareReq(req::Req &oReq)
 {
     oReq.Init(cmd::COMMAND_SHOW_BAG);
 }
 
-void BagFrame::PrepareRsp(const Rsp &oRsp)
+void BagFrame::PrepareRsp(const rsp::Rsp &oRsp)
 {
     vector<Option> vOptions;
     Option stOption;
-    if (oRsp.HasInt(Rsp::RetCode))
+    if (oRsp.HasInt(rsp::i_RetCode))
     {
-        switch (oRsp.GetInt(Rsp::RetCode))
+        switch (oRsp.GetInt(rsp::i_RetCode))
         {
-        case Rsp::RETCODE_SUCCEED:
+        case rsp::Rsp::RETCODE_SUCCEED:
         {
-            vector<Rsp> vRsps = oRsp.GetVector("bag");
-            for (vector<Rsp>::const_iterator it = vRsps.begin(); it != vRsps.end(); ++it)
+            vector<rsp::Rsp> vRsps = oRsp.GetVector("bag");
+            for (vector<rsp::Rsp>::const_iterator it = vRsps.begin(); it != vRsps.end(); ++it)
             {
                 stOption.sDescription = it->GetString("description");
                 stOption.iFrameID = data::FRAME_TYPE_ITEM;
@@ -36,7 +36,7 @@ void BagFrame::PrepareRsp(const Rsp &oRsp)
             SetOptions(vOptions);
             break;
         }
-        case Rsp::RETCODE_NO_ITEM:
+        case rsp::Rsp::RETCODE_NO_ITEM:
             SetDescription("No Items");
             stOption.sDescription = "back";
             stOption.iFrameID = -1;

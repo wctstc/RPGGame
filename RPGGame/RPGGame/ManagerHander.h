@@ -24,18 +24,34 @@ public:
 	/**
 	* @brief 分发命令到各个处理函数
 	*/
-	virtual int Handle(cmd::Command eCmd, Req &oReq, Rsp &oRsp);
+	virtual int Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
 
 private:
 	/**
 	* @brief 展示背包
 	*/
-	int HandleShowBag(cmd::Command eCmd, Req &oReq, Rsp &oRsp);
+	int HandleShowBag(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
 
 	/**
 	* @brief 展示物品
 	*/
-	int HandleShowItem(cmd::Command eCmd, Req &oReq, Rsp &oRsp);
+	int HandleShowItem(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
+
+    /**
+     * @brief 展示商店
+     */
+    int HandleShowShop(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
+
+    /**
+    * @brief 展示商品
+    */
+    int HandleShowShopItem(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
+
+    /**
+    * @brief 买商品
+    */
+    int HandleBuyShopItem(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
+
 };
 
 

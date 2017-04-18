@@ -11,12 +11,12 @@ ItemFrame::~ItemFrame()
 {
 }
 
-void ItemFrame::PrepareReq(Req &oReq)
+void ItemFrame::PrepareReq(req::Req &oReq)
 {
     oReq.Init(cmd::COMMAND_SHOW_ITEM);
 }
 
-void ItemFrame::PrepareRsp(const Rsp &oRsp)
+void ItemFrame::PrepareRsp(const rsp::Rsp &oRsp)
 {
 	string sDescription = oRsp.GetString("description");
 	SetDescription(sDescription);

@@ -25,6 +25,11 @@ namespace cmd
 
         /*!< 展示商店 */
         COMMAND_SHOW_SHOP = 10003,
+
+        /*!< 展示商品 */
+        COMMAND_SHOW_SHOP_ITEM = 10004,
+
+        
 	};
 }
 

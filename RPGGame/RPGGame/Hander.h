@@ -6,7 +6,6 @@
 #include "Req.h"
 #include "Rsp.h"
 
-using cmd::Command;
 
 class App;
 /**
@@ -38,22 +37,22 @@ public:
 	/**
 	* @brief 转发发送的命令
 	*/
-	int Forword(Command eCmd, Req &oReq, Rsp &oRsp);
+	int Forword(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
 public:
 	/**
 	* @brief 路由命令到处理函数
 	*/
-	virtual int Handle(Command eCmd, Req &oReq, Rsp &oRsp) = 0;
+	virtual int Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp) = 0;
 protected:
 	/**
 	* @brief 注册处理函数
 	*/
-	void RegisterCmd(Command eCmd);
+	void RegisterCmd(cmd::Command eCmd);
 
 	/**
 	* @brief 注销处理函数
 	*/
-	void UnRegisterCmd(Command eCmd);
+	void UnRegisterCmd(cmd::Command eCmd);
 };
 
 

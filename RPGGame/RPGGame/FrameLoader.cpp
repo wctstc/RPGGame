@@ -31,14 +31,14 @@ bool FrameLoader::Init()
 		oFrameData.oPosition.iY = pFrameConfig->y();
 		oFrameData.oSize.iWidth = pFrameConfig->width();
 		oFrameData.oSize.iHeigth = pFrameConfig->height();
-		oFrameData.sDescription = UTF_82ASCII(pFrameConfig->description()).c_str();
+		oFrameData.sDescription = platform::UTF_82ASCII(pFrameConfig->description()).c_str();
 		if (pFrameConfig->has_handle_id())
 			oFrameData.iHandlerID = pFrameConfig->handle_id();
 		else
 			oFrameData.iHandlerID = NO_HANDLER;
 		for (int j = 0; j < pFrameConfig->option().size(); ++j )
 		{
-			oOptionData.sDescription = UTF_82ASCII(pFrameConfig->option(j).description());
+			oOptionData.sDescription = platform::UTF_82ASCII(pFrameConfig->option(j).description());
 			oOptionData.iFrameID = pFrameConfig->option(j).frame_id();
 			vOptions.push_back(oOptionData);
 		}
@@ -82,6 +82,9 @@ Frame * FrameLoader::CreateFrameInstanceByType(const int iType)
 	case data::FRAME_TYPE_ITEM:
 		pFrame = new ItemFrame();
 		break;
+    case data::FRAME_TYPE_SHOP:
+        pFrame = new ShopFrame();
+        break;
 	default://FRAME_TYPE_NORMAL
 		pFrame = new Frame();
 	}

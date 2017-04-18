@@ -25,9 +25,6 @@
     <Filter Include="Game\UI">
       <UniqueIdentifier>{cc662fb6-d47b-4c56-8ed1-2a3f9b764897}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\UI\Frame">
-      <UniqueIdentifier>{4252cc46-dc8d-4d45-9237-9ea0043777ff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Data">
       <UniqueIdentifier>{5a5a3bff-e087-4287-91e2-f07f2834e93c}</UniqueIdentifier>
     </Filter>
@@ -58,19 +55,19 @@
     <Filter Include="Game\Config\proto">
       <UniqueIdentifier>{523ef514-f17d-48b3-aaab-8e8091135a4d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Data\Frame">
-      <UniqueIdentifier>{f8d0bf0d-79de-42c2-a2b8-2b6996f36600}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Data\Frame\PlayerFrame">
-      <UniqueIdentifier>{d171b03c-dba0-49b5-b85e-9eb03682afc8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Data\Frame\ItemFrame">
-      <UniqueIdentifier>{efb0a965-143c-411f-be1a-d835d82a9860}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Hander">
       <UniqueIdentifier>{b28fe9b4-4882-4fb0-90ad-ed54daa8375a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Data\Frame\ShowFrame">
+    <Filter Include="Game\UI\Frame">
+      <UniqueIdentifier>{f8d0bf0d-79de-42c2-a2b8-2b6996f36600}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\UI\Frame\PlayerFrame">
+      <UniqueIdentifier>{d171b03c-dba0-49b5-b85e-9eb03682afc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\UI\Frame\ItemFrame">
+      <UniqueIdentifier>{efb0a965-143c-411f-be1a-d835d82a9860}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\UI\Frame\ShowFrame">
       <UniqueIdentifier>{f5310251-5c99-4323-83d9-4f915a704c28}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -115,7 +112,7 @@
       <Filter>Game\Data\Actor\Player\Bag</Filter>
     </ClCompile>
     <ClCompile Include="BagFrame.cpp">
-      <Filter>Game\Data\Frame\PlayerFrame</Filter>
+      <Filter>Game\UI\Frame\PlayerFrame</Filter>
     </ClCompile>
     <ClCompile Include="Actor.cpp">
       <Filter>Game\Data\Actor</Filter>
@@ -127,16 +124,16 @@
       <Filter>Framework</Filter>
     </ClCompile>
     <ClCompile Include="ItemFrame.cpp">
-      <Filter>Game\Data\Frame\ItemFrame</Filter>
+      <Filter>Game\UI\Frame\ItemFrame</Filter>
     </ClCompile>
     <ClCompile Include="proto\src\proto\dataconfig_item.pb.cc">
       <Filter>Game\Config\proto</Filter>
     </ClCompile>
     <ClCompile Include="Frame.cpp">
-      <Filter>Game\Data\Frame</Filter>
+      <Filter>Game\UI\Frame</Filter>
     </ClCompile>
     <ClCompile Include="FrameLoader.cpp">
-      <Filter>Game\Data\Frame</Filter>
+      <Filter>Game\UI\Frame</Filter>
     </ClCompile>
     <ClCompile Include="Platform.cpp">
       <Filter>Base</Filter>
@@ -150,9 +147,6 @@
     <ClCompile Include="Hander.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
-    <ClCompile Include="FrameHander.cpp">
-      <Filter>Game\Hander</Filter>
-    </ClCompile>
     <ClCompile Include="ManagerHander.cpp">
       <Filter>Game\Hander</Filter>
     </ClCompile>
@@ -160,7 +154,19 @@
       <Filter>Game\Manager</Filter>
     </ClCompile>
     <ClCompile Include="ShopFrame.cpp">
-      <Filter>Game\Data\Frame\ShowFrame</Filter>
+      <Filter>Game\UI\Frame\ShowFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="TestUnit.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="StrUtil.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopManager.cpp">
+      <Filter>Game\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameHander.cpp">
+      <Filter>Game\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -207,7 +213,7 @@
       <Filter>Game\Data\Actor\Player\Bag</Filter>
     </ClInclude>
     <ClInclude Include="BagFrame.h">
-      <Filter>Game\Data\Frame\PlayerFrame</Filter>
+      <Filter>Game\UI\Frame\PlayerFrame</Filter>
     </ClInclude>
     <ClInclude Include="Actor.h">
       <Filter>Game\Data\Actor</Filter>
@@ -225,16 +231,16 @@
       <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="ItemFrame.h">
-      <Filter>Game\Data\Frame\ItemFrame</Filter>
+      <Filter>Game\UI\Frame\ItemFrame</Filter>
     </ClInclude>
     <ClInclude Include="proto\src\proto\dataconfig_item.pb.h">
       <Filter>Game\Config\proto</Filter>
     </ClInclude>
     <ClInclude Include="Frame.h">
-      <Filter>Game\Data\Frame</Filter>
+      <Filter>Game\UI\Frame</Filter>
     </ClInclude>
     <ClInclude Include="FrameLoader.h">
-      <Filter>Game\Data\Frame</Filter>
+      <Filter>Game\UI\Frame</Filter>
     </ClInclude>
     <ClInclude Include="ItemLoader.h">
       <Filter>Game\Data\Item</Filter>
@@ -244,9 +250,6 @@
     </ClInclude>
     <ClInclude Include="Hander.h">
       <Filter>Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameHander.h">
-      <Filter>Game\Hander</Filter>
     </ClInclude>
     <ClInclude Include="ManagerHander.h">
       <Filter>Game\Hander</Filter>
@@ -258,7 +261,19 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ShopFrame.h">
-      <Filter>Game\Data\Frame\ShowFrame</Filter>
+      <Filter>Game\UI\Frame\ShowFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="TestUnit.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="StrUtil.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopManager.h">
+      <Filter>Game\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameHander.h">
+      <Filter>Game\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
