@@ -56,15 +56,15 @@ const vector<Rsp> Rsp::GetVector(string sKey) const
 
 const bool Rsp::HasInt(string sKey) const
 {
-	return m_mapIntArg.find(sKey) == m_mapIntArg.end();
+	return m_mapIntArg.find(sKey) != m_mapIntArg.end();
 }
 
 const bool Rsp::HasString(string sKey) const
 {
-	return m_mapStringArg.find(sKey) == m_mapStringArg.end();
+	return m_mapStringArg.find(sKey) != m_mapStringArg.end();
 }
 
 const bool Rsp::HasVector(string sKey) const
 {
-	return m_mapVectorArg.find(sKey) == m_mapVectorArg.end();
+	return m_mapVectorArg.find(sKey) != m_mapVectorArg.end();
 }

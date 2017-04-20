@@ -116,8 +116,7 @@ int FrameHander::HandleStart(req::Req &oReq)
 				rsp::Rsp oRsp;
 				//请求数据;
 				pFrame->PrepareReq(iSelected, oReq);
-				if (0 < Forword(oReq.GetCmd(), oReq, oRsp))
-					return -1;
+                Forword(oReq.GetCmd(), oReq, oRsp);
 				pFrame->PrepareRsp(oRsp);
 
 				//入栈

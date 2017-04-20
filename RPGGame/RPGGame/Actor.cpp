@@ -87,7 +87,7 @@ bool Actor::IsDie()
 
 bool Actor::AddItemToBag(const Item &oItem)
 {
-	return m_oBag.AddItem(oItem);
+    return true;
 }
 
 int Actor::GetHp()
@@ -155,7 +155,7 @@ int Actor::GetExtendDefance()
 	return iExtendDefance;
 }
 
-const Bag& Actor::GetBag() const
+const Container& Actor::GetBag() const
 {
 	return m_oBag;
 }

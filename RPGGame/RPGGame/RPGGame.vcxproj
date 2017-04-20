@@ -122,13 +122,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
-    <ClCompile Include="Bag.cpp" />
+    <ClCompile Include="Container.cpp" />
     <ClCompile Include="BagFrame.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Equipment.cpp" />
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="FrameLoader.cpp" />
     <ClCompile Include="FrameHander.cpp" />
+    <ClCompile Include="Goods.cpp" />
     <ClCompile Include="ManagerHander.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemFrame.cpp" />
@@ -156,7 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
-    <ClInclude Include="Bag.h" />
+    <ClInclude Include="Container.h" />
     <ClInclude Include="BagFrame.h" />
     <ClInclude Include="Cmd.h" />
     <ClInclude Include="Config.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Frame.h" />
     <ClInclude Include="FrameLoader.h" />
     <ClInclude Include="FrameHander.h" />
+    <ClInclude Include="Goods.h" />
     <ClInclude Include="ManagerHander.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemFrame.h" />

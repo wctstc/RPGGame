@@ -14187,3 +14187,480 @@ items {
   description: "\346\235\220\346\226\231"
 }
 
+2017-04-20 21:54:10,720|INFO|123|_initlog|
+
+
+
+2017-04-20 21:54:10,743|INFO|124|_initlog|logger is inited!
+2017-04-20 21:54:11,095|INFO|193|Interpreter|begin Interpreter, row_count = 11, col_count = 21
+2017-04-20 21:54:11,095|INFO|235|_FieldDefine|row=0, col=0, repeated_num=0
+2017-04-20 21:54:11,095|INFO|250|_FieldDefine|required|int32|id|编号
+2017-04-20 21:54:11,142|INFO|235|_FieldDefine|row=0, col=1, repeated_num=0
+2017-04-20 21:54:11,144|INFO|250|_FieldDefine|required|int32|type|类型
+2017-04-20 21:54:11,144|INFO|235|_FieldDefine|row=0, col=2, repeated_num=0
+2017-04-20 21:54:11,144|INFO|250|_FieldDefine|required|int32|x|横坐标
+2017-04-20 21:54:11,144|INFO|235|_FieldDefine|row=0, col=3, repeated_num=0
+2017-04-20 21:54:11,144|INFO|250|_FieldDefine|required|int32|y|纵坐标
+2017-04-20 21:54:11,144|INFO|235|_FieldDefine|row=0, col=4, repeated_num=0
+2017-04-20 21:54:11,144|INFO|250|_FieldDefine|required|int32|width|宽度
+2017-04-20 21:54:11,144|INFO|235|_FieldDefine|row=0, col=5, repeated_num=0
+2017-04-20 21:54:11,144|INFO|250|_FieldDefine|required|int32|height|高度
+2017-04-20 21:54:11,144|INFO|235|_FieldDefine|row=0, col=6, repeated_num=0
+2017-04-20 21:54:11,144|INFO|250|_FieldDefine|required|string|description|描述
+2017-04-20 21:54:11,145|INFO|235|_FieldDefine|row=0, col=7, repeated_num=0
+2017-04-20 21:54:11,145|INFO|250|_FieldDefine|required|int32|direction|选项方向
+2017-04-20 21:54:11,145|INFO|235|_FieldDefine|row=0, col=8, repeated_num=0
+2017-04-20 21:54:11,145|INFO|250|_FieldDefine|optional|int32|handle_id|对应的处理id
+2017-04-20 21:54:11,145|INFO|235|_FieldDefine|row=0, col=9, repeated_num=0
+2017-04-20 21:54:11,147|DEBUG|267|_FieldDefine|repeated|5.0
+2017-04-20 21:54:11,147|INFO|272|_FieldDefine|repeated|5
+2017-04-20 21:54:11,147|INFO|235|_FieldDefine|row=0, col=10, repeated_num=5
+2017-04-20 21:54:11,147|INFO|298|_FieldDefine|required_struct|2|InternalType_option|option
+2017-04-20 21:54:11,147|INFO|235|_FieldDefine|row=0, col=11, repeated_num=0
+2017-04-20 21:54:11,147|INFO|250|_FieldDefine|required|string|description|选项描述
+2017-04-20 21:54:11,148|INFO|235|_FieldDefine|row=0, col=12, repeated_num=0
+2017-04-20 21:54:11,148|INFO|250|_FieldDefine|required|int32|frame_id|对应的框id
+2017-04-20 21:54:13,361|INFO|498|Parse|begin parse, row_count = 11, col_count = 21
+2017-04-20 21:54:13,361|INFO|534|_ParseLine|5
+2017-04-20 21:54:13,361|INFO|557|_ParseField|5|0
+2017-04-20 21:54:13,361|INFO|558|_ParseField|required|int32|id
+2017-04-20 21:54:13,361|INFO|708|_GetFieldValue|5|0|0.0
+2017-04-20 21:54:13,361|INFO|557|_ParseField|5|1
+2017-04-20 21:54:13,361|INFO|558|_ParseField|required|int32|type
+2017-04-20 21:54:13,361|INFO|708|_GetFieldValue|5|1|0.0
+2017-04-20 21:54:13,361|INFO|557|_ParseField|5|2
+2017-04-20 21:54:13,361|INFO|558|_ParseField|required|int32|x
+2017-04-20 21:54:13,362|INFO|708|_GetFieldValue|5|2|2.0
+2017-04-20 21:54:13,362|INFO|557|_ParseField|5|3
+2017-04-20 21:54:13,362|INFO|558|_ParseField|required|int32|y
+2017-04-20 21:54:13,362|INFO|708|_GetFieldValue|5|3|4.0
+2017-04-20 21:54:13,362|INFO|557|_ParseField|5|4
+2017-04-20 21:54:13,362|INFO|558|_ParseField|required|int32|width
+2017-04-20 21:54:13,362|INFO|708|_GetFieldValue|5|4|20.0
+2017-04-20 21:54:13,362|INFO|557|_ParseField|5|5
+2017-04-20 21:54:13,362|INFO|558|_ParseField|required|int32|height
+2017-04-20 21:54:13,362|INFO|708|_GetFieldValue|5|5|4.0
+2017-04-20 21:54:13,362|INFO|557|_ParseField|5|6
+2017-04-20 21:54:13,362|INFO|558|_ParseField|required|string|description
+2017-04-20 21:54:13,362|INFO|708|_GetFieldValue|5|6|欢迎来到Lost世界！
+2017-04-20 21:54:13,362|INFO|557|_ParseField|5|7
+2017-04-20 21:54:13,362|INFO|558|_ParseField|required|int32|direction
+2017-04-20 21:54:13,362|INFO|708|_GetFieldValue|5|7|1.0
+2017-04-20 21:54:13,364|INFO|557|_ParseField|5|8
+2017-04-20 21:54:13,364|INFO|558|_ParseField|optional|int32|handle_id
+2017-04-20 21:54:13,364|INFO|708|_GetFieldValue|5|8|
+2017-04-20 21:54:13,364|DEBUG|594|_ParseField|repeated|5.0
+2017-04-20 21:54:13,364|INFO|602|_ParseField|repeated|5|3
+2017-04-20 21:54:13,364|INFO|658|_ParseField|required_struct|2|InternalType_option|option
+2017-04-20 21:54:13,364|INFO|557|_ParseField|5|11
+2017-04-20 21:54:13,364|INFO|558|_ParseField|required|string|description
+2017-04-20 21:54:13,364|INFO|708|_GetFieldValue|5|11|show bag
+2017-04-20 21:54:13,364|INFO|557|_ParseField|5|12
+2017-04-20 21:54:13,364|INFO|558|_ParseField|required|int32|frame_id
+2017-04-20 21:54:13,364|INFO|708|_GetFieldValue|5|12|1.0
+2017-04-20 21:54:13,364|INFO|557|_ParseField|5|13
+2017-04-20 21:54:13,364|INFO|558|_ParseField|required|string|description
+2017-04-20 21:54:13,364|INFO|708|_GetFieldValue|5|13|商店
+2017-04-20 21:54:13,365|INFO|557|_ParseField|5|14
+2017-04-20 21:54:13,365|INFO|558|_ParseField|required|int32|frame_id
+2017-04-20 21:54:13,365|INFO|708|_GetFieldValue|5|14|2.0
+2017-04-20 21:54:13,365|INFO|557|_ParseField|5|15
+2017-04-20 21:54:13,365|INFO|558|_ParseField|required|string|description
+2017-04-20 21:54:13,365|INFO|708|_GetFieldValue|5|15|show hello
+2017-04-20 21:54:13,365|INFO|557|_ParseField|5|16
+2017-04-20 21:54:13,365|INFO|558|_ParseField|required|int32|frame_id
+2017-04-20 21:54:13,365|INFO|708|_GetFieldValue|5|16|3.0
+2017-04-20 21:54:13,365|INFO|534|_ParseLine|6
+2017-04-20 21:54:13,365|INFO|557|_ParseField|6|0
+2017-04-20 21:54:13,365|INFO|558|_ParseField|required|int32|id
+2017-04-20 21:54:13,365|INFO|708|_GetFieldValue|6|0|1.0
+2017-04-20 21:54:13,365|INFO|557|_ParseField|6|1
+2017-04-20 21:54:13,365|INFO|558|_ParseField|required|int32|type
+2017-04-20 21:54:13,365|INFO|708|_GetFieldValue|6|1|1.0
+2017-04-20 21:54:13,365|INFO|557|_ParseField|6|2
+2017-04-20 21:54:13,365|INFO|558|_ParseField|required|int32|x
+2017-04-20 21:54:13,365|INFO|708|_GetFieldValue|6|2|2.0
+2017-04-20 21:54:13,365|INFO|557|_ParseField|6|3
+2017-04-20 21:54:13,365|INFO|558|_ParseField|required|int32|y
+2017-04-20 21:54:13,365|INFO|708|_GetFieldValue|6|3|4.0
+2017-04-20 21:54:13,365|INFO|557|_ParseField|6|4
+2017-04-20 21:54:13,365|INFO|558|_ParseField|required|int32|width
+2017-04-20 21:54:13,365|INFO|708|_GetFieldValue|6|4|20.0
+2017-04-20 21:54:13,365|INFO|557|_ParseField|6|5
+2017-04-20 21:54:13,365|INFO|558|_ParseField|required|int32|height
+2017-04-20 21:54:13,365|INFO|708|_GetFieldValue|6|5|4.0
+2017-04-20 21:54:13,365|INFO|557|_ParseField|6|6
+2017-04-20 21:54:13,365|INFO|558|_ParseField|required|string|description
+2017-04-20 21:54:13,365|INFO|708|_GetFieldValue|6|6|show bag
+2017-04-20 21:54:13,365|INFO|557|_ParseField|6|7
+2017-04-20 21:54:13,367|INFO|558|_ParseField|required|int32|direction
+2017-04-20 21:54:13,367|INFO|708|_GetFieldValue|6|7|1.0
+2017-04-20 21:54:13,367|INFO|557|_ParseField|6|8
+2017-04-20 21:54:13,367|INFO|558|_ParseField|optional|int32|handle_id
+2017-04-20 21:54:13,367|INFO|708|_GetFieldValue|6|8|10001.0
+2017-04-20 21:54:13,367|DEBUG|594|_ParseField|repeated|5.0
+2017-04-20 21:54:13,367|INFO|602|_ParseField|repeated|5|1
+2017-04-20 21:54:13,367|INFO|658|_ParseField|required_struct|2|InternalType_option|option
+2017-04-20 21:54:13,367|INFO|557|_ParseField|6|11
+2017-04-20 21:54:13,367|INFO|558|_ParseField|required|string|description
+2017-04-20 21:54:13,367|INFO|708|_GetFieldValue|6|11|错误bag
+2017-04-20 21:54:13,367|INFO|557|_ParseField|6|12
+2017-04-20 21:54:13,367|INFO|558|_ParseField|required|int32|frame_id
+2017-04-20 21:54:13,367|INFO|708|_GetFieldValue|6|12|-1.0
+2017-04-20 21:54:13,367|INFO|534|_ParseLine|7
+2017-04-20 21:54:13,367|INFO|557|_ParseField|7|0
+2017-04-20 21:54:13,367|INFO|558|_ParseField|required|int32|id
+2017-04-20 21:54:13,368|INFO|708|_GetFieldValue|7|0|2.0
+2017-04-20 21:54:13,368|INFO|557|_ParseField|7|1
+2017-04-20 21:54:13,368|INFO|558|_ParseField|required|int32|type
+2017-04-20 21:54:13,368|INFO|708|_GetFieldValue|7|1|3.0
+2017-04-20 21:54:13,368|INFO|557|_ParseField|7|2
+2017-04-20 21:54:13,368|INFO|558|_ParseField|required|int32|x
+2017-04-20 21:54:13,368|INFO|708|_GetFieldValue|7|2|2.0
+2017-04-20 21:54:13,368|INFO|557|_ParseField|7|3
+2017-04-20 21:54:13,368|INFO|558|_ParseField|required|int32|y
+2017-04-20 21:54:13,368|INFO|708|_GetFieldValue|7|3|4.0
+2017-04-20 21:54:13,368|INFO|557|_ParseField|7|4
+2017-04-20 21:54:13,368|INFO|558|_ParseField|required|int32|width
+2017-04-20 21:54:13,368|INFO|708|_GetFieldValue|7|4|20.0
+2017-04-20 21:54:13,368|INFO|557|_ParseField|7|5
+2017-04-20 21:54:13,368|INFO|558|_ParseField|required|int32|height
+2017-04-20 21:54:13,368|INFO|708|_GetFieldValue|7|5|4.0
+2017-04-20 21:54:13,368|INFO|557|_ParseField|7|6
+2017-04-20 21:54:13,368|INFO|558|_ParseField|required|string|description
+2017-04-20 21:54:13,368|INFO|708|_GetFieldValue|7|6|欢迎光临！请随便挑选
+2017-04-20 21:54:13,368|INFO|557|_ParseField|7|7
+2017-04-20 21:54:13,368|INFO|558|_ParseField|required|int32|direction
+2017-04-20 21:54:13,368|INFO|708|_GetFieldValue|7|7|1.0
+2017-04-20 21:54:13,368|INFO|557|_ParseField|7|8
+2017-04-20 21:54:13,368|INFO|558|_ParseField|optional|int32|handle_id
+2017-04-20 21:54:13,368|INFO|708|_GetFieldValue|7|8|10003.0
+2017-04-20 21:54:13,368|DEBUG|594|_ParseField|repeated|5.0
+2017-04-20 21:54:13,368|INFO|602|_ParseField|repeated|5|1
+2017-04-20 21:54:13,368|INFO|658|_ParseField|required_struct|2|InternalType_option|option
+2017-04-20 21:54:13,368|INFO|557|_ParseField|7|11
+2017-04-20 21:54:13,368|INFO|558|_ParseField|required|string|description
+2017-04-20 21:54:13,368|INFO|708|_GetFieldValue|7|11|没有商品
+2017-04-20 21:54:13,368|INFO|557|_ParseField|7|12
+2017-04-20 21:54:13,368|INFO|558|_ParseField|required|int32|frame_id
+2017-04-20 21:54:13,368|INFO|708|_GetFieldValue|7|12|-1.0
+2017-04-20 21:54:13,369|INFO|534|_ParseLine|8
+2017-04-20 21:54:13,369|INFO|557|_ParseField|8|0
+2017-04-20 21:54:13,369|INFO|558|_ParseField|required|int32|id
+2017-04-20 21:54:13,369|INFO|708|_GetFieldValue|8|0|3.0
+2017-04-20 21:54:13,369|INFO|557|_ParseField|8|1
+2017-04-20 21:54:13,369|INFO|558|_ParseField|required|int32|type
+2017-04-20 21:54:13,369|INFO|708|_GetFieldValue|8|1|0.0
+2017-04-20 21:54:13,369|INFO|557|_ParseField|8|2
+2017-04-20 21:54:13,369|INFO|558|_ParseField|required|int32|x
+2017-04-20 21:54:13,369|INFO|708|_GetFieldValue|8|2|2.0
+2017-04-20 21:54:13,369|INFO|557|_ParseField|8|3
+2017-04-20 21:54:13,369|INFO|558|_ParseField|required|int32|y
+2017-04-20 21:54:13,369|INFO|708|_GetFieldValue|8|3|4.0
+2017-04-20 21:54:13,369|INFO|557|_ParseField|8|4
+2017-04-20 21:54:13,369|INFO|558|_ParseField|required|int32|width
+2017-04-20 21:54:13,369|INFO|708|_GetFieldValue|8|4|20.0
+2017-04-20 21:54:13,369|INFO|557|_ParseField|8|5
+2017-04-20 21:54:13,369|INFO|558|_ParseField|required|int32|height
+2017-04-20 21:54:13,369|INFO|708|_GetFieldValue|8|5|4.0
+2017-04-20 21:54:13,371|INFO|557|_ParseField|8|6
+2017-04-20 21:54:13,371|INFO|558|_ParseField|required|string|description
+2017-04-20 21:54:13,371|INFO|708|_GetFieldValue|8|6|show hello
+2017-04-20 21:54:13,371|INFO|557|_ParseField|8|7
+2017-04-20 21:54:13,371|INFO|558|_ParseField|required|int32|direction
+2017-04-20 21:54:13,371|INFO|708|_GetFieldValue|8|7|1.0
+2017-04-20 21:54:13,371|INFO|557|_ParseField|8|8
+2017-04-20 21:54:13,371|INFO|558|_ParseField|optional|int32|handle_id
+2017-04-20 21:54:13,371|INFO|708|_GetFieldValue|8|8|
+2017-04-20 21:54:13,371|DEBUG|594|_ParseField|repeated|5.0
+2017-04-20 21:54:13,371|INFO|602|_ParseField|repeated|5|2
+2017-04-20 21:54:13,371|INFO|658|_ParseField|required_struct|2|InternalType_option|option
+2017-04-20 21:54:13,371|INFO|557|_ParseField|8|11
+2017-04-20 21:54:13,371|INFO|558|_ParseField|required|string|description
+2017-04-20 21:54:13,371|INFO|708|_GetFieldValue|8|11|OK
+2017-04-20 21:54:13,371|INFO|557|_ParseField|8|12
+2017-04-20 21:54:13,371|INFO|558|_ParseField|required|int32|frame_id
+2017-04-20 21:54:13,371|INFO|708|_GetFieldValue|8|12|1.0
+2017-04-20 21:54:13,371|INFO|557|_ParseField|8|13
+2017-04-20 21:54:13,371|INFO|558|_ParseField|required|string|description
+2017-04-20 21:54:13,371|INFO|708|_GetFieldValue|8|13|不可以
+2017-04-20 21:54:13,371|INFO|557|_ParseField|8|14
+2017-04-20 21:54:13,371|INFO|558|_ParseField|required|int32|frame_id
+2017-04-20 21:54:13,371|INFO|708|_GetFieldValue|8|14|-1.0
+2017-04-20 21:54:13,371|INFO|534|_ParseLine|9
+2017-04-20 21:54:13,371|INFO|557|_ParseField|9|0
+2017-04-20 21:54:13,371|INFO|558|_ParseField|required|int32|id
+2017-04-20 21:54:13,371|INFO|708|_GetFieldValue|9|0|4.0
+2017-04-20 21:54:13,371|INFO|557|_ParseField|9|1
+2017-04-20 21:54:13,371|INFO|558|_ParseField|required|int32|type
+2017-04-20 21:54:13,371|INFO|708|_GetFieldValue|9|1|2.0
+2017-04-20 21:54:13,371|INFO|557|_ParseField|9|2
+2017-04-20 21:54:13,371|INFO|558|_ParseField|required|int32|x
+2017-04-20 21:54:13,372|INFO|708|_GetFieldValue|9|2|2.0
+2017-04-20 21:54:13,372|INFO|557|_ParseField|9|3
+2017-04-20 21:54:13,372|INFO|558|_ParseField|required|int32|y
+2017-04-20 21:54:13,372|INFO|708|_GetFieldValue|9|3|4.0
+2017-04-20 21:54:13,372|INFO|557|_ParseField|9|4
+2017-04-20 21:54:13,372|INFO|558|_ParseField|required|int32|width
+2017-04-20 21:54:13,372|INFO|708|_GetFieldValue|9|4|20.0
+2017-04-20 21:54:13,372|INFO|557|_ParseField|9|5
+2017-04-20 21:54:13,372|INFO|558|_ParseField|required|int32|height
+2017-04-20 21:54:13,372|INFO|708|_GetFieldValue|9|5|4.0
+2017-04-20 21:54:13,372|INFO|557|_ParseField|9|6
+2017-04-20 21:54:13,372|INFO|558|_ParseField|required|string|description
+2017-04-20 21:54:13,372|INFO|708|_GetFieldValue|9|6|bag
+2017-04-20 21:54:13,372|INFO|557|_ParseField|9|7
+2017-04-20 21:54:13,372|INFO|558|_ParseField|required|int32|direction
+2017-04-20 21:54:13,372|INFO|708|_GetFieldValue|9|7|1.0
+2017-04-20 21:54:13,372|INFO|557|_ParseField|9|8
+2017-04-20 21:54:13,372|INFO|558|_ParseField|optional|int32|handle_id
+2017-04-20 21:54:13,372|INFO|708|_GetFieldValue|9|8|10002.0
+2017-04-20 21:54:13,372|DEBUG|594|_ParseField|repeated|5.0
+2017-04-20 21:54:13,374|INFO|602|_ParseField|repeated|5|1
+2017-04-20 21:54:13,374|INFO|658|_ParseField|required_struct|2|InternalType_option|option
+2017-04-20 21:54:13,374|INFO|557|_ParseField|9|11
+2017-04-20 21:54:13,374|INFO|558|_ParseField|required|string|description
+2017-04-20 21:54:13,374|INFO|708|_GetFieldValue|9|11|OK
+2017-04-20 21:54:13,374|INFO|557|_ParseField|9|12
+2017-04-20 21:54:13,374|INFO|558|_ParseField|required|int32|frame_id
+2017-04-20 21:54:13,374|INFO|708|_GetFieldValue|9|12|-1.0
+2017-04-20 21:54:13,374|INFO|534|_ParseLine|10
+2017-04-20 21:54:13,374|INFO|557|_ParseField|10|0
+2017-04-20 21:54:13,374|INFO|558|_ParseField|required|int32|id
+2017-04-20 21:54:13,374|INFO|708|_GetFieldValue|10|0|5.0
+2017-04-20 21:54:13,374|INFO|557|_ParseField|10|1
+2017-04-20 21:54:13,374|INFO|558|_ParseField|required|int32|type
+2017-04-20 21:54:13,374|INFO|708|_GetFieldValue|10|1|4.0
+2017-04-20 21:54:13,374|INFO|557|_ParseField|10|2
+2017-04-20 21:54:13,374|INFO|558|_ParseField|required|int32|x
+2017-04-20 21:54:13,374|INFO|708|_GetFieldValue|10|2|2.0
+2017-04-20 21:54:13,374|INFO|557|_ParseField|10|3
+2017-04-20 21:54:13,374|INFO|558|_ParseField|required|int32|y
+2017-04-20 21:54:13,374|INFO|708|_GetFieldValue|10|3|4.0
+2017-04-20 21:54:13,374|INFO|557|_ParseField|10|4
+2017-04-20 21:54:13,375|INFO|558|_ParseField|required|int32|width
+2017-04-20 21:54:13,375|INFO|708|_GetFieldValue|10|4|20.0
+2017-04-20 21:54:13,375|INFO|557|_ParseField|10|5
+2017-04-20 21:54:13,375|INFO|558|_ParseField|required|int32|height
+2017-04-20 21:54:13,375|INFO|708|_GetFieldValue|10|5|4.0
+2017-04-20 21:54:13,375|INFO|557|_ParseField|10|6
+2017-04-20 21:54:13,375|INFO|558|_ParseField|required|string|description
+2017-04-20 21:54:13,375|INFO|708|_GetFieldValue|10|6|这是一个超级牛逼的武器
+2017-04-20 21:54:13,375|INFO|557|_ParseField|10|7
+2017-04-20 21:54:13,375|INFO|558|_ParseField|required|int32|direction
+2017-04-20 21:54:13,375|INFO|708|_GetFieldValue|10|7|1.0
+2017-04-20 21:54:13,375|INFO|557|_ParseField|10|8
+2017-04-20 21:54:13,375|INFO|558|_ParseField|optional|int32|handle_id
+2017-04-20 21:54:13,375|INFO|708|_GetFieldValue|10|8|10003.0
+2017-04-20 21:54:13,375|DEBUG|594|_ParseField|repeated|5.0
+2017-04-20 21:54:13,375|INFO|602|_ParseField|repeated|5|2
+2017-04-20 21:54:13,375|INFO|658|_ParseField|required_struct|2|InternalType_option|option
+2017-04-20 21:54:13,375|INFO|557|_ParseField|10|11
+2017-04-20 21:54:13,375|INFO|558|_ParseField|required|string|description
+2017-04-20 21:54:13,375|INFO|708|_GetFieldValue|10|11|买
+2017-04-20 21:54:13,375|INFO|557|_ParseField|10|12
+2017-04-20 21:54:13,375|INFO|558|_ParseField|required|int32|frame_id
+2017-04-20 21:54:13,375|INFO|708|_GetFieldValue|10|12|-1.0
+2017-04-20 21:54:13,375|INFO|557|_ParseField|10|13
+2017-04-20 21:54:13,375|INFO|558|_ParseField|required|string|description
+2017-04-20 21:54:13,375|INFO|708|_GetFieldValue|10|13|不买
+2017-04-20 21:54:13,375|INFO|557|_ParseField|10|14
+2017-04-20 21:54:13,375|INFO|558|_ParseField|required|int32|frame_id
+2017-04-20 21:54:13,375|INFO|708|_GetFieldValue|10|14|-1.0
+2017-04-20 21:54:13,375|INFO|522|Parse|parse result:
+items {
+  id: 0
+  type: 0
+  x: 2
+  y: 4
+  width: 20
+  height: 4
+  description: "\346\254\242\350\277\216\346\235\245\345\210\260Lost\344\270\226\347\225\214\357\274\201"
+  direction: 1
+  option {
+    description: "show bag"
+    frame_id: 1
+  }
+  option {
+    description: "\345\225\206\345\272\227"
+    frame_id: 2
+  }
+  option {
+    description: "show hello"
+    frame_id: 3
+  }
+}
+items {
+  id: 1
+  type: 1
+  x: 2
+  y: 4
+  width: 20
+  height: 4
+  description: "show bag"
+  direction: 1
+  handle_id: 10001
+  option {
+    description: "\351\224\231\350\257\257bag"
+    frame_id: -1
+  }
+}
+items {
+  id: 2
+  type: 3
+  x: 2
+  y: 4
+  width: 20
+  height: 4
+  description: "\346\254\242\350\277\216\345\205\211\344\270\264\357\274\201\350\257\267\351\232\217\344\276\277\346\214\221\351\200\211"
+  direction: 1
+  handle_id: 10003
+  option {
+    description: "\346\262\241\346\234\211\345\225\206\345\223\201"
+    frame_id: -1
+  }
+}
+items {
+  id: 3
+  type: 0
+  x: 2
+  y: 4
+  width: 20
+  height: 4
+  description: "show hello"
+  direction: 1
+  option {
+    description: "OK"
+    frame_id: 1
+  }
+  option {
+    description: "\344\270\215\345\217\257\344\273\245"
+    frame_id: -1
+  }
+}
+items {
+  id: 4
+  type: 2
+  x: 2
+  y: 4
+  width: 20
+  height: 4
+  description: "bag"
+  direction: 1
+  handle_id: 10002
+  option {
+    description: "OK"
+    frame_id: -1
+  }
+}
+items {
+  id: 5
+  type: 4
+  x: 2
+  y: 4
+  width: 20
+  height: 4
+  description: "\350\277\231\346\230\257\344\270\200\344\270\252\350\266\205\347\272\247\347\211\233\351\200\274\347\232\204\346\255\246\345\231\250"
+  direction: 1
+  handle_id: 10003
+  option {
+    description: "\344\271\260"
+    frame_id: -1
+  }
+  option {
+    description: "\344\270\215\344\271\260"
+    frame_id: -1
+  }
+}
+
+2017-04-20 21:54:13,746|INFO|123|_initlog|
+
+
+
+2017-04-20 21:54:13,746|INFO|124|_initlog|logger is inited!
+2017-04-20 21:54:13,849|INFO|193|Interpreter|begin Interpreter, row_count = 11, col_count = 3
+2017-04-20 21:54:13,849|INFO|235|_FieldDefine|row=0, col=0, repeated_num=0
+2017-04-20 21:54:13,849|INFO|250|_FieldDefine|required|int32|id|编号
+2017-04-20 21:54:13,849|INFO|235|_FieldDefine|row=0, col=1, repeated_num=0
+2017-04-20 21:54:13,849|INFO|250|_FieldDefine|required|int32|type|类型
+2017-04-20 21:54:13,851|INFO|235|_FieldDefine|row=0, col=2, repeated_num=0
+2017-04-20 21:54:13,851|INFO|250|_FieldDefine|required|string|description|描述
+2017-04-20 21:54:14,270|INFO|498|Parse|begin parse, row_count = 11, col_count = 3
+2017-04-20 21:54:14,272|INFO|534|_ParseLine|5
+2017-04-20 21:54:14,272|INFO|557|_ParseField|5|0
+2017-04-20 21:54:14,272|INFO|558|_ParseField|required|int32|id
+2017-04-20 21:54:14,272|INFO|708|_GetFieldValue|5|0|0.0
+2017-04-20 21:54:14,272|INFO|557|_ParseField|5|1
+2017-04-20 21:54:14,272|INFO|558|_ParseField|required|int32|type
+2017-04-20 21:54:14,272|INFO|708|_GetFieldValue|5|1|0.0
+2017-04-20 21:54:14,272|INFO|557|_ParseField|5|2
+2017-04-20 21:54:14,272|INFO|558|_ParseField|required|string|description
+2017-04-20 21:54:14,272|INFO|708|_GetFieldValue|5|2|中文
+2017-04-20 21:54:14,272|INFO|534|_ParseLine|6
+2017-04-20 21:54:14,272|INFO|557|_ParseField|6|0
+2017-04-20 21:54:14,272|INFO|558|_ParseField|required|int32|id
+2017-04-20 21:54:14,272|INFO|708|_GetFieldValue|6|0|1.0
+2017-04-20 21:54:14,272|INFO|557|_ParseField|6|1
+2017-04-20 21:54:14,273|INFO|558|_ParseField|required|int32|type
+2017-04-20 21:54:14,273|INFO|708|_GetFieldValue|6|1|0.0
+2017-04-20 21:54:14,273|INFO|557|_ParseField|6|2
+2017-04-20 21:54:14,273|INFO|558|_ParseField|required|string|description
+2017-04-20 21:54:14,273|INFO|708|_GetFieldValue|6|2|武器
+2017-04-20 21:54:14,273|INFO|534|_ParseLine|7
+2017-04-20 21:54:14,273|INFO|557|_ParseField|7|0
+2017-04-20 21:54:14,273|INFO|558|_ParseField|required|int32|id
+2017-04-20 21:54:14,273|INFO|708|_GetFieldValue|7|0|2.0
+2017-04-20 21:54:14,273|INFO|557|_ParseField|7|1
+2017-04-20 21:54:14,273|INFO|558|_ParseField|required|int32|type
+2017-04-20 21:54:14,273|INFO|708|_GetFieldValue|7|1|0.0
+2017-04-20 21:54:14,273|INFO|557|_ParseField|7|2
+2017-04-20 21:54:14,273|INFO|558|_ParseField|required|string|description
+2017-04-20 21:54:14,273|INFO|708|_GetFieldValue|7|2|防具
+2017-04-20 21:54:14,273|INFO|534|_ParseLine|8
+2017-04-20 21:54:14,273|INFO|557|_ParseField|8|0
+2017-04-20 21:54:14,273|INFO|558|_ParseField|required|int32|id
+2017-04-20 21:54:14,273|INFO|708|_GetFieldValue|8|0|3.0
+2017-04-20 21:54:14,273|INFO|557|_ParseField|8|1
+2017-04-20 21:54:14,273|INFO|558|_ParseField|required|int32|type
+2017-04-20 21:54:14,273|INFO|708|_GetFieldValue|8|1|0.0
+2017-04-20 21:54:14,273|INFO|557|_ParseField|8|2
+2017-04-20 21:54:14,273|INFO|558|_ParseField|required|string|description
+2017-04-20 21:54:14,273|INFO|708|_GetFieldValue|8|2|道具
+2017-04-20 21:54:14,273|INFO|534|_ParseLine|9
+2017-04-20 21:54:14,273|INFO|557|_ParseField|9|0
+2017-04-20 21:54:14,273|INFO|558|_ParseField|required|int32|id
+2017-04-20 21:54:14,273|INFO|708|_GetFieldValue|9|0|4.0
+2017-04-20 21:54:14,273|INFO|557|_ParseField|9|1
+2017-04-20 21:54:14,273|INFO|558|_ParseField|required|int32|type
+2017-04-20 21:54:14,273|INFO|708|_GetFieldValue|9|1|0.0
+2017-04-20 21:54:14,273|INFO|557|_ParseField|9|2
+2017-04-20 21:54:14,273|INFO|558|_ParseField|required|string|description
+2017-04-20 21:54:14,273|INFO|708|_GetFieldValue|9|2|材料
+2017-04-20 21:54:14,273|WARNING|517|Parse|10 is None
+2017-04-20 21:54:14,273|INFO|522|Parse|parse result:
+items {
+  id: 0
+  type: 0
+  description: "\344\270\255\346\226\207"
+}
+items {
+  id: 1
+  type: 0
+  description: "\346\255\246\345\231\250"
+}
+items {
+  id: 2
+  type: 0
+  description: "\351\230\262\345\205\267"
+}
+items {
+  id: 3
+  type: 0
+  description: "\351\201\223\345\205\267"
+}
+items {
+  id: 4
+  type: 0
+  description: "\346\235\220\346\226\231"
+}
+

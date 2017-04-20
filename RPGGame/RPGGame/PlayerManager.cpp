@@ -15,17 +15,28 @@ bool PlayerManager::Init()
 {
 	//PlayerLoader::GetInstance().Init();
 
-	m_oActor.Init(10, 10, 10, 1, 1);
-	Item item;
-	item.SetDescription("swoker");
-	item.SetID(3);
-	m_oActor.AddItemToBag(item);
+    m_oPlayer.Init(10, 10, 10, 1, 1);
+    m_oPlayer.AddItemToBag(1, 2);
+    m_oPlayer.AddItemToBag(2, 3);
+    m_oPlayer.AddItemToBag(3, 4);
+    m_oPlayer.AddItemToBag(1, 5);
 
 	return true;
 }
 
-const Bag & PlayerManager::GetBag()
+const Container & PlayerManager::GetBag()
 {
-	return m_oActor.GetBag();
+	return m_oPlayer.GetBag();
+}
+
+bool PlayerManager::Buy(const Goods &oGoods)
+{
+    if (!m_oPlayer.CanAddItemToBag(oGoods.GetItemID(),oGoods.GetAmount()))
+        return false;
+
+    if (!m_oPlayer.Pay(oGoods.GetPrice()))
+        return false;
+
+    return m_oPlayer.AddItemToBag(oGoods.GetItemID(), oGoods.GetAmount());
 }
 

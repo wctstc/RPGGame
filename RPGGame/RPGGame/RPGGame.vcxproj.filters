@@ -70,6 +70,9 @@
     <Filter Include="Game\UI\Frame\ShowFrame">
       <UniqueIdentifier>{f5310251-5c99-4323-83d9-4f915a704c28}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Manager\Shop">
+      <UniqueIdentifier>{9c82482c-2c44-4747-82bc-8068275c9a8f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -107,9 +110,6 @@
     </ClCompile>
     <ClCompile Include="Equipment.cpp">
       <Filter>Game\Data\Actor\Player\Equipment</Filter>
-    </ClCompile>
-    <ClCompile Include="Bag.cpp">
-      <Filter>Game\Data\Actor\Player\Bag</Filter>
     </ClCompile>
     <ClCompile Include="BagFrame.cpp">
       <Filter>Game\UI\Frame\PlayerFrame</Filter>
@@ -162,11 +162,17 @@
     <ClCompile Include="StrUtil.cpp">
       <Filter>Base</Filter>
     </ClCompile>
-    <ClCompile Include="ShopManager.cpp">
-      <Filter>Game\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="FrameHander.cpp">
       <Filter>Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopManager.cpp">
+      <Filter>Game\Manager\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="Goods.cpp">
+      <Filter>Game\Manager\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="Container.cpp">
+      <Filter>Game\Data\Actor\Player\Bag</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -208,9 +214,6 @@
     </ClInclude>
     <ClInclude Include="Equipment.h">
       <Filter>Game\Data\Actor\Player\Equipment</Filter>
-    </ClInclude>
-    <ClInclude Include="Bag.h">
-      <Filter>Game\Data\Actor\Player\Bag</Filter>
     </ClInclude>
     <ClInclude Include="BagFrame.h">
       <Filter>Game\UI\Frame\PlayerFrame</Filter>
@@ -269,11 +272,17 @@
     <ClInclude Include="StrUtil.h">
       <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="ShopManager.h">
-      <Filter>Game\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="FrameHander.h">
       <Filter>Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopManager.h">
+      <Filter>Game\Manager\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="Goods.h">
+      <Filter>Game\Manager\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="Container.h">
+      <Filter>Game\Data\Actor\Player\Bag</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

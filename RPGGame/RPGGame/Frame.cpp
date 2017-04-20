@@ -17,6 +17,15 @@ bool Frame::Init(const FrameData &oFrameData)
 	return true;
 }
 
+void Frame::PrepareReq(const int iSelected, req::Req &oReq)
+{
+    oReq.Init(cmd::COMMAND_IDLE);
+}
+
+void Frame::PrepareRsp(const rsp::Rsp &oRsp)
+{
+}
+
 const Position Frame::GetOptionPosition()
 {
 	Position oPosition;
@@ -121,18 +130,6 @@ void Frame::Show() const
 		else
 			printf( FrameHorizontal );
 	}
-}
-
-
-void Frame::PrepareReq(const int iSelected, req::Req &oReq)
-{
-	oReq.Add("selected", iSelected);
-	return;
-}
-
-void Frame::PrepareRsp(const rsp::Rsp &oRsp)
-{
-	return;
 }
 
 bool Frame::CheckRsp(const rsp::Rsp &oRsp)

@@ -37,16 +37,6 @@ public:
 	virtual bool Init( const FrameData &oFrameData );
 
 	/**
-	* @brief 获取第一个选项位置
-	*/
-	const Position GetOptionPosition();
-
-	/**
-	* @brief 展示框
-	*/
-	void Show()const;
-
-	/**
 	* @brief 生成请求数据
 	*/
 	virtual void PrepareReq(const int iSelected, req::Req &oReq);
@@ -55,6 +45,17 @@ public:
 	 * @brief 处理响应数据
 	 */
 	virtual void PrepareRsp(const rsp::Rsp &oRsp);
+
+public:
+	/**
+	* @brief 获取第一个选项位置
+	*/
+	const Position GetOptionPosition();
+
+	/**
+	* @brief 展示框
+	*/
+	void Show()const;
 
     /**
      * @brief 检查回报响应码

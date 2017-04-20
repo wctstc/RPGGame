@@ -4,7 +4,7 @@
 #include "Struct.h"
 
 #include "Item.h"
-#include "Bag.h"
+#include "Container.h"
 #include "Equipment.h"
 
 
@@ -122,7 +122,7 @@ public://-模块数据获取----------------------------------------------------//
 	/**
 	 * @brief 获取背包
 	 */
-	const Bag& GetBag()const;
+	const Container& GetBag()const;
 
 public:
 	SET_GET(int,    i, BaseID,      m_oActorData.iID);
@@ -137,7 +137,7 @@ protected:
 	/*!< 装备状态数组 */
 	EquipmentState m_ayEquipments[EquipmentType::EQUIPMENT_TYPE_MAX];
 	/*!< 背包 */
-	Bag m_oBag;
+	Container m_oBag;
 };
 
 

@@ -220,7 +220,28 @@ namespace data
 		/*!< 防御力 */
 		int iDefance;
 	};
+    
+    /**
+	 * @brief 行动者额外数据
+	 */
+    struct ActorExternData
+    {
+        int iMoney;
+        int iLevel;
+        int iExp;
+    };
 
+    /**
+     * @brief 玩家数据
+     */
+    struct PlayerData
+    {
+        /*!< 行动者数据 */
+        ActorData stActorData;
+
+        /*!< 行动者额外数据 */
+        ActorExternData stActorExternData;
+    };
 
 	/**
 	 * @brief 装备数据
@@ -229,25 +250,64 @@ namespace data
 	{
 		/*!< 编号 */
 		int iID;
-		/*!< 类型 */
+		
+        /*!< 类型 */
 		EquipmentType eType;
-		/*!< 附加生命上限 */
+		
+        /*!< 附加生命上限 */
 		int iMaxHp;
-		/*!< 附加攻击力 */
+		
+        /*!< 附加攻击力 */
 		int iAttack;
-		/*!< 附加防御力 */
+		
+        /*!< 附加防御力 */
 		int iDefance;
 	};
+
+    /**
+     * @brief 背包单元格数据
+     */
+    struct ContainerUnitData
+    {
+        /*!< 编号 */
+        int iID;
+
+        /*!< 物品编号 */
+        int iItemID;
+
+        /*!< 物品数量 */
+        int iItemNum;
+
+        /*!< 物品最大叠加 */
+        int iItemMaxCapacity;
+    };
+
+    /**
+     * @brief 背吧数据
+     */
+    struct ContainerData
+    {
+        /*!< 编号 */
+        int iID;
+
+        /*!< 容量 */
+        int iCapacity;
+    };
 
     /**
      * @brief 商品数据
      */
     struct GoodsData
     {
+        /*!< 商品编号 */
+        int iID;
+
         /*!< 物品编号 */
         int iItemID;
+        
         /*!< 单次购买数量 */
         int iAmount;
+        
         /*!< 单次购买价格 */
         int iPrice;
     };

@@ -10,6 +10,9 @@
 /*!< 物品实例 */
 #define g_ItemManager  ItemManager::GetInstance()
 
+/*!< 商店实例 */
+#define g_ShopManager ShopManager::GetInstance()
+
 ManagerHander::ManagerHander()
 {
 }
@@ -28,9 +31,13 @@ bool ManagerHander::Init(Config *pConfig)
 		return false;
 	if (!g_ItemManager.Init())
 		return false;
+    if (!g_ShopManager.Init())
+        return false;
 
-	RegisterCmd(cmd::COMMAND_SHOW_BAG);
-	RegisterCmd(cmd::COMMAND_SHOW_ITEM);
+    RegisterCmd(cmd::COMMAND_SHOW_BAG);
+    RegisterCmd(cmd::COMMAND_SHOW_ITEM);
+    RegisterCmd(cmd::COMMAND_SHOW_SHOP);
+    RegisterCmd(cmd::COMMAND_SHOW_SHOP_ITEM);
 
 	return true;
 }
@@ -55,16 +62,20 @@ int ManagerHander::Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 
 int ManagerHander::HandleShowBag(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 {
-	const Bag &bag = PlayerManager::GetInstance().GetBag();
+	const Container &bag = g_PlayerManger.GetBag();
 
 	vector<rsp::Rsp> vRsps;
-    rsp::Rsp tmp;
-	for (int i = 0; i < bag.GetItemsNumber(); ++i)
+	for (int i = 0; i < bag.GetCapacity(); ++i)
 	{
-		tmp.Add("id", bag.GetItemID(i));
-		tmp.Add("description", bag.GetItemDescription(i));
+        int iItemID = bag.GetItemID(i);
+        if (iItemID!=0)
+        {
+            rsp::Rsp tmp;
+            tmp.Add("id", iItemID);
+            tmp.Add("description", g_ItemManager.GetDescriptionByID(iItemID));
+		    vRsps.push_back(tmp);
+        }
 
-		vRsps.push_back(tmp);
 	}
     if (vRsps.size() == 0)
     {
@@ -82,9 +93,9 @@ int ManagerHander::HandleShowBag(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oR
 int ManagerHander::HandleShowItem(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 {
 	int iSelected = oReq.GetInt("selected");
-	const Bag &bag = PlayerManager::GetInstance().GetBag();
+	const Container &bag = g_PlayerManger.GetBag();
 	int iID = bag.GetItemID(iSelected);
-	string sDescription = ItemManager::GetInstance().GetDescriptionByID(iID);
+	string sDescription = g_ItemManager.GetDescriptionByID(iID);
 
 	oRsp.Add("description", sDescription);
 
@@ -105,8 +116,9 @@ int ManagerHander::HandleShowShop(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &o
         stRspShopItem.Add(rsp::i_ShopItem_Price, oShopManager.GetGoodsPrice(i));
         vRsp.push_back(stRspShopItem);
     }
+    oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_SUCCEED);
     oRsp.Add(rsp::v_ShopItem, vRsp);
-    return 1;
+    return 0;
 }
 
 int ManagerHander::HandleShowShopItem(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
@@ -115,7 +127,19 @@ int ManagerHander::HandleShowShopItem(cmd::Command eCmd, req::Req &oReq, rsp::Rs
 
     ShopManager &oShopManager = ShopManager::GetInstance();
 
-    Rsp.Add(i_ShopItem_Amount);
+    int iNum = oShopManager.GetNumberOfGoodsCategory();
 
-    return 1;
+    if (iNum > iIndex)
+    {
+        oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_SUCCEED);
+        oRsp.Add(rsp::i_ShopItem_ItemID, oShopManager.GetGoodsItemID(iIndex));
+        oRsp.Add(rsp::i_ShopItem_Price, oShopManager.GetGoodsPrice(iIndex));
+        oRsp.Add(rsp::i_ShopItem_Amount, oShopManager.GetGoodsAmount(iIndex));
+    }
+    else
+    {
+        oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_NO_ITEM);
+    }
+
+    return 0;
 }

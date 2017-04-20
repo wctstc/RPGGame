@@ -11,7 +11,8 @@ BagFrame::~BagFrame()
 {
 }
 
-void BagFrame::PrepareReq(req::Req &oReq)
+
+void BagFrame::PrepareReq(const int iSelected, req::Req &oReq)
 {
     oReq.Init(cmd::COMMAND_SHOW_BAG);
 }

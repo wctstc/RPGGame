@@ -1,0 +1,107 @@
+<MainFrame>
+	<PropertyFrame>
+		<Hp value="10/10"/>
+		<Money value="20"/>
+		<Level value="Lv.2"/>
+		<Exp value="30/40"/>
+		<Bag value="12/20"/>
+	</PropertyFrame>
+	<TipsFrame>
+		<Result/>
+		<>
+	</TipsFrame>
+	<MenuFrame>
+		<Home>
+			<Sleep>
+			</Sleep>
+			<Kitchen>
+			</Kitchen>
+			<工坊/>
+			<冶炼/>
+			仓库
+				材料
+				工具
+			冰箱
+				材料
+				食物
+			田
+			牲畜圈
+		</Home>
+		<Body>
+			<Bag>
+			</Bag>
+			<Skill>
+			</Skill>
+			<Weapon>
+			</Weapon>
+		</Body>
+		
+		<Shop>
+			<Goods type='array'>
+				<Buy/>
+			</Goods>
+		</Shop>
+		<Adventure dec="冒险">
+			<Field>
+				<Monster>
+					<Goblin dec="哥布林" type = "array">
+						<Attack/>
+						<Escape/>
+					</Goblin>
+				</Monster>
+				<Material>
+					<Seed/>
+					<Fruit/>
+					<Meet/>
+				</Material>
+				<GoDeep>
+					<Field/>
+				</GoDeep>
+				<Back>
+					<Field/>
+				</Back>
+			</Field>
+			<Mountain>
+			</Mountain>
+			<Forest>
+			</Forest>
+			<Sea>
+			</Sea>
+		</Adventure>
+		<Achievement dec="成就">
+			<Pokedex>
+			</Pokedex>
+		</Achievement>
+	</MenuFrame>
+</MainFrame>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
