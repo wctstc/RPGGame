@@ -1,7 +1,6 @@
 #include "BagFrame.h"
 
 
-
 BagFrame::BagFrame()
 {
 }

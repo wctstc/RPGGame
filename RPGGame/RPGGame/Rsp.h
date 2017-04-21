@@ -17,11 +17,15 @@ namespace rsp
 {
     const string i_RetCode = "i_RetCode";
 
-    const string v_ShopItem        = "v_ShopItem";
-    const string i_ShopItem_ItemID = "i_ShopItem_ItemID";
-    const string i_ShopItem_Price  = "i_ShopItem_Price";
-    const string i_ShopItem_Amount = "i_ShopItem_Amount";
+    const string v_ShopItem          = "v_ShopItem";
 
+    const string i_ShopItem_ItemID   = "i_ShopItem_ItemID";
+    const string i_ShopItem_Price    = "i_ShopItem_Price";
+    const string i_ShopItem_Amount   = "i_ShopItem_Amount";
+
+
+    const string i_ItemID          = "i_ItemID";
+    const string s_ItemDescription = "s_ItemDescription";
 
 
     /**

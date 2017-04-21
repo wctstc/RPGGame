@@ -37,7 +37,7 @@ bool ItemLoader::Init()
 	{
 		pItemConfig = &(ayItems.items(i));
 		oItemData.iID = pItemConfig->id();
-		oItemData.iType = pItemConfig->type();
+		oItemData.eType = static_cast<data::ItemType>(pItemConfig->type());
 		oItemData.sDescription = UTF_82ASCII(pItemConfig->description());
 
 		m_mapItemDatas.insert(pair<int, ItemData>(oItemData.iID, oItemData));
@@ -52,7 +52,7 @@ Item * ItemLoader::GetItemByID(int iID)
 	map<int, ItemData>::iterator it = m_mapItemDatas.find(iID);
 	if (it != m_mapItemDatas.end())
 	{
-		pItem = CreateItemInstanceByType(it->second.iType);
+		pItem = CreateItemInstanceByType(it->second.eType);
 		pItem->Init(it->second);
 	}
 	return pItem;

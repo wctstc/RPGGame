@@ -17,7 +17,7 @@ bool Frame::Init(const FrameData &oFrameData)
 	return true;
 }
 
-void Frame::PrepareReq(const int iSelected, req::Req &oReq)
+void Frame::PrepareReq(const int iIndex, req::Req &oReq)
 {
     oReq.Init(cmd::COMMAND_IDLE);
 }

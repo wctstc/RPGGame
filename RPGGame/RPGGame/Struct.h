@@ -166,7 +166,7 @@ namespace data
 		int iID;
 
 		/*!< 类型 */
-		int iType;
+		FrameType eType;
 
 		/*!< 位置 */
 		Position oPosition;
@@ -196,7 +196,7 @@ namespace data
 		int iID;
 
 		/*!< 类型 */
-		int iType;
+		ItemType eType;
 
 		/*!< 描述 */
 		string sDescription;

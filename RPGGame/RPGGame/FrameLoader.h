@@ -15,6 +15,7 @@ using std::pair;
 #include "BagFrame.h"
 #include "ItemFrame.h"
 #include "ShopFrame.h"
+#include "ShopItemFrame.h"
 
 
 #define FRAMEFIEL "proto/data/dataconfig_frame.data"
@@ -49,7 +50,7 @@ private:
 	/**
 	* @brief ´´½¨¿ò
 	*/
-	Frame *CreateFrameInstanceByType(const int iType);
+	Frame *CreateFrameInstanceByType(const data::FrameType eType);
 private:
 	/*!< ¿òÓë±àºÅÓ³Éä */
 	map<int, FrameData> m_mapFrameDatas;

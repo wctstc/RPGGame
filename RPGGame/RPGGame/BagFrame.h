@@ -24,5 +24,4 @@ private:
 	virtual void PrepareRsp(const rsp::Rsp &oRsp);
 };
 
-
 #endif // __BAGFRAME_H__

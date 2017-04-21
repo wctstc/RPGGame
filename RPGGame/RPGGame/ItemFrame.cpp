@@ -11,7 +11,7 @@ ItemFrame::~ItemFrame()
 {
 }
 
-void ItemFrame::PrepareReq(req::Req &oReq)
+void ItemFrame::PrepareReq(const int iIndex, req::Req &oReq)
 {
     oReq.Init(cmd::COMMAND_SHOW_ITEM);
 }

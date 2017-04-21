@@ -1,12 +1,11 @@
-#ifndef __SHOWFRAME_H__
-#define __SHOWFRAME_H__
+#ifndef __SHOPITEMFRAME_H__
+#define __SHOPITEMFRAME_H__
 
 #include "Frame.h"
-
 /**
- * @brief 商店框类
+ * @brief 商品框
  */
-class ShopFrame :public Frame
+class ShopItemFrame :public Frame
 {
 public:
     /**
@@ -20,6 +19,6 @@ public:
     virtual void PrepareRsp(const rsp::Rsp &oRsp);
 };
 
-
-#endif // __SHOWFRAME_H__
+#endif // __SHOPITEMFRAME_H__
+#include "Frame.h"
 

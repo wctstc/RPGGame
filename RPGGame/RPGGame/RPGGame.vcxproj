@@ -148,6 +148,7 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Rsp.cpp" />
     <ClCompile Include="ShopFrame.cpp" />
+    <ClCompile Include="ShopItemFrame.cpp" />
     <ClCompile Include="ShopManager.cpp" />
     <ClCompile Include="Skill.cpp" />
     <ClCompile Include="SkillData.cpp" />
@@ -183,6 +184,7 @@
     <ClInclude Include="App.h" />
     <ClInclude Include="Rsp.h" />
     <ClInclude Include="ShopFrame.h" />
+    <ClInclude Include="ShopItemFrame.h" />
     <ClInclude Include="ShopManager.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Skill.h" />

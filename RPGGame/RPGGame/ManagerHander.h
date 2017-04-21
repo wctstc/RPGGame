@@ -5,7 +5,7 @@
 #include "Cmd.h"
 #include "Singleton.h"
 #include "Hander.h"
-
+#include "ItemLoader.h"
 
 /**
 * @brief 管理处理类，管理类的门户接口

@@ -1,8 +1,5 @@
 #include "FrameLoader.h"
 
-
-
-
 bool FrameLoader::Init()
 {
 	FRAMEArray ayFrames;
@@ -25,8 +22,8 @@ bool FrameLoader::Init()
 		vOptions.clear();
 		pFrameConfig = &(ayFrames.items(i));
 		oFrameData.iID = pFrameConfig->id();
-		oFrameData.iType = pFrameConfig->type();
-		oFrameData.eDirection = static_cast<Direction>(pFrameConfig->direction());
+		oFrameData.eType = static_cast<data::FrameType>(pFrameConfig->type());
+		oFrameData.eDirection = static_cast<data::Direction>(pFrameConfig->direction());
 		oFrameData.oPosition.iX = pFrameConfig->x();
 		oFrameData.oPosition.iY = pFrameConfig->y();
 		oFrameData.oSize.iWidth = pFrameConfig->width();
@@ -43,7 +40,7 @@ bool FrameLoader::Init()
 			vOptions.push_back(oOptionData);
 		}
 		oFrameData.vOptions = vOptions;
-		m_mapFrameDatas.insert(pair<int, FrameData>(oFrameData.iID, oFrameData));
+		m_mapFrameDatas.insert(pair<int, data::FrameData>(oFrameData.iID, oFrameData));
 	}
 
 	return true;
@@ -55,7 +52,8 @@ Frame *FrameLoader::GetFrameByID(int iID)
 	map<int, FrameData>::iterator it = m_mapFrameDatas.find(iID);
 	if (it != m_mapFrameDatas.end())
 	{
-		pFrame = CreateFrameInstanceByType(it->second.iType);
+        const data::FrameType eFrameType = it->second.eType;
+        pFrame = CreateFrameInstanceByType(eFrameType);
 		pFrame->Init(it->second);
 	}
 	return pFrame;
@@ -63,30 +61,27 @@ Frame *FrameLoader::GetFrameByID(int iID)
 
 void FrameLoader::ReleaseFrame(Frame *pFrame)
 {
-	if (pFrame != NULL)
-		delete pFrame;
+    if (pFrame != NULL)
+        delete pFrame;
 }
 
-
-Frame * FrameLoader::CreateFrameInstanceByType(const int iType)
+Frame * FrameLoader::CreateFrameInstanceByType(const data::FrameType eType)
 {
-	Frame *pFrame = NULL;
-	switch (iType)
-	{
-	case data::FRAME_TYPE_NORMAL:
-		pFrame = new Frame();
-		break;
-	case data::FRAME_TYPE_BAG:
-		pFrame = new BagFrame();
-		break;
-	case data::FRAME_TYPE_ITEM:
-		pFrame = new ItemFrame();
-		break;
+    switch (eType)
+    {
+    case data::FRAME_TYPE_NORMAL:
+        return new Frame;
+    case data::FRAME_TYPE_BAG:
+        return new BagFrame;
+    case data::FRAME_TYPE_ITEM:
+        return new ItemFrame;
     case data::FRAME_TYPE_SHOP:
-        pFrame = new ShopFrame();
-        break;
-	default://FRAME_TYPE_NORMAL
-		pFrame = new Frame();
-	}
-	return pFrame;
+        return new ShopFrame;
+    case data::FRAME_TYPE_SHOP_ITEM:
+        return new ShopItemFrame;
+    default:
+        return new Frame;
+    }
+    return new Frame;
 }
+

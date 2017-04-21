@@ -131,8 +131,11 @@ int ManagerHander::HandleShowShopItem(cmd::Command eCmd, req::Req &oReq, rsp::Rs
 
     if (iNum > iIndex)
     {
+        int iItemID = oShopManager.GetGoodsItemID(iIndex);
+        const ItemData stItemData = ItemLoader::GetInstance().GetItemDataByID(iItemID);
+
         oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_SUCCEED);
-        oRsp.Add(rsp::i_ShopItem_ItemID, oShopManager.GetGoodsItemID(iIndex));
+        oRsp.Add(rsp::s_ItemDescription, stItemData.sDescription);
         oRsp.Add(rsp::i_ShopItem_Price, oShopManager.GetGoodsPrice(iIndex));
         oRsp.Add(rsp::i_ShopItem_Amount, oShopManager.GetGoodsAmount(iIndex));
     }

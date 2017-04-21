@@ -2,11 +2,11 @@
 
 
 
-void ShopFrame::PrepareReq(const int iSelected, req::Req &oReq)
+void ShopFrame::PrepareReq(const int iIndex, req::Req &oReq)
 {
     oReq.Init(cmd::COMMAND_SHOW_SHOP);
 
-    oReq.Add(req::i_Index,iSelected);
+    oReq.Add(req::i_Index, iIndex);
 }
 
 void ShopFrame::PrepareRsp(const rsp::Rsp &oRsp)
@@ -27,7 +27,7 @@ void ShopFrame::PrepareRsp(const rsp::Rsp &oRsp)
             it->GetInt(rsp::i_ShopItem_Price));
         stOption.sDescription = chDescription;
         stOption.iData = -1;
-        stOption.iFrameID = data::FRAME_TYPE_SHOP_ITEM;
+        stOption.iFrameID = 5;
         vOptions.push_back(stOption);
     }
     SetOptions(vOptions);

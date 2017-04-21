@@ -67,11 +67,11 @@
     <Filter Include="Game\UI\Frame\ItemFrame">
       <UniqueIdentifier>{efb0a965-143c-411f-be1a-d835d82a9860}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\UI\Frame\ShowFrame">
-      <UniqueIdentifier>{f5310251-5c99-4323-83d9-4f915a704c28}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Manager\Shop">
       <UniqueIdentifier>{9c82482c-2c44-4747-82bc-8068275c9a8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\UI\Frame\ShopFrame">
+      <UniqueIdentifier>{f5310251-5c99-4323-83d9-4f915a704c28}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -154,7 +154,7 @@
       <Filter>Game\Manager</Filter>
     </ClCompile>
     <ClCompile Include="ShopFrame.cpp">
-      <Filter>Game\UI\Frame\ShowFrame</Filter>
+      <Filter>Game\UI\Frame\ShopFrame</Filter>
     </ClCompile>
     <ClCompile Include="TestUnit.cpp">
       <Filter>源文件</Filter>
@@ -173,6 +173,9 @@
     </ClCompile>
     <ClCompile Include="Container.cpp">
       <Filter>Game\Data\Actor\Player\Bag</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopItemFrame.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -264,7 +267,7 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ShopFrame.h">
-      <Filter>Game\UI\Frame\ShowFrame</Filter>
+      <Filter>Game\UI\Frame\ShopFrame</Filter>
     </ClInclude>
     <ClInclude Include="TestUnit.h">
       <Filter>头文件</Filter>
@@ -283,6 +286,9 @@
     </ClInclude>
     <ClInclude Include="Container.h">
       <Filter>Game\Data\Actor\Player\Bag</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopItemFrame.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
