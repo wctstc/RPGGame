@@ -22,7 +22,7 @@ public:
 
 public:
     const ShopManager::VecGoods &GetAllGoods()const;
-    const Goods &GetGoods(const int iIndex)const;
+    bool GetGoods(const int iIndex, Goods &stGoods)const;
 
     bool SellGoods( const int iPrice, const int iGoodID );
 

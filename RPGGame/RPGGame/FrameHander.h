@@ -5,7 +5,8 @@
 
 #include "Singleton.h"
 #include "Hander.h"
-#include "Frame.h"
+#include "FrameWithOption.h"
+
 
 using std::list;
 
@@ -51,11 +52,15 @@ private:
 	/**
 	 * @brief 处理命令路由
 	 */
-	virtual int Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
+	virtual int Handle(const cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
 
+    /**
+     * @brief 处理通知路由
+     */
+    virtual void Handle(const cmd::Notify eNotify, const rsp::Rsp &stRsp);
 private:
 	/*!< 显示框的栈 */
-	list<Frame*> m_lsFrames;
+	list<FrameWithOption*> m_lsFrames;
 };
 
 #endif // __FRAMEMANAGER_H__

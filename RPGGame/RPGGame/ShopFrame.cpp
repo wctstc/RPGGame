@@ -14,8 +14,8 @@ void ShopFrame::PrepareRsp(const rsp::Rsp &oRsp)
     if (!CheckRsp(oRsp))
         return;
 
-    vector<Option> vOptions;
-    Option stOption;
+    vector<data::Option> vOptions;
+    data::Option stOption;
     vector<rsp::Rsp> vRsp = oRsp.GetVector(rsp::v_ShopItem);
     for (vector<rsp::Rsp>::iterator it = vRsp.begin(); it != vRsp.end(); ++it)
     {

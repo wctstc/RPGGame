@@ -1,11 +1,11 @@
 #ifndef __SHOPITEMFRAME_H__
 #define __SHOPITEMFRAME_H__
 
-#include "Frame.h"
+#include "FrameWithOption.h"
 /**
  * @brief ÉÌÆ·¿ò
  */
-class ShopItemFrame :public Frame
+class ShopItemFrame :public FrameWithOption
 {
 public:
     /**
@@ -20,5 +20,5 @@ public:
 };
 
 #endif // __SHOPITEMFRAME_H__
-#include "Frame.h"
+#include "FrameWithOption.h"
 

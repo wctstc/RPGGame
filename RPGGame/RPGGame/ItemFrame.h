@@ -2,12 +2,12 @@
 #define __ITEMFRAME_H__
 
 
-#include "Frame.h"
+#include "FrameWithOption.h"
 
 /**
  * @brief ŒÔ∆∑øÚ¿‡
  */
-class ItemFrame :public Frame
+class ItemFrame :public FrameWithOption
 {
 public:
 	ItemFrame();

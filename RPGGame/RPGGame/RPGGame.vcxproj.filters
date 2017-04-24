@@ -129,9 +129,6 @@
     <ClCompile Include="proto\src\proto\dataconfig_item.pb.cc">
       <Filter>Game\Config\proto</Filter>
     </ClCompile>
-    <ClCompile Include="Frame.cpp">
-      <Filter>Game\UI\Frame</Filter>
-    </ClCompile>
     <ClCompile Include="FrameLoader.cpp">
       <Filter>Game\UI\Frame</Filter>
     </ClCompile>
@@ -175,6 +172,15 @@
       <Filter>Game\Data\Actor\Player\Bag</Filter>
     </ClCompile>
     <ClCompile Include="ShopItemFrame.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertyFrame.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWithOption.cpp">
+      <Filter>Game\UI\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Frame.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -242,9 +248,6 @@
     <ClInclude Include="proto\src\proto\dataconfig_item.pb.h">
       <Filter>Game\Config\proto</Filter>
     </ClInclude>
-    <ClInclude Include="Frame.h">
-      <Filter>Game\UI\Frame</Filter>
-    </ClInclude>
     <ClInclude Include="FrameLoader.h">
       <Filter>Game\UI\Frame</Filter>
     </ClInclude>
@@ -289,6 +292,21 @@
     </ClInclude>
     <ClInclude Include="ShopItemFrame.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyFrame.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWithOption.h">
+      <Filter>Game\UI\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Frame.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameStruct.h">
+      <Filter>Game\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagerData.h">
+      <Filter>Game\Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

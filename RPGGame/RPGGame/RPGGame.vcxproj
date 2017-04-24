@@ -127,6 +127,7 @@
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Equipment.cpp" />
     <ClCompile Include="Frame.cpp" />
+    <ClCompile Include="FrameWithOption.cpp" />
     <ClCompile Include="FrameLoader.cpp" />
     <ClCompile Include="FrameHander.cpp" />
     <ClCompile Include="Goods.cpp" />
@@ -142,6 +143,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerLoader.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
+    <ClCompile Include="PropertyFrame.cpp" />
     <ClCompile Include="proto\src\proto\dataconfig_frame.pb.cc" />
     <ClCompile Include="proto\src\proto\dataconfig_item.pb.cc" />
     <ClCompile Include="Req.cpp" />
@@ -164,9 +166,12 @@
     <ClInclude Include="Config.h" />
     <ClInclude Include="Equipment.h" />
     <ClInclude Include="Frame.h" />
+    <ClInclude Include="FrameStruct.h" />
+    <ClInclude Include="FrameWithOption.h" />
     <ClInclude Include="FrameLoader.h" />
     <ClInclude Include="FrameHander.h" />
     <ClInclude Include="Goods.h" />
+    <ClInclude Include="ManagerData.h" />
     <ClInclude Include="ManagerHander.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemFrame.h" />
@@ -178,6 +183,7 @@
     <ClInclude Include="PlayerLoader.h" />
     <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="Pointer.h" />
+    <ClInclude Include="PropertyFrame.h" />
     <ClInclude Include="proto\src\proto\dataconfig_frame.pb.h" />
     <ClInclude Include="proto\src\proto\dataconfig_item.pb.h" />
     <ClInclude Include="Req.h" />

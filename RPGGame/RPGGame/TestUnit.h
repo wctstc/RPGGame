@@ -20,6 +20,7 @@ private:
     bool TestStrUtilSplit();
     bool TestPointer();
     bool TestFrame();
+    bool TestPropertyFrame();
 };
 
 

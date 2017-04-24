@@ -14,9 +14,9 @@ bool FrameLoader::Init()
 	ayFrames.ParseFromArray(buffer, length);
 
 	const FRAME *pFrameConfig;
-	FrameData oFrameData;
-	Option oOptionData;
-	vector<Option> vOptions;
+    data::FrameData oFrameData;
+	data::Option oOptionData;
+	vector<data::Option> vOptions;
 	for (int i = 0; i < ayFrames.items_size(); ++i)
 	{
 		vOptions.clear();
@@ -46,10 +46,10 @@ bool FrameLoader::Init()
 	return true;
 }
 
-Frame *FrameLoader::GetFrameByID(int iID)
+FrameWithOption *FrameLoader::GetFrameByID(int iID)
 {
-	Frame *pFrame = NULL;
-	map<int, FrameData>::iterator it = m_mapFrameDatas.find(iID);
+	FrameWithOption *pFrame = NULL;
+	map<int, data::FrameData>::iterator it = m_mapFrameDatas.find(iID);
 	if (it != m_mapFrameDatas.end())
 	{
         const data::FrameType eFrameType = it->second.eType;
@@ -59,18 +59,18 @@ Frame *FrameLoader::GetFrameByID(int iID)
 	return pFrame;
 }
 
-void FrameLoader::ReleaseFrame(Frame *pFrame)
+void FrameLoader::ReleaseFrame(FrameWithOption *pFrame)
 {
     if (pFrame != NULL)
         delete pFrame;
 }
 
-Frame * FrameLoader::CreateFrameInstanceByType(const data::FrameType eType)
+FrameWithOption * FrameLoader::CreateFrameInstanceByType(const data::FrameType eType)
 {
     switch (eType)
     {
     case data::FRAME_TYPE_NORMAL:
-        return new Frame;
+        return new FrameWithOption;
     case data::FRAME_TYPE_BAG:
         return new BagFrame;
     case data::FRAME_TYPE_ITEM:
@@ -80,8 +80,8 @@ Frame * FrameLoader::CreateFrameInstanceByType(const data::FrameType eType)
     case data::FRAME_TYPE_SHOP_ITEM:
         return new ShopItemFrame;
     default:
-        return new Frame;
+        return new FrameWithOption;
     }
-    return new Frame;
+    return new FrameWithOption;
 }
 

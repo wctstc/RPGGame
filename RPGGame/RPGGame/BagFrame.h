@@ -2,12 +2,12 @@
 #define __BAGFRAME_H__
 
 
-#include "Frame.h"
+#include "FrameWithOption.h"
 
 /**
 * @brief ±³°ü¿òÀà
 */
-class BagFrame :public Frame
+class BagFrame :public FrameWithOption
 {
 public:
 	BagFrame();

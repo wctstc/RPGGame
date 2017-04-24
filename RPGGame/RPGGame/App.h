@@ -60,6 +60,10 @@ public:
 	*/
 	int Handler(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
 
+    /**
+    * @brief 处理通知
+    */
+    void Notify(cmd::Notify eNotify, const rsp::Rsp &oRsp);
 private:
 	typedef multimap <cmd::Command, Hander&>::const_iterator MMapIt;
 	/*!< 命令和处理函数的映射关系 */

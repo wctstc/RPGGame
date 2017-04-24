@@ -106,3 +106,8 @@ int App::Handler(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 
 	return iRet;
 }
+
+void App::Notify(cmd::Notify eNotify, const rsp::Rsp &oRsp)
+{
+    FrameHander::GetInstance().Notify(eNotify, oRsp);
+}

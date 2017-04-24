@@ -11,7 +11,7 @@ using std::pair;
 #include "Platform.h"
 #include "Singleton.h"
 #include "Struct.h"
-#include "Frame.h"
+#include "FrameWithOption.h"
 #include "BagFrame.h"
 #include "ItemFrame.h"
 #include "ShopFrame.h"
@@ -40,20 +40,20 @@ public:
 	/**
 	* @brief 创建并获取框
 	*/
-	Frame *GetFrameByID(int iID);
+	FrameWithOption *GetFrameByID(int iID);
 
 	/**
 	* @brief 释放框
 	*/
-	void ReleaseFrame(Frame *pFrame);
+	void ReleaseFrame(FrameWithOption *pFrame);
 private:
 	/**
 	* @brief 创建框
 	*/
-	Frame *CreateFrameInstanceByType(const data::FrameType eType);
+	FrameWithOption *CreateFrameInstanceByType(const data::FrameType eType);
 private:
 	/*!< 框与编号映射 */
-	map<int, FrameData> m_mapFrameDatas;
+	map<int, data::FrameData> m_mapFrameDatas;
 };
 
 

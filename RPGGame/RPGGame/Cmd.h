@@ -7,8 +7,8 @@
 namespace cmd
 {
 	/**
-	* @brief 命令枚举
-	*/
+	 * @brief 命令枚举
+	 */
 	enum Command
 	{
 		/*!< 空 */
@@ -31,6 +31,15 @@ namespace cmd
 
         
 	};
+    
+    /**
+     * @brief 通知枚举
+     */
+    enum Notify
+    {
+        NOTIFY_UPDATE_PROPERTY = 20001,
+        NOTIFY_UPDATE_INFORMATION = 20002,
+    };
 }
 
 

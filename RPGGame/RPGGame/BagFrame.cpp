@@ -18,8 +18,8 @@ void BagFrame::PrepareReq(const int iSelected, req::Req &oReq)
 
 void BagFrame::PrepareRsp(const rsp::Rsp &oRsp)
 {
-    vector<Option> vOptions;
-    Option stOption;
+    vector<data::Option> vOptions;
+    data::Option stOption;
     if (oRsp.HasInt(rsp::i_RetCode))
     {
         switch (oRsp.GetInt(rsp::i_RetCode))

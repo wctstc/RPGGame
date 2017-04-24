@@ -1,12 +1,12 @@
 #ifndef __SHOWFRAME_H__
 #define __SHOWFRAME_H__
 
-#include "Frame.h"
+#include "FrameWithOption.h"
 
 /**
  * @brief …ÃµÍøÚ¿‡
  */
-class ShopFrame :public Frame
+class ShopFrame :public FrameWithOption
 {
 public:
     /**

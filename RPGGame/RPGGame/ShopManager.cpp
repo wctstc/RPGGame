@@ -34,11 +34,15 @@ const ShopManager::VecGoods & ShopManager::GetAllGoods() const
     return m_vGoods;
 }
 
-const Goods & ShopManager::GetGoods(const int iIndex) const
+bool ShopManager::GetGoods(const int iIndex, Goods &stGoods) const
 {
-    if (iIndex >= 0 && iIndex < m_vGoods.size())
-        m_vGoods.at(iIndex);
-    return Goods();
+    const int iSize = m_vGoods.size();
+    if (iIndex < iSize)
+    {
+        stGoods = m_vGoods.at(iIndex);
+        return true;
+    }
+    return false;
 }
 
 bool ShopManager::SellGoods(const int iPrice, const int iGoodID)
@@ -58,21 +62,24 @@ int ShopManager::GetNumberOfGoodsCategory()const
 
 int ShopManager::GetGoodsItemID(const int index)const
 {
-    if (index < m_vGoods.size())
+    const int iSize = m_vGoods.size();
+    if (index < iSize)
         return m_vGoods.at(index).GetItemID();
     return -1;
 }
 
 int ShopManager::GetGoodsAmount(const int index)const
 {
-    if (index < m_vGoods.size())
+    const int iSize = m_vGoods.size();
+    if (index < iSize)
         return m_vGoods.at(index).GetAmount();
     return -1;
 }
 
 int ShopManager::GetGoodsPrice(const int index)const
 {
-    if (index < m_vGoods.size())
+    const int iSize = m_vGoods.size();
+    if (index < iSize)
         return m_vGoods.at(index).GetPrice();
     return -1;
 }

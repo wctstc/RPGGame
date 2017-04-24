@@ -24,8 +24,12 @@ public:
 	/**
 	* @brief 分发命令到各个处理函数
 	*/
-	virtual int Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
+	virtual int Handle(const cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
 
+    /**
+    * @brief 路由通知到处理函数
+    */
+    virtual void Handle(const cmd::Notify eNotify, const rsp::Rsp &oRsp);
 private:
 	/**
 	* @brief 展示背包

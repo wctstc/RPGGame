@@ -3,6 +3,9 @@
 #include "Cmd.h"
 #include "FrameLoader.h"
 
+
+#include "PropertyFrame.h"
+
 FrameHander::FrameHander()
 {
 
@@ -55,7 +58,7 @@ int FrameHander::HandleIdle(req::Req &oReq)
 int FrameHander::HandleStart(req::Req &oReq)
 {
 	FrameLoader &oFrameLoader = FrameLoader::GetInstance();
-	Frame *pFrame = oFrameLoader.GetFrameByID(0);
+	FrameWithOption *pFrame = oFrameLoader.GetFrameByID(0);
 	m_lsFrames.push_back(pFrame);
 
 
@@ -64,6 +67,12 @@ int FrameHander::HandleStart(req::Req &oReq)
 	int iSelected;
 
 	bool bIsRuning = true;
+
+    PropertyFrame &oPropertyFrame = PropertyFrame::GetInstance();
+    data::FrameData stFrameData;
+    oPropertyFrame.Init(stFrameData);
+    oPropertyFrame.Show();
+
 	while (bIsRuning)
 	{
 		pFrame = m_lsFrames.back();
@@ -71,7 +80,7 @@ int FrameHander::HandleStart(req::Req &oReq)
 		//if (bFlash)
 		if(true)
 		{
-			clear();
+//			clear();
 //			list<Frame*>::const_iterator cpIt;
 //			for (cpIt = m_lsFrames.begin();cpIt != m_lsFrames.end();++cpIt)
 //				(*cpIt)->Show();
@@ -79,9 +88,11 @@ int FrameHander::HandleStart(req::Req &oReq)
 		pFrame->Show();
 
 		ArrowManager &oArrowManager = ArrowManager::GetInstance();
+        data::Position stArrawPosition;
+        pFrame->GetArrawDefaultPosition(stArrawPosition);
 		oArrowManager.Init(
 			pFrame->GetDirection( ), 
-			pFrame->GetOptionPosition(), 
+            stArrawPosition,
 			pFrame->GetOptions() );
 		iSelected = oArrowManager.GetSelectIndex();
 		do
@@ -139,4 +150,35 @@ int FrameHander::Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 		break;
 	}
 	return 0;
+}
+
+void FrameHander::Handle(const cmd::Notify eNotify, const rsp::Rsp &stRsp)
+{
+    switch (eNotify)
+    {
+    case cmd::NOTIFY_UPDATE_PROPERTY:
+    {
+        PropertyFrame &oPropertyFrame = PropertyFrame::GetInstance();
+        if (stRsp.HasInt(rsp::i_PropertyFrame_Hp))
+            oPropertyFrame.SetHp(stRsp.GetInt(rsp::i_PropertyFrame_Hp));
+        if (stRsp.HasInt(rsp::i_PropertyFrame_MaxHp))
+            oPropertyFrame.SetMaxHp(stRsp.GetInt(rsp::i_PropertyFrame_MaxHp));
+        if (stRsp.HasInt(rsp::i_PropertyFrame_Money))
+            oPropertyFrame.SetMoney(stRsp.GetInt(rsp::i_PropertyFrame_Money));
+        if (stRsp.HasInt(rsp::i_PropertyFrame_Level))
+            oPropertyFrame.SetLevel(stRsp.GetInt(rsp::i_PropertyFrame_Level));
+        if (stRsp.HasInt(rsp::i_PropertyFrame_Exp))
+            oPropertyFrame.SetExp(stRsp.GetInt(rsp::i_PropertyFrame_Exp));
+        if (stRsp.HasInt(rsp::i_PropertyFrame_TotalExp))
+            oPropertyFrame.SetTotalExp(stRsp.GetInt(rsp::i_PropertyFrame_TotalExp));
+        if (stRsp.HasInt(rsp::i_PropertyFrame_Bag))
+            oPropertyFrame.SetBag(stRsp.GetInt(rsp::i_PropertyFrame_Bag));
+        if (stRsp.HasInt(rsp::i_PropertyFrame_Bag))
+            oPropertyFrame.SetTotalBag(stRsp.GetInt(rsp::i_PropertyFrame_TotalBag));
+        break;
+    }
+    case cmd::NOTIFY_UPDATE_INFORMATION:
+        break;
+    }
+
 }

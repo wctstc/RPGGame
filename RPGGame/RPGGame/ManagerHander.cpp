@@ -60,6 +60,11 @@ int ManagerHander::Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 	return -1;
 }
 
+void ManagerHander::Handle(const cmd::Notify eCmd, const rsp::Rsp &oRsp)
+{
+
+}
+
 int ManagerHander::HandleShowBag(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 {
 	const Container &bag = g_PlayerManger.GetBag();

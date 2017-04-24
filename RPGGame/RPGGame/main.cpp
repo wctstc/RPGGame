@@ -1,7 +1,7 @@
 
 #include "UIBase.h"
 
-#include "Frame.h"
+#include "FrameWithOption.h"
 #include "ArrowManager.h"
 #include "App.h"
 
@@ -36,9 +36,9 @@ int main()
    // test.Run();
 
 
-	App &app = App::GetInstance();
-	app.Init();
-	app.Start();
+    App &app = App::GetInstance();
+    app.Init();
+    app.Start();
 
 
 	system("pause");

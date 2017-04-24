@@ -34,25 +34,35 @@ public:
 	*/
 	virtual void Finish();
 public:
-	/**
-	* @brief 转发发送的命令
-	*/
-	int Forword(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
+    /**
+    * @brief 转发发送的命令
+    */
+    int Forword(const cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
+
+    /**
+    * @brief 转发发送的通知
+    */
+    void Notify(const cmd::Notify eNotify, const rsp::Rsp &oRsp);
 public:
 	/**
 	* @brief 路由命令到处理函数
 	*/
-	virtual int Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp) = 0;
+	virtual int Handle(const cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp) = 0;
+
+    /**
+    * @brief 路由通知到处理函数
+    */
+    virtual void Handle(const cmd::Notify eNotify, const rsp::Rsp &stRsp) = 0;
 protected:
 	/**
 	* @brief 注册处理函数
 	*/
-	void RegisterCmd(cmd::Command eCmd);
+	void RegisterCmd(const cmd::Command eCmd);
 
 	/**
 	* @brief 注销处理函数
 	*/
-	void UnRegisterCmd(cmd::Command eCmd);
+	void UnRegisterCmd(const cmd::Command eCmd);
 };
 
 

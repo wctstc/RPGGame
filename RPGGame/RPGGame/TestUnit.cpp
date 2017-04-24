@@ -11,8 +11,8 @@ using std::endl;
 #include "StrUtil.h"
 #include "Pointer.h"
 #include "App.h"
-#include "Frame.h"
-
+#include "FrameWithOption.h"
+#include "PropertyFrame.h"
 
 TestUnit::TestUnit()
 {
@@ -25,9 +25,10 @@ TestUnit::~TestUnit()
 
 void TestUnit::Run()
 {
-    TEST(TestStrUtilSplit);
-    TEST(TestPointer);
-    TEST(TestFrame);
+    //TEST(TestStrUtilSplit);
+    //TEST(TestPointer);
+    //TEST(TestFrame);
+    TEST(TestPropertyFrame);
 
 
 
@@ -98,23 +99,37 @@ bool TestUnit::TestPointer()
 
 bool TestUnit::TestFrame()
 {
-    Frame frame;
+    FrameWithOption frame;
 
-    FrameData stFrameData;
-    stFrameData.eDirection = data::DIRECTION_HORIZONTAL;
+    data::FrameData stFrameData;
+    stFrameData.eDirection = data::DIRECTION_VERTICAL;
     stFrameData.iHandlerID = 0;
     stFrameData.iID = 0;
     stFrameData.oPosition.iX = 0;
     stFrameData.oPosition.iY = 0;
     stFrameData.oSize.iWidth = 20;
-    stFrameData.oSize.iHeigth = 20;
+    stFrameData.oSize.iHeigth = 10;
     stFrameData.sDescription = "adsfasfd\nadsfalasdfasdfsadfsasdfsadfsafsafsfsfsafsadfasdfdf\nksdjf";
-    Option option;
+    data::Option option;
     option.sDescription = "world";
+    stFrameData.vOptions.push_back(option);
+    option.sDescription = "hello!";
     stFrameData.vOptions.push_back(option);
 
 
     frame.Init(stFrameData);
     frame.Show();
+    int iIndex = frame.GetSelectIndex();
+    return true;
+}
+
+bool TestUnit::TestPropertyFrame()
+{
+    PropertyFrame &oPropertyFrame = PropertyFrame::GetInstance();
+
+    data::FrameData stFrameData;
+    oPropertyFrame.Init(stFrameData);
+    oPropertyFrame.Show();
+
     return true;
 }

@@ -28,6 +28,24 @@ namespace rsp
     const string s_ItemDescription = "s_ItemDescription";
 
 
+
+
+
+
+
+
+
+
+
+    const string i_PropertyFrame_Hp       = "i_PropertyFrame_Hp";
+    const string i_PropertyFrame_MaxHp    = "i_PropertyFrame_MaxHp";
+    const string i_PropertyFrame_Money    = "i_PropertyFrame_Money";
+    const string i_PropertyFrame_Level    = "i_PropertyFrame_Level";
+    const string i_PropertyFrame_Exp      = "i_PropertyFrame_Exp";
+    const string i_PropertyFrame_TotalExp = "i_PropertyFrame_TotalExp";
+    const string i_PropertyFrame_Bag      = "i_PropertyFrame_Bag";
+    const string i_PropertyFrame_TotalBag = "i_PropertyFrame_TotalBag";
+
     /**
     * @brief œÏ”¶¿‡
     */
