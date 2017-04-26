@@ -44,11 +44,6 @@ bool PropertyFrame::Init(const data::FrameData &oFrameData)
     return Frame::Init(stFrameData);
 }
 
-void PropertyFrame::Show() const
-{
-    Frame::Show();
-}
-
 void PropertyFrame::Update()
 {
     char csBuffer[128];

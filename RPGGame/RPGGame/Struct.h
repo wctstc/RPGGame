@@ -7,6 +7,8 @@
 #include <vector>
 #include <string>
 
+#include "Cmd.h"
+
 using std::vector;
 using std::string;
 
@@ -146,8 +148,8 @@ namespace data
 		/*!< 文字描述 */
 		string sDescription;
 
-		/*!< 数据编号 */
-		int iData;
+		/*!< 处理命令 */
+		cmd::Notify eNotify;
 
 		/*!< 选中后对应框的编号 */
 		int iFrameID;

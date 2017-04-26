@@ -24,14 +24,9 @@ public:
 
 public:
     /**
-    * @brief 展示框
-    */
-    void Show()const;
-
-    /**
      * @brief 更新框
      */
-    void Update();
+    virtual void Update();
 
 public:
     SET_GET(int, i, Hp,       m_stPropertyFrameData.iHp);

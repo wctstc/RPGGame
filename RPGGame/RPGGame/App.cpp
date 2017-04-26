@@ -82,8 +82,8 @@ int App::AddCmdHandle(cmd::Command eCmd, Hander& oManager)
 
 int App::RemoveCmdHandle(cmd::Command eCmd,Hander &oManager)
 {
-	pair<MMapIt,MMapIt> pairFound = m_mmapCmdToHanders.equal_range(eCmd);
-	for ( MMapIt it = pairFound.first; it != pairFound.second; ++it )
+	pair<CommandMMapIt,CommandMMapIt> pairFound = m_mmapCmdToHanders.equal_range(eCmd);
+	for ( CommandMMapIt it = pairFound.first; it != pairFound.second; ++it )
 	{
 		if (&(it->second) == &oManager) 
 		{
@@ -98,16 +98,19 @@ int App::RemoveCmdHandle(cmd::Command eCmd,Hander &oManager)
 int App::Handler(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 {
 	int iRet = 0;
-	pair<MMapIt, MMapIt> pairFound = m_mmapCmdToHanders.equal_range(eCmd);
+	pair<CommandMMapIt, CommandMMapIt> pairFound = m_mmapCmdToHanders.equal_range(eCmd);
 
-	for (MMapIt it = pairFound.first; it != pairFound.second; ++it)
+	for (CommandMMapIt it = pairFound.first; it != pairFound.second; ++it)
 		if ((iRet = it->second.Handle(eCmd, oReq, oRsp)) != 0)
 			break;
 
 	return iRet;
 }
 
-void App::Notify(cmd::Notify eNotify, const rsp::Rsp &oRsp)
+void App::Notify(cmd::Notify eNotify, const notify::Notify &oNotify)
 {
-    FrameHander::GetInstance().Notify(eNotify, oRsp);
+    pair<NotifyMMapIt, NotifyMMapIt> pairFound = m_mmapNotifyToHanders.equal_range(eNotify);
+
+    for (NotifyMMapIt it = pairFound.first; it != pairFound.second; ++it)
+        it->second.Handle(eNotify, oNotify);
 }

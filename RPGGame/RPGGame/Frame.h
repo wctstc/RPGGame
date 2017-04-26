@@ -10,24 +10,29 @@ public:
     ~Frame();
 public:
     /**
-    * @brief 初始化
-    */
+     * @brief 初始化
+     */
+    virtual bool Init();
+
+    /**
+     * @brief 初始化
+     */
     virtual bool Init(const data::FrameData &oFrameData);
 
 public:
     /**
-    * @brief 展示框
-    */
+     * @brief 展示框
+     */
     void Show()const;
 private:
     /**
-    * @brief 清理框
-    */
+     * @brief 清理框
+     */
     virtual void ClearFrame() const;
 
     /**
-    * @brief 清理内容
-    */
+     * @brief 清理内容
+     */
     virtual void ClearContent() const;
 
     /**
@@ -36,8 +41,8 @@ private:
     virtual void ShowFrame() const;
 
     /**
-    * @brief 展示描述
-    */
+     * @brief 展示描述
+     */
     virtual void ShowDescription() const;
 public:
     SET_GET(int,                   i, ID,          m_stFrameData.iID);
@@ -49,6 +54,7 @@ public:
     SET_GET(int,                   i, Handler,     m_stFrameData.iHandlerID);
     SET_GET(vector<data::Option>&, v, Options,     m_stFrameData.vOptions);
 private:
+    /*!< 框数据 */
     data::FrameData m_stFrameData;
 };
 

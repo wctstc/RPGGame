@@ -29,7 +29,7 @@ public:
     /**
     * @brief 路由通知到处理函数
     */
-    virtual void Handle(const cmd::Notify eNotify, const rsp::Rsp &oRsp);
+    virtual void Handle(const cmd::Notify eNotify, const notify::Notify &oNotify);
 private:
 	/**
 	* @brief 展示背包

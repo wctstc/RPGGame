@@ -63,11 +63,15 @@ public:
     /**
     * @brief 处理通知
     */
-    void Notify(cmd::Notify eNotify, const rsp::Rsp &oRsp);
+    void Notify(cmd::Notify eNotify, const notify::Notify &oNotify);
 private:
-	typedef multimap <cmd::Command, Hander&>::const_iterator MMapIt;
+	typedef multimap <cmd::Command, Hander&>::const_iterator CommandMMapIt;
 	/*!< 命令和处理函数的映射关系 */
-	multimap<cmd::Command, Hander&> m_mmapCmdToHanders;
+    multimap<cmd::Command, Hander&> m_mmapCmdToHanders;
+
+    typedef multimap <cmd::Notify, Hander&>::const_iterator NotifyMMapIt;
+    /*!< 通知和处理函数的映射关系 */
+    multimap<cmd::Notify, Hander&> m_mmapNotifyToHanders;
 
 	/*!< 是否运行 */
 	bool m_bIsRuning;

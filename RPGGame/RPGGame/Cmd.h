@@ -29,14 +29,20 @@ namespace cmd
         /*!< 展示商品 */
         COMMAND_SHOW_SHOP_ITEM = 10004,
 
+
+
         
-	};
-    
+    };
+
     /**
-     * @brief 通知枚举
-     */
+    * @brief 通知枚举
+    */
     enum Notify
     {
+        /*!< 空 */
+        NOTIFY_IDLE = 0,
+        NOTIFY_SHOP_BUY = 30001,
+
         NOTIFY_UPDATE_PROPERTY = 20001,
         NOTIFY_UPDATE_INFORMATION = 20002,
     };

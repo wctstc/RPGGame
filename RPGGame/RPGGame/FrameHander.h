@@ -57,7 +57,7 @@ private:
     /**
      * @brief 处理通知路由
      */
-    virtual void Handle(const cmd::Notify eNotify, const rsp::Rsp &stRsp);
+    virtual void Handle(const cmd::Notify eNotify, const notify::Notify &oNotify);
 private:
 	/*!< 显示框的栈 */
 	list<FrameWithOption*> m_lsFrames;

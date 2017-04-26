@@ -142,6 +142,15 @@ int FrameWithOption::GetSelectIndex()
     }
 }
 
+bool FrameWithOption::GetOptionByIndex(unsigned int iIndex, data::Option &stOption)
+{
+    if (iIndex >= GetOptions().size())
+        return false;
+
+    stOption = GetOptions().at(iIndex);
+    return true;
+}
+
 bool FrameWithOption::CheckRsp(const rsp::Rsp &oRsp)
 {
     vector<data::Option> vOptions;

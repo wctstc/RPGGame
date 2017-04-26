@@ -46,6 +46,7 @@ namespace rsp
     const string i_PropertyFrame_Bag      = "i_PropertyFrame_Bag";
     const string i_PropertyFrame_TotalBag = "i_PropertyFrame_TotalBag";
 
+    const string s_TipsFrame_Description = "s_TipsFrame_Description";
     /**
     * @brief œÏ”¶¿‡
     */

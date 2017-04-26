@@ -54,7 +54,7 @@ public:
     /**
      * @brief 获取选项
      */
-    const data::Option GetOptionByIndex(unsigned int iIndex);
+    bool GetOptionByIndex(unsigned int iIndex, data::Option &stOption);
 private:
     /**
      * @brief 清理框

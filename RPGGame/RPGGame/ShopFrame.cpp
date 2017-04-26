@@ -26,7 +26,6 @@ void ShopFrame::PrepareRsp(const rsp::Rsp &oRsp)
             it->GetInt(rsp::i_ShopItem_Amount),
             it->GetInt(rsp::i_ShopItem_Price));
         stOption.sDescription = chDescription;
-        stOption.iData = -1;
         stOption.iFrameID = 5;
         vOptions.push_back(stOption);
     }

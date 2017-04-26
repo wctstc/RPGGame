@@ -13,11 +13,29 @@ Frame::~Frame()
 {
 }
 
+bool Frame::Init()
+{
+    m_stFrameData.iID = 0;
+    m_stFrameData.eType = data::FRAME_TYPE_NORMAL;
+    m_stFrameData.oPosition.iX = 0;
+    m_stFrameData.oPosition.iY = 0;
+    m_stFrameData.oSize.iHeigth = 0;
+    m_stFrameData.oSize.iWidth  = 0;
+    m_stFrameData.sDescription = "";
+    m_stFrameData.eDirection = data::DIRECTION_VERTICAL;
+    m_stFrameData.iHandlerID = -1;
+
+    m_stFrameData.vOptions.clear();
+
+    return true;
+}
+
 bool Frame::Init(const data::FrameData &oFrameData)
 {
     m_stFrameData = oFrameData;
     return true;
 }
+
 
 void Frame::Show() const
 {

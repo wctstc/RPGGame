@@ -5,6 +5,7 @@
 #include "Cmd.h"
 #include "Req.h"
 #include "Rsp.h"
+#include "Notify.h"
 
 
 class App;
@@ -42,7 +43,7 @@ public:
     /**
     * @brief 转发发送的通知
     */
-    void Notify(const cmd::Notify eNotify, const rsp::Rsp &oRsp);
+    void Notify(const cmd::Notify eNotify, const notify::Notify &oNotify);
 public:
 	/**
 	* @brief 路由命令到处理函数
@@ -52,7 +53,7 @@ public:
     /**
     * @brief 路由通知到处理函数
     */
-    virtual void Handle(const cmd::Notify eNotify, const rsp::Rsp &stRsp) = 0;
+    virtual void Handle(const cmd::Notify eNotify, const notify::Notify &oNotify) = 0;
 protected:
 	/**
 	* @brief 注册处理函数

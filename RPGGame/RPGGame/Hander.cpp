@@ -35,9 +35,9 @@ int Hander::Forword(const cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 	return g_App.Handler(eCmd, oReq, oRsp);
 }
 
-void Hander::Notify(const cmd::Notify eNotify, const rsp::Rsp &oRsp)
+void Hander::Notify(const cmd::Notify eNotify, const notify::Notify &oNotify)
 {
-    g_App.Notify(eNotify, oRsp);
+    g_App.Notify(eNotify, oNotify);
 }
 
 void Hander::RegisterCmd(const cmd::Command eCmd)

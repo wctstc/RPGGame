@@ -139,6 +139,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Hander.cpp" />
     <ClCompile Include="ArrowManager.cpp" />
+    <ClCompile Include="Notify.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerLoader.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="SkillData.cpp" />
     <ClCompile Include="StrUtil.cpp" />
     <ClCompile Include="TestUnit.cpp" />
+    <ClCompile Include="TipsFrame.cpp" />
     <ClCompile Include="UIBase.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +181,7 @@
     <ClInclude Include="ItemManager.h" />
     <ClInclude Include="Hander.h" />
     <ClInclude Include="ArrowManager.h" />
+    <ClInclude Include="Notify.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerLoader.h" />
     <ClInclude Include="PlayerManager.h" />
@@ -199,6 +202,7 @@
     <ClInclude Include="Platform.h" />
     <ClInclude Include="StrUtil.h" />
     <ClInclude Include="TestUnit.h" />
+    <ClInclude Include="TipsFrame.h" />
     <ClInclude Include="UIBase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
