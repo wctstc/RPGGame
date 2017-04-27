@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <stdarg.h>
 
 using std::string;
 using std::vector;
@@ -14,6 +15,7 @@ public:
     ~StrUtil();
 public:
     static int Split(const string &sBuffer, const string &sSeparate, vector<string> &vFragments);
+    static string Format( const char *csFormat, ... );
 
 };
 

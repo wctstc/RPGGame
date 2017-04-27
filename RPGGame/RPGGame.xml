@@ -8,39 +8,60 @@
 	</PropertyFrame>
 	<TipsFrame>
 		<Result/>
-		<>
 	</TipsFrame>
 	<MenuFrame>
-		<Home>
-			<Sleep>
-			</Sleep>
-			<Kitchen>
-			</Kitchen>
-			<工坊/>
-			<冶炼/>
-			仓库
-				材料
-				工具
-			冰箱
-				材料
-				食物
-			田
-			牲畜圈
-		</Home>
-		<Body>
-			<Bag>
+		<Town dec="小镇">
+			<Home dec="家">
+				<BedRoom dec="卧室">
+					<Sleep dec="睡觉"/>
+				</BedRoom>
+				<Kitchen dec="厨房">
+					<Cooking dec="烹饪"/>
+						< />
+					<Refrigerator dec="冰箱"/>
+						< />
+				</Kitchen>
+			</Home>
+			<Shop dec="商店">
+				<Goods dec="商品" type='array'>
+					<Buy dec="买"/>
+				</Goods>
+				<Bag dec="背包">
+					<Item dec="物品">
+						<Sell dec="卖"/>
+					</Item>
+				</Bag>
+			</Shop>
+			<Farming dec="农事">
+				<Field dec="田野">
+					< />
+				</Field>
+				<Pasture dec="牧场">
+					< />
+				</Pasture>
+			</Farming>
+			<Industry dec="工业">
+				<Workshop dec="工坊">
+					< />
+				</Workshop>
+				<Smelt dec="冶炼">
+					< />
+				</Smelt>
+			</Industry>
+		</Town>
+		<Body dec="属性">
+			<Bag dec="背包">
+				<Item dec="物品">
+					<use dec="使用"/>
+				</Item>
 			</Bag>
-			<Skill>
+			<Skill dec="技能">
+				< />
 			</Skill>
-			<Weapon>
-			</Weapon>
+			<Equipment dec="装备">
+				< />
+			</Equipment>
 		</Body>
-		
-		<Shop>
-			<Goods type='array'>
-				<Buy/>
-			</Goods>
-		</Shop>
 		<Adventure dec="冒险">
 			<Field>
 				<Monster>

@@ -25,6 +25,30 @@ void FrameWithOption::PrepareReq(const int iIndex, req::Req &oReq)
 
 void FrameWithOption::PrepareRsp(const rsp::Rsp &oRsp)
 {
+    if (oRsp.HasString(rsp::s_Description))
+        SetDescription(oRsp.GetString(rsp::s_Description));
+
+    if (oRsp.HasVector(rsp::v_Option))
+    {
+        const vector<rsp::Rsp> &vRsp = oRsp.GetVector(rsp::v_Option);
+        vector<data::Option> vOption;
+
+        for (vector<rsp::Rsp>::const_iterator it = vRsp.begin(); it != vRsp.end(); ++it)
+        {
+            data::Option stOption;
+            stOption.sDescription = it->GetString(rsp::s_Option_Description);
+            stOption.iFrameID = -1;
+            stOption.eNotify = cmd::NOTIFY_IDLE;
+
+            if (it->HasInt(rsp::i_Option_FrameID))
+                stOption.iFrameID = it->GetInt(rsp::i_Option_FrameID);
+            if (it->HasInt(rsp::i_Option_Notify))
+                stOption.eNotify = static_cast<cmd::Notify>(it->GetInt(rsp::i_Option_Notify));
+
+            vOption.push_back(stOption);
+        }
+        SetOptions(vOption);
+    }
 }
 
 bool FrameWithOption::GetArrawDefaultPosition(data::Position &stPosition) const

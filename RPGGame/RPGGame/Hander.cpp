@@ -42,10 +42,20 @@ void Hander::Notify(const cmd::Notify eNotify, const notify::Notify &oNotify)
 
 void Hander::RegisterCmd(const cmd::Command eCmd)
 {
-	g_App.AddCmdHandle(eCmd,*this);
+	g_App.AddCmdHandle(eCmd, *this);
 }
 
 void Hander::UnRegisterCmd(const cmd::Command eCmd)
 {
-	g_App.RemoveCmdHandle(eCmd,*this);
+	g_App.RemoveCmdHandle(eCmd, *this);
+}
+
+void Hander::RegisterNotify(const cmd::Notify eNotify)
+{
+    g_App.AddNotifyHandle(eNotify, *this);
+}
+
+void Hander::UnRegisterNotify(const cmd::Notify eNotify)
+{
+    g_App.RemoveNotifyHandle(eNotify, *this);
 }

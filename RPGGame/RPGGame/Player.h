@@ -135,13 +135,15 @@ public://-模块数据获取----------------------------------------------------//
     const Container& GetBag()const;
 
 public:
-    SET_GET(int, i, BaseID, m_stPlayerData.stActorData.iID);
+    SET_GET(int,    i, BaseID,      m_stPlayerData.stActorData.iID);
     SET_GET(string, s, BaseName, m_stPlayerData.stActorData.sName);
-    SET_GET(int, i, BaseHp, m_stPlayerData.stActorData.iHp);
-    SET_GET(int, i, BaseMaxHp, m_stPlayerData.stActorData.iMaxHp);
-    SET_GET(int, i, BaseAttack, m_stPlayerData.stActorData.iAttack);
-    SET_GET(int, i, BaseDefance, m_stPlayerData.stActorData.iDefance);
-    SET_GET(int, i, Money, m_stPlayerData.stActorExternData.iMoney);
+    SET_GET(int,    i, BaseHp,      m_stPlayerData.stActorData.iHp);
+    SET_GET(int,    i, BaseMaxHp,   m_stPlayerData.stActorData.iMaxHp);
+    SET_GET(int,    i, BaseAttack,  m_stPlayerData.stActorData.iAttack);
+    SET_GET(int,    i, BaseDefance, m_stPlayerData.stActorData.iDefance);
+    SET_GET(int,    i, Money,       m_stPlayerData.stActorExternData.iMoney);
+    SET_GET(int,    i, Level,       m_stPlayerData.stActorExternData.iLevel);
+    SET_GET(int,    i, Exp,         m_stPlayerData.stActorExternData.iExp);
 protected:
     /*!< 玩家数据 */
     data::PlayerData m_stPlayerData;

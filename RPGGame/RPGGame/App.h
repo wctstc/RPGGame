@@ -61,6 +61,16 @@ public:
 	int Handler(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
 
     /**
+    * @brief 添加通知的处理函数
+    */
+    int AddNotifyHandle(cmd::Notify eNotify, Hander& oManager);
+
+    /**
+    * @brief 移除通知的处理函数
+    */
+    int RemoveNotifyHandle(cmd::Notify eNotify, Hander& oManager);
+
+    /**
     * @brief 处理通知
     */
     void Notify(cmd::Notify eNotify, const notify::Notify &oNotify);

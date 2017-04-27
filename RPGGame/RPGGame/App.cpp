@@ -107,6 +107,26 @@ int App::Handler(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 	return iRet;
 }
 
+int App::AddNotifyHandle(cmd::Notify eNotify, Hander& oManager)
+{
+    m_mmapNotifyToHanders.insert(pair<cmd::Notify, Hander&>(eNotify, oManager));
+    return 0;
+}
+
+int App::RemoveNotifyHandle(cmd::Notify eNotify, Hander& oManager)
+{
+    pair<NotifyMMapIt, NotifyMMapIt> pairFound = m_mmapNotifyToHanders.equal_range(eNotify);
+    for (NotifyMMapIt it = pairFound.first; it != pairFound.second; ++it)
+    {
+        if (&(it->second) == &oManager)
+        {
+            m_mmapNotifyToHanders.erase(it);
+            return 0;
+        }
+    }
+    return -1;
+}
+
 void App::Notify(cmd::Notify eNotify, const notify::Notify &oNotify)
 {
     pair<NotifyMMapIt, NotifyMMapIt> pairFound = m_mmapNotifyToHanders.equal_range(eNotify);

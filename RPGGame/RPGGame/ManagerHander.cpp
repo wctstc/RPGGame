@@ -4,6 +4,8 @@
 #include "ItemManager.h"
 #include "ShopManager.h"
 
+#include "StrUtil.h"
+
 /*!< 玩家实例 */
 #define g_PlayerManger PlayerManager::GetInstance()
 
@@ -39,6 +41,8 @@ bool ManagerHander::Init(Config *pConfig)
     RegisterCmd(cmd::COMMAND_SHOW_SHOP);
     RegisterCmd(cmd::COMMAND_SHOW_SHOP_ITEM);
 
+    RegisterNotify(cmd::NOTIFY_SHOP_BUY);
+
 	return true;
 }
 
@@ -60,9 +64,15 @@ int ManagerHander::Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 	return -1;
 }
 
-void ManagerHander::Handle(const cmd::Notify eCmd, const notify::Notify &oNotify)
+void ManagerHander::Handle(const cmd::Notify eNotify, const notify::Notify &oNotify)
 {
-
+    switch (eNotify)
+    {
+    case cmd::NOTIFY_SHOP_BUY:
+        HandleBuyShopItem(eNotify, oNotify);
+    default:
+        break;
+    }
 }
 
 int ManagerHander::HandleShowBag(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
@@ -150,4 +160,48 @@ int ManagerHander::HandleShowShopItem(cmd::Command eCmd, req::Req &oReq, rsp::Rs
     }
 
     return 0;
+}
+
+void ManagerHander::HandleBuyShopItem(const cmd::Notify eNotify, const notify::Notify &oNotify)
+{
+    //参数检查
+    notify::Notify oRspNotify;
+    if (oNotify.HasInt(notify::i_Index))
+    {
+        oRspNotify.Add(notify::s_TipsFrame_Description, "无选购物品");
+        Notify(cmd::NOTIFY_UPDATE_INFORMATION, oRspNotify);
+        return;
+    }
+
+    //获取商品
+    int i_Index = oNotify.GetInt(notify::i_Index);
+    const ShopManager::VecGoods &vGoods = ShopManager::GetInstance().GetAllGoods();
+    int iSize = vGoods.size();
+    if (i_Index < 0 || i_Index >iSize)
+    {
+        oRspNotify.Add(notify::s_TipsFrame_Description, "选购物品不存在");
+        Notify(cmd::NOTIFY_UPDATE_INFORMATION, oRspNotify);
+        return;
+    }
+
+    //玩家购买
+    const Goods &oGoods = vGoods.at(i_Index);
+    if (!PlayerManager::GetInstance().Buy(oGoods))
+    {
+        oRspNotify.Add(notify::s_TipsFrame_Description, "玩家购买失败");
+        Notify(cmd::NOTIFY_UPDATE_INFORMATION, oRspNotify);
+        return;
+    }
+
+    //回报
+    string sItemName = ItemManager::GetInstance().GetDescriptionByID(oGoods.GetItemID());
+    oRspNotify.Add(
+        notify::s_TipsFrame_Description, 
+        StrUtil::Format(
+            "购买:%s*%d,花费：%d", 
+            sItemName.c_str(),
+            oGoods.GetAmount(),
+            oGoods.GetPrice()));
+    Notify(cmd::NOTIFY_UPDATE_INFORMATION, oRspNotify);
+    return;
 }

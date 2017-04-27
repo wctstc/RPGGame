@@ -17,6 +17,13 @@ void ShopItemFrame::PrepareRsp(const rsp::Rsp &oRsp)
     char buffer[128];
     sprintf(buffer, "name:%s\nprice:%d\nnum:%d", sName.c_str(), iPrice, iNum);
 
-
     SetDescription(buffer);
+
+    vector<data::Option> vOptions;
+    data::Option stOption;
+    stOption.sDescription = "Âò";
+    stOption.eNotify = cmd::NOTIFY_SHOP_BUY;
+    stOption.iFrameID = -1;
+    vOptions.push_back(stOption);
+    SetOptions(vOptions);
 }

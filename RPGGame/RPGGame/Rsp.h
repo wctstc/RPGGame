@@ -17,6 +17,12 @@ namespace rsp
 {
     const string i_RetCode = "i_RetCode";
 
+    const string s_Description        = "s_Description";
+    const string v_Option             = "v_Option";
+    const string s_Option_Description = "s_Option_Description";
+    const string i_Option_FrameID     = "s_Option_FrameID";
+    const string i_Option_Notify      = "i_Option_Notify";
+
     const string v_ShopItem          = "v_ShopItem";
 
     const string i_ShopItem_ItemID   = "i_ShopItem_ItemID";
@@ -29,24 +35,6 @@ namespace rsp
 
 
 
-
-
-
-
-
-
-
-
-    const string i_PropertyFrame_Hp       = "i_PropertyFrame_Hp";
-    const string i_PropertyFrame_MaxHp    = "i_PropertyFrame_MaxHp";
-    const string i_PropertyFrame_Money    = "i_PropertyFrame_Money";
-    const string i_PropertyFrame_Level    = "i_PropertyFrame_Level";
-    const string i_PropertyFrame_Exp      = "i_PropertyFrame_Exp";
-    const string i_PropertyFrame_TotalExp = "i_PropertyFrame_TotalExp";
-    const string i_PropertyFrame_Bag      = "i_PropertyFrame_Bag";
-    const string i_PropertyFrame_TotalBag = "i_PropertyFrame_TotalBag";
-
-    const string s_TipsFrame_Description = "s_TipsFrame_Description";
     /**
     * @brief œÏ”¶¿‡
     */

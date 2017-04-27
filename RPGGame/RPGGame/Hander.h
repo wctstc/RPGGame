@@ -56,14 +56,25 @@ public:
     virtual void Handle(const cmd::Notify eNotify, const notify::Notify &oNotify) = 0;
 protected:
 	/**
-	* @brief 注册处理函数
+	* @brief 注册命令处理函数
 	*/
 	void RegisterCmd(const cmd::Command eCmd);
 
 	/**
-	* @brief 注销处理函数
+	* @brief 注销命令处理函数
 	*/
 	void UnRegisterCmd(const cmd::Command eCmd);
+
+
+    /**
+    * @brief 注册通知处理函数
+    */
+    void RegisterNotify(const cmd::Notify eNotify);
+
+    /**
+    * @brief 注销通知处理函数
+    */
+    void UnRegisterNotify(const cmd::Notify eNotify);
 };
 
 

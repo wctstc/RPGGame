@@ -26,9 +26,10 @@ TestUnit::~TestUnit()
 void TestUnit::Run()
 {
     //TEST(TestStrUtilSplit);
+    TEST(TestStrUtilFormat);
     //TEST(TestPointer);
     //TEST(TestFrame);
-    TEST(TestPropertyFrame);
+    //TEST(TestPropertyFrame);
 
 
 
@@ -47,6 +48,12 @@ bool TestUnit::TestStrUtilSplit()
     {
         cout << (*it).c_str() << endl;
     }
+    return true;
+}
+
+bool TestUnit::TestStrUtilFormat()
+{
+    cout << StrUtil::Format("abc%d,%d,%s",10,23,"asdf").c_str() << endl;
     return true;
 }
 

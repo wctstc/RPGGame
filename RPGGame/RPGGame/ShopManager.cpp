@@ -46,6 +46,7 @@ bool ShopManager::GetGoods(const int iIndex, Goods &stGoods) const
 }
 
 bool ShopManager::SellGoods(const int iPrice, const int iGoodID)
+
 {
     for (VecGoodsIt it = m_vGoods.begin();it != m_vGoods.end(); ++it)
     {

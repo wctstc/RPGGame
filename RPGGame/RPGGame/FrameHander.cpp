@@ -27,6 +27,8 @@ bool FrameHander::Init(Config *pConfig)
 	RegisterCmd(cmd::COMMAND_IDLE);
 	RegisterCmd(cmd::COMMAND_START);
 
+    RegisterNotify(cmd::NOTIFY_UPDATE_PROPERTY);
+    RegisterNotify(cmd::NOTIFY_UPDATE_INFORMATION);
 	return true;
 }
 
@@ -79,17 +81,14 @@ int FrameHander::HandleStart(req::Req &oReq)
 
 	while (bIsRuning)
     {
-        int iFrameID;
-        int iIndex;
-
 		pFrame = m_lsFrames.back();
 		pFrame->Show();
 
-        iIndex = pFrame->GetSelectIndex();
+        int iIndex = pFrame->GetSelectIndex();
 		
-		//没有选中
 		if (iIndex < 0 )
 		{
+		    //取消选择
             if (m_lsFrames.size() <= 1)
                 continue;
 
@@ -99,6 +98,7 @@ int FrameHander::HandleStart(req::Req &oReq)
 		}
         else
         {
+            //选中后通知处理
             data::Option  stOption;
             pFrame->GetOptionByIndex(iIndex, stOption);
             if (stOption.eNotify != cmd::COMMAND_IDLE)
@@ -108,7 +108,7 @@ int FrameHander::HandleStart(req::Req &oReq)
                 Notify(stOption.eNotify, oNotify);
             }
 
-
+            //选中后框处理
             if (stOption.iFrameID != -1)
             {
                 pFrame = FrameLoader::GetInstance().GetFrameByID(stOption.iFrameID);
@@ -123,39 +123,9 @@ int FrameHander::HandleStart(req::Req &oReq)
                      
                     //入栈
                     m_lsFrames.push_back(pFrame);
-                    break;
-
                 }
             }
         }
-
-
-
-//         }
-//             if (pFrame == NULL)
-//             {
-//                 //选中选项无后续菜单
-//                 m_lsFrames.pop_back();
-//                 oFrameLoader.ReleaseFrame(pFrame);
-//                 pFrame = NULL;
-//                 break;
-//             }
-//         }
-// 			//选中选项有后续菜单
-// 			else
-// 			{
-// 				req::Req oReq;
-// 				rsp::Rsp oRsp;
-// 				//请求数据;
-// 				pFrame->PrepareReq(iSelected, oReq);
-//                 Forword(oReq.GetCmd(), oReq, oRsp);
-// 				pFrame->PrepareRsp(oRsp);
-// 
-// 				//入栈
-// 				m_lsFrames.push_back(pFrame);
-// 				break;
-// 			}
-// 		} while (false);
 	}
 
 	return 0;
@@ -179,27 +149,30 @@ void FrameHander::Handle(const cmd::Notify eNotify, const notify::Notify &oNotif
     case cmd::NOTIFY_UPDATE_PROPERTY:
     {
         PropertyFrame &oPropertyFrame = PropertyFrame::GetInstance();
-        if (oNotify.HasInt(rsp::i_PropertyFrame_Hp))
-            oPropertyFrame.SetHp(oNotify.GetInt(rsp::i_PropertyFrame_Hp));
-        if (oNotify.HasInt(rsp::i_PropertyFrame_MaxHp))
-            oPropertyFrame.SetMaxHp(oNotify.GetInt(rsp::i_PropertyFrame_MaxHp));
-        if (oNotify.HasInt(rsp::i_PropertyFrame_Money))
-            oPropertyFrame.SetMoney(oNotify.GetInt(rsp::i_PropertyFrame_Money));
-        if (oNotify.HasInt(rsp::i_PropertyFrame_Level))
-            oPropertyFrame.SetLevel(oNotify.GetInt(rsp::i_PropertyFrame_Level));
-        if (oNotify.HasInt(rsp::i_PropertyFrame_Exp))
-            oPropertyFrame.SetExp(oNotify.GetInt(rsp::i_PropertyFrame_Exp));
-        if (oNotify.HasInt(rsp::i_PropertyFrame_TotalExp))
-            oPropertyFrame.SetTotalExp(oNotify.GetInt(rsp::i_PropertyFrame_TotalExp));
-        if (oNotify.HasInt(rsp::i_PropertyFrame_Bag))
-            oPropertyFrame.SetBag(oNotify.GetInt(rsp::i_PropertyFrame_Bag));
-        if (oNotify.HasInt(rsp::i_PropertyFrame_Bag))
-            oPropertyFrame.SetTotalBag(oNotify.GetInt(rsp::i_PropertyFrame_TotalBag));
+        if (oNotify.HasInt(notify::i_PropertyFrame_Hp))
+            oPropertyFrame.SetHp(oNotify.GetInt(notify::i_PropertyFrame_Hp));
+        if (oNotify.HasInt(notify::i_PropertyFrame_MaxHp))
+            oPropertyFrame.SetMaxHp(oNotify.GetInt(notify::i_PropertyFrame_MaxHp));
+        if (oNotify.HasInt(notify::i_PropertyFrame_Money))
+            oPropertyFrame.SetMoney(oNotify.GetInt(notify::i_PropertyFrame_Money));
+        if (oNotify.HasInt(notify::i_PropertyFrame_Level))
+            oPropertyFrame.SetLevel(oNotify.GetInt(notify::i_PropertyFrame_Level));
+        if (oNotify.HasInt(notify::i_PropertyFrame_Exp))
+            oPropertyFrame.SetExp(oNotify.GetInt(notify::i_PropertyFrame_Exp));
+        if (oNotify.HasInt(notify::i_PropertyFrame_TotalExp))
+            oPropertyFrame.SetTotalExp(oNotify.GetInt(notify::i_PropertyFrame_TotalExp));
+        if (oNotify.HasInt(notify::i_PropertyFrame_Bag))
+            oPropertyFrame.SetBag(oNotify.GetInt(notify::i_PropertyFrame_Bag));
+        if (oNotify.HasInt(notify::i_PropertyFrame_Bag))
+            oPropertyFrame.SetTotalBag(oNotify.GetInt(notify::i_PropertyFrame_TotalBag));
+        oPropertyFrame.Update();
+
         break;
     }
     case cmd::NOTIFY_UPDATE_INFORMATION:
         TipsFrame &oTipsFrame = TipsFrame::GetInstance();
-        oTipsFrame.SetDescription(oNotify.GetString(rsp::s_TipsFrame_Description));
+        oTipsFrame.SetDescription(oNotify.GetString(notify::s_TipsFrame_Description));
+        oTipsFrame.Show();
         break;
     }
 

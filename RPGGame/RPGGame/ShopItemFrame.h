@@ -20,5 +20,4 @@ public:
 };
 
 #endif // __SHOPITEMFRAME_H__
-#include "FrameWithOption.h"
 

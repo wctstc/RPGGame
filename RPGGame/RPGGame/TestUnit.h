@@ -18,6 +18,7 @@ public:
     void Run();
 private:
     bool TestStrUtilSplit();
+    bool TestStrUtilFormat();
     bool TestPointer();
     bool TestFrame();
     bool TestPropertyFrame();

@@ -51,10 +51,13 @@ private:
     */
     int HandleShowShopItem(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
 
+
+
+
     /**
     * @brief ¬Ú…Ã∆∑
     */
-    int HandleBuyShopItem(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
+    void HandleBuyShopItem(const cmd::Notify eNotify,const notify::Notify &oNotify);
 
 };
 
