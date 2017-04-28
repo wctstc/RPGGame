@@ -28,6 +28,11 @@ public:
       * @brief 买东西
       */
     bool Buy( const Goods &oGoods );
+
+    /**
+     * @brief 获取玩家
+     */
+    const Player & GetPlayer();
 private:
 	/*!< 玩家 */
 	Player m_oPlayer;

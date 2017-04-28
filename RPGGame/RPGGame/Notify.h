@@ -19,6 +19,7 @@ namespace notify
 {
 
     const string i_Index = "i_Index";
+    const string i_DataID = "i_DataID";
 
 
 
@@ -56,47 +57,47 @@ namespace notify
         /**
         * @brief 添加整型参数
         */
-        void Add(string sKey, int iValue);
+        void Add(const string sKey, const int iValue);
 
         /**
         * @brief 添加字符串参数
         */
-        void Add(string sKey, string sValue);
+        void Add(const string sKey, const string sValue);
 
         /**
         * @brief 添加数组参数
         */
-        void Add(string sKey, vector<Notify> vValue);
+        void Add(const string sKey, const vector<Notify> vValue);
 
         /**
         * @brief 获取指定整型参数
         */
-        const int GetInt(string sKey)const;
+        const int GetInt(const string sKey)const;
 
         /**
         * @brief 获取指定字符串参数
         */
-        const string GetString(string sKey)const;
+        const string GetString(const string sKey)const;
 
         /**
         * @brief 获取指定数组参数
         */
-        const vector<Notify> GetVector(string sKey)const;
+        const vector<Notify> GetVector(const string sKey)const;
 
         /**
         * @brief 是否有指定整型参数
         */
-        const bool HasInt(string sKey)const;
+        const bool HasInt(const string sKey)const;
 
         /**
         * @brief 是否有指定字符串参数
         */
-        const bool HasString(string sKey)const;
+        const bool HasString(const string sKey)const;
 
         /**
         * @brief 是否有指定数组参数
         */
-        const bool HasVector(string sKey)const;
+        const bool HasVector(const string sKey)const;
     private:
         /*!< 指令 */
         cmd::Command m_eCmd;

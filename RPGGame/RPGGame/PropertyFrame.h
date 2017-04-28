@@ -19,7 +19,7 @@ public:
     /**
     * @brief ≥ı ºªØ
     */
-    virtual bool Init(const data::FrameData &oFrameData);
+    virtual bool Init();
 
 
 public:

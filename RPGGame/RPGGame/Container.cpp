@@ -19,7 +19,7 @@ Container::Container(const int iID, const int iCapacity)
         stUnit.iID              = i;
         stUnit.iItemID          = 0;
         stUnit.iItemNum         = 0;
-        stUnit.iItemMaxCapacity = g_iUnitMaxCapacity;
+        stUnit.iUnitCapacity = g_iUnitMaxCapacity;
 
         m_vContainerUnits.push_back(stUnit);
     }
@@ -41,7 +41,7 @@ bool Container::Init(const int iID, const int iCapacity)
         stUnit.iID = i;
         stUnit.iItemID = 0;
         stUnit.iItemNum = 0;
-        stUnit.iItemMaxCapacity = g_iUnitMaxCapacity;
+        stUnit.iUnitCapacity = g_iUnitMaxCapacity;
 
         m_vContainerUnits.push_back(stUnit);
     }
@@ -49,7 +49,7 @@ bool Container::Init(const int iID, const int iCapacity)
     return true;
 }
 
-int Container::GetUnitMaxCapacity() const
+int Container::GetUnitCapacity() const
 {
     return g_iUnitMaxCapacity;
 }
@@ -86,7 +86,7 @@ void Container::AddForce(const int iItemID, const int iNumber)
     {
         if (it->iItemID == iItemID)//可叠加格子
         {
-            if (it->iItemMaxCapacity >= it->iItemNum + iLeft)
+            if (it->iUnitCapacity >= it->iItemNum + iLeft)
             {
                 //放在叠加格子
                 it->iItemNum += iLeft;
@@ -95,8 +95,8 @@ void Container::AddForce(const int iItemID, const int iNumber)
             else
             {
                 //叠加格子不够放
-                iLeft -= it->iItemMaxCapacity - it->iItemNum;
-                it->iItemNum = it->iItemMaxCapacity;
+                iLeft -= it->iUnitCapacity - it->iItemNum;
+                it->iItemNum = it->iUnitCapacity;
             }
         }
     }
@@ -107,7 +107,7 @@ void Container::AddForce(const int iItemID, const int iNumber)
         if (it->iItemNum <= 0)
         {
             it->iItemID = iItemID;
-            if (iLeft < it->iItemMaxCapacity)
+            if (iLeft < it->iUnitCapacity)
             {
                 //空格子够放
                 it->iItemNum = iLeft;
@@ -116,8 +116,8 @@ void Container::AddForce(const int iItemID, const int iNumber)
             else
             {
                 //空格子不够放
-                iLeft -= it->iItemMaxCapacity;
-                it->iItemNum = it->iItemMaxCapacity;
+                iLeft -= it->iUnitCapacity;
+                it->iItemNum = it->iUnitCapacity;
             }
         }
     }
@@ -134,9 +134,9 @@ bool Container::CanAdd(int iItemID, int iNumber) const
     for (;it != m_vContainerUnits.rend(); ++it)
     {
         if (it->iItemID == iItemID)//可叠加格子
-            iLeft -= (it->iItemMaxCapacity - it->iItemNum);
+            iLeft -= (it->iUnitCapacity - it->iItemNum);
         else if( it->iItemNum == 0 )//空格子
-            iLeft -= it->iItemMaxCapacity;
+            iLeft -= it->iUnitCapacity;
 
         if (iLeft <= 0)
             return true;
@@ -162,7 +162,7 @@ void Container::RemoveForce(const int iItemID, const int iNumber)
     it = m_vContainerUnits.begin();
     for (; it != m_vContainerUnits.end(); ++it)
     {
-        if (it->iItemID == iItemID && it->iItemNum != it->iItemMaxCapacity)
+        if (it->iItemID == iItemID && it->iItemNum != it->iUnitCapacity)
         {
             if (it->iItemNum > iLeft)
             {
@@ -182,7 +182,7 @@ void Container::RemoveForce(const int iItemID, const int iNumber)
     it = m_vContainerUnits.begin();
     for (; it != m_vContainerUnits.end(); ++it)
     {
-        if (it->iItemID == iItemID && it->iItemNum == it->iItemMaxCapacity)
+        if (it->iItemID == iItemID && it->iItemNum == it->iUnitCapacity)
         {
             if (it->iItemNum > iLeft)
             {
@@ -201,7 +201,7 @@ void Container::RemoveForce(const int iItemID, const int iNumber)
 
 bool Container::CanRemove(const int iItemID, const int iNumber)
 {
-    int iCount = GetItemNum(iItemID);
+    int iCount = GetItemNumByItemID(iItemID);
 
     if (iCount >= iNumber)
         return true;
@@ -215,7 +215,14 @@ int Container::GetItemID(const int iIndex)const
 	return 0;
 }
 
-int Container::GetItemNum(const int iItemID)const
+int Container::GetItemNum(const int iIndex) const
+{
+    if (iIndex >= 0 && iIndex < m_stContainerData.iCapacity)
+        return m_vContainerUnits[iIndex].iItemNum;
+    return 0;
+}
+
+int Container::GetItemNumByItemID(const int iItemID)const
 {
     int iCount = 0;
 

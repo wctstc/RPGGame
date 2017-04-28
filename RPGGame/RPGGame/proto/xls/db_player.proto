@@ -1,0 +1,156 @@
+
+package db;
+
+/***********************************************/
+
+/** 物品 */
+message ItemData
+{
+	/** 编号 */
+	required int32 ID = 1;
+	
+	/** 类型 */
+	required int32 Type = 2;
+	
+	/** 名字 */
+	required string Name = 3;
+	
+	/** 描述 */
+	required string Descripition = 4;
+}
+
+/** 装备 */
+message EquipmentData
+{
+	/** 物品 */
+	required ItemData Item = 1;
+	
+	/** 类型 */
+	required int Type = 2;
+	
+	/** 附加生命上限 */
+	required int MaxHp = 3;
+	
+	/** 附加攻击力 */
+	required int Attack = 4;
+	
+	/** 附加防御力 */
+	required int Defance = 5;
+}
+
+/***********************************************/
+message GoodsData
+{
+	/** 商品编号 */
+	int iID;
+
+	/** 物品编号 */
+	int iItemID;
+	
+	/** 购买价格 */
+	int iPrice;
+}
+message ShopData
+{
+	/** 商店编号 */
+	required int iID;
+
+	/** 物品编号 */
+	repeated int iGoodsID;
+}
+
+/***********************************************/
+
+message UnitData
+{
+	/** 编号 */
+	required int32 ID = 1;
+	
+	/** 物品编号 */
+	required int32 ItemID = 2;
+	
+	/** 数量 */
+	required int32 ItemNum = 3;
+	
+	/** 数量 */
+	required int32 ItemNum = 3;
+}
+
+message ContainerData
+{
+  /** 编号 */
+  required int32 ID = 1;
+
+	/** 单元格 */
+	repeated UnitData UnitData = 2;
+
+  /** 容量 */
+  int iCapacity;
+  
+}
+
+
+
+
+
+
+/***********************************************/
+
+/** 行动者 */
+message ActorData
+{
+	/** 编号 */
+	required int32 iID = 1;
+	
+	/** 名字 */
+	required string sName = 2;
+	
+	/** 等级 */
+	required int iLevel = 3;
+	
+	/** 生命 */
+	required int32 iHp = 4;
+	
+	/** 生命上限 */
+	required int32 iMaxHp = 5;
+	
+	/** 攻击力 */
+	required int32 iAttack = 6;
+	
+	/** 防御力 */
+	required int32 iDefance = 7;
+}
+
+/** 玩家 */
+message PlayerData
+{
+	/** 行动者 */
+	required ActorData ActorData;
+
+	/** 钱 */
+	required int iMoney;
+	
+	/** 当前获得经验 */
+	required int iExp;
+	
+	/** 下一级所需经验 */
+	required int iTotalExp;
+}
+
+/***********************************************/
+
+
+///////////////////////////////////////////
+
+message PlayerData
+{
+}
+
+message Player
+{
+	
+}
+
+message ITEMArray {
+    repeated ITEM items = 1;
+}

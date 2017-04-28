@@ -22,6 +22,7 @@ namespace rsp
     const string s_Option_Description = "s_Option_Description";
     const string i_Option_FrameID     = "s_Option_FrameID";
     const string i_Option_Notify      = "i_Option_Notify";
+    const string i_Option_DataID      = "i_Option_DataID";
 
     const string v_ShopItem          = "v_ShopItem";
 

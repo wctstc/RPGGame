@@ -25,9 +25,8 @@ bool ItemLoader::Init()
 	file = fopen("proto/data/dataconfig_item.data", "rb");
 	if (file == NULL)
 		return 0;
-	char buffer[1024];
-	int length = fread(buffer, 1, 1024, file);
-	printf("length:%d", length);
+	char buffer[10240];
+	int length = fread(buffer, 1, 10240, file);
 
 	ayItems.ParseFromArray(buffer, length);
 

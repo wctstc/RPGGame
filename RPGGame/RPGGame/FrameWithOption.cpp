@@ -21,10 +21,16 @@ bool FrameWithOption::Init(const data::FrameData &oFrameData)
 void FrameWithOption::PrepareReq(const int iIndex, req::Req &oReq)
 {
     oReq.Init(cmd::COMMAND_IDLE);
+    oReq.Add(req::i_Index, iIndex);
+    oReq.Add(req::i_DataID, GetDataID());
 }
 
 void FrameWithOption::PrepareRsp(const rsp::Rsp &oRsp)
 {
+    if (!oRsp.HasInt(rsp::i_RetCode) && oRsp.GetInt(rsp::i_RetCode) != rsp::Rsp::RETCODE_SUCCEED)
+        return;
+
+
     if (oRsp.HasString(rsp::s_Description))
         SetDescription(oRsp.GetString(rsp::s_Description));
 
@@ -39,11 +45,14 @@ void FrameWithOption::PrepareRsp(const rsp::Rsp &oRsp)
             stOption.sDescription = it->GetString(rsp::s_Option_Description);
             stOption.iFrameID = -1;
             stOption.eNotify = cmd::NOTIFY_IDLE;
+            stOption.iDataID = 0;
 
             if (it->HasInt(rsp::i_Option_FrameID))
                 stOption.iFrameID = it->GetInt(rsp::i_Option_FrameID);
             if (it->HasInt(rsp::i_Option_Notify))
                 stOption.eNotify = static_cast<cmd::Notify>(it->GetInt(rsp::i_Option_Notify));
+            if (it->HasInt(rsp::i_Option_DataID))
+                stOption.iDataID = it->GetInt(rsp::i_Option_DataID);
 
             vOption.push_back(stOption);
         }

@@ -18,6 +18,7 @@ using std::pair;
 namespace req
 {
     const static string i_Index = "i_Index";
+    const static string i_DataID = "i_DataID";
 
 
     /**

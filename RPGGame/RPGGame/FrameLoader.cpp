@@ -7,8 +7,8 @@ bool FrameLoader::Init()
 	file = fopen("proto/data/dataconfig_frame.data", "rb");
 	if (file == NULL)
 		return 0;
-	char buffer[1024];
-	int length = fread(buffer, 1, 1024, file);
+	char buffer[10240];
+	int length = fread(buffer, 1, 10240, file);
 	printf("length:%d", length);
 
 	ayFrames.ParseFromArray(buffer, length);
@@ -37,6 +37,7 @@ bool FrameLoader::Init()
 		{
 			oOptionData.sDescription = platform::UTF_82ASCII(pFrameConfig->option(j).description());
 			oOptionData.iFrameID = pFrameConfig->option(j).frame_id();
+            oOptionData.eNotify = static_cast<cmd::Notify>(pFrameConfig->option(j).notify());
 			vOptions.push_back(oOptionData);
 		}
 		oFrameData.vOptions = vOptions;

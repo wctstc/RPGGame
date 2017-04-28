@@ -166,6 +166,7 @@
     <ClInclude Include="BagFrame.h" />
     <ClInclude Include="Cmd.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="ContainerData.h" />
     <ClInclude Include="Equipment.h" />
     <ClInclude Include="Frame.h" />
     <ClInclude Include="FrameStruct.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="FrameLoader.h" />
     <ClInclude Include="FrameHander.h" />
     <ClInclude Include="Goods.h" />
+    <ClInclude Include="ItemData.h" />
     <ClInclude Include="ManagerData.h" />
     <ClInclude Include="ManagerHander.h" />
     <ClInclude Include="Item.h" />
@@ -183,6 +185,7 @@
     <ClInclude Include="ArrowManager.h" />
     <ClInclude Include="Notify.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerData.h" />
     <ClInclude Include="PlayerLoader.h" />
     <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="Pointer.h" />

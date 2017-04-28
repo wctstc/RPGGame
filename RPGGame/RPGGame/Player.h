@@ -4,6 +4,7 @@
 #include "Struct.h"
 #include "Container.h"
 #include "Equipment.h"
+#include "Goods.h"
 
 /**
 * @brief 玩家类
@@ -66,23 +67,23 @@ public://-操作----------------------------------------------------//
     int Attack();
 
     /**
-    * @brief 判断是否死亡
-    */
+     * @brief 判断是否死亡
+     */
     bool IsDie();
 
     /**
-    * @brief 添加到背包
-    */
+     * @brief 添加到背包
+     */
     bool AddItemToBag(const int iItemID, const int iNumber);
 
     /**
-    * @brief 添加到背包，多出来的丢弃
-    */
+     * @brief 添加到背包，多出来的丢弃
+     */
     void AddItemToBagFocus(const int iItemID, const int iNumber);
 
     /**
-    * @brief 是否可以添加到背包
-    */
+     * @brief 是否可以添加到背包
+     */
     bool CanAddItemToBag(const int iItemID, const int iNumber);
 
     /**
@@ -90,42 +91,45 @@ public://-操作----------------------------------------------------//
      */
     bool Pay(const int iMoney);
 
-
+    /**
+     * @brief 买东西
+     */
+    bool Buy(const Goods &oGoods);
 public://-基本属性获取----------------------------------------------------//
-       /**
-       * @brief 获取总生命
-       */
-    int GetHp();
+    /**
+     * @brief 获取总生命
+     */
+    int GetHp()const;
 
     /**
     * @brief 获取总生命上限
     */
-    int GetMaxHp();
+    int GetMaxHp()const;
 
     /**
     * @brief 获取总攻击力
     */
-    int GetAttack();
+    int GetAttack()const;
 
     /**
     * @brief 获取总防御力
     */
-    int GetDefance();
+    int GetDefance()const;
 
     /**
     * @brief 获取加成的生命上限
     */
-    int GetExtendMaxHp();
+    int GetExtendMaxHp()const;
 
     /**
      * @brief 获取加成的攻击力
      */
-    int GetExtendAttack();
+    int GetExtendAttack()const;
 
     /**
      * @brief 获取加成的防御力
      */
-    int GetExtendDefance();
+    int GetExtendDefance()const;
 
 
 public://-模块数据获取----------------------------------------------------//
@@ -135,8 +139,8 @@ public://-模块数据获取----------------------------------------------------//
     const Container& GetBag()const;
 
 public:
-    SET_GET(int,    i, BaseID,      m_stPlayerData.stActorData.iID);
-    SET_GET(string, s, BaseName, m_stPlayerData.stActorData.sName);
+    SET_GET(int,    i, ID,          m_stPlayerData.stActorData.iID);
+    SET_GET(string, s, Name,        m_stPlayerData.stActorData.sName);
     SET_GET(int,    i, BaseHp,      m_stPlayerData.stActorData.iHp);
     SET_GET(int,    i, BaseMaxHp,   m_stPlayerData.stActorData.iMaxHp);
     SET_GET(int,    i, BaseAttack,  m_stPlayerData.stActorData.iAttack);
@@ -144,6 +148,7 @@ public:
     SET_GET(int,    i, Money,       m_stPlayerData.stActorExternData.iMoney);
     SET_GET(int,    i, Level,       m_stPlayerData.stActorExternData.iLevel);
     SET_GET(int,    i, Exp,         m_stPlayerData.stActorExternData.iExp);
+    SET_GET(int,    i, TotalExp,    m_stPlayerData.stActorExternData.iTotalExp);
 protected:
     /*!< 玩家数据 */
     data::PlayerData m_stPlayerData;

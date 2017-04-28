@@ -153,9 +153,6 @@
     <ClCompile Include="ManagerHander.cpp">
       <Filter>Game\Hander</Filter>
     </ClCompile>
-    <ClCompile Include="ArrowManager.cpp">
-      <Filter>Game\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="ShopFrame.cpp">
       <Filter>Game\UI\Frame\FrameWithOption\ShopFrame</Filter>
     </ClCompile>
@@ -194,6 +191,9 @@
     </ClCompile>
     <ClCompile Include="Notify.cpp">
       <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="ArrowManager.cpp">
+      <Filter>Game\UI\Frame</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -275,9 +275,6 @@
     <ClInclude Include="ManagerHander.h">
       <Filter>Game\Hander</Filter>
     </ClInclude>
-    <ClInclude Include="ArrowManager.h">
-      <Filter>Game\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="Pointer.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -325,6 +322,18 @@
     </ClInclude>
     <ClInclude Include="Notify.h">
       <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="ArrowManager.h">
+      <Filter>Game\UI\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerData.h">
+      <Filter>Game\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemData.h">
+      <Filter>Game\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ContainerData.h">
+      <Filter>Game\Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

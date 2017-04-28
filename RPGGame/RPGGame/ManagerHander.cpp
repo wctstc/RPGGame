@@ -46,6 +46,22 @@ bool ManagerHander::Init(Config *pConfig)
 	return true;
 }
 
+int ManagerHander::Start()
+{
+    const Player &oPlayer = g_PlayerManger.GetPlayer();
+    notify::Notify oPropertyNotify;
+    oPropertyNotify.Add(notify::i_PropertyFrame_Hp,       oPlayer.GetHp());
+    oPropertyNotify.Add(notify::i_PropertyFrame_MaxHp,    oPlayer.GetMaxHp());
+    oPropertyNotify.Add(notify::i_PropertyFrame_Money,    oPlayer.GetMoney());
+    oPropertyNotify.Add(notify::i_PropertyFrame_Level,    oPlayer.GetLevel());
+    oPropertyNotify.Add(notify::i_PropertyFrame_Exp,      oPlayer.GetExp());
+    oPropertyNotify.Add(notify::i_PropertyFrame_TotalExp, oPlayer.GetTotalExp());
+    oPropertyNotify.Add(notify::i_PropertyFrame_Bag,      oPlayer.GetBag().GetUsedCapacity());
+    oPropertyNotify.Add(notify::i_PropertyFrame_TotalBag, oPlayer.GetBag().GetCapacity());
+    Notify(cmd::NOTIFY_UPDATE_PROPERTY, oPropertyNotify);
+    return 0;
+}
+
 int ManagerHander::Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 {
 	switch (eCmd)
@@ -77,30 +93,37 @@ void ManagerHander::Handle(const cmd::Notify eNotify, const notify::Notify &oNot
 
 int ManagerHander::HandleShowBag(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 {
-	const Container &bag = g_PlayerManger.GetBag();
-
-	vector<rsp::Rsp> vRsps;
-	for (int i = 0; i < bag.GetCapacity(); ++i)
-	{
-        int iItemID = bag.GetItemID(i);
-        if (iItemID!=0)
-        {
-            rsp::Rsp tmp;
-            tmp.Add("id", iItemID);
-            tmp.Add("description", g_ItemManager.GetDescriptionByID(iItemID));
-		    vRsps.push_back(tmp);
-        }
-
-	}
-    if (vRsps.size() == 0)
+	const Container &oBag = g_PlayerManger.GetPlayer().GetBag();
+    if (oBag.GetUsedCapacity() <= 0)
     {
         oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_NO_ITEM);
+        return 0;
     }
-    else
-    {
-        oRsp.Add(rsp::i_RetCode, 0);
-        oRsp.Add("bag", vRsps);
-    }
+
+
+	vector<rsp::Rsp> vRspOption;
+	for (int i = 0; i < oBag.GetCapacity(); ++i)
+	{
+        int iItemID = oBag.GetItemID(i);
+        if (iItemID!=0)
+        {
+            string sItemDescription = g_ItemManager.GetDescriptionByID(iItemID);
+
+            rsp::Rsp oRspOption;
+            oRspOption.Add(
+                rsp::s_Option_Description, 
+                StrUtil::Format(
+                    "%s*%d",
+                    sItemDescription.c_str(),
+                    oBag.GetItemNum(iItemID)));
+            oRspOption.Add(rsp::i_Option_FrameID,     2110000);
+            oRspOption.Add(rsp::i_Option_Notify,      cmd::NOTIFY_IDLE);
+            oRspOption.Add(rsp::i_Option_DataID,      iItemID);
+            vRspOption.push_back(oRspOption);
+        }
+	}
+    oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_SUCCEED);
+    oRsp.Add(rsp::v_Option, vRspOption);
 
 	return 0;
 }
@@ -108,7 +131,7 @@ int ManagerHander::HandleShowBag(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oR
 int ManagerHander::HandleShowItem(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 {
 	int iSelected = oReq.GetInt("selected");
-	const Container &bag = g_PlayerManger.GetBag();
+	const Container &bag = g_PlayerManger.GetPlayer().GetBag();
 	int iID = bag.GetItemID(iSelected);
 	string sDescription = g_ItemManager.GetDescriptionByID(iID);
 
@@ -122,17 +145,21 @@ int ManagerHander::HandleShowShop(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &o
     ShopManager &oShopManager = ShopManager::GetInstance();
     int iSize = oShopManager.GetNumberOfGoodsCategory();
 
-    vector<rsp::Rsp> vRsp;
+    vector<rsp::Rsp> vRspOption;
     for (int i = 0; i < iSize; ++i)
     {
-        rsp::Rsp stRspShopItem;
-        stRspShopItem.Add(rsp::i_ShopItem_ItemID,oShopManager.GetGoodsItemID(i));
-        stRspShopItem.Add(rsp::i_ShopItem_Amount,oShopManager.GetGoodsAmount(i));
-        stRspShopItem.Add(rsp::i_ShopItem_Price, oShopManager.GetGoodsPrice(i));
-        vRsp.push_back(stRspShopItem);
+        rsp::Rsp oRspOption;
+        int iItemID = oShopManager.GetGoodsItemID(i);
+        string sItemDescription = ItemManager::GetInstance().GetDescriptionByID(iItemID);
+
+        oRspOption.Add(rsp::s_Option_Description, sItemDescription);
+        oRspOption.Add(rsp::i_Option_FrameID,     1210000);
+        oRspOption.Add(rsp::i_Option_Notify,      cmd::NOTIFY_IDLE);
+        oRspOption.Add(rsp::i_Option_DataID,      i);
+        vRspOption.push_back(oRspOption);
     }
+    oRsp.Add(rsp::v_Option, vRspOption);
     oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_SUCCEED);
-    oRsp.Add(rsp::v_ShopItem, vRsp);
     return 0;
 }
 
@@ -144,15 +171,18 @@ int ManagerHander::HandleShowShopItem(cmd::Command eCmd, req::Req &oReq, rsp::Rs
 
     int iNum = oShopManager.GetNumberOfGoodsCategory();
 
-    if (iNum > iIndex)
+    Goods oGoods;
+    if (oShopManager.GetGoods(iIndex, oGoods))
     {
-        int iItemID = oShopManager.GetGoodsItemID(iIndex);
-        const ItemData stItemData = ItemLoader::GetInstance().GetItemDataByID(iItemID);
+        string sDescription = ItemManager::GetInstance().GetDescriptionByID(oGoods.GetItemID());
 
-        oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_SUCCEED);
-        oRsp.Add(rsp::s_ItemDescription, stItemData.sDescription);
-        oRsp.Add(rsp::i_ShopItem_Price, oShopManager.GetGoodsPrice(iIndex));
-        oRsp.Add(rsp::i_ShopItem_Amount, oShopManager.GetGoodsAmount(iIndex));
+        oRsp.Add(
+            rsp::s_Description, 
+            StrUtil::Format(
+                "商品：%s\n价格：%d个%d块钱\n",
+                sDescription.c_str(),
+                oGoods.GetAmount(),
+                oGoods.GetPrice()));
     }
     else
     {
@@ -165,43 +195,50 @@ int ManagerHander::HandleShowShopItem(cmd::Command eCmd, req::Req &oReq, rsp::Rs
 void ManagerHander::HandleBuyShopItem(const cmd::Notify eNotify, const notify::Notify &oNotify)
 {
     //参数检查
-    notify::Notify oRspNotify;
-    if (oNotify.HasInt(notify::i_Index))
+    notify::Notify oInfoNotify;
+    if (!oNotify.HasInt(notify::i_DataID))
     {
-        oRspNotify.Add(notify::s_TipsFrame_Description, "无选购物品");
-        Notify(cmd::NOTIFY_UPDATE_INFORMATION, oRspNotify);
+        oInfoNotify.Add(notify::s_TipsFrame_Description, "无选购物品");
+        Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
         return;
     }
 
     //获取商品
-    int i_Index = oNotify.GetInt(notify::i_Index);
+    int iShopIndex = oNotify.GetInt(notify::i_DataID);
     const ShopManager::VecGoods &vGoods = ShopManager::GetInstance().GetAllGoods();
     int iSize = vGoods.size();
-    if (i_Index < 0 || i_Index >iSize)
+    if (iShopIndex < 0 || iShopIndex >iSize)
     {
-        oRspNotify.Add(notify::s_TipsFrame_Description, "选购物品不存在");
-        Notify(cmd::NOTIFY_UPDATE_INFORMATION, oRspNotify);
+        oInfoNotify.Add(notify::s_TipsFrame_Description, "选购物品不存在");
+        Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
         return;
     }
 
     //玩家购买
-    const Goods &oGoods = vGoods.at(i_Index);
-    if (!PlayerManager::GetInstance().Buy(oGoods))
+    const Goods &oGoods = vGoods.at(iShopIndex);
+    if (!g_PlayerManger.Buy(oGoods))
     {
-        oRspNotify.Add(notify::s_TipsFrame_Description, "玩家购买失败");
-        Notify(cmd::NOTIFY_UPDATE_INFORMATION, oRspNotify);
+        oInfoNotify.Add(notify::s_TipsFrame_Description, "玩家购买失败");
+        Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
         return;
     }
 
     //回报
     string sItemName = ItemManager::GetInstance().GetDescriptionByID(oGoods.GetItemID());
-    oRspNotify.Add(
+    oInfoNotify.Add(
         notify::s_TipsFrame_Description, 
         StrUtil::Format(
             "购买:%s*%d,花费：%d", 
             sItemName.c_str(),
             oGoods.GetAmount(),
             oGoods.GetPrice()));
-    Notify(cmd::NOTIFY_UPDATE_INFORMATION, oRspNotify);
+
+    Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
+
+    notify::Notify oPropertyNotify;
+    const Player &oPlayer = g_PlayerManger.GetPlayer();
+    oPropertyNotify.Add(notify::i_PropertyFrame_Money, oPlayer.GetMoney());
+    oPropertyNotify.Add(notify::i_PropertyFrame_Bag, oPlayer.GetBag().GetUsedCapacity());
+    Notify(cmd::NOTIFY_UPDATE_PROPERTY, oPropertyNotify);
     return;
 }

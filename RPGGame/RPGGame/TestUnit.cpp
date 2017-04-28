@@ -26,11 +26,11 @@ TestUnit::~TestUnit()
 void TestUnit::Run()
 {
     //TEST(TestStrUtilSplit);
-    TEST(TestStrUtilFormat);
+    //TEST(TestStrUtilFormat);
     //TEST(TestPointer);
     //TEST(TestFrame);
     //TEST(TestPropertyFrame);
-
+    TEST(TestProtobuf);
 
 
 
@@ -134,9 +134,30 @@ bool TestUnit::TestPropertyFrame()
 {
     PropertyFrame &oPropertyFrame = PropertyFrame::GetInstance();
 
-    data::FrameData stFrameData;
-    oPropertyFrame.Init(stFrameData);
+    oPropertyFrame.Init();
     oPropertyFrame.Show();
 
+    return true;
+}
+
+#include "Struct.h"
+#include "dataconfig_item.pb.h"
+bool TestUnit::TestProtobuf()
+{
+    dataconfig::ITEM item;
+    item.set_type(2);
+
+    const google::protobuf::Descriptor *pDes = item.GetDescriptor();
+
+    data::ItemData stData;
+    for (int i = 0; i < pDes->field_count(); ++i)
+    {
+        const google::protobuf::FieldDescriptor *pField = pDes->field(i);
+        if ("type" == pField->name())
+        {
+            if (pField->cpp_type() == google::protobuf::FieldDescriptor::CPPTYPE_INT32)
+                stData.eType = pField->number();
+        }
+    }
     return true;
 }

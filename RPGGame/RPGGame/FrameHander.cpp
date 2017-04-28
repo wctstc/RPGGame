@@ -29,6 +29,15 @@ bool FrameHander::Init(Config *pConfig)
 
     RegisterNotify(cmd::NOTIFY_UPDATE_PROPERTY);
     RegisterNotify(cmd::NOTIFY_UPDATE_INFORMATION);
+
+
+    //属性框
+    PropertyFrame::GetInstance().Init();
+
+    //提示框
+    TipsFrame::GetInstance().Init();
+
+
 	return true;
 }
 
@@ -64,15 +73,10 @@ int FrameHander::HandleStart(req::Req &oReq)
 {
     bool bIsRuning = true;
     //属性框
-    PropertyFrame &oPropertyFrame = PropertyFrame::GetInstance();
-    data::FrameData stFrameData;
-    oPropertyFrame.Init(stFrameData);
-    oPropertyFrame.Show();
+    PropertyFrame::GetInstance().Show();
 
     //提示框
-    TipsFrame &oTipsFrame = TipsFrame::GetInstance();
-    oTipsFrame.Init();
-    oTipsFrame.Show();
+    TipsFrame::GetInstance().Show();
 
     //选择框
     FrameLoader &oFrameLoader = FrameLoader::GetInstance();
@@ -101,10 +105,11 @@ int FrameHander::HandleStart(req::Req &oReq)
             //选中后通知处理
             data::Option  stOption;
             pFrame->GetOptionByIndex(iIndex, stOption);
-            if (stOption.eNotify != cmd::COMMAND_IDLE)
+            if (stOption.eNotify != cmd::NOTIFY_IDLE)
             {
                 notify::Notify oNotify;
                 oNotify.Add(notify::i_Index, iIndex);
+                oNotify.Add(notify::i_DataID, pFrame->GetDataID());
                 Notify(stOption.eNotify, oNotify);
             }
 
@@ -114,11 +119,13 @@ int FrameHander::HandleStart(req::Req &oReq)
                 pFrame = FrameLoader::GetInstance().GetFrameByID(stOption.iFrameID);
                 if (pFrame)
                 {
+                    pFrame->SetDataID(stOption.iDataID);
+
                     req::Req oReq;
                     rsp::Rsp oRsp;
                     //请求数据;
                     pFrame->PrepareReq(iIndex, oReq);
-                    Forword(oReq.GetCmd(), oReq, oRsp);
+                    Forword(static_cast<const cmd::Command>(pFrame->GetHandler()), oReq, oRsp);
                     pFrame->PrepareRsp(oRsp);
                      
                     //入栈
@@ -163,7 +170,7 @@ void FrameHander::Handle(const cmd::Notify eNotify, const notify::Notify &oNotif
             oPropertyFrame.SetTotalExp(oNotify.GetInt(notify::i_PropertyFrame_TotalExp));
         if (oNotify.HasInt(notify::i_PropertyFrame_Bag))
             oPropertyFrame.SetBag(oNotify.GetInt(notify::i_PropertyFrame_Bag));
-        if (oNotify.HasInt(notify::i_PropertyFrame_Bag))
+        if (oNotify.HasInt(notify::i_PropertyFrame_TotalBag))
             oPropertyFrame.SetTotalBag(oNotify.GetInt(notify::i_PropertyFrame_TotalBag));
         oPropertyFrame.Update();
 

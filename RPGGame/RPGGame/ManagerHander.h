@@ -20,6 +20,11 @@ public:
 	* @brief 初始化
 	*/
 	virtual bool Init(Config *pConfig);
+
+    /**
+    * @brief 启动模块
+    */
+    virtual int Start();
 public:
 	/**
 	* @brief 分发命令到各个处理函数
@@ -50,9 +55,6 @@ private:
     * @brief 展示商品
     */
     int HandleShowShopItem(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
-
-
-
 
     /**
     * @brief 买商品

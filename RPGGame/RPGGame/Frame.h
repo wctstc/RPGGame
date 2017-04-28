@@ -52,6 +52,7 @@ public:
     SET_GET(string,                s, Description, m_stFrameData.sDescription);
     SET_GET(data::Direction,       e, Direction,   m_stFrameData.eDirection);
     SET_GET(int,                   i, Handler,     m_stFrameData.iHandlerID);
+    SET_GET(int,                   i, DataID,      m_stFrameData.iDataID);
     SET_GET(vector<data::Option>&, v, Options,     m_stFrameData.vOptions);
 private:
     /*!< ¿òÊý¾Ý */

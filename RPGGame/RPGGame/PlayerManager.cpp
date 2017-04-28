@@ -18,7 +18,6 @@ bool PlayerManager::Init()
     m_oPlayer.Init(10, 10, 10, 1, 1);
     m_oPlayer.AddItemToBag(1, 2);
     m_oPlayer.AddItemToBag(2, 3);
-    m_oPlayer.AddItemToBag(3, 4);
     m_oPlayer.AddItemToBag(1, 5);
 
     m_oPlayer.SetMoney(10000);
@@ -40,5 +39,10 @@ bool PlayerManager::Buy(const Goods &oGoods)
         return false;
 
     return m_oPlayer.AddItemToBag(oGoods.GetItemID(), oGoods.GetAmount());
+}
+
+const Player & PlayerManager::GetPlayer()
+{
+    return m_oPlayer;
 }
 

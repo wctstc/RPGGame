@@ -25,22 +25,22 @@ cmd::Command notify::Notify::GetCmd()
     return m_eCmd;
 }
 
-void notify::Notify::Add(string sKey, int iValue)
+void notify::Notify::Add(const string sKey, const int iValue)
 {
     m_mapIntArg.insert(pair<string, int>(sKey, iValue));
 }
 
-void notify::Notify::Add(string sKey, string sValue)
+void notify::Notify::Add(const string sKey, const string sValue)
 {
     m_mapStringArg.insert(pair<string, string>(sKey, sValue));
 }
 
-void notify::Notify::Add(string sKey, vector<notify::Notify> vValue)
+void notify::Notify::Add(const string sKey, const vector<notify::Notify> vValue)
 {
     m_mapVectorArg.insert(pair<string, vector<notify::Notify>>(sKey, vValue));
 }
 
-const int notify::Notify::GetInt(string sKey) const
+const int notify::Notify::GetInt(const string sKey) const
 {
     map<string, int>::const_iterator it = m_mapIntArg.find(sKey);
     if (it != m_mapIntArg.end())
@@ -49,7 +49,7 @@ const int notify::Notify::GetInt(string sKey) const
         return 0;
 }
 
-const string notify::Notify::GetString(string sKey) const
+const string notify::Notify::GetString(const string sKey) const
 {
     map<string, string>::const_iterator it = m_mapStringArg.find(sKey);
     if (it != m_mapStringArg.end())
@@ -58,7 +58,7 @@ const string notify::Notify::GetString(string sKey) const
         return "";
 }
 
-const vector<notify::Notify> notify::Notify::GetVector(string sKey) const
+const vector<notify::Notify> notify::Notify::GetVector(const string sKey) const
 {
     map<string, vector<notify::Notify>>::const_iterator it = m_mapVectorArg.find(sKey);
     if (it != m_mapVectorArg.end())
@@ -67,17 +67,17 @@ const vector<notify::Notify> notify::Notify::GetVector(string sKey) const
         return vector<notify::Notify>();
 }
 
-const bool notify::Notify::HasInt(string sKey) const
+const bool notify::Notify::HasInt(const string sKey) const
 {
-    return m_mapIntArg.find(sKey) == m_mapIntArg.end();
+    return m_mapIntArg.find(sKey) != m_mapIntArg.end();
 }
 
-const bool notify::Notify::HasString(string sKey) const
+const bool notify::Notify::HasString(const string sKey) const
 {
-    return m_mapStringArg.find(sKey) == m_mapStringArg.end();
+    return m_mapStringArg.find(sKey) != m_mapStringArg.end();
 }
 
-const bool notify::Notify::HasVector(string sKey) const
+const bool notify::Notify::HasVector(const string sKey) const
 {
-    return m_mapVectorArg.find(sKey) == m_mapVectorArg.end();
+    return m_mapVectorArg.find(sKey) != m_mapVectorArg.end();
 }

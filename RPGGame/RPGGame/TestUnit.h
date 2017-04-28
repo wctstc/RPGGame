@@ -22,6 +22,7 @@ private:
     bool TestPointer();
     bool TestFrame();
     bool TestPropertyFrame();
+    bool TestProtobuf();
 };
 
 

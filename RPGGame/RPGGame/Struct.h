@@ -152,7 +152,10 @@ namespace data
 		cmd::Notify eNotify;
 
 		/*!< 选中后对应框的编号 */
-		int iFrameID;
+        int iFrameID;
+
+        /*!< 数据编号 */
+        int iDataID;
 	};
 
 	
@@ -185,6 +188,9 @@ namespace data
 		/*!< 处理编号 */
 		int iHandlerID;
 
+        /*!< 数据编号 */
+        int iDataID;
+
 		/*!< 选项数据 */
 		vector<Option> vOptions;
 	};
@@ -199,6 +205,9 @@ namespace data
 
 		/*!< 类型 */
 		ItemType eType;
+
+        /*!< 名字 */
+        string sName;
 
 		/*!< 描述 */
 		string sDescription;
@@ -231,6 +240,7 @@ namespace data
         int iMoney;
         int iLevel;
         int iExp;
+        int iTotalExp;
     };
 
     /**
@@ -281,7 +291,7 @@ namespace data
         int iItemNum;
 
         /*!< 物品最大叠加 */
-        int iItemMaxCapacity;
+        int iUnitCapacity;
     };
 
     /**

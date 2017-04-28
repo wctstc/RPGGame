@@ -112,12 +112,29 @@ bool Player::Pay(const int iMoney)
 }
 
 
-int Player::GetHp()
+bool Player::Buy(const Goods &oGoods)
+{
+    int iItemID = oGoods.GetItemID();
+    int iNumber = oGoods.GetAmount();
+    int iPrice  = oGoods.GetPrice();
+
+    if (!m_oBag.CanAdd(iItemID, iNumber))
+        return false;
+
+    if (Pay(iPrice))
+        return false;
+
+    m_oBag.AddForce(iItemID, iNumber);
+
+    return true;
+}
+
+int Player::GetHp()const
 {
     return m_stPlayerData.stActorData.iHp;
 }
 
-int Player::GetMaxHp()
+int Player::GetMaxHp()const
 {
     int iTotalMaxHp = m_stPlayerData.stActorData.iMaxHp;
 
@@ -128,7 +145,7 @@ int Player::GetMaxHp()
     return iTotalMaxHp;
 }
 
-int Player::GetAttack()
+int Player::GetAttack()const
 {
     int iTotalAttack = m_stPlayerData.stActorData.iAttack;
 
@@ -139,7 +156,7 @@ int Player::GetAttack()
     return iTotalAttack;
 }
 
-int Player::GetDefance()
+int Player::GetDefance()const
 {
     int iTotalDefance = m_stPlayerData.stActorData.iDefance;
 
@@ -150,7 +167,7 @@ int Player::GetDefance()
     return iTotalDefance;
 }
 
-int Player::GetExtendMaxHp()
+int Player::GetExtendMaxHp()const
 {
     int iExtendMaxHp = 0;
     for (int i = 0; i < data::EQUIPMENT_TYPE_MAX; ++i)
@@ -159,7 +176,7 @@ int Player::GetExtendMaxHp()
     return iExtendMaxHp;
 }
 
-int Player::GetExtendAttack()
+int Player::GetExtendAttack()const
 {
     int iExtendAttack = 0;
     for (int i = 0; i < data::EQUIPMENT_TYPE_MAX; ++i)
@@ -168,7 +185,7 @@ int Player::GetExtendAttack()
     return iExtendAttack;
 }
 
-int Player::GetExtendDefance()
+int Player::GetExtendDefance()const
 {
     int iExtendDefance = 0;
     for (int i = 0; i < data::EQUIPMENT_TYPE_MAX; ++i)

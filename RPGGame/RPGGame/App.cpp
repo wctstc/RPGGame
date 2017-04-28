@@ -26,7 +26,11 @@ int App::Start()
 	if (iRet = g_FrameHander.Start())
 	{
 		return iRet;
-	}
+    }
+    if (iRet = g_ManagerHander.Start())
+    {
+        return iRet;
+    }
 
 	req::Req req;
     rsp::Rsp rsp;

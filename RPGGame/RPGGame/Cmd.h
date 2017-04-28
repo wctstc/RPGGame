@@ -18,16 +18,16 @@ namespace cmd
 		COMMAND_START,
 
 		/*!< 展示背包 */
-		COMMAND_SHOW_BAG = 10001,
+        COMMAND_SHOW_BAG = 2100000,
 
         /*!< 展示物品 */
-        COMMAND_SHOW_ITEM = 10002,
+        COMMAND_SHOW_ITEM = 2110000,
 
         /*!< 展示商店 */
-        COMMAND_SHOW_SHOP = 10003,
+        COMMAND_SHOW_SHOP = 1200000,
 
         /*!< 展示商品 */
-        COMMAND_SHOW_SHOP_ITEM = 10004,
+        COMMAND_SHOW_SHOP_ITEM = 1210000,
 
 
 
@@ -41,7 +41,7 @@ namespace cmd
     {
         /*!< 空 */
         NOTIFY_IDLE = 0,
-        NOTIFY_SHOP_BUY = 30001,
+        NOTIFY_SHOP_BUY = 1210000,
 
         NOTIFY_UPDATE_PROPERTY = 20001,
         NOTIFY_UPDATE_INFORMATION = 20002,

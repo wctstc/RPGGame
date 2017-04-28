@@ -27,7 +27,7 @@ public:
     /**
      * @brief 单元格最大叠加
      */
-    int GetUnitMaxCapacity() const;
+    int GetUnitCapacity() const;
 
 	/**
 	 * @brief 获取已使用格子
@@ -64,15 +64,20 @@ public:
     */
     bool CanRemove(const int iItemID, const int iNumber);
 
-	/**
-	 * @brief 获取物品编号
-	 */
-	int GetItemID(const int iIndex)const;
+    /**
+    * @brief 获取物品编号
+    */
+    int GetItemID(const int iIndex)const;
+
+    /**
+    * @brief 获取数量
+    */
+    int GetItemNum(const int iIndex)const;
 
 	/**
 	 * @brief 获取物品数量
 	 */
-    int GetItemNum(const int iItemID)const;
+    int GetItemNumByItemID(const int iItemID)const;
 
     
 public:
