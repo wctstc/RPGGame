@@ -122,6 +122,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="Bag.cpp" />
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="BagFrame.cpp" />
     <ClCompile Include="Config.cpp" />
@@ -150,6 +151,7 @@
     <ClCompile Include="Req.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Rsp.cpp" />
+    <ClCompile Include="Shop.cpp" />
     <ClCompile Include="ShopFrame.cpp" />
     <ClCompile Include="ShopItemFrame.cpp" />
     <ClCompile Include="ShopManager.cpp" />
@@ -159,9 +161,11 @@
     <ClCompile Include="TestUnit.cpp" />
     <ClCompile Include="TipsFrame.cpp" />
     <ClCompile Include="UIBase.cpp" />
+    <ClCompile Include="Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="Bag.h" />
     <ClInclude Include="Container.h" />
     <ClInclude Include="BagFrame.h" />
     <ClInclude Include="Cmd.h" />
@@ -174,7 +178,6 @@
     <ClInclude Include="FrameLoader.h" />
     <ClInclude Include="FrameHander.h" />
     <ClInclude Include="Goods.h" />
-    <ClInclude Include="ItemData.h" />
     <ClInclude Include="ManagerData.h" />
     <ClInclude Include="ManagerHander.h" />
     <ClInclude Include="Item.h" />
@@ -195,6 +198,7 @@
     <ClInclude Include="Req.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="Rsp.h" />
+    <ClInclude Include="Shop.h" />
     <ClInclude Include="ShopFrame.h" />
     <ClInclude Include="ShopItemFrame.h" />
     <ClInclude Include="ShopManager.h" />
@@ -207,6 +211,7 @@
     <ClInclude Include="TestUnit.h" />
     <ClInclude Include="TipsFrame.h" />
     <ClInclude Include="UIBase.h" />
+    <ClInclude Include="Unit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

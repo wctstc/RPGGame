@@ -9,6 +9,7 @@ namespace dataD
      * @brief 单元格数据
      */
     struct UnitData
+
     {
         /*!< 编号 */
         int iID;
@@ -37,12 +38,6 @@ namespace dataD
         /*!< 单元格数据 */
         std::vector<data::UnitData> vUnits;
     };
-
-    struct Goods
-    {
-
-    };
-    struct ShopData
 }
 
 

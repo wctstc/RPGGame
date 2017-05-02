@@ -11,25 +11,84 @@ Player::~Player()
 {
 }
 
-bool Player::Init(int iID, int iHp, int iMaxHp, int iAttack, int iDefance)
+bool Player::Init(const Player &oPlayer)
 {
-    m_stPlayerData.stActorData.iID      = iID;
-    m_stPlayerData.stActorData.iHp      = iHp;
-    m_stPlayerData.stActorData.iMaxHp   = iMaxHp;
-    m_stPlayerData.stActorData.iAttack  = iAttack;
-    m_stPlayerData.stActorData.iDefance = iDefance;
+    if (!Actor::Init(oPlayer))
+        return false;
 
-    m_oBag.Init(1, 20);
+    m_stPlayerData = oPlayer.m_stPlayerData;
 
-    for (int i = 0; i < EquipmentType::EQUIPMENT_TYPE_MAX; ++i)
+    return true;
+}
+bool Player::Init(
+    const int iID,
+    const int iHp,
+    const int iMaxHp,
+    const int iAttack,
+    const int iDefance,
+    const int iMoney,
+    const int iLevel,
+    const int iExp,
+    const int iTotalExp)
+{
+    if (!Actor::Init(iID, iHp, iMaxHp, iAttack, iDefance))
+        return false;
+
+
+    m_stPlayerData.iMoney    = iMoney;
+    m_stPlayerData.iLevel    = iLevel;
+    m_stPlayerData.iExp      = iExp;
+    m_stPlayerData.iTotalExp = iTotalExp;
+
+    m_stBag.Init(1, 20);
+
+    for (int i = 0; i < Equipment::EQUIPMENT_TYPE_MAX; ++i)
         m_ayEquipments[i].bIsEquip = false;
+
+    return true;
+}
+
+
+bool Player::Save(int &iLength, char *csBuffer) const
+{
+    int iSize = sizeof(m_stPlayerData);
+    if (iLength < iSize)
+        return false;
+
+    memcpy(csBuffer, &m_stPlayerData, iSize );
+
+    int iLeft = iLength - iSize;
+    int iUsed = iSize;
+
+    if (!m_stBag.Save(iLeft, csBuffer + iSize))
+        return false;
+
+    iLength = iLeft + iUsed;
+    return true;
+}
+
+bool Player::Load(int &iLength, const char *const csBuffer)
+{
+    int iSize = sizeof(m_stPlayerData);
+    if (iLength < iSize)
+        return false;
+
+    memcpy(&m_stPlayerData, csBuffer, iSize);
+
+    int iLeft = iLength - iSize;
+    int iUsed = iSize;
+
+    if (!m_stBag.Load(iLeft, csBuffer + iSize))
+        return false;
+
+    iLength = iLeft + iUsed;
 
     return true;
 }
 
 void Player::Reset()
 {
-    m_stPlayerData.stActorData.iHp = GetMaxHp();
+    Actor::SetHp(GetMaxHp() + GetExtendMaxHp());
 }
 
 Player::EquipmentOperator Player::Equip(
@@ -40,7 +99,7 @@ Player::EquipmentOperator Player::Equip(
     EquipmentOperator eRet;
     EquipmentState *oTempEquipment = NULL;
     if (oNewEquipment.GetType() >= 0
-        && oNewEquipment.GetType() < data::EQUIPMENT_TYPE_MAX)
+        && oNewEquipment.GetType() < Equipment::EQUIPMENT_TYPE_MAX)
     {
         oTempEquipment = &m_ayEquipments[oNewEquipment.GetType()];
         switch (eEquipmentOperator)
@@ -69,45 +128,41 @@ Player::EquipmentOperator Player::Equip(
     return eEquipmentOperator;
 }
 
-void Player::Defance(int iDamage)
+void Player::Defance( const int iDamage)
 {
     int iRealDamage = iDamage - GetDefance();
     if (iRealDamage <= 0)
         iRealDamage = 1;
-    m_stPlayerData.stActorData.iHp -= iRealDamage;
+    Actor::SetHp(Actor::GetHp()-iRealDamage);
 }
 
 int Player::Attack()
 {
-    return GetAttack();
+    return GetAttack()+GetExtendAttack();
 }
 
-bool Player::IsDie()
-{
-    return m_stPlayerData.stActorData.iHp <= 0;
-}
 
 bool Player::AddItemToBag(const int iItemID, const int iNumber)
 {
-    return m_oBag.Add(iItemID, iNumber);
+    return m_stBag.Add(iItemID, iNumber);
 }
 
-void Player::AddItemToBagFocus(const int iItemID, const int iNumber)
-{
-    m_oBag.AddForce(iItemID, iNumber);
-}
-
-bool Player::CanAddItemToBag(const int iItemID, const int iNumber)
-{
-    return m_oBag.CanAdd(iItemID, iNumber);
-}
+// void Player::AddItemToBagFocus(const int iItemID, const int iNumber)
+// {
+//     m_stPlayerData.oBag.AddForce(iItemID, iNumber);
+// }
+// 
+// bool Player::CanAddItemToBag(const int iItemID, const int iNumber)
+// {
+//     return m_stPlayerData.oBag.CanAdd(iItemID, iNumber);
+// }
 
 bool Player::Pay(const int iMoney)
 {
-    if (m_stPlayerData.stActorExternData.iMoney < iMoney)
+    if (m_stPlayerData.iMoney < iMoney)
         return false;
 
-    m_stPlayerData.stActorExternData.iMoney -= iMoney;
+    m_stPlayerData.iMoney -= iMoney;
     return true;
 }
 
@@ -115,62 +170,24 @@ bool Player::Pay(const int iMoney)
 bool Player::Buy(const Goods &oGoods)
 {
     int iItemID = oGoods.GetItemID();
-    int iNumber = oGoods.GetAmount();
-    int iPrice  = oGoods.GetPrice();
+    int iPrice  = oGoods.GetBuyPrice();
 
-    if (!m_oBag.CanAdd(iItemID, iNumber))
-        return false;
+//     if (!m_stPlayerData.oBag.CanAdd(iItemID, iNumber))
+//         return false;
 
     if (Pay(iPrice))
         return false;
 
-    m_oBag.AddForce(iItemID, iNumber);
+    m_stBag.Add(iItemID, 1);
 
     return true;
 }
 
-int Player::GetHp()const
-{
-    return m_stPlayerData.stActorData.iHp;
-}
-
-int Player::GetMaxHp()const
-{
-    int iTotalMaxHp = m_stPlayerData.stActorData.iMaxHp;
-
-    for (int i = 0; i < data::EQUIPMENT_TYPE_MAX; ++i)
-        if (m_ayEquipments[i].bIsEquip)
-            iTotalMaxHp += m_ayEquipments[i].oEquipment.GetMaxHp();
-
-    return iTotalMaxHp;
-}
-
-int Player::GetAttack()const
-{
-    int iTotalAttack = m_stPlayerData.stActorData.iAttack;
-
-    for (int i = 0; i < data::EQUIPMENT_TYPE_MAX; ++i)
-        if (m_ayEquipments[i].bIsEquip)
-            iTotalAttack += m_ayEquipments[i].oEquipment.GetAttack();
-
-    return iTotalAttack;
-}
-
-int Player::GetDefance()const
-{
-    int iTotalDefance = m_stPlayerData.stActorData.iDefance;
-
-    for (int i = 0; i < data::EQUIPMENT_TYPE_MAX; ++i)
-        if (m_ayEquipments[i].bIsEquip)
-            iTotalDefance += m_ayEquipments[i].oEquipment.GetDefance();
-
-    return iTotalDefance;
-}
 
 int Player::GetExtendMaxHp()const
 {
     int iExtendMaxHp = 0;
-    for (int i = 0; i < data::EQUIPMENT_TYPE_MAX; ++i)
+    for (int i = 0; i < Equipment::EQUIPMENT_TYPE_MAX; ++i)
         if (m_ayEquipments[i].bIsEquip)
             iExtendMaxHp += m_ayEquipments[i].oEquipment.GetMaxHp();
     return iExtendMaxHp;
@@ -179,7 +196,7 @@ int Player::GetExtendMaxHp()const
 int Player::GetExtendAttack()const
 {
     int iExtendAttack = 0;
-    for (int i = 0; i < data::EQUIPMENT_TYPE_MAX; ++i)
+    for (int i = 0; i < Equipment::EQUIPMENT_TYPE_MAX; ++i)
         if (m_ayEquipments[i].bIsEquip)
             iExtendAttack += m_ayEquipments[i].oEquipment.GetAttack();
     return iExtendAttack;
@@ -188,13 +205,13 @@ int Player::GetExtendAttack()const
 int Player::GetExtendDefance()const
 {
     int iExtendDefance = 0;
-    for (int i = 0; i < data::EQUIPMENT_TYPE_MAX; ++i)
+    for (int i = 0; i < Equipment::EQUIPMENT_TYPE_MAX; ++i)
         if (m_ayEquipments[i].bIsEquip)
             iExtendDefance += m_ayEquipments[i].oEquipment.GetDefance();
     return iExtendDefance;
 }
 
-const Container& Player::GetBag() const
-{
-    return m_oBag;
-}
+// const Bag& Player::GetBag() const
+// {
+//     return m_stBag;
+// }

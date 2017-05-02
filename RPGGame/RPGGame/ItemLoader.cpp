@@ -31,15 +31,17 @@ bool ItemLoader::Init()
 	ayItems.ParseFromArray(buffer, length);
 
 	const ITEM *pItemConfig;
-	ItemData oItemData;
 	for (int i = 0; i < ayItems.items_size(); ++i)
 	{
+        Item oItem;
 		pItemConfig = &(ayItems.items(i));
-		oItemData.iID = pItemConfig->id();
-		oItemData.eType = static_cast<data::ItemType>(pItemConfig->type());
-		oItemData.sDescription = UTF_82ASCII(pItemConfig->description());
+        oItem.Init(
+            pItemConfig->id(),
+		    static_cast<Item::ItemType>(pItemConfig->type()),
+            "",
+		    UTF_82ASCII(pItemConfig->description()));
 
-		m_mapItemDatas.insert(pair<int, ItemData>(oItemData.iID, oItemData));
+		m_mapItemDatas.insert(pair<int, Item>(oItem.GetID(), oItem));
 	}
 
 	return true;
@@ -48,21 +50,13 @@ bool ItemLoader::Init()
 Item * ItemLoader::GetItemByID(int iID)
 {
 	Item *pItem = NULL;
-	map<int, ItemData>::iterator it = m_mapItemDatas.find(iID);
+	map<int, Item>::iterator it = m_mapItemDatas.find(iID);
 	if (it != m_mapItemDatas.end())
 	{
-		pItem = CreateItemInstanceByType(it->second.eType);
+		pItem = CreateItemInstanceByType(it->second.GetType());
 		pItem->Init(it->second);
 	}
 	return pItem;
-}
-
-const ItemData ItemLoader::GetItemDataByID(const int iID) const
-{
-	map<int, ItemData>::const_iterator it = m_mapItemDatas.find(iID);
-	if (it != m_mapItemDatas.end())
-		return it->second;
-	return ItemData();
 }
 
 void ItemLoader::ReleaseItem(Item *pItem)
@@ -77,7 +71,7 @@ Item * ItemLoader::CreateItemInstanceByType(const int iType)
 	Item *pItem;
 	switch (iType)
 	{
-	case data::ITEM_TYPE_NORMAL:
+	case Item::ITEM_TYPE_NORMAL:
 		pItem = new Item();
 		break;
 	default:

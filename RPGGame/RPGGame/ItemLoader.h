@@ -11,8 +11,6 @@ using std::pair;
 #include "Struct.h"
 #include "Item.h"
 
-using data::ItemType;
-using data::ItemData;
 
 /**
 * @brief 物品加载器
@@ -34,11 +32,6 @@ public:
 	Item *GetItemByID(int iID);
 
 	/**
-	* @brief 通过编号获取物品数据
-	*/
-	const ItemData GetItemDataByID(const int iID)const;
-
-	/**
 	* @brief 释放物品
 	*/
 	void ReleaseItem(Item *pItem);
@@ -49,7 +42,7 @@ private:
 	Item *CreateItemInstanceByType(const int iType);
 private:
 	/*!< 编号与物品数据映射 */
-	map<int, ItemData> m_mapItemDatas;
+	map<int, Item> m_mapItemDatas;
 };
 
 

@@ -11,151 +11,47 @@ Actor::~Actor()
 {
 }
 
-bool Actor::Init(int iID, int iHp, int iMaxHp, int iAttack, int iDefance)
+bool Actor::Init(const Actor &oActor)
 {
-	m_oActorData.iID      = iID;
-	m_oActorData.iHp      = iHp;
-	m_oActorData.iMaxHp   = iMaxHp;
-	m_oActorData.iAttack  = iAttack;
-	m_oActorData.iDefance = iDefance;
+    m_stActorData = oActor.m_stActorData;
+    return true;
+}
 
-	for (int i = 0; i < EquipmentType::EQUIPMENT_TYPE_MAX; ++i)
-		m_ayEquipments[i].bIsEquip = false;
 
+bool Actor::Init(
+    const int iID, 
+    const int iHp,
+    const int iMaxHp,
+    const int iAttack,
+    const int iDefance)
+{
+	m_stActorData.iID      = iID;
+	m_stActorData.iHp      = iHp;
+	m_stActorData.iMaxHp   = iMaxHp;
+	m_stActorData.iAttack  = iAttack;
+	m_stActorData.iDefance = iDefance;
 	return true;
 }
 
 void Actor::Reset()
 {
-	m_oActorData.iHp = GetMaxHp();
+	m_stActorData.iHp = GetMaxHp();
 }
 
-EquipmentOperator Actor::Equip(
-	const EquipmentOperator eEquipmentOperator,
-	const Equipment &oNewEquipment, 
-	Equipment &oOldEuipment)
+void Actor::Defance(const int iDamage)
 {
-	EquipmentOperator eRet;
-	EquipmentState *oTempEquipment = NULL;
-	if (oNewEquipment.GetType() >= 0
-		&& oNewEquipment.GetType() < data::EQUIPMENT_TYPE_MAX)
-	{
-		oTempEquipment = &m_ayEquipments[oNewEquipment.GetType()];
-		switch (eEquipmentOperator)
-		{
-		case EQUIPMENT_OPERATOR_PUTON:
-		case EQUIPMENT_OPERATOR_CHANGE:
-			eRet = EQUIPMENT_OPERATOR_PUTON;
-			if (oTempEquipment->bIsEquip)
-			{
-				eRet = EQUIPMENT_OPERATOR_CHANGE;
-				oOldEuipment = oTempEquipment->oEquipment;
-			}
-
-			oTempEquipment->bIsEquip = true;
-			oTempEquipment->oEquipment = oNewEquipment;
-			break;
-		case EQUIPMENT_OPERATOR_GETOFF:
-			oTempEquipment->bIsEquip = false;
-			oOldEuipment = oTempEquipment->oEquipment;
-			eRet = EQUIPMENT_OPERATOR_GETOFF;
-			break;
-		}
-		oTempEquipment = NULL;
-	}
-
-	return eEquipmentOperator;
-}
-
-void Actor::Defance(int iDamage)
-{
-	int iRealDamage = iDamage - GetDefance();
+	int iRealDamage = iDamage - m_stActorData.iDefance;
 	if (iRealDamage <= 0)
 		iRealDamage = 1;
-	m_oActorData.iHp -= iRealDamage;
+	m_stActorData.iHp -= iRealDamage;
 }
 
 int Actor::Attack()
 {
-	return GetAttack();
+	return m_stActorData.iAttack;
 }
 
 bool Actor::IsDie()
 {
-	return m_oActorData.iHp <= 0;
-}
-
-bool Actor::AddItemToBag(const Item &oItem)
-{
-    return true;
-}
-
-int Actor::GetHp()
-{
-	return m_oActorData.iHp;
-}
-
-int Actor::GetMaxHp()
-{
-	int iTotalMaxHp = m_oActorData.iMaxHp;
-
-	for (int i = 0; i < data::EQUIPMENT_TYPE_MAX; ++i)
-		if( m_ayEquipments[i].bIsEquip )
-			iTotalMaxHp += m_ayEquipments[i].oEquipment.GetMaxHp();
-
-	return iTotalMaxHp;
-}
-
-int Actor::GetAttack()
-{
-	int iTotalAttack = m_oActorData.iAttack;
-
-	for (int i = 0; i < data::EQUIPMENT_TYPE_MAX; ++i)
-		if (m_ayEquipments[i].bIsEquip)
-			iTotalAttack += m_ayEquipments[i].oEquipment.GetAttack();
-
-	return iTotalAttack;
-}
-
-int Actor::GetDefance()
-{
-	int iTotalDefance = m_oActorData.iDefance;
-
-	for (int i = 0; i < data::EQUIPMENT_TYPE_MAX; ++i)
-		if (m_ayEquipments[i].bIsEquip)
-			iTotalDefance += m_ayEquipments[i].oEquipment.GetDefance();
-
-	return iTotalDefance;
-}
-
-int Actor::GetExtendMaxHp()
-{
-	int iExtendMaxHp = 0;
-	for (int i = 0; i < data::EQUIPMENT_TYPE_MAX; ++i)
-		if (m_ayEquipments[i].bIsEquip)
-			iExtendMaxHp += m_ayEquipments[i].oEquipment.GetMaxHp();
-	return iExtendMaxHp;
-}
-
-int Actor::GetExtendAttack()
-{
-	int iExtendAttack = 0;
-	for (int i = 0; i < data::EQUIPMENT_TYPE_MAX; ++i)
-		if (m_ayEquipments[i].bIsEquip)
-			iExtendAttack += m_ayEquipments[i].oEquipment.GetAttack();
-	return iExtendAttack;
-}
-
-int Actor::GetExtendDefance()
-{
-	int iExtendDefance = 0;
-	for (int i = 0; i < data::EQUIPMENT_TYPE_MAX; ++i)
-		if (m_ayEquipments[i].bIsEquip)
-			iExtendDefance += m_ayEquipments[i].oEquipment.GetDefance();
-	return iExtendDefance;
-}
-
-const Container& Actor::GetBag() const
-{
-	return m_oBag;
+	return m_stActorData.iHp <= 0;
 }

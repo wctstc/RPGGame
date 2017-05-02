@@ -149,15 +149,5 @@ bool TestUnit::TestProtobuf()
 
     const google::protobuf::Descriptor *pDes = item.GetDescriptor();
 
-    data::ItemData stData;
-    for (int i = 0; i < pDes->field_count(); ++i)
-    {
-        const google::protobuf::FieldDescriptor *pField = pDes->field(i);
-        if ("type" == pField->name())
-        {
-            if (pField->cpp_type() == google::protobuf::FieldDescriptor::CPPTYPE_INT32)
-                stData.eType = pField->number();
-        }
-    }
     return true;
 }

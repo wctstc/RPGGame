@@ -18,16 +18,26 @@ public:
 	* @brief 初始化
 	*/
 	virtual bool Init();
+
+    /**
+     * @brief 保存
+     */
+    virtual bool Save(const string sFile);
+
+    /**
+     * @brief 加载
+     */
+    virtual bool Load(const string sFile);
 public:
 	/**
 	* @brief 获取背包
 	*/
-	const Container &GetBag();
+	const Bag &GetBag();
 
      /**
       * @brief 买东西
       */
-    bool Buy( const Goods &oGoods );
+    bool Buy(const int iItemID, const int iPrice);
 
     /**
      * @brief 获取玩家

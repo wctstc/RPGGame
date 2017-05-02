@@ -71,30 +71,6 @@ namespace data
 	};
 
 	/**
-	 * @brief 装备类型
-	 */
-	enum EquipmentType
-	{
-		/*!< 武器 */
-		EQUIPMENT_TYPE_WEAPON = 0,
-		/*!< 防具 */
-		EQUIPMENT_TYPE_AEMOR = 1,
-		/*!< 饰品 */
-		EQUIPMENT_TYPE_ACCESSORY = 2,
-		/*!< 类型最大值 */
-		EQUIPMENT_TYPE_MAX = 3,
-	};
-
-	/**
-	* @brief 物品类型
-	*/
-	enum ItemType
-	{
-		/*!< 普通类型 */
-		ITEM_TYPE_NORMAL = 0,
-	};
-	
-	/**
 	* @brief 框类型
 	*/
 	enum FrameType
@@ -193,87 +169,6 @@ namespace data
 
 		/*!< 选项数据 */
 		vector<Option> vOptions;
-	};
-
-	/**
-	* @brief 物品数据
-	*/
-	struct ItemData
-	{
-		/*!< 编号 */
-		int iID;
-
-		/*!< 类型 */
-		ItemType eType;
-
-        /*!< 名字 */
-        string sName;
-
-		/*!< 描述 */
-		string sDescription;
-	};
-
-	/**
-	 * @brief 行动者数据
-	 */
-	struct ActorData
-	{
-		/*!< 编号 */
-		int iID;
-		/*!< 名字 */
-		string sName;
-		/*!< 生命 */
-		int iHp;
-		/*!< 生命上限 */
-		int iMaxHp;
-		/*!< 攻击力 */
-		int iAttack;
-		/*!< 防御力 */
-		int iDefance;
-	};
-    
-    /**
-	 * @brief 行动者额外数据
-	 */
-    struct ActorExternData
-    {
-        int iMoney;
-        int iLevel;
-        int iExp;
-        int iTotalExp;
-    };
-
-    /**
-     * @brief 玩家数据
-     */
-    struct PlayerData
-    {
-        /*!< 行动者数据 */
-        ActorData stActorData;
-
-        /*!< 行动者额外数据 */
-        ActorExternData stActorExternData;
-    };
-
-	/**
-	 * @brief 装备数据
-	 */
-	struct EquipmentData
-	{
-		/*!< 编号 */
-		int iID;
-		
-        /*!< 类型 */
-		EquipmentType eType;
-		
-        /*!< 附加生命上限 */
-		int iMaxHp;
-		
-        /*!< 附加攻击力 */
-		int iAttack;
-		
-        /*!< 附加防御力 */
-		int iDefance;
 	};
 
     /**

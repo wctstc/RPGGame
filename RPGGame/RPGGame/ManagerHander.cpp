@@ -36,6 +36,8 @@ bool ManagerHander::Init(Config *pConfig)
     if (!g_ShopManager.Init())
         return false;
 
+    g_PlayerManger.Load("Save.sav");
+
     RegisterCmd(cmd::COMMAND_SHOW_BAG);
     RegisterCmd(cmd::COMMAND_SHOW_ITEM);
     RegisterCmd(cmd::COMMAND_SHOW_SHOP);
@@ -64,6 +66,7 @@ int ManagerHander::Start()
 
 int ManagerHander::Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 {
+    g_PlayerManger.Save("Save.sav");
 	switch (eCmd)
 	{
 	case cmd::COMMAND_SHOW_BAG:
@@ -77,6 +80,7 @@ int ManagerHander::Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 	default:
 		break;
 	}
+
 	return -1;
 }
 
@@ -93,7 +97,7 @@ void ManagerHander::Handle(const cmd::Notify eNotify, const notify::Notify &oNot
 
 int ManagerHander::HandleShowBag(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 {
-	const Container &oBag = g_PlayerManger.GetPlayer().GetBag();
+	const Bag &oBag = g_PlayerManger.GetPlayer().GetBag();
     if (oBag.GetUsedCapacity() <= 0)
     {
         oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_NO_ITEM);
@@ -105,7 +109,7 @@ int ManagerHander::HandleShowBag(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oR
 	for (int i = 0; i < oBag.GetCapacity(); ++i)
 	{
         int iItemID = oBag.GetItemID(i);
-        if (iItemID!=0)
+        if (iItemID > 0 && oBag.GetItemNum(i) >= 0)
         {
             string sItemDescription = g_ItemManager.GetDescriptionByID(iItemID);
 
@@ -115,7 +119,7 @@ int ManagerHander::HandleShowBag(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oR
                 StrUtil::Format(
                     "%s*%d",
                     sItemDescription.c_str(),
-                    oBag.GetItemNum(iItemID)));
+                    oBag.GetItemNum(i)));
             oRspOption.Add(rsp::i_Option_FrameID,     2110000);
             oRspOption.Add(rsp::i_Option_Notify,      cmd::NOTIFY_IDLE);
             oRspOption.Add(rsp::i_Option_DataID,      iItemID);
@@ -131,8 +135,8 @@ int ManagerHander::HandleShowBag(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oR
 int ManagerHander::HandleShowItem(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 {
 	int iSelected = oReq.GetInt("selected");
-	const Container &bag = g_PlayerManger.GetPlayer().GetBag();
-	int iID = bag.GetItemID(iSelected);
+	const Bag &oBag = g_PlayerManger.GetPlayer().GetBag();
+	int iID = oBag.GetItemID(iSelected);
 	string sDescription = g_ItemManager.GetDescriptionByID(iID);
 
 	oRsp.Add("description", sDescription);
@@ -142,15 +146,15 @@ int ManagerHander::HandleShowItem(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &o
 
 int ManagerHander::HandleShowShop(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 {
-    ShopManager &oShopManager = ShopManager::GetInstance();
-    int iSize = oShopManager.GetNumberOfGoodsCategory();
+    const Shop &oShop = g_ShopManager.GetShop();
+    int iSize = oShop.GetGoodsNum();
 
     vector<rsp::Rsp> vRspOption;
     for (int i = 0; i < iSize; ++i)
     {
         rsp::Rsp oRspOption;
-        int iItemID = oShopManager.GetGoodsItemID(i);
-        string sItemDescription = ItemManager::GetInstance().GetDescriptionByID(iItemID);
+        int iItemID = oShop.GetGoodsItemID(i);
+        string sItemDescription = g_ItemManager.GetDescriptionByID(iItemID);
 
         oRspOption.Add(rsp::s_Option_Description, sItemDescription);
         oRspOption.Add(rsp::i_Option_FrameID,     1210000);
@@ -167,22 +171,24 @@ int ManagerHander::HandleShowShopItem(cmd::Command eCmd, req::Req &oReq, rsp::Rs
 {
     int iIndex = oReq.GetInt(req::i_Index);
 
-    ShopManager &oShopManager = ShopManager::GetInstance();
+    const Shop &oShop = g_ShopManager.GetShop();
 
-    int iNum = oShopManager.GetNumberOfGoodsCategory();
+    int iSize = oShop.GetGoodsNum();
 
-    Goods oGoods;
-    if (oShopManager.GetGoods(iIndex, oGoods))
+    if (iSize > iIndex)
     {
-        string sDescription = ItemManager::GetInstance().GetDescriptionByID(oGoods.GetItemID());
+        int iItemID = oShop.GetGoodsItemID(iIndex);
+        string sItemDescription = g_ItemManager.GetDescriptionByID(iItemID);
+        int iPlayerItemNum = g_PlayerManger.GetBag().GetItemNumByItemID(iItemID);
 
         oRsp.Add(
             rsp::s_Description, 
             StrUtil::Format(
-                "商品：%s\n价格：%d个%d块钱\n",
-                sDescription.c_str(),
-                oGoods.GetAmount(),
-                oGoods.GetPrice()));
+                "商品：%s\n购买价格：%d块钱\n出售价格：%d块钱\n\n你拥有%d个",
+                sItemDescription.c_str(),
+                oShop.GetGoodsBuyPrice(iIndex),
+                oShop.GetGoodsSellPrice(iIndex),
+                iPlayerItemNum));
     }
     else
     {
@@ -205,9 +211,8 @@ void ManagerHander::HandleBuyShopItem(const cmd::Notify eNotify, const notify::N
 
     //获取商品
     int iShopIndex = oNotify.GetInt(notify::i_DataID);
-    const ShopManager::VecGoods &vGoods = ShopManager::GetInstance().GetAllGoods();
-    int iSize = vGoods.size();
-    if (iShopIndex < 0 || iShopIndex >iSize)
+    const Shop &oShop = g_ShopManager.GetShop();
+    if (iShopIndex < 0 || iShopIndex > oShop.GetGoodsNum())
     {
         oInfoNotify.Add(notify::s_TipsFrame_Description, "选购物品不存在");
         Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
@@ -215,8 +220,9 @@ void ManagerHander::HandleBuyShopItem(const cmd::Notify eNotify, const notify::N
     }
 
     //玩家购买
-    const Goods &oGoods = vGoods.at(iShopIndex);
-    if (!g_PlayerManger.Buy(oGoods))
+    int iItemID = oShop.GetGoodsItemID(iShopIndex);
+    int iBuyPrice = oShop.GetGoodsBuyPrice(iShopIndex);
+    if (!g_PlayerManger.Buy(iItemID, iBuyPrice))
     {
         oInfoNotify.Add(notify::s_TipsFrame_Description, "玩家购买失败");
         Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
@@ -224,14 +230,13 @@ void ManagerHander::HandleBuyShopItem(const cmd::Notify eNotify, const notify::N
     }
 
     //回报
-    string sItemName = ItemManager::GetInstance().GetDescriptionByID(oGoods.GetItemID());
+    string sItemName = ItemManager::GetInstance().GetDescriptionByID(iItemID);
     oInfoNotify.Add(
         notify::s_TipsFrame_Description, 
         StrUtil::Format(
-            "购买:%s*%d,花费：%d", 
+            "购买:%s,花费：%d", 
             sItemName.c_str(),
-            oGoods.GetAmount(),
-            oGoods.GetPrice()));
+            iBuyPrice));
 
     Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
 

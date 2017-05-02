@@ -15,7 +15,7 @@ bool PlayerManager::Init()
 {
 	//PlayerLoader::GetInstance().Init();
 
-    m_oPlayer.Init(10, 10, 10, 1, 1);
+    m_oPlayer.Init(10,10, 10, 10, 1, 1,1,1, 1000);
     m_oPlayer.AddItemToBag(1, 2);
     m_oPlayer.AddItemToBag(2, 3);
     m_oPlayer.AddItemToBag(1, 5);
@@ -25,20 +25,66 @@ bool PlayerManager::Init()
 	return true;
 }
 
-const Container & PlayerManager::GetBag()
+bool PlayerManager::Save(const string sFile)
+{
+    if (sFile.empty())
+        return true;
+
+
+    FILE *pFile = fopen(sFile.c_str(), "wb");
+    if (pFile == NULL)
+        return false;
+
+
+    char csBuffer[10240];
+    int iLength = sizeof(csBuffer);
+
+    if (!m_oPlayer.Save(iLength, csBuffer))
+        return false;
+        
+    iLength = fwrite(csBuffer, 1, iLength, pFile);
+    if (iLength <= 0)
+        return false;
+
+    return true;
+}
+
+bool PlayerManager::Load(const string sFile)
+{
+    if (sFile.empty())
+        return true;
+
+
+    FILE *pFile = fopen(sFile.c_str(), "rb");
+    if (pFile == NULL)
+        return false;
+
+
+    char csBuffer[10240];
+    int iLength = fread(csBuffer, 1, 10240, pFile);
+    if (iLength >= 10000)
+        return false;
+
+    if (!m_oPlayer.Load(iLength, csBuffer))
+        return false;
+
+    return true;
+}
+
+const Bag & PlayerManager::GetBag()
 {
 	return m_oPlayer.GetBag();
 }
 
-bool PlayerManager::Buy(const Goods &oGoods)
+bool PlayerManager::Buy(const int iItemID, const int iPrice)
 {
-    if (!m_oPlayer.CanAddItemToBag(oGoods.GetItemID(),oGoods.GetAmount()))
+//     if (!m_oPlayer.CanAddItemToBag(oGoods.GetItemID(),oGoods.GetAmount()))
+//         return false;
+
+    if (!m_oPlayer.Pay(iPrice))
         return false;
 
-    if (!m_oPlayer.Pay(oGoods.GetPrice()))
-        return false;
-
-    return m_oPlayer.AddItemToBag(oGoods.GetItemID(), oGoods.GetAmount());
+    return m_oPlayer.AddItemToBag(iItemID, 1);
 }
 
 const Player & PlayerManager::GetPlayer()
