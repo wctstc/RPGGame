@@ -96,6 +96,10 @@ public://-操作----------------------------------------------------//
      */
     bool AddItemToBag(const int iItemID, const int iNumber);
 
+    /**
+    * @brief 从背包减少
+    */
+    bool ReduceItemFromBag(const int iItemID, const int iNumber);
 //     /**
 //      * @brief 添加到背包，多出来的丢弃
 //      */
@@ -107,14 +111,14 @@ public://-操作----------------------------------------------------//
 //     bool CanAddItemToBag(const int iItemID, const int iNumber);
 
     /**
-     * @brief 付钱
+     * @brief 加钱
      */
-    bool Pay(const int iMoney);
-
+    bool AddMoney(const int iMoney);
     /**
-     * @brief 买东西
+     * @brief 减钱
      */
-    bool Buy(const Goods &oGoods);
+    bool ReduceMoney(const int iMoney);
+
 public:
 
     /**

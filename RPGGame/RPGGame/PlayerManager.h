@@ -40,6 +40,11 @@ public:
     bool Buy(const int iItemID, const int iPrice);
 
     /**
+    * @brief 卖东西
+    */
+    bool Sell(const int iItemID, const int iPrice);
+
+    /**
      * @brief 获取玩家
      */
     const Player & GetPlayer();

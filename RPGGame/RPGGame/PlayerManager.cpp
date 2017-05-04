@@ -81,10 +81,18 @@ bool PlayerManager::Buy(const int iItemID, const int iPrice)
 //     if (!m_oPlayer.CanAddItemToBag(oGoods.GetItemID(),oGoods.GetAmount()))
 //         return false;
 
-    if (!m_oPlayer.Pay(iPrice))
+    if (!m_oPlayer.ReduceMoney(iPrice))
         return false;
 
     return m_oPlayer.AddItemToBag(iItemID, 1);
+}
+
+bool PlayerManager::Sell(const int iItemID, const int iPrice)
+{
+    if (!m_oPlayer.ReduceItemFromBag(iItemID, 1))
+        return false;
+
+    return m_oPlayer.AddMoney(iPrice);
 }
 
 const Player & PlayerManager::GetPlayer()

@@ -60,6 +60,10 @@ private:
     * @brief 买商品
     */
     void HandleBuyShopItem(const cmd::Notify eNotify,const notify::Notify &oNotify);
+    /**
+    * @brief 买商品
+    */
+    void HandleSellShopItem(const cmd::Notify eNotify, const notify::Notify &oNotify);
 
 };
 

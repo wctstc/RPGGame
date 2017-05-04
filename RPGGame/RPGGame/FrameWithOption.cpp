@@ -30,7 +30,6 @@ void FrameWithOption::PrepareRsp(const rsp::Rsp &oRsp)
     if (!oRsp.HasInt(rsp::i_RetCode) && oRsp.GetInt(rsp::i_RetCode) != rsp::Rsp::RETCODE_SUCCEED)
         return;
 
-
     if (oRsp.HasString(rsp::s_Description))
         SetDescription(oRsp.GetString(rsp::s_Description));
 

@@ -147,6 +147,17 @@ bool Player::AddItemToBag(const int iItemID, const int iNumber)
     return m_stBag.Add(iItemID, iNumber);
 }
 
+bool Player::ReduceItemFromBag(const int iItemID, const int iNumber)
+{
+    return m_stBag.Reduce(iItemID, iNumber);
+}
+
+bool Player::AddMoney(const int iMoney)
+{
+    m_stPlayerData.iMoney += iMoney;
+    return true;
+}
+
 // void Player::AddItemToBagFocus(const int iItemID, const int iNumber)
 // {
 //     m_stPlayerData.oBag.AddForce(iItemID, iNumber);
@@ -157,29 +168,12 @@ bool Player::AddItemToBag(const int iItemID, const int iNumber)
 //     return m_stPlayerData.oBag.CanAdd(iItemID, iNumber);
 // }
 
-bool Player::Pay(const int iMoney)
+bool Player::ReduceMoney(const int iMoney)
 {
     if (m_stPlayerData.iMoney < iMoney)
         return false;
 
     m_stPlayerData.iMoney -= iMoney;
-    return true;
-}
-
-
-bool Player::Buy(const Goods &oGoods)
-{
-    int iItemID = oGoods.GetItemID();
-    int iPrice  = oGoods.GetBuyPrice();
-
-//     if (!m_stPlayerData.oBag.CanAdd(iItemID, iNumber))
-//         return false;
-
-    if (Pay(iPrice))
-        return false;
-
-    m_stBag.Add(iItemID, 1);
-
     return true;
 }
 

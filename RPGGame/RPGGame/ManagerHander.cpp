@@ -44,6 +44,7 @@ bool ManagerHander::Init(Config *pConfig)
     RegisterCmd(cmd::COMMAND_SHOW_SHOP_ITEM);
 
     RegisterNotify(cmd::NOTIFY_SHOP_BUY);
+    RegisterNotify(cmd::NOTIFY_SHOP_SELL);
 
 	return true;
 }
@@ -66,22 +67,27 @@ int ManagerHander::Start()
 
 int ManagerHander::Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 {
-    g_PlayerManger.Save("Save.sav");
+    int iRetCode = -1;
 	switch (eCmd)
 	{
 	case cmd::COMMAND_SHOW_BAG:
-		return HandleShowBag(eCmd, oReq, oRsp);
+        iRetCode = HandleShowBag(eCmd, oReq, oRsp);
+        break;
 	case cmd::COMMAND_SHOW_ITEM:
-		return HandleShowItem(eCmd, oReq, oRsp);
+        iRetCode = HandleShowItem(eCmd, oReq, oRsp);
+        break;
     case cmd::COMMAND_SHOW_SHOP:
-        return HandleShowShop(eCmd, oReq, oRsp);
+        iRetCode = HandleShowShop(eCmd, oReq, oRsp);
+        break;
     case cmd::COMMAND_SHOW_SHOP_ITEM:
-        return HandleShowShopItem(eCmd, oReq, oRsp);
+        iRetCode = HandleShowShopItem(eCmd, oReq, oRsp);
+        break;
 	default:
 		break;
 	}
 
-	return -1;
+    g_PlayerManger.Save("Save.sav");
+	return iRetCode;
 }
 
 void ManagerHander::Handle(const cmd::Notify eNotify, const notify::Notify &oNotify)
@@ -90,9 +96,14 @@ void ManagerHander::Handle(const cmd::Notify eNotify, const notify::Notify &oNot
     {
     case cmd::NOTIFY_SHOP_BUY:
         HandleBuyShopItem(eNotify, oNotify);
+        break;
+    case cmd::NOTIFY_SHOP_SELL:
+        HandleSellShopItem(eNotify, oNotify);
+        break;
     default:
         break;
     }
+    g_PlayerManger.Save("Save.sav");
 }
 
 int ManagerHander::HandleShowBag(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
@@ -234,9 +245,59 @@ void ManagerHander::HandleBuyShopItem(const cmd::Notify eNotify, const notify::N
     oInfoNotify.Add(
         notify::s_TipsFrame_Description, 
         StrUtil::Format(
-            "购买:%s,花费：%d", 
+            "购买:%s,花费：%d块钱", 
             sItemName.c_str(),
             iBuyPrice));
+
+    Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
+
+    notify::Notify oPropertyNotify;
+    const Player &oPlayer = g_PlayerManger.GetPlayer();
+    oPropertyNotify.Add(notify::i_PropertyFrame_Money, oPlayer.GetMoney());
+    oPropertyNotify.Add(notify::i_PropertyFrame_Bag, oPlayer.GetBag().GetUsedCapacity());
+    Notify(cmd::NOTIFY_UPDATE_PROPERTY, oPropertyNotify);
+    return;
+}
+
+void ManagerHander::HandleSellShopItem(const cmd::Notify eNotify, const notify::Notify &oNotify)
+{
+    //参数检查
+    notify::Notify oInfoNotify;
+    if (!oNotify.HasInt(notify::i_DataID))
+    {
+        oInfoNotify.Add(notify::s_TipsFrame_Description, "无选购物品");
+        Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
+        return;
+    }
+
+    //获取商品
+    int iShopIndex = oNotify.GetInt(notify::i_DataID);
+    const Shop &oShop = g_ShopManager.GetShop();
+    if (iShopIndex < 0 || iShopIndex > oShop.GetGoodsNum())
+    {
+        oInfoNotify.Add(notify::s_TipsFrame_Description, "选购物品不存在");
+        Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
+        return;
+    }
+
+    //玩家卖出
+    int iItemID = oShop.GetGoodsItemID(iShopIndex);
+    int iSellPrice = oShop.GetGoodsSellPrice(iShopIndex);
+    if (!g_PlayerManger.Sell(iItemID, iSellPrice))
+    {
+        oInfoNotify.Add(notify::s_TipsFrame_Description, "玩家出售失败");
+        Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
+        return;
+    }
+
+    //回报
+    string sItemName = ItemManager::GetInstance().GetDescriptionByID(iItemID);
+    oInfoNotify.Add(
+        notify::s_TipsFrame_Description,
+        StrUtil::Format(
+            "出售:%s,赚取：%d块钱",
+            sItemName.c_str(),
+            iSellPrice));
 
     Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
 

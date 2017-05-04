@@ -114,23 +114,33 @@ int FrameHander::HandleStart(req::Req &oReq)
             }
 
             //选中后框处理
-            if (stOption.iFrameID != -1)
+            if (stOption.iFrameID == -2)
             {
-                pFrame = FrameLoader::GetInstance().GetFrameByID(stOption.iFrameID);
-                if (pFrame)
+                m_lsFrames.pop_back();
+                oFrameLoader.ReleaseFrame(pFrame);
+            }
+            else if (stOption.iFrameID >= 0)
+            {
+                if( pFrame->GetID() != stOption.iFrameID )
                 {
-                    pFrame->SetDataID(stOption.iDataID);
+                    pFrame = FrameLoader::GetInstance().GetFrameByID(stOption.iFrameID);
+                    if (pFrame != NULL)
+                    {
+                        pFrame->SetDataID(stOption.iDataID);
+                        pFrame->SetIndex(iIndex);
 
-                    req::Req oReq;
-                    rsp::Rsp oRsp;
-                    //请求数据;
-                    pFrame->PrepareReq(iIndex, oReq);
-                    Forword(static_cast<const cmd::Command>(pFrame->GetHandler()), oReq, oRsp);
-                    pFrame->PrepareRsp(oRsp);
-                     
-                    //入栈
-                    m_lsFrames.push_back(pFrame);
+                        DealFrame(iIndex, pFrame);
+
+                        //入栈
+                        m_lsFrames.push_back(pFrame);
+                    }
                 }
+                else
+                {
+                    iIndex = pFrame->GetIndex();
+                    DealFrame(iIndex, pFrame);
+                }
+                     
             }
         }
 	}
@@ -183,4 +193,18 @@ void FrameHander::Handle(const cmd::Notify eNotify, const notify::Notify &oNotif
         break;
     }
 
+}
+
+void FrameHander::DealFrame(const int iIndex, FrameWithOption *pFrame)
+{
+    if (pFrame == NULL)
+        return;
+
+    req::Req oReq;
+    rsp::Rsp oRsp;
+
+    //请求数据;
+    pFrame->PrepareReq(iIndex, oReq);
+    Forword(static_cast<const cmd::Command>(pFrame->GetHandler()), oReq, oRsp);
+    pFrame->PrepareRsp(oRsp);
 }

@@ -167,7 +167,10 @@ namespace data
         /*!< 数据编号 */
         int iDataID;
 
-		/*!< 选项数据 */
+        /*!< 选中选项 */
+        int iIndex;
+
+        /*!< 选项数据 */
 		vector<Option> vOptions;
 	};
 

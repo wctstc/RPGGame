@@ -41,7 +41,8 @@ namespace cmd
     {
         /*!< Пе */
         NOTIFY_IDLE = 0,
-        NOTIFY_SHOP_BUY = 1210000,
+        NOTIFY_SHOP_BUY = 1210001,
+        NOTIFY_SHOP_SELL = 1210002,
 
         NOTIFY_UPDATE_PROPERTY = 20001,
         NOTIFY_UPDATE_INFORMATION = 20002,
