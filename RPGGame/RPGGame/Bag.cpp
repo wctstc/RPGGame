@@ -72,7 +72,8 @@ int Bag::GetUsedCapacity() const
 
 bool Bag::Add(const int iItemID, const int iNumber)
 {
-    for (int i = 0; i < m_stContainerData.iUsed && i < m_vUnits.size(); ++i)
+    int iSize = m_vUnits.size();
+    for (int i = 0; i < m_stContainerData.iUsed && i < iSize; ++i)
     {
         Unit &rUnit = m_vUnits.at(i);
         if (iItemID == rUnit.GetItemID())
@@ -99,12 +100,17 @@ bool Bag::Add(const int iItemID, const int iNumber)
 
 bool Bag::Reduce(const int iItemID, const int iNumber)
 {
-    for (int i = 0; i < m_stContainerData.iUsed && i < m_vUnits.size(); ++i)
+    for (vector<Unit>::iterator it = m_vUnits.begin();it != m_vUnits.end(); ++it)
     {
-        Unit &rUnit = m_vUnits.at(i);
-        if (iItemID == rUnit.GetItemID())
+        if (iItemID == it->GetItemID())
         {
-            rUnit.Reduce(iNumber);
+            if (!it->Reduce(iNumber))
+                return false;
+            if (it->GetItemNum() <= 0)
+            {
+                it = m_vUnits.erase(it);
+                --m_stContainerData.iUsed;
+            }
             return true;
         }
     }
@@ -113,15 +119,18 @@ bool Bag::Reduce(const int iItemID, const int iNumber)
 }
 
 int Bag::GetItemID(const int iIndex) const
+
 {
-    if (iIndex < m_vUnits.size() && iIndex < m_stContainerData.iUsed)
+    int iSize = m_vUnits.size();
+    if (iIndex < iSize && iIndex < m_stContainerData.iUsed)
         return m_vUnits.at(iIndex).GetItemID();
     return 0;
 }
 
 int Bag::GetItemNum(const int iIndex) const
 {
-    if (iIndex < m_vUnits.size() && iIndex < m_stContainerData.iUsed)
+    int iSize = m_vUnits.size();
+    if (iIndex < iSize && iIndex < m_stContainerData.iUsed)
         return m_vUnits.at(iIndex).GetItemNum();
     return 0;
 }

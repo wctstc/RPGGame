@@ -132,6 +132,7 @@
     <ClCompile Include="FrameLoader.cpp" />
     <ClCompile Include="FrameHander.cpp" />
     <ClCompile Include="Goods.cpp" />
+    <ClCompile Include="HomeManager.cpp" />
     <ClCompile Include="ManagerHander.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemFrame.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="FrameLoader.h" />
     <ClInclude Include="FrameHander.h" />
     <ClInclude Include="Goods.h" />
+    <ClInclude Include="HomeManager.h" />
     <ClInclude Include="ManagerData.h" />
     <ClInclude Include="ManagerHander.h" />
     <ClInclude Include="Item.h" />

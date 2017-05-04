@@ -76,6 +76,16 @@ const Bag & PlayerManager::GetBag()
 	return m_oPlayer.GetBag();
 }
 
+bool PlayerManager::AddItemToBag(const int iItemID, const int iNum)
+{
+    return m_oPlayer.AddItemToBag(iItemID, iNum);
+}
+
+bool PlayerManager::ReduceItemFromBag(const int iItemID, const int iNum)
+{
+    return m_oPlayer.ReduceItemFromBag(iItemID, iNum);
+}
+
 bool PlayerManager::Buy(const int iItemID, const int iPrice)
 {
 //     if (!m_oPlayer.CanAddItemToBag(oGoods.GetItemID(),oGoods.GetAmount()))

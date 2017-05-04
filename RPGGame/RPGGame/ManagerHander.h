@@ -37,33 +37,70 @@ public:
     virtual void Handle(const cmd::Notify eNotify, const notify::Notify &oNotify);
 private:
 	/**
-	* @brief 展示背包
-	*/
-	int HandleShowBag(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
+	 * @brief 展示背包
+	 */
+	int HandleShowBag(const cmd::Command eCmd, const  req::Req &oReq, rsp::Rsp &oRsp);
 
 	/**
-	* @brief 展示物品
-	*/
-	int HandleShowItem(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
+	 * @brief 展示物品
+	 */
+	int HandleShowItem(const cmd::Command eCmd, const  req::Req &oReq, rsp::Rsp &oRsp);
 
     /**
      * @brief 展示商店
      */
-    int HandleShowShop(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
+    int HandleShowShop(const cmd::Command eCmd, const req::Req &oReq, rsp::Rsp &oRsp);
 
     /**
-    * @brief 展示商品
-    */
-    int HandleShowShopItem(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp);
+     * @brief 展示商品
+     */
+    int HandleShowShopItem(const cmd::Command eCmd, const req::Req &oReq, rsp::Rsp &oRsp);
 
     /**
-    * @brief 买商品
+    * @brief 展示仓库
     */
+    int HandleShowStorage(const cmd::Command eCmd, const req::Req &oReq, rsp::Rsp &oRsp);
+
+    /**
+     * @brief 展示仓库物品
+     */
+    int HandleShowStorageItem(const cmd::Command eCmd, const req::Req &oReq, rsp::Rsp &oRsp);
+
+    /**
+    * @brief 在家展示背包
+    */
+    int HandleHomeShowBag(const cmd::Command eCmd, const req::Req &oReq, rsp::Rsp &oRsp);
+
+    /**
+    * @brief 在家展示背包物品
+    */
+    int HandleHomeShowBagItem(const cmd::Command eCmd, const req::Req &oReq, rsp::Rsp &oRsp);
+
+
+
+
+
+
+
+    /**
+     * @brief 买商品
+     */
     void HandleBuyShopItem(const cmd::Notify eNotify,const notify::Notify &oNotify);
+
     /**
-    * @brief 买商品
+    * @brief 卖商品
     */
     void HandleSellShopItem(const cmd::Notify eNotify, const notify::Notify &oNotify);
+
+    /**
+     * @brief 取出仓库
+     */
+    void HandleStorageTakeOut(const cmd::Notify eNotify, const notify::Notify &oNotify);
+
+    /**
+     * @brief 存放仓库
+     */
+    void HandleStorageDeposit(const cmd::Notify eNotify, const notify::Notify &oNotify);
 
 };
 

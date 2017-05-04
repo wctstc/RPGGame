@@ -34,6 +34,16 @@ public:
 	*/
 	const Bag &GetBag();
 
+    /**
+    * @brief 添加到背包
+    */
+    bool AddItemToBag( const int iItemID, const int iNum);
+
+    /**
+     * @brief 从背包取出
+     */
+    bool ReduceItemFromBag(const int iItemID, const int iNum);
+
      /**
       * @brief 买东西
       */

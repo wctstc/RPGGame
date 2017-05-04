@@ -22,7 +22,7 @@ void FrameWithOption::PrepareReq(const int iIndex, req::Req &oReq)
 {
     oReq.Init(cmd::COMMAND_IDLE);
     oReq.Add(req::i_Index, iIndex);
-    oReq.Add(req::i_DataID, GetDataID());
+    oReq.Add(req::i_DataID,GetDataID());
 }
 
 void FrameWithOption::PrepareRsp(const rsp::Rsp &oRsp)

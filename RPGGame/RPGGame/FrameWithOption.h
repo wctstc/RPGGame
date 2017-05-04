@@ -87,14 +87,16 @@ public:
     */
     bool CheckRsp(const rsp::Rsp &oRsp);
 public:
-	SET_GET(int,                   i, ID,          m_oFrameData.iID);
-	SET_GET(data::FrameType,       e, Type,        m_oFrameData.eType);
-	SET_GET(data::Position&,       o, Position,    m_oFrameData.oPosition);
-	SET_GET(data::Size&,           o, Size,        m_oFrameData.oSize);
-	SET_GET(string,                s, Description, m_oFrameData.sDescription);
-	SET_GET(data::Direction,       e, Direction,   m_oFrameData.eDirection);
-	SET_GET(int,                   i, Handler,     m_oFrameData.iHandlerID);
-	SET_GET(vector<data::Option>&, v, Options,     m_oFrameData.vOptions);
+	SET_GET(int,                   i, ID,          m_oFrameData.iID)
+	SET_GET(data::FrameType,       e, Type,        m_oFrameData.eType)
+	SET_GET(data::Position&,       o, Position,    m_oFrameData.oPosition)
+	SET_GET(data::Size&,           o, Size,        m_oFrameData.oSize)
+	SET_GET(string,                s, Description, m_oFrameData.sDescription)
+	SET_GET(data::Direction,       e, Direction,   m_oFrameData.eDirection)
+	SET_GET(int,                   i, Handler,     m_oFrameData.iHandlerID)
+    SET_GET(int,                   i, DataID,      m_oFrameData.iDataID)
+    SET_GET(int,                   i, Index,       m_oFrameData.iIndex)
+	SET_GET(vector<data::Option>&, v, Options,     m_oFrameData.vOptions)
 private:
 	data::FrameData m_oFrameData;
 };

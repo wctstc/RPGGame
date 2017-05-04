@@ -1,10 +1,14 @@
 #include "ManagerHander.h"
 
+#include "HomeManager.h"
 #include "PlayerManager.h"
 #include "ItemManager.h"
 #include "ShopManager.h"
 
 #include "StrUtil.h"
+
+/*!< 家实例 */
+#define g_HomeManager HomeManager::GetInstance()
 
 /*!< 玩家实例 */
 #define g_PlayerManger PlayerManager::GetInstance()
@@ -29,6 +33,8 @@ bool ManagerHander::Init(Config *pConfig)
 	if (!Hander::Init(pConfig))
 		return false;
 
+    if (!g_HomeManager.Init())
+        return false;
 	if (!g_PlayerManger.Init())
 		return false;
 	if (!g_ItemManager.Init())
@@ -42,9 +48,15 @@ bool ManagerHander::Init(Config *pConfig)
     RegisterCmd(cmd::COMMAND_SHOW_ITEM);
     RegisterCmd(cmd::COMMAND_SHOW_SHOP);
     RegisterCmd(cmd::COMMAND_SHOW_SHOP_ITEM);
+    RegisterCmd(cmd::COMMAND_SHOW_STOGAE);
+    RegisterCmd(cmd::COMMAND_SHOW_STOGAE_ITEM);
+    RegisterCmd(cmd::COMMAND_HOME_SHOW_BAG);
+    RegisterCmd(cmd::COMMAND_HOME_SHOW_BAG_ITEM);
 
     RegisterNotify(cmd::NOTIFY_SHOP_BUY);
     RegisterNotify(cmd::NOTIFY_SHOP_SELL);
+    RegisterNotify(cmd::NOTIFY_STORAGE_TAKEOUT);
+    RegisterNotify(cmd::NOTIFY_STORAGE_DEPOSIT);
 
 	return true;
 }
@@ -82,6 +94,18 @@ int ManagerHander::Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
     case cmd::COMMAND_SHOW_SHOP_ITEM:
         iRetCode = HandleShowShopItem(eCmd, oReq, oRsp);
         break;
+    case cmd::COMMAND_SHOW_STOGAE:
+        iRetCode = HandleShowStorage(eCmd, oReq, oRsp);
+        break;
+    case cmd::COMMAND_SHOW_STOGAE_ITEM:
+        iRetCode = HandleShowStorageItem(eCmd, oReq, oRsp);
+        break;
+    case cmd::COMMAND_HOME_SHOW_BAG:
+        iRetCode = HandleHomeShowBag(eCmd, oReq, oRsp);
+        break;
+    case cmd::COMMAND_HOME_SHOW_BAG_ITEM:
+        iRetCode = HandleHomeShowBagItem(eCmd, oReq, oRsp);
+        break;
 	default:
 		break;
 	}
@@ -100,13 +124,19 @@ void ManagerHander::Handle(const cmd::Notify eNotify, const notify::Notify &oNot
     case cmd::NOTIFY_SHOP_SELL:
         HandleSellShopItem(eNotify, oNotify);
         break;
+    case cmd::NOTIFY_STORAGE_TAKEOUT:
+        HandleStorageTakeOut(eNotify, oNotify);
+        break;
+    case cmd::NOTIFY_STORAGE_DEPOSIT:
+        HandleStorageDeposit(eNotify, oNotify);
+        break;
     default:
         break;
     }
     g_PlayerManger.Save("Save.sav");
 }
 
-int ManagerHander::HandleShowBag(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
+int ManagerHander::HandleShowBag(const cmd::Command eCmd, const  req::Req &oReq, rsp::Rsp &oRsp)
 {
 	const Bag &oBag = g_PlayerManger.GetPlayer().GetBag();
     if (oBag.GetUsedCapacity() <= 0)
@@ -143,7 +173,7 @@ int ManagerHander::HandleShowBag(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oR
 	return 0;
 }
 
-int ManagerHander::HandleShowItem(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
+int ManagerHander::HandleShowItem(const cmd::Command eCmd, const req::Req &oReq, rsp::Rsp &oRsp)
 {
 	int iSelected = oReq.GetInt("selected");
 	const Bag &oBag = g_PlayerManger.GetPlayer().GetBag();
@@ -155,7 +185,7 @@ int ManagerHander::HandleShowItem(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &o
 	return 0;
 }
 
-int ManagerHander::HandleShowShop(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
+int ManagerHander::HandleShowShop(const cmd::Command eCmd, const req::Req &oReq, rsp::Rsp &oRsp)
 {
     const Shop &oShop = g_ShopManager.GetShop();
     int iSize = oShop.GetGoodsNum();
@@ -178,7 +208,7 @@ int ManagerHander::HandleShowShop(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &o
     return 0;
 }
 
-int ManagerHander::HandleShowShopItem(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
+int ManagerHander::HandleShowShopItem(const cmd::Command eCmd, const req::Req &oReq, rsp::Rsp &oRsp)
 {
     int iIndex = oReq.GetInt(req::i_Index);
 
@@ -206,6 +236,135 @@ int ManagerHander::HandleShowShopItem(cmd::Command eCmd, req::Req &oReq, rsp::Rs
         oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_NO_ITEM);
     }
 
+    return 0;
+}
+
+int ManagerHander::HandleShowStorage(const cmd::Command eCmd, const req::Req &oReq, rsp::Rsp &oRsp)
+{
+    vector<rsp::Rsp> vRspOption;
+    const Bag &oStorage = g_HomeManager.GetStorage();
+    if (oStorage.GetUsedCapacity() <= 0)
+    {
+        rsp::Rsp oRspOption;
+        oRspOption.Add(rsp::s_Option_Description,"无物品");
+        oRspOption.Add(rsp::i_Option_FrameID, -2);
+        oRspOption.Add(rsp::i_Option_Notify, cmd::NOTIFY_IDLE);
+        oRspOption.Add(rsp::i_Option_DataID, 0);
+        vRspOption.push_back(oRspOption);
+
+        oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_NO_ITEM);
+        oRsp.Add(rsp::v_Option, vRspOption);
+        return 0;
+    }
+
+
+    for (int i = 0; i < oStorage.GetCapacity(); ++i)
+    {
+        int iItemID = oStorage.GetItemID(i);
+        if (iItemID > 0 && oStorage.GetItemNum(i) >= 0)
+        {
+            string sItemDescription = g_ItemManager.GetDescriptionByID(iItemID);
+
+            rsp::Rsp oRspOption;
+            oRspOption.Add(
+                rsp::s_Option_Description,
+                StrUtil::Format(
+                    "%s*%d",
+                    sItemDescription.c_str(),
+                    oStorage.GetItemNum(i)));
+            oRspOption.Add(rsp::i_Option_FrameID, 1121100);
+            oRspOption.Add(rsp::i_Option_Notify, cmd::NOTIFY_IDLE);
+            oRspOption.Add(rsp::i_Option_DataID, iItemID);
+            vRspOption.push_back(oRspOption);
+        }
+    }
+    oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_SUCCEED);
+    oRsp.Add(rsp::v_Option, vRspOption);
+
+    return 0;
+}
+
+int ManagerHander::HandleShowStorageItem(const cmd::Command eCmd, const req::Req &oReq, rsp::Rsp &oRsp)
+{
+    if (!oRsp.HasInt(req::i_Index))
+        return 0;
+
+    int iIndex = oReq.GetInt(req::i_Index);
+
+    const Bag &oStorage = g_HomeManager.GetStorage();
+    if (iIndex < 0 && iIndex >= oStorage.GetUsedCapacity())
+        return 0;
+
+    int iItemID = oStorage.GetItemID(iIndex);
+    string sItemDescription = g_ItemManager.GetDescriptionByID(iItemID);
+    oRsp.Add(
+        rsp::s_Description,
+        StrUtil::Format(
+            "物品：%s\n仓库：%d个\n\n背包：%d个",
+            sItemDescription.c_str(),
+            oStorage.GetItemNumByItemID(iItemID),
+            g_PlayerManger.GetBag().GetItemNumByItemID(iItemID)));
+
+    return 0;
+}
+
+int ManagerHander::HandleHomeShowBag(const cmd::Command eCmd, const req::Req &oReq, rsp::Rsp &oRsp)
+{
+    const Bag &oBag = g_PlayerManger.GetPlayer().GetBag();
+    if (oBag.GetUsedCapacity() <= 0)
+    {
+        oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_NO_ITEM);
+        return 0;
+    }
+        
+    vector<rsp::Rsp> vRspOption;
+    for (int i = 0; i < oBag.GetCapacity(); ++i)
+    {
+        int iItemID = oBag.GetItemID(i);
+        if (iItemID > 0 && oBag.GetItemNum(i) >= 0)
+        {
+            string sItemDescription = g_ItemManager.GetDescriptionByID(iItemID);
+
+            rsp::Rsp oRspOption;
+            oRspOption.Add(
+                rsp::s_Option_Description,
+                StrUtil::Format(
+                    "%s*%d",
+                    sItemDescription.c_str(),
+                    oBag.GetItemNum(i)));
+            oRspOption.Add(rsp::i_Option_FrameID, 1122100);
+            oRspOption.Add(rsp::i_Option_Notify, cmd::NOTIFY_IDLE);
+            oRspOption.Add(rsp::i_Option_DataID, iItemID);
+            vRspOption.push_back(oRspOption);
+        }
+    }
+    oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_SUCCEED);
+    oRsp.Add(rsp::v_Option, vRspOption);
+
+    return 0;
+}
+
+int ManagerHander::HandleHomeShowBagItem(const cmd::Command eCmd, const req::Req &oReq, rsp::Rsp &oRsp)
+{
+    if (!oRsp.HasInt(req::i_Index))
+        return 0;
+
+    int iIndex = oReq.GetInt(req::i_Index);
+
+    const Bag &oBag = g_PlayerManger.GetBag();
+    if (iIndex < 0 && iIndex >= oBag.GetUsedCapacity())
+        return 0;
+
+    int iItemID = oBag.GetItemID(iIndex);
+
+    string sItemDescription = g_ItemManager.GetDescriptionByID(iItemID);
+    oRsp.Add(
+        rsp::s_Description,
+        StrUtil::Format(
+            "物品：%s\n背包：%d个\n\n仓库：%d个",
+            sItemDescription.c_str(),
+            oBag.GetItemNumByItemID(iItemID),
+            g_HomeManager.GetStorage().GetItemNumByItemID(iItemID)));
     return 0;
 }
 
@@ -265,7 +424,7 @@ void ManagerHander::HandleSellShopItem(const cmd::Notify eNotify, const notify::
     notify::Notify oInfoNotify;
     if (!oNotify.HasInt(notify::i_DataID))
     {
-        oInfoNotify.Add(notify::s_TipsFrame_Description, "无选购物品");
+        oInfoNotify.Add(notify::s_TipsFrame_Description, "无选中物品");
         Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
         return;
     }
@@ -275,7 +434,7 @@ void ManagerHander::HandleSellShopItem(const cmd::Notify eNotify, const notify::
     const Shop &oShop = g_ShopManager.GetShop();
     if (iShopIndex < 0 || iShopIndex > oShop.GetGoodsNum())
     {
-        oInfoNotify.Add(notify::s_TipsFrame_Description, "选购物品不存在");
+        oInfoNotify.Add(notify::s_TipsFrame_Description, "选中物品不存在");
         Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
         return;
     }
@@ -307,4 +466,112 @@ void ManagerHander::HandleSellShopItem(const cmd::Notify eNotify, const notify::
     oPropertyNotify.Add(notify::i_PropertyFrame_Bag, oPlayer.GetBag().GetUsedCapacity());
     Notify(cmd::NOTIFY_UPDATE_PROPERTY, oPropertyNotify);
     return;
+}
+
+void ManagerHander::HandleStorageTakeOut(const cmd::Notify eNotify, const notify::Notify &oNotify)
+{
+    //参数检查
+    notify::Notify oInfoNotify;
+    if (!oNotify.HasInt(notify::i_DataID))
+    {
+        oInfoNotify.Add(notify::s_TipsFrame_Description, "无选中物品");
+        Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
+        return;
+    }
+
+    //获取物品
+    int iItemID = oNotify.GetInt(notify::i_DataID);
+    int iNum = g_HomeManager.GetStorage().GetItemNumByItemID(iItemID);
+    if (iNum == 0)
+    {
+        oInfoNotify.Add(notify::s_TipsFrame_Description, "选中物品不存在");
+        Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
+        return;
+    }
+
+    const Bag &oBag = g_PlayerManger.GetBag();
+    if (!g_PlayerManger.AddItemToBag(iItemID, iNum))
+    {
+        oInfoNotify.Add(notify::s_TipsFrame_Description, "背包已满");
+        Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
+        return;
+    }
+
+    if (iNum != g_HomeManager.RemoveFromStorage(iItemID))
+    {
+        oInfoNotify.Add(notify::s_TipsFrame_Description, "仓库取出数量错误");
+        Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
+        return;
+    }
+
+
+    oInfoNotify.Add(notify::s_TipsFrame_Description, 
+        StrUtil::Format(
+            "取出%s*%d",
+            g_ItemManager.GetDescriptionByID(iItemID).c_str(),
+            iNum));
+    Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
+
+
+
+    notify::Notify oPropertyNotify;
+    oPropertyNotify.Add(
+        notify::i_PropertyFrame_Bag, 
+        g_PlayerManger.GetBag().GetUsedCapacity());
+    Notify(cmd::NOTIFY_UPDATE_PROPERTY, oPropertyNotify);
+
+}
+
+void ManagerHander::HandleStorageDeposit(const cmd::Notify eNotify, const notify::Notify &oNotify)
+{
+
+    //参数检查
+    notify::Notify oInfoNotify;
+    if (!oNotify.HasInt(notify::i_DataID))
+    {
+        oInfoNotify.Add(notify::s_TipsFrame_Description, "无选中物品");
+        Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
+        return;
+    }
+
+    //获取物品
+    int iItemID = oNotify.GetInt(notify::i_DataID);
+    int iNum = g_PlayerManger.GetBag().GetItemNumByItemID(iItemID);
+    if (iNum == 0)
+    {
+        oInfoNotify.Add(notify::s_TipsFrame_Description, "选中物品不存在");
+        Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
+        return;
+    }
+
+    const Bag &oStorage = g_HomeManager.GetStorage();
+    if (!g_HomeManager.AddToStorage(iItemID, iNum))
+    {
+        oInfoNotify.Add(notify::s_TipsFrame_Description, "仓库已满");
+        Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
+        return;
+    }
+
+    if (!g_PlayerManger.ReduceItemFromBag(iItemID,iNum))
+    {
+        oInfoNotify.Add(notify::s_TipsFrame_Description, "背包取出数量错误");
+        Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
+        return;
+    }
+
+
+    oInfoNotify.Add(notify::s_TipsFrame_Description,
+        StrUtil::Format(
+            "存入%s*%d",
+            g_ItemManager.GetDescriptionByID(iItemID).c_str(),
+            iNum));
+    Notify(cmd::NOTIFY_UPDATE_INFORMATION, oInfoNotify);
+
+
+
+    notify::Notify oPropertyNotify;
+    oPropertyNotify.Add(
+        notify::i_PropertyFrame_Bag,
+        g_PlayerManger.GetBag().GetUsedCapacity());
+    Notify(cmd::NOTIFY_UPDATE_PROPERTY, oPropertyNotify);
 }

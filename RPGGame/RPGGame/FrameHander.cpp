@@ -86,6 +86,8 @@ int FrameHander::HandleStart(req::Req &oReq)
 	while (bIsRuning)
     {
 		pFrame = m_lsFrames.back();
+
+        DealFrame(pFrame->GetIndex(), pFrame);
 		pFrame->Show();
 
         int iIndex = pFrame->GetSelectIndex();
