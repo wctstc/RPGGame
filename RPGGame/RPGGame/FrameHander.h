@@ -2,6 +2,7 @@
 #define __FRAMEMANAGER_H__
 
 #include <list>
+#include <vector>
 
 #include "Singleton.h"
 #include "Hander.h"
@@ -9,7 +10,7 @@
 
 
 using std::list;
-
+using std::vector;
 /**
 * @brief 框处理类
 */
@@ -57,13 +58,32 @@ private:
     /**
      * @brief 处理通知路由
      */
-    virtual void Handle(const cmd::Notify eNotify, const notify::Notify &oNotify);
+    virtual void Handle(const cmd::NotifyCommand eNotify, const notify::Notify &oNotify);
 
 private:
-    void DealFrame(const int iIndex, FrameWithOption *pFrame);
+    /**
+     * @brief 处理请求
+     */
+    int DoForword( FrameWithOption *const pFrame);
+
+    /**
+     * @brief 处理通知
+     */
+    void DoNotify(const cmd::NotifyCommand eNotifyCommand, const int iIndex, const int iDataID);
+
+    /**
+     * @brief 框入栈
+     */
+    void PushStackFrame(const int iIndex, const data::Option &stOption);
+
+    /**
+     * @brief 框出栈
+     */
+    void PopStackFrame();
+
 private:
 	/*!< 显示框的栈 */
-	list<FrameWithOption*> m_lsFrames;
+    vector<FrameWithOption*> m_vStackFrames;
 };
 
 #endif // __FRAMEMANAGER_H__

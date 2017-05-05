@@ -3,11 +3,21 @@
 
 Item::Item()
 {
+    m_oItemData.iID          = 0;
+    m_oItemData.eType        = ITEM_TYPE_NO;
+    m_oItemData.sName        = "无";
+    m_oItemData.sDescription = "无物品";
 }
 
 
 Item::~Item()
 {
+}
+
+const Item & Item::GetNoItem()
+{
+    static Item oItem;
+    return oItem;
 }
 
 bool Item::Init(const Item &oItem)

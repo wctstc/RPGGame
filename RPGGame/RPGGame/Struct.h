@@ -125,7 +125,7 @@ namespace data
 		string sDescription;
 
 		/*!< 处理命令 */
-		cmd::Notify eNotify;
+		cmd::NotifyCommand eNotify;
 
 		/*!< 选中后对应框的编号 */
         int iFrameID;

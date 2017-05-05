@@ -27,19 +27,10 @@ public:
 	bool Init();
 public:
 	/**
-	* @brief 通过编号创建物品
+	* @brief 通过编号获取物品
 	*/
-	Item *GetItemByID(int iID);
+	const Item & GetItemByID(const int iID)const ;
 
-	/**
-	* @brief 释放物品
-	*/
-	void ReleaseItem(Item *pItem);
-private:
-	/**
-	* @brief 通过类型创建物品
-	*/
-	Item *CreateItemInstanceByType(const int iType);
 private:
 	/*!< 编号与物品数据映射 */
 	map<int, Item> m_mapItemDatas;

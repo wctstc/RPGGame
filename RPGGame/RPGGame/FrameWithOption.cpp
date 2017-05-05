@@ -27,8 +27,27 @@ void FrameWithOption::PrepareReq(const int iIndex, req::Req &oReq)
 
 void FrameWithOption::PrepareRsp(const rsp::Rsp &oRsp)
 {
-    if (!oRsp.HasInt(rsp::i_RetCode) && oRsp.GetInt(rsp::i_RetCode) != rsp::Rsp::RETCODE_SUCCEED)
+    if (!oRsp.HasInt(rsp::i_RetCode) )
         return;
+    
+    int iRetCode = oRsp.GetInt(rsp::i_RetCode);
+    if (iRetCode != rsp::Rsp::RETCODE_SUCCEED)
+    {
+        SetDescription(StrUtil::Format("´íÎó£¬´íÎóÂë£º%d", iRetCode));
+
+        data::Option stOption;
+        stOption.sDescription = "·µ»Ø";
+        stOption.eNotify = cmd::NOTIFY_IDLE;
+        stOption.iFrameID = -2;
+        stOption.iDataID = 0;
+
+        vector<data::Option> vOption;
+        vOption.push_back(stOption);
+
+        SetOptions(vOption);
+
+        return;
+    }
 
     if (oRsp.HasString(rsp::s_Description))
         SetDescription(oRsp.GetString(rsp::s_Description));
@@ -49,7 +68,7 @@ void FrameWithOption::PrepareRsp(const rsp::Rsp &oRsp)
             if (it->HasInt(rsp::i_Option_FrameID))
                 stOption.iFrameID = it->GetInt(rsp::i_Option_FrameID);
             if (it->HasInt(rsp::i_Option_Notify))
-                stOption.eNotify = static_cast<cmd::Notify>(it->GetInt(rsp::i_Option_Notify));
+                stOption.eNotify = static_cast<cmd::NotifyCommand>(it->GetInt(rsp::i_Option_Notify));
             if (it->HasInt(rsp::i_Option_DataID))
                 stOption.iDataID = it->GetInt(rsp::i_Option_DataID);
 
@@ -174,7 +193,7 @@ int FrameWithOption::GetSelectIndex()
     }
 }
 
-bool FrameWithOption::GetOptionByIndex(unsigned int iIndex, data::Option &stOption)
+bool FrameWithOption::GetOptionByIndex(unsigned int iIndex, data::Option &stOption)const
 {
     if (iIndex >= GetOptions().size())
         return false;

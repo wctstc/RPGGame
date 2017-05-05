@@ -40,7 +40,7 @@ public:
 	/**
 	* @brief 创建并获取框
 	*/
-	FrameWithOption *GetFrameByID(int iID);
+	FrameWithOption *CreateFrameByID(int iID);
 
 	/**
 	* @brief 释放框

@@ -17,11 +17,25 @@ bool ItemManager::Init()
 	return true;
 }
 
+const Item::ItemType ItemManager::GetTypeByID(const int iID) const
+{
+    const Item &oItem = ItemLoader::GetInstance().GetItemByID(iID);
+    return oItem.GetType();
+}
+
+const string ItemManager::GetNameByID(const int iID) const
+{
+    const Item &oItem = ItemLoader::GetInstance().GetItemByID(iID);
+    return oItem.GetName();
+}
+
 const string ItemManager::GetDescriptionByID(const int iID) const 
 {
-    string sDescription;
-    Item *pItem = ItemLoader::GetInstance().GetItemByID(iID);
-    sDescription = pItem->GetDescription();
-    ItemLoader::GetInstance().ReleaseItem(pItem);
-    return sDescription;
+    const Item &oItem = ItemLoader::GetInstance().GetItemByID(iID);
+    return oItem.GetDescription();
+}
+
+const Item & ItemManager::GetItemByID(const int iID) const
+{
+    return ItemLoader::GetInstance().GetItemByID(iID);
 }

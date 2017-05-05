@@ -11,18 +11,18 @@ notify::Notify::~Notify()
 {
 }
 
-bool notify::Notify::Init(cmd::Command eCmd)
+bool notify::Notify::Init(cmd::NotifyCommand eNotifyCmd)
 {
-    m_eCmd = eCmd;
+    m_eNotifyCmd = eNotifyCmd;
     m_mapIntArg.clear();
     m_mapStringArg.clear();
     m_mapVectorArg.clear();
     return true;
 }
 
-cmd::Command notify::Notify::GetCmd()
+cmd::NotifyCommand notify::Notify::GetCmd()
 {
-    return m_eCmd;
+    return m_eNotifyCmd;
 }
 
 void notify::Notify::Add(const string sKey, const int iValue)

@@ -34,7 +34,7 @@ public:
     /**
     * @brief 路由通知到处理函数
     */
-    virtual void Handle(const cmd::Notify eNotify, const notify::Notify &oNotify);
+    virtual void Handle(const cmd::NotifyCommand eNotify, const notify::Notify &oNotify);
 private:
 	/**
 	 * @brief 展示背包
@@ -85,22 +85,22 @@ private:
     /**
      * @brief 买商品
      */
-    void HandleBuyShopItem(const cmd::Notify eNotify,const notify::Notify &oNotify);
+    void HandleBuyShopItem(const cmd::NotifyCommand eNotify,const notify::Notify &oNotify);
 
     /**
     * @brief 卖商品
     */
-    void HandleSellShopItem(const cmd::Notify eNotify, const notify::Notify &oNotify);
+    void HandleSellShopItem(const cmd::NotifyCommand eNotify, const notify::Notify &oNotify);
 
     /**
      * @brief 取出仓库
      */
-    void HandleStorageTakeOut(const cmd::Notify eNotify, const notify::Notify &oNotify);
+    void HandleStorageTakeOut(const cmd::NotifyCommand eNotify, const notify::Notify &oNotify);
 
     /**
      * @brief 存放仓库
      */
-    void HandleStorageDeposit(const cmd::Notify eNotify, const notify::Notify &oNotify);
+    void HandleStorageDeposit(const cmd::NotifyCommand eNotify, const notify::Notify &oNotify);
 
 };
 

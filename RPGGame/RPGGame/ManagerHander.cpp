@@ -114,7 +114,7 @@ int ManagerHander::Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 	return iRetCode;
 }
 
-void ManagerHander::Handle(const cmd::Notify eNotify, const notify::Notify &oNotify)
+void ManagerHander::Handle(const cmd::NotifyCommand eNotify, const notify::Notify &oNotify)
 {
     switch (eNotify)
     {
@@ -138,35 +138,36 @@ void ManagerHander::Handle(const cmd::Notify eNotify, const notify::Notify &oNot
 
 int ManagerHander::HandleShowBag(const cmd::Command eCmd, const  req::Req &oReq, rsp::Rsp &oRsp)
 {
-	const Bag &oBag = g_PlayerManger.GetPlayer().GetBag();
+	const Bag &oBag = g_PlayerManger.GetBag();
+
+    //背包为空
     if (oBag.GetUsedCapacity() <= 0)
     {
         oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_NO_ITEM);
         return 0;
     }
 
-
+    //获取背包物品信息
 	vector<rsp::Rsp> vRspOption;
 	for (int i = 0; i < oBag.GetCapacity(); ++i)
 	{
         int iItemID = oBag.GetItemID(i);
         if (iItemID > 0 && oBag.GetItemNum(i) >= 0)
         {
-            string sItemDescription = g_ItemManager.GetDescriptionByID(iItemID);
+            string sDescription = StrUtil::Format(
+                "%s*%d", 
+                g_ItemManager.GetNameByID(iItemID).c_str(),
+                oBag.GetItemNum(i));
 
             rsp::Rsp oRspOption;
-            oRspOption.Add(
-                rsp::s_Option_Description, 
-                StrUtil::Format(
-                    "%s*%d",
-                    sItemDescription.c_str(),
-                    oBag.GetItemNum(i)));
+            oRspOption.Add(rsp::s_Option_Description, sDescription);
             oRspOption.Add(rsp::i_Option_FrameID,     2110000);
             oRspOption.Add(rsp::i_Option_Notify,      cmd::NOTIFY_IDLE);
             oRspOption.Add(rsp::i_Option_DataID,      iItemID);
             vRspOption.push_back(oRspOption);
         }
 	}
+
     oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_SUCCEED);
     oRsp.Add(rsp::v_Option, vRspOption);
 
@@ -175,12 +176,24 @@ int ManagerHander::HandleShowBag(const cmd::Command eCmd, const  req::Req &oReq,
 
 int ManagerHander::HandleShowItem(const cmd::Command eCmd, const req::Req &oReq, rsp::Rsp &oRsp)
 {
-	int iSelected = oReq.GetInt("selected");
-	const Bag &oBag = g_PlayerManger.GetPlayer().GetBag();
-	int iID = oBag.GetItemID(iSelected);
-	string sDescription = g_ItemManager.GetDescriptionByID(iID);
+    if (!oReq.HasInt(req::i_Index))
+    {
+        oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_NO_INDEX);
+        return 0;
+    }
 
-	oRsp.Add("description", sDescription);
+	int iIndex = oReq.GetInt(req::i_Index);
+	const Bag &oBag = g_PlayerManger.GetBag();
+
+    if (iIndex < 0 || iIndex >= oBag.GetUsedCapacity())
+    {
+        oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_NO_INDEX);
+        return 0;
+    }
+
+	int iItemID = oBag.GetItemID(iIndex);
+    oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_SUCCEED);
+	oRsp.Add(rsp::s_Description, g_ItemManager.GetDescriptionByID(iItemID));
 
 	return 0;
 }
@@ -368,7 +381,7 @@ int ManagerHander::HandleHomeShowBagItem(const cmd::Command eCmd, const req::Req
     return 0;
 }
 
-void ManagerHander::HandleBuyShopItem(const cmd::Notify eNotify, const notify::Notify &oNotify)
+void ManagerHander::HandleBuyShopItem(const cmd::NotifyCommand eNotify, const notify::Notify &oNotify)
 {
     //参数检查
     notify::Notify oInfoNotify;
@@ -418,7 +431,7 @@ void ManagerHander::HandleBuyShopItem(const cmd::Notify eNotify, const notify::N
     return;
 }
 
-void ManagerHander::HandleSellShopItem(const cmd::Notify eNotify, const notify::Notify &oNotify)
+void ManagerHander::HandleSellShopItem(const cmd::NotifyCommand eNotify, const notify::Notify &oNotify)
 {
     //参数检查
     notify::Notify oInfoNotify;
@@ -468,7 +481,7 @@ void ManagerHander::HandleSellShopItem(const cmd::Notify eNotify, const notify::
     return;
 }
 
-void ManagerHander::HandleStorageTakeOut(const cmd::Notify eNotify, const notify::Notify &oNotify)
+void ManagerHander::HandleStorageTakeOut(const cmd::NotifyCommand eNotify, const notify::Notify &oNotify)
 {
     //参数检查
     notify::Notify oInfoNotify;
@@ -522,7 +535,7 @@ void ManagerHander::HandleStorageTakeOut(const cmd::Notify eNotify, const notify
 
 }
 
-void ManagerHander::HandleStorageDeposit(const cmd::Notify eNotify, const notify::Notify &oNotify)
+void ManagerHander::HandleStorageDeposit(const cmd::NotifyCommand eNotify, const notify::Notify &oNotify)
 {
 
     //参数检查

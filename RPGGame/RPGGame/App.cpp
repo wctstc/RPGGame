@@ -111,13 +111,13 @@ int App::Handler(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 	return iRet;
 }
 
-int App::AddNotifyHandle(cmd::Notify eNotify, Hander& oManager)
+int App::AddNotifyHandle(cmd::NotifyCommand eNotify, Hander& oManager)
 {
-    m_mmapNotifyToHanders.insert(pair<cmd::Notify, Hander&>(eNotify, oManager));
+    m_mmapNotifyToHanders.insert(pair<cmd::NotifyCommand, Hander&>(eNotify, oManager));
     return 0;
 }
 
-int App::RemoveNotifyHandle(cmd::Notify eNotify, Hander& oManager)
+int App::RemoveNotifyHandle(cmd::NotifyCommand eNotify, Hander& oManager)
 {
     pair<NotifyMMapIt, NotifyMMapIt> pairFound = m_mmapNotifyToHanders.equal_range(eNotify);
     for (NotifyMMapIt it = pairFound.first; it != pairFound.second; ++it)
@@ -131,7 +131,7 @@ int App::RemoveNotifyHandle(cmd::Notify eNotify, Hander& oManager)
     return -1;
 }
 
-void App::Notify(cmd::Notify eNotify, const notify::Notify &oNotify)
+void App::Notify(cmd::NotifyCommand eNotify, const notify::Notify &oNotify)
 {
     pair<NotifyMMapIt, NotifyMMapIt> pairFound = m_mmapNotifyToHanders.equal_range(eNotify);
 

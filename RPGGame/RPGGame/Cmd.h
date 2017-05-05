@@ -46,7 +46,7 @@ namespace cmd
     /**
     * @brief Í¨ÖªÃ¶¾Ù
     */
-    enum Notify
+    enum NotifyCommand
     {
         /*!< ¿Õ */
         NOTIFY_IDLE = 0,

@@ -43,7 +43,7 @@ public:
     /**
     * @brief 转发发送的通知
     */
-    void Notify(const cmd::Notify eNotify, const notify::Notify &oNotify);
+    void Notify(const cmd::NotifyCommand eNotify, const notify::Notify &oNotify);
 public:
 	/**
 	* @brief 路由命令到处理函数
@@ -53,7 +53,7 @@ public:
     /**
     * @brief 路由通知到处理函数
     */
-    virtual void Handle(const cmd::Notify eNotify, const notify::Notify &oNotify) = 0;
+    virtual void Handle(const cmd::NotifyCommand eNotify, const notify::Notify &oNotify) = 0;
 protected:
 	/**
 	* @brief 注册命令处理函数
@@ -69,12 +69,12 @@ protected:
     /**
     * @brief 注册通知处理函数
     */
-    void RegisterNotify(const cmd::Notify eNotify);
+    void RegisterNotify(const cmd::NotifyCommand eNotify);
 
     /**
     * @brief 注销通知处理函数
     */
-    void UnRegisterNotify(const cmd::Notify eNotify);
+    void UnRegisterNotify(const cmd::NotifyCommand eNotify);
 };
 
 

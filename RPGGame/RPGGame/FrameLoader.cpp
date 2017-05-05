@@ -37,7 +37,7 @@ bool FrameLoader::Init()
 		{
 			oOptionData.sDescription = platform::UTF_82ASCII(pFrameConfig->option(j).description());
 			oOptionData.iFrameID = pFrameConfig->option(j).frame_id();
-            oOptionData.eNotify = static_cast<cmd::Notify>(pFrameConfig->option(j).notify());
+            oOptionData.eNotify = static_cast<cmd::NotifyCommand>(pFrameConfig->option(j).notify());
 			vOptions.push_back(oOptionData);
 		}
 		oFrameData.vOptions = vOptions;
@@ -47,7 +47,7 @@ bool FrameLoader::Init()
 	return true;
 }
 
-FrameWithOption *FrameLoader::GetFrameByID(int iID)
+FrameWithOption *FrameLoader::CreateFrameByID(int iID)
 {
 	FrameWithOption *pFrame = NULL;
 	map<int, data::FrameData>::iterator it = m_mapFrameDatas.find(iID);

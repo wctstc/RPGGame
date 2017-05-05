@@ -4,6 +4,7 @@
 #include <string>
 
 #include "Singleton.h"
+#include "Item.h"
 
 using std::string;
 /**
@@ -16,14 +17,29 @@ public:
 	~ItemManager();
 public:
 	/**
-	* @brief 初始化
-	*/
+	 * @brief 初始化
+	 */
 	virtual bool Init();
 public:
-	/**
-	* @brief 获取物品描述
-	*/
-	const string GetDescriptionByID(const int iID)const;
+    /**
+     * @brief 获取物品描述
+     */
+    const Item::ItemType GetTypeByID(const int iID)const;
+
+    /**
+     * @brief 获取物品描述
+     */
+    const string GetNameByID(const int iID)const;
+
+    /**
+     * @brief 获取物品描述
+     */
+    const string GetDescriptionByID(const int iID)const;
+
+    /**
+     * @brief 获取物品描述
+     */
+    const Item &GetItemByID(const int iID)const;
 
 };
 

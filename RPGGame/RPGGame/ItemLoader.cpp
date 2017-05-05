@@ -38,7 +38,7 @@ bool ItemLoader::Init()
         oItem.Init(
             pItemConfig->id(),
 		    static_cast<Item::ItemType>(pItemConfig->type()),
-            "",
+            UTF_82ASCII(pItemConfig->name()),
 		    UTF_82ASCII(pItemConfig->description()));
 
 		m_mapItemDatas.insert(pair<int, Item>(oItem.GetID(), oItem));
@@ -47,36 +47,12 @@ bool ItemLoader::Init()
 	return true;
 }
 
-Item * ItemLoader::GetItemByID(int iID)
+const Item &ItemLoader::GetItemByID(const int iID ) const
 {
-	Item *pItem = NULL;
-	map<int, Item>::iterator it = m_mapItemDatas.find(iID);
-	if (it != m_mapItemDatas.end())
-	{
-		pItem = CreateItemInstanceByType(it->second.GetType());
-		pItem->Init(it->second);
-	}
-	return pItem;
-}
-
-void ItemLoader::ReleaseItem(Item *pItem)
-{
-	if (pItem != NULL)
-		delete pItem;
-}
-
-
-Item * ItemLoader::CreateItemInstanceByType(const int iType)
-{
-	Item *pItem;
-	switch (iType)
-	{
-	case Item::ITEM_TYPE_NORMAL:
-		pItem = new Item();
-		break;
-	default:
-		pItem = new Item();
-		break;
-	}
-	return pItem;
+    map<int, Item>::const_iterator it = m_mapItemDatas.find(iID);
+    if (it != m_mapItemDatas.end())
+    {
+        return it->second;
+    }
+    return Item::GetNoItem();
 }

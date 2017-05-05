@@ -37,6 +37,8 @@ bool FrameHander::Init(Config *pConfig)
     //提示框
     TipsFrame::GetInstance().Init();
 
+    m_vStackFrames.clear();
+    m_vStackFrames.reserve(10);
 
 	return true;
 }
@@ -80,70 +82,49 @@ int FrameHander::HandleStart(req::Req &oReq)
 
     //选择框
     FrameLoader &oFrameLoader = FrameLoader::GetInstance();
-    FrameWithOption *pFrame = oFrameLoader.GetFrameByID(0);
-    m_lsFrames.push_back(pFrame);
+    FrameWithOption *pFrame = oFrameLoader.CreateFrameByID(0);
+    m_vStackFrames.push_back(pFrame);
 
 	while (bIsRuning)
     {
-		pFrame = m_lsFrames.back();
-
-        DealFrame(pFrame->GetIndex(), pFrame);
+		pFrame = m_vStackFrames.back();
+        
+        //数据请求填充
+        if (DoForword(pFrame) < 0)
+        {
+            PopStackFrame();
+            continue;
+        }
 		pFrame->Show();
 
+        //选择选项
         int iIndex = pFrame->GetSelectIndex();
 		
-		if (iIndex < 0 )
+        
+		if (iIndex < 0 )//Esc退出
 		{
-		    //取消选择
-            if (m_lsFrames.size() <= 1)
-                continue;
-
-            m_lsFrames.pop_back();
-            oFrameLoader.ReleaseFrame(pFrame);
+            PopStackFrame();
             continue;
 		}
-        else
+        else//Enter选中
         {
-            //选中后通知处理
             data::Option  stOption;
-            pFrame->GetOptionByIndex(iIndex, stOption);
-            if (stOption.eNotify != cmd::NOTIFY_IDLE)
-            {
-                notify::Notify oNotify;
-                oNotify.Add(notify::i_Index, iIndex);
-                oNotify.Add(notify::i_DataID, pFrame->GetDataID());
-                Notify(stOption.eNotify, oNotify);
-            }
+            //获取选项信息
+            if (!pFrame->GetOptionByIndex(iIndex, stOption))
+                continue;
 
-            //选中后框处理
+            //通知处理
+            if (stOption.eNotify != cmd::NOTIFY_IDLE )
+                DoNotify(stOption.eNotify, iIndex, pFrame->GetDataID());
+
+
+            //一次性框，显示后弹出
             if (stOption.iFrameID == -2)
-            {
-                m_lsFrames.pop_back();
-                oFrameLoader.ReleaseFrame(pFrame);
-            }
-            else if (stOption.iFrameID >= 0)
-            {
-                if( pFrame->GetID() != stOption.iFrameID )
-                {
-                    pFrame = FrameLoader::GetInstance().GetFrameByID(stOption.iFrameID);
-                    if (pFrame != NULL)
-                    {
-                        pFrame->SetDataID(stOption.iDataID);
-                        pFrame->SetIndex(iIndex);
+                PopStackFrame();
 
-                        DealFrame(iIndex, pFrame);
-
-                        //入栈
-                        m_lsFrames.push_back(pFrame);
-                    }
-                }
-                else
-                {
-                    iIndex = pFrame->GetIndex();
-                    DealFrame(iIndex, pFrame);
-                }
-                     
-            }
+            //跳转框，添加后续框
+            if (stOption.iFrameID >= 0 && pFrame->GetID() != stOption.iFrameID)
+                PushStackFrame(iIndex, stOption);
         }
 	}
 
@@ -161,7 +142,7 @@ int FrameHander::Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 	return 0;
 }
 
-void FrameHander::Handle(const cmd::Notify eNotify, const notify::Notify &oNotify)
+void FrameHander::Handle(const cmd::NotifyCommand eNotify, const notify::Notify &oNotify)
 {
     switch (eNotify)
     {
@@ -197,16 +178,51 @@ void FrameHander::Handle(const cmd::Notify eNotify, const notify::Notify &oNotif
 
 }
 
-void FrameHander::DealFrame(const int iIndex, FrameWithOption *pFrame)
+int FrameHander::DoForword(FrameWithOption *const pFrame)
 {
     if (pFrame == NULL)
-        return;
+        return -1;
+
+    if (!pFrame->GetHandler())
+        return 0;
 
     req::Req oReq;
     rsp::Rsp oRsp;
 
     //请求数据;
-    pFrame->PrepareReq(iIndex, oReq);
-    Forword(static_cast<const cmd::Command>(pFrame->GetHandler()), oReq, oRsp);
-    pFrame->PrepareRsp(oRsp);
+    pFrame->PrepareReq(pFrame->GetIndex(), oReq);
+    if (0 == Forword(static_cast<const cmd::Command>(pFrame->GetHandler()), oReq, oRsp))
+    {
+        pFrame->PrepareRsp(oRsp);
+        return 0;
+    }
+    return -1;
+}
+
+void FrameHander::DoNotify(const cmd::NotifyCommand eNotifyCommand, const int iIndex, const int iDataID)
+{
+    notify::Notify oNotify;
+    oNotify.Add(notify::i_Index, iIndex);
+    oNotify.Add(notify::i_DataID, iDataID);
+    Notify(eNotifyCommand, oNotify);
+}
+
+void FrameHander::PushStackFrame(const int iIndex, const data::Option &stOption )
+{
+    FrameWithOption *const pFrame = FrameLoader::GetInstance().CreateFrameByID(stOption.iFrameID);
+    if (pFrame != NULL)
+    {
+        pFrame->SetDataID(stOption.iDataID);
+        pFrame->SetIndex(iIndex);
+        m_vStackFrames.push_back(pFrame);
+    }
+}
+
+void FrameHander::PopStackFrame()
+{
+    if (m_vStackFrames.size() > 1)
+    {
+        FrameLoader::GetInstance().ReleaseFrame(m_vStackFrames.back());
+        m_vStackFrames.pop_back();
+    }
 }

@@ -63,25 +63,25 @@ public:
     /**
     * @brief 添加通知的处理函数
     */
-    int AddNotifyHandle(cmd::Notify eNotify, Hander& oManager);
+    int AddNotifyHandle(cmd::NotifyCommand eNotify, Hander& oManager);
 
     /**
     * @brief 移除通知的处理函数
     */
-    int RemoveNotifyHandle(cmd::Notify eNotify, Hander& oManager);
+    int RemoveNotifyHandle(cmd::NotifyCommand eNotify, Hander& oManager);
 
     /**
     * @brief 处理通知
     */
-    void Notify(cmd::Notify eNotify, const notify::Notify &oNotify);
+    void Notify(cmd::NotifyCommand eNotify, const notify::Notify &oNotify);
 private:
 	typedef multimap <cmd::Command, Hander&>::const_iterator CommandMMapIt;
 	/*!< 命令和处理函数的映射关系 */
     multimap<cmd::Command, Hander&> m_mmapCmdToHanders;
 
-    typedef multimap <cmd::Notify, Hander&>::const_iterator NotifyMMapIt;
+    typedef multimap <cmd::NotifyCommand, Hander&>::const_iterator NotifyMMapIt;
     /*!< 通知和处理函数的映射关系 */
-    multimap<cmd::Notify, Hander&> m_mmapNotifyToHanders;
+    multimap<cmd::NotifyCommand, Hander&> m_mmapNotifyToHanders;
 
 	/*!< 是否运行 */
 	bool m_bIsRuning;

@@ -16,18 +16,26 @@ public:
     */
     enum ItemType
     {
+        /*!< 空类型 */
+        ITEM_TYPE_NO = 0,
+
         /*!< 普通类型 */
-        ITEM_TYPE_NORMAL = 0,
+        ITEM_TYPE_NORMAL = 1,
 
         /*!< 武器类型 */
-        ITEM_TYPE_EQUIPMENT = 1,
+        ITEM_TYPE_EQUIPMENT = 2,
 
         /*!< 类型最大值 */
-        ITEM_TYPE_MAX = 2
+        ITEM_TYPE_MAX = 3
     };
 public:
 	Item();
 	~Item();
+public:
+    /**
+     * @brief 无物品
+     */
+    static const Item &GetNoItem();
 public:
 	/**
 	 * @brief 初始化

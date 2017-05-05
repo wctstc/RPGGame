@@ -48,7 +48,10 @@ namespace rsp
         enum RetCode
         {
             RETCODE_SUCCEED = 0,
-            RETCODE_NO_ITEM,
+            RETCODE_NO_INDEX    = 1000001,
+            RETCODE_ERROR_INDEX = 1000002,
+
+            RETCODE_NO_ITEM = 2000002,
         };
 
     public:

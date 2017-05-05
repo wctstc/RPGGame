@@ -47,12 +47,12 @@ namespace notify
         /**
         * @brief 初始化
         */
-        virtual bool Init(cmd::Command eCmd);
+        virtual bool Init(cmd::NotifyCommand eCmd);
 
         /**
         * @brief 获取指令
         */
-        cmd::Command GetCmd();
+        cmd::NotifyCommand GetCmd();
 
         /**
         * @brief 添加整型参数
@@ -100,7 +100,7 @@ namespace notify
         const bool HasVector(const string sKey)const;
     private:
         /*!< 指令 */
-        cmd::Command m_eCmd;
+        cmd::NotifyCommand m_eNotifyCmd;
         /*!< 整型参数映射 */
         map<string, int> m_mapIntArg;
         /*!< 字符串参数映射 */
