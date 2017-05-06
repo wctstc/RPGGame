@@ -2,13 +2,13 @@
 #define __PLAYERMANAGER_H__
 
 #include "Singleton.h"
+#include "Manager.h"
 #include "Player.h"
-#include "Goods.h"
-
+#include "Bag.h"
 /**
 * @brief 玩家管理
 */
-class PlayerManager:public Singleton<PlayerManager>
+class PlayerManager:public Singleton<PlayerManager>,public Manager
 {
 public:
 	PlayerManager();
@@ -29,6 +29,7 @@ public:
      */
     virtual bool Load(const string sFile);
 public:
+
 	/**
 	* @brief 获取背包
 	*/
@@ -37,12 +38,12 @@ public:
     /**
     * @brief 添加到背包
     */
-    bool AddItemToBag( const int iItemID, const int iNum);
+    bool AddToBag( const int iItemID, const int iNum);
 
     /**
      * @brief 从背包取出
      */
-    bool ReduceItemFromBag(const int iItemID, const int iNum);
+    bool ReduceFromBag(const int iItemID, const int iNum);
 
      /**
       * @brief 买东西
@@ -59,6 +60,9 @@ public:
      */
     const Player & GetPlayer();
 private:
+    /*!< 背包 */
+    Bag m_oBag;
+
 	/*!< 玩家 */
 	Player m_oPlayer;
 };

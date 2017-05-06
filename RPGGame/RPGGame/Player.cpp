@@ -1,7 +1,5 @@
 #include "Player.h"
 
-
-
 Player::Player()
 {
 }
@@ -40,7 +38,6 @@ bool Player::Init(
     m_stPlayerData.iExp      = iExp;
     m_stPlayerData.iTotalExp = iTotalExp;
 
-    m_stBag.Init(1, 20);
 
     for (int i = 0; i < Equipment::EQUIPMENT_TYPE_MAX; ++i)
         m_ayEquipments[i].bIsEquip = false;
@@ -57,13 +54,7 @@ bool Player::Save(int &iLength, char *csBuffer) const
 
     memcpy(csBuffer, &m_stPlayerData, iSize );
 
-    int iLeft = iLength - iSize;
-    int iUsed = iSize;
-
-    if (!m_stBag.Save(iLeft, csBuffer + iSize))
-        return false;
-
-    iLength = iLeft + iUsed;
+    iLength = iSize;
     return true;
 }
 
@@ -73,16 +64,7 @@ bool Player::Load(int &iLength, const char *const csBuffer)
     if (iLength < iSize)
         return false;
 
-    memcpy(&m_stPlayerData, csBuffer, iSize);
-
-    int iLeft = iLength - iSize;
-    int iUsed = iSize;
-
-    if (!m_stBag.Load(iLeft, csBuffer + iSize))
-        return false;
-
-    iLength = iLeft + iUsed;
-
+    iLength = iSize;
     return true;
 }
 
@@ -139,17 +121,6 @@ void Player::Defance( const int iDamage)
 int Player::Attack()
 {
     return GetAttack()+GetExtendAttack();
-}
-
-
-bool Player::AddItemToBag(const int iItemID, const int iNumber)
-{
-    return m_stBag.Add(iItemID, iNumber);
-}
-
-bool Player::ReduceItemFromBag(const int iItemID, const int iNumber)
-{
-    return m_stBag.Reduce(iItemID, iNumber);
 }
 
 bool Player::AddMoney(const int iMoney)

@@ -1,5 +1,5 @@
-#ifndef __FRAMEMANAGER_H__
-#define __FRAMEMANAGER_H__
+#ifndef __FRAMEHANDLER_H__
+#define __FRAMEHANDLER_H__
 
 #include <list>
 #include <vector>
@@ -14,11 +14,11 @@ using std::vector;
 /**
 * @brief 框处理类
 */
-class FrameHander : public Singleton<FrameHander>,public Hander
+class FrameHandler : public Singleton<FrameHandler>,public Hander
 {
 public:
-	FrameHander();
-	virtual ~FrameHander();
+	FrameHandler();
+	virtual ~FrameHandler();
 public:
 	/**
 	* @brief 初始化
@@ -69,7 +69,7 @@ private:
     /**
      * @brief 处理通知
      */
-    void DoNotify(const cmd::NotifyCommand eNotifyCommand, const int iIndex, const int iDataID);
+    void DoNotify(const cmd::NotifyCommand eNotifyCommand, const int iIndex, const int iData);
 
     /**
      * @brief 框入栈
@@ -86,4 +86,4 @@ private:
     vector<FrameWithOption*> m_vStackFrames;
 };
 
-#endif // __FRAMEMANAGER_H__
+#endif // __FRAMEHANDLER_H__

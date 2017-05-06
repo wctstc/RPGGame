@@ -1,4 +1,4 @@
-#include "FrameHander.h"
+#include "FrameHandler.h"
 #include "ArrowManager.h"
 #include "Cmd.h"
 #include "FrameLoader.h"
@@ -9,17 +9,17 @@
 
 
 
-FrameHander::FrameHander()
+FrameHandler::FrameHandler()
 {
 
 }
 
-FrameHander::~FrameHander()
+FrameHandler::~FrameHandler()
 {
 
 }
 
-bool FrameHander::Init(Config *pConfig)
+bool FrameHandler::Init(Config *pConfig)
 {
 	if (!FrameLoader::GetInstance().Init())
 		return false;
@@ -43,7 +43,7 @@ bool FrameHander::Init(Config *pConfig)
 	return true;
 }
 
-int FrameHander::Start()
+int FrameHandler::Start()
 {
 	int iRet = Hander::Start();
 	if (iRet != 0)
@@ -52,7 +52,7 @@ int FrameHander::Start()
 	return 0;
 }
 
-int FrameHander::Stop()
+int FrameHandler::Stop()
 {
 	int iRet = Hander::Stop();
 	if (iRet != 0)
@@ -61,17 +61,17 @@ int FrameHander::Stop()
 	return 0;
 }
 
-void FrameHander::Finish()
+void FrameHandler::Finish()
 {
 
 }
 
-int FrameHander::HandleIdle(req::Req &oReq)
+int FrameHandler::HandleIdle(req::Req &oReq)
 {
 	return 1;
 }
 
-int FrameHander::HandleStart(req::Req &oReq)
+int FrameHandler::HandleStart(req::Req &oReq)
 {
     bool bIsRuning = true;
     //属性框
@@ -115,7 +115,7 @@ int FrameHander::HandleStart(req::Req &oReq)
 
             //通知处理
             if (stOption.eNotify != cmd::NOTIFY_IDLE )
-                DoNotify(stOption.eNotify, iIndex, pFrame->GetDataID());
+                DoNotify(stOption.eNotify, iIndex, pFrame->GetData());
 
 
             //一次性框，显示后弹出
@@ -131,7 +131,7 @@ int FrameHander::HandleStart(req::Req &oReq)
 	return 0;
 }
 
-int FrameHander::Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
+int FrameHandler::Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 {
 	switch (eCmd)
 	{
@@ -142,7 +142,7 @@ int FrameHander::Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 	return 0;
 }
 
-void FrameHander::Handle(const cmd::NotifyCommand eNotify, const notify::Notify &oNotify)
+void FrameHandler::Handle(const cmd::NotifyCommand eNotify, const notify::Notify &oNotify)
 {
     switch (eNotify)
     {
@@ -178,7 +178,7 @@ void FrameHander::Handle(const cmd::NotifyCommand eNotify, const notify::Notify 
 
 }
 
-int FrameHander::DoForword(FrameWithOption *const pFrame)
+int FrameHandler::DoForword(FrameWithOption *const pFrame)
 {
     if (pFrame == NULL)
         return -1;
@@ -199,26 +199,26 @@ int FrameHander::DoForword(FrameWithOption *const pFrame)
     return -1;
 }
 
-void FrameHander::DoNotify(const cmd::NotifyCommand eNotifyCommand, const int iIndex, const int iDataID)
+void FrameHandler::DoNotify(const cmd::NotifyCommand eNotifyCommand, const int iIndex, const int iData)
 {
     notify::Notify oNotify;
     oNotify.Add(notify::i_Index, iIndex);
-    oNotify.Add(notify::i_DataID, iDataID);
+    oNotify.Add(notify::i_Data, iData);
     Notify(eNotifyCommand, oNotify);
 }
 
-void FrameHander::PushStackFrame(const int iIndex, const data::Option &stOption )
+void FrameHandler::PushStackFrame(const int iIndex, const data::Option &stOption )
 {
     FrameWithOption *const pFrame = FrameLoader::GetInstance().CreateFrameByID(stOption.iFrameID);
     if (pFrame != NULL)
     {
-        pFrame->SetDataID(stOption.iDataID);
+        pFrame->SetData(stOption.iData);
         pFrame->SetIndex(iIndex);
         m_vStackFrames.push_back(pFrame);
     }
 }
 
-void FrameHander::PopStackFrame()
+void FrameHandler::PopStackFrame()
 {
     if (m_vStackFrames.size() > 1)
     {

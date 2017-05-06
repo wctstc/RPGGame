@@ -81,6 +81,7 @@
       <AdditionalIncludeDirectories>proto\src\proto;proto\src;proto;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>HAVE_STRUCT_TIMESPEC;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>proto/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -130,10 +131,12 @@
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="FrameWithOption.cpp" />
     <ClCompile Include="FrameLoader.cpp" />
-    <ClCompile Include="FrameHander.cpp" />
+    <ClCompile Include="FrameHandler.cpp" />
     <ClCompile Include="Goods.cpp" />
     <ClCompile Include="HomeManager.cpp" />
-    <ClCompile Include="ManagerHander.cpp" />
+    <ClCompile Include="HomeHandler.cpp" />
+    <ClCompile Include="Manager.cpp" />
+    <ClCompile Include="ManagerHandler.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemFrame.cpp" />
     <ClCompile Include="ItemLoader.cpp" />
@@ -144,6 +147,7 @@
     <ClCompile Include="Notify.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerHandler.cpp" />
     <ClCompile Include="PlayerLoader.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="PropertyFrame.cpp" />
@@ -154,6 +158,7 @@
     <ClCompile Include="Rsp.cpp" />
     <ClCompile Include="Shop.cpp" />
     <ClCompile Include="ShopFrame.cpp" />
+    <ClCompile Include="ShopHandler.cpp" />
     <ClCompile Include="ShopItemFrame.cpp" />
     <ClCompile Include="ShopManager.cpp" />
     <ClCompile Include="Skill.cpp" />
@@ -177,20 +182,24 @@
     <ClInclude Include="FrameStruct.h" />
     <ClInclude Include="FrameWithOption.h" />
     <ClInclude Include="FrameLoader.h" />
-    <ClInclude Include="FrameHander.h" />
+    <ClInclude Include="FrameHandler.h" />
     <ClInclude Include="Goods.h" />
     <ClInclude Include="HomeManager.h" />
+    <ClInclude Include="HomeHandler.h" />
+    <ClInclude Include="Manager.h" />
     <ClInclude Include="ManagerData.h" />
-    <ClInclude Include="ManagerHander.h" />
+    <ClInclude Include="ManagerHandler.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemFrame.h" />
     <ClInclude Include="ItemLoader.h" />
     <ClInclude Include="ItemManager.h" />
     <ClInclude Include="Hander.h" />
     <ClInclude Include="ArrowManager.h" />
+    <ClInclude Include="ManagerInstance.h" />
     <ClInclude Include="Notify.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerData.h" />
+    <ClInclude Include="PlayerHandler.h" />
     <ClInclude Include="PlayerLoader.h" />
     <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="Pointer.h" />
@@ -202,6 +211,7 @@
     <ClInclude Include="Rsp.h" />
     <ClInclude Include="Shop.h" />
     <ClInclude Include="ShopFrame.h" />
+    <ClInclude Include="ShopHandler.h" />
     <ClInclude Include="ShopItemFrame.h" />
     <ClInclude Include="ShopManager.h" />
     <ClInclude Include="Singleton.h" />

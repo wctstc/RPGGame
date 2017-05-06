@@ -8,15 +8,12 @@ using std::pair;
 
 #include "Cmd.h"
 #include "Singleton.h"
-#include "FrameHander.h"
-#include "ManagerHander.h"
+#include "FrameHandler.h"
+#include "ManagerHandler.h"
 
 
 /*!< 框实例 */
-#define g_FrameHander FrameHander::GetInstance()
-
-/*!< 处理实例 */
-#define g_ManagerHander ManagerHander::GetInstance()
+#define g_FrameHandler FrameHandler::GetInstance()
 
 /*!< 应用实例 */
 #define g_App App::GetInstance()

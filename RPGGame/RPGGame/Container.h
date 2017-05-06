@@ -1,5 +1,5 @@
-#ifndef __BAG_H__
-#define __BAG_H__
+#ifndef __CONTAINER_H__
+#define __CONTAINER_H__
 
 #include "Item.h"
 
@@ -91,5 +91,5 @@ private:
 };
 
 
-#endif // __BAG_H__
+#endif // __CONTAINER_H__
 

@@ -22,7 +22,7 @@ void FrameWithOption::PrepareReq(const int iIndex, req::Req &oReq)
 {
     oReq.Init(cmd::COMMAND_IDLE);
     oReq.Add(req::i_Index, iIndex);
-    oReq.Add(req::i_DataID,GetDataID());
+    oReq.Add(req::i_Data,GetData());
 }
 
 void FrameWithOption::PrepareRsp(const rsp::Rsp &oRsp)
@@ -39,7 +39,7 @@ void FrameWithOption::PrepareRsp(const rsp::Rsp &oRsp)
         stOption.sDescription = "·µ»Ø";
         stOption.eNotify = cmd::NOTIFY_IDLE;
         stOption.iFrameID = -2;
-        stOption.iDataID = 0;
+        stOption.iData = 0;
 
         vector<data::Option> vOption;
         vOption.push_back(stOption);
@@ -63,14 +63,14 @@ void FrameWithOption::PrepareRsp(const rsp::Rsp &oRsp)
             stOption.sDescription = it->GetString(rsp::s_Option_Description);
             stOption.iFrameID = -1;
             stOption.eNotify = cmd::NOTIFY_IDLE;
-            stOption.iDataID = 0;
+            stOption.iData = 0;
 
             if (it->HasInt(rsp::i_Option_FrameID))
                 stOption.iFrameID = it->GetInt(rsp::i_Option_FrameID);
             if (it->HasInt(rsp::i_Option_Notify))
                 stOption.eNotify = static_cast<cmd::NotifyCommand>(it->GetInt(rsp::i_Option_Notify));
-            if (it->HasInt(rsp::i_Option_DataID))
-                stOption.iDataID = it->GetInt(rsp::i_Option_DataID);
+            if (it->HasInt(rsp::i_Option_Data))
+                stOption.iData = it->GetInt(rsp::i_Option_Data);
 
             vOption.push_back(stOption);
         }

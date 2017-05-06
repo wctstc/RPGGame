@@ -79,6 +79,9 @@
     <Filter Include="Game\UI\Frame\MainFrame\FrameWithOption\PlayerFrame">
       <UniqueIdentifier>{d171b03c-dba0-49b5-b85e-9eb03682afc8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Hander\ManagerHandler">
+      <UniqueIdentifier>{212bf255-282b-422e-aaa9-4dbc4749b3a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -150,9 +153,6 @@
     <ClCompile Include="Hander.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
-    <ClCompile Include="ManagerHander.cpp">
-      <Filter>Game\Hander</Filter>
-    </ClCompile>
     <ClCompile Include="ShopFrame.cpp">
       <Filter>Game\UI\Frame\MainFrame\FrameWithOption\ShopFrame</Filter>
     </ClCompile>
@@ -180,9 +180,6 @@
     <ClCompile Include="Frame.cpp">
       <Filter>Game\UI\Frame</Filter>
     </ClCompile>
-    <ClCompile Include="FrameHander.cpp">
-      <Filter>Game\Hander</Filter>
-    </ClCompile>
     <ClCompile Include="ShopItemFrame.cpp">
       <Filter>Game\UI\Frame\MainFrame\FrameWithOption\ShopFrame</Filter>
     </ClCompile>
@@ -206,6 +203,24 @@
     </ClCompile>
     <ClCompile Include="HomeManager.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameHandler.cpp">
+      <Filter>Game\Hander</Filter>
+    </ClCompile>
+    <ClCompile Include="HomeHandler.cpp">
+      <Filter>Game\Hander\ManagerHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHandler.cpp">
+      <Filter>Game\Hander\ManagerHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopHandler.cpp">
+      <Filter>Game\Hander\ManagerHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagerHandler.cpp">
+      <Filter>Game\Hander\ManagerHandler</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -284,9 +299,6 @@
     <ClInclude Include="Hander.h">
       <Filter>Framework</Filter>
     </ClInclude>
-    <ClInclude Include="ManagerHander.h">
-      <Filter>Game\Hander</Filter>
-    </ClInclude>
     <ClInclude Include="Pointer.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -323,9 +335,6 @@
     <ClInclude Include="Frame.h">
       <Filter>Game\UI\Frame</Filter>
     </ClInclude>
-    <ClInclude Include="FrameHander.h">
-      <Filter>Game\Hander</Filter>
-    </ClInclude>
     <ClInclude Include="ShopItemFrame.h">
       <Filter>Game\UI\Frame\MainFrame\FrameWithOption\ShopFrame</Filter>
     </ClInclude>
@@ -355,6 +364,27 @@
     </ClInclude>
     <ClInclude Include="HomeManager.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameHandler.h">
+      <Filter>Game\Hander</Filter>
+    </ClInclude>
+    <ClInclude Include="HomeHandler.h">
+      <Filter>Game\Hander\ManagerHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagerInstance.h">
+      <Filter>Game\Hander\ManagerHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHandler.h">
+      <Filter>Game\Hander\ManagerHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopHandler.h">
+      <Filter>Game\Hander\ManagerHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagerHandler.h">
+      <Filter>Game\Hander\ManagerHandler</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

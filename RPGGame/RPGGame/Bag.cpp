@@ -5,11 +5,20 @@ const int Bag::g_iMaxCapacity = 20;
 
 Bag::Bag()
 {
+    m_stContainerData.iID       = 0;
+    m_stContainerData.iCapacity = 0;
+    m_stContainerData.iUsed     = 0;
 }
 
 
 Bag::~Bag()
 {
+}
+
+const Bag & Bag::GetNoBag()
+{
+    static Bag oBag;
+    return oBag;
 }
 
 bool Bag::Init(const int iID, const int iCapacity)

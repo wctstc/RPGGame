@@ -131,7 +131,7 @@ namespace data
         int iFrameID;
 
         /*!< 数据编号 */
-        int iDataID;
+        int iData;
 	};
 
 	
@@ -165,7 +165,7 @@ namespace data
 		int iHandlerID;
 
         /*!< 数据编号 */
-        int iDataID;
+        int iData;
 
         /*!< 选中选项 */
         int iIndex;

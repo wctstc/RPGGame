@@ -10,6 +10,11 @@ public:
     ~Bag();
 public:
     /**
+     * @brief ÎÞÈÝÆ÷
+     */
+    static const Bag &GetNoBag();
+public:
+    /**
     * @brief ³õÊ¼»¯
     */
     virtual bool Init(const int iID, const int iCapacity);

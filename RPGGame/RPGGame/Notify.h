@@ -17,12 +17,11 @@ using std::pair;
 */
 namespace notify
 {
-
+    /** @brief Frame->Manager **/
     const string i_Index = "i_Index";
-    const string i_DataID = "i_DataID";
+    const string i_Data = "i_Data";
 
-
-
+    /** @brief Manager->PropertyFrame **/
     const string i_PropertyFrame_Hp = "i_PropertyFrame_Hp";
     const string i_PropertyFrame_MaxHp = "i_PropertyFrame_MaxHp";
     const string i_PropertyFrame_Money = "i_PropertyFrame_Money";
@@ -32,6 +31,7 @@ namespace notify
     const string i_PropertyFrame_Bag = "i_PropertyFrame_Bag";
     const string i_PropertyFrame_TotalBag = "i_PropertyFrame_TotalBag";
 
+    /** @brief Manager->TipsFrame **/
     const string s_TipsFrame_Description = "s_TipsFrame_Description";
 
 

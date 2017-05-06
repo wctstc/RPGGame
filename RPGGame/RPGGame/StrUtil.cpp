@@ -21,6 +21,7 @@ int StrUtil::Split(const string &sBuffer, const string &sSeparate, vector<string
     int iTempOffset = 0;
     while (uOffset >= 0 && uOffset < sBuffer.size())
     {
+        //组个查找分割符，并裁剪出子串
         iTempOffset = sBuffer.find(sSeparate, uOffset);
         if (iTempOffset < 0)
         {
@@ -29,16 +30,17 @@ int StrUtil::Split(const string &sBuffer, const string &sSeparate, vector<string
         }
            
         vFragments.push_back(sBuffer.substr(uOffset, iTempOffset - uOffset));
-        uOffset = iTempOffset + sSeparate.size();
+        uOffset = iTempOffset + sSeparate.length();
     }
     return vFragments.size();
 }
 
 string StrUtil::Format(const char *csFormat, ...)
 {
-    va_list ap;
-    va_start(ap, csFormat);
     char buffer[512];
+    va_list ap;
+
+    va_start(ap, csFormat);
     vsprintf(buffer, csFormat, ap);
     va_end(ap);
 

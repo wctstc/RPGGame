@@ -1,5 +1,5 @@
-#ifndef __MANAGER_H__
-#define __MANAGER_H__
+#ifndef __HANDER_H__
+#define __HANDER_H__
 
 #include "Config.h"
 #include "Cmd.h"
@@ -78,5 +78,5 @@ protected:
 };
 
 
-#endif // __MANAGER_H__
+#endif // __HANDER_H__
 

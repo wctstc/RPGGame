@@ -92,25 +92,6 @@ public://-操作----------------------------------------------------//
     virtual int Attack();
 
     /**
-     * @brief 添加到背包
-     */
-    bool AddItemToBag(const int iItemID, const int iNumber);
-
-    /**
-    * @brief 从背包减少
-    */
-    bool ReduceItemFromBag(const int iItemID, const int iNumber);
-//     /**
-//      * @brief 添加到背包，多出来的丢弃
-//      */
-//     void AddItemToBagFocus(const int iItemID, const int iNumber);
-// 
-//     /**
-//      * @brief 是否可以添加到背包
-//      */
-//     bool CanAddItemToBag(const int iItemID, const int iNumber);
-
-    /**
      * @brief 加钱
      */
     bool AddMoney(const int iMoney);
@@ -148,7 +129,6 @@ public:
     SET_GET(int,  i, Level,    m_stPlayerData.iLevel);
     SET_GET(int,  i, Exp,      m_stPlayerData.iExp);
     SET_GET(int,  i, TotalExp, m_stPlayerData.iTotalExp);
-    SET_GET(Bag&, o, Bag,    m_stBag);
 private:
     /**
      * @brief 玩家数据
@@ -166,10 +146,9 @@ private:
 
         /*!< 下一级所需经验 */
         int iTotalExp;
+
     };
 private:
-    /*!< 背包 */
-    Bag m_stBag;
     /*!< 玩家数据 */
     PlayerData m_stPlayerData;
     EquipmentState m_ayEquipments[Equipment::EQUIPMENT_TYPE_MAX];

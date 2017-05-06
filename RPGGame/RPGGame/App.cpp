@@ -8,10 +8,10 @@ bool App::Init()
 
 	m_bIsRuning = false;
 
-	if (!g_FrameHander.Init(&config))
+	if (!g_FrameHandler.Init(&config))
 		return false;
 
-	if (!g_ManagerHander.Init(&config))
+	if (!g_ManagerHandler.Init(&config))
 		return false;
 
 	return true;
@@ -23,18 +23,18 @@ int App::Start()
 		return -1;
 
 	int iRet;
-	if (iRet = g_FrameHander.Start())
+	if (iRet = g_FrameHandler.Start())
 	{
 		return iRet;
     }
-    if (iRet = g_ManagerHander.Start())
+    if (iRet = g_ManagerHandler.Start())
     {
         return iRet;
     }
 
 	req::Req req;
     rsp::Rsp rsp;
-	g_FrameHander.Forword(cmd::COMMAND_START, req, rsp);
+	g_FrameHandler.Forword(cmd::COMMAND_START, req, rsp);
 
 	
 	m_bIsRuning = true;
@@ -65,7 +65,7 @@ int App::Start()
 int App::Stop()
 {
 	int iRet;
-	if ( iRet = g_FrameHander.Stop())
+	if ( iRet = g_FrameHandler.Stop())
 	{
 		return iRet;
 	}
@@ -74,7 +74,7 @@ int App::Stop()
 
 void App::Finish()
 {
-	g_FrameHander.Finish();
+	g_FrameHandler.Finish();
 }
 
 

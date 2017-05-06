@@ -40,9 +40,15 @@ public:
     bool AddToStorage(const int iItemID, const int iItemNum);
 
     /**
+    * @brief 从仓库减少
+    */
+    bool ReduceFromStorage(const int iItemID, const int iItemNum);
+
+    /**
      * @brief 从仓库取出
      */
     int RemoveFromStorage(const int iItemID);
+
 private:
     Bag m_oStorage;
 };
