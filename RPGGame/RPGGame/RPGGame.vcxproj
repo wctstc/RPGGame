@@ -127,6 +127,7 @@
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="BagFrame.cpp" />
     <ClCompile Include="Config.cpp" />
+    <ClCompile Include="Drop.cpp" />
     <ClCompile Include="DropLoader.cpp" />
     <ClCompile Include="Equipment.cpp" />
     <ClCompile Include="FileUtil.cpp" />
@@ -152,6 +153,7 @@
     <ClCompile Include="MapLoader.cpp" />
     <ClCompile Include="MapHandler.cpp" />
     <ClCompile Include="MapManager.cpp" />
+    <ClCompile Include="Monster.cpp" />
     <ClCompile Include="MonsterLoader.cpp" />
     <ClCompile Include="Notify.cpp" />
     <ClCompile Include="Platform.cpp" />
@@ -189,6 +191,7 @@
     <ClInclude Include="Cmd.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="ContainerData.h" />
+    <ClInclude Include="Drop.h" />
     <ClInclude Include="DropLoader.h" />
     <ClInclude Include="Equipment.h" />
     <ClInclude Include="FileUtil.h" />
@@ -216,6 +219,7 @@
     <ClInclude Include="MapLoader.h" />
     <ClInclude Include="MapHandler.h" />
     <ClInclude Include="MapManager.h" />
+    <ClInclude Include="Monster.h" />
     <ClInclude Include="MonsterLoader.h" />
     <ClInclude Include="Notify.h" />
     <ClInclude Include="Player.h" />

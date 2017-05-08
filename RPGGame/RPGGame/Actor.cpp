@@ -19,13 +19,15 @@ bool Actor::Init(const Actor &oActor)
 
 
 bool Actor::Init(
-    const int iID, 
+    const int iID,
+    const string sName,
     const int iHp,
     const int iMaxHp,
     const int iAttack,
     const int iDefance)
 {
 	m_stActorData.iID      = iID;
+    m_stActorData.sName    = sName;
 	m_stActorData.iHp      = iHp;
 	m_stActorData.iMaxHp   = iMaxHp;
 	m_stActorData.iAttack  = iAttack;

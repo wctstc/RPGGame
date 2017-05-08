@@ -255,13 +255,19 @@
     <ClCompile Include="MonsterLoader.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="MapLoader.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Loader.cpp">
+      <Filter>Game\Data\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="MapLoader.cpp">
+      <Filter>Game\Data\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Drop.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -455,13 +461,19 @@
     <ClInclude Include="MonsterLoader.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="MapLoader.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Map.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Loader.h">
+      <Filter>Game\Data\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="MapLoader.h">
+      <Filter>Game\Data\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Drop.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

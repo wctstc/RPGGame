@@ -25,3 +25,8 @@ bool MapManager::Load(const string sFile)
 {
     return true;
 }
+
+int MapManager::CreateRandMonster(int iMapID)
+{
+    return 0;
+}

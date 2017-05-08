@@ -48,6 +48,7 @@ public://-²Ù×÷----------------------------------------------------//
      */
     virtual bool Init( 
         const int iID,
+        const string sName,
         const int iHp,
         const int iMaxHp,
         const int iAttack,

@@ -15,6 +15,8 @@ using std::endl;
 #include "PropertyFrame.h"
 #include "Log.h"
 #include "MapLoader.h"
+#include "MonsterLoader.h"
+#include "DropLoader.h"
 
 TestUnit::TestUnit()
 {
@@ -171,6 +173,14 @@ bool TestUnit::TestLog()
 bool TestUnit::TestMapConfig()
 {
     MapLoader &mapLoader = MapLoader::GetInstance();
-    mapLoader.Init();
+    mapLoader.Init("proto/data/dataconfig_map.data");
+
+    MonsterLoader &monsterLoader = MonsterLoader::GetInstance();
+    monsterLoader.Init("proto/data/dataconfig_monster.data");
+
+    DropLoader &dropLoader = DropLoader::GetInstance();
+    dropLoader.Init("proto/data/dataconfig_drop.data");
+
+
     return true;
 }

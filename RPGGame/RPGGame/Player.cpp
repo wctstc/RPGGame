@@ -20,6 +20,7 @@ bool Player::Init(const Player &oPlayer)
 }
 bool Player::Init(
     const int iID,
+    const string sName,
     const int iHp,
     const int iMaxHp,
     const int iAttack,
@@ -29,7 +30,7 @@ bool Player::Init(
     const int iExp,
     const int iTotalExp)
 {
-    if (!Actor::Init(iID, iHp, iMaxHp, iAttack, iDefance))
+    if (!Actor::Init(iID, sName, iHp, iMaxHp, iAttack, iDefance))
         return false;
 
 

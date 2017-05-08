@@ -27,8 +27,8 @@ public:
 	bool Init();
 public:
 	/**
-	* @brief 通过编号获取物品
-	*/
+	 * @brief 通过编号获取物品
+	 */
 	const Item & GetItemByID(const int iID)const ;
 
 private:

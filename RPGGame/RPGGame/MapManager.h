@@ -28,8 +28,10 @@ public:
     virtual bool Load(const string sFile);
 
 public:
-    
-
+    /**
+     * @brief Ëæ»úÒ°¹Ö
+     */
+    int CreateRandMonster(int iMapID);
 private:
 
 };

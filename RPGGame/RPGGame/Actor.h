@@ -20,7 +20,8 @@ public:
     * @brief 初始化数据
     */
     virtual bool Init(
-        const int iID, 
+        const int iID,
+        const string sName,
         const int iHp,
         const int iMaxHp,
         const int iAttack,
