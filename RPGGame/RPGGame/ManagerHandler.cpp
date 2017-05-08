@@ -35,7 +35,8 @@ bool ManagerHandler::Init(Config *pConfig)
     if (!g_ShopManager.Init())
         return false;
 
-    g_PlayerManger.Load("Save.sav");
+    g_PlayerManger.Load("Player.sav");
+    g_HomeManager.Load("Home.sav");
 
     RegisterCmd(cmd::COMMAND_SHOW_BAG);
     RegisterCmd(cmd::COMMAND_SHOW_ITEM);
@@ -103,7 +104,8 @@ int ManagerHandler::Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
 		break;
 	}
 
-    g_PlayerManger.Save("Save.sav");
+    g_PlayerManger.Save("Player.sav");
+    g_HomeManager.Save("Home.sav");
 	return iRetCode;
 }
 
@@ -126,7 +128,8 @@ void ManagerHandler::Handle(const cmd::NotifyCommand eNotify, const notify::Noti
     default:
         break;
     }
-    g_PlayerManger.Save("Save.sav");
+    g_PlayerManger.Save("Player.sav");
+    g_HomeManager.Save("Home.sav");
 }
 
 void ManagerHandler::UpdateTipsFrame(const string sNotifyMessage)

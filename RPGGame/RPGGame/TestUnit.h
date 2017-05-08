@@ -23,6 +23,8 @@ private:
     bool TestFrame();
     bool TestPropertyFrame();
     bool TestProtobuf();
+    bool TestLog();
+    bool TestMapConfig();
 };
 
 

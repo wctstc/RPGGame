@@ -94,10 +94,11 @@ public:
 	SET_GET(string,                s, Description, m_oFrameData.sDescription)
 	SET_GET(data::Direction,       e, Direction,   m_oFrameData.eDirection)
 	SET_GET(int,                   i, Handler,     m_oFrameData.iHandlerID)
-    SET_GET(int,                   i, Data,      m_oFrameData.iData)
+    SET_GET(int,                   i, Data,        m_oFrameData.iData)
     SET_GET(int,                   i, Index,       m_oFrameData.iIndex)
 	SET_GET(vector<data::Option>&, v, Options,     m_oFrameData.vOptions)
 private:
+    /*!< ¿òÊý¾Ý */
 	data::FrameData m_oFrameData;
 };
 

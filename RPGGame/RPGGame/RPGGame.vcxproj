@@ -127,7 +127,9 @@
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="BagFrame.cpp" />
     <ClCompile Include="Config.cpp" />
+    <ClCompile Include="DropLoader.cpp" />
     <ClCompile Include="Equipment.cpp" />
+    <ClCompile Include="FileUtil.cpp" />
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="FrameWithOption.cpp" />
     <ClCompile Include="FrameLoader.cpp" />
@@ -135,6 +137,8 @@
     <ClCompile Include="Goods.cpp" />
     <ClCompile Include="HomeManager.cpp" />
     <ClCompile Include="HomeHandler.cpp" />
+    <ClCompile Include="Loader.cpp" />
+    <ClCompile Include="Log.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="ManagerHandler.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -144,6 +148,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Hander.cpp" />
     <ClCompile Include="ArrowManager.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MapLoader.cpp" />
+    <ClCompile Include="MapHandler.cpp" />
+    <ClCompile Include="MapManager.cpp" />
+    <ClCompile Include="MonsterLoader.cpp" />
     <ClCompile Include="Notify.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -151,8 +160,11 @@
     <ClCompile Include="PlayerLoader.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="PropertyFrame.cpp" />
+    <ClCompile Include="proto\src\proto\dataconfig_drop.pb.cc" />
     <ClCompile Include="proto\src\proto\dataconfig_frame.pb.cc" />
     <ClCompile Include="proto\src\proto\dataconfig_item.pb.cc" />
+    <ClCompile Include="proto\src\proto\dataconfig_map.pb.cc" />
+    <ClCompile Include="proto\src\proto\dataconfig_monster.pb.cc" />
     <ClCompile Include="Req.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Rsp.cpp" />
@@ -177,7 +189,9 @@
     <ClInclude Include="Cmd.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="ContainerData.h" />
+    <ClInclude Include="DropLoader.h" />
     <ClInclude Include="Equipment.h" />
+    <ClInclude Include="FileUtil.h" />
     <ClInclude Include="Frame.h" />
     <ClInclude Include="FrameStruct.h" />
     <ClInclude Include="FrameWithOption.h" />
@@ -186,6 +200,8 @@
     <ClInclude Include="Goods.h" />
     <ClInclude Include="HomeManager.h" />
     <ClInclude Include="HomeHandler.h" />
+    <ClInclude Include="Loader.h" />
+    <ClInclude Include="Log.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="ManagerData.h" />
     <ClInclude Include="ManagerHandler.h" />
@@ -196,6 +212,11 @@
     <ClInclude Include="Hander.h" />
     <ClInclude Include="ArrowManager.h" />
     <ClInclude Include="ManagerInstance.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="MapLoader.h" />
+    <ClInclude Include="MapHandler.h" />
+    <ClInclude Include="MapManager.h" />
+    <ClInclude Include="MonsterLoader.h" />
     <ClInclude Include="Notify.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerData.h" />
@@ -204,8 +225,11 @@
     <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="Pointer.h" />
     <ClInclude Include="PropertyFrame.h" />
+    <ClInclude Include="proto\src\proto\dataconfig_drop.pb.h" />
     <ClInclude Include="proto\src\proto\dataconfig_frame.pb.h" />
     <ClInclude Include="proto\src\proto\dataconfig_item.pb.h" />
+    <ClInclude Include="proto\src\proto\dataconfig_map.pb.h" />
+    <ClInclude Include="proto\src\proto\dataconfig_monster.pb.h" />
     <ClInclude Include="Req.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="Rsp.h" />

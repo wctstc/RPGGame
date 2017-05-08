@@ -13,7 +13,7 @@ using std::vector;
  */
 class StrUtil
 {
-public:
+private:
     StrUtil();
     ~StrUtil();
 public:

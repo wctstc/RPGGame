@@ -16,12 +16,6 @@
 
 using namespace std;
 
-void *thread(void *arg)
-{
-	cout << (char*)arg << endl;
-	return NULL;
-}
-
 #include "StrUtil.h"
 #include "proto\dataconfig_frame.pb.h"
 
@@ -33,12 +27,12 @@ using dataconfig::FRAMEArray;
 int main()
 {
     TestUnit test;
-    //test.Run();
+    test.Run();
  
  
-    App &app = App::GetInstance();
-    app.Init();
-    app.Start();
+//     App &app = App::GetInstance();
+//     app.Init();
+//     app.Start();
 
  
  	system("pause");

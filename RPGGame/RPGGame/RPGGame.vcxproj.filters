@@ -82,6 +82,12 @@
     <Filter Include="Game\Hander\ManagerHandler">
       <UniqueIdentifier>{212bf255-282b-422e-aaa9-4dbc4749b3a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Data\Map">
+      <UniqueIdentifier>{ecfc70fd-f36a-4a56-b314-d1a8060e9ab5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Data\Map\NewFilter1">
+      <UniqueIdentifier>{e9581b39-fa6a-4646-b1ec-5b49234b8ebb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -221,6 +227,42 @@
     </ClCompile>
     <ClCompile Include="ManagerHandler.cpp">
       <Filter>Game\Hander\ManagerHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="FileUtil.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="MapManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MapHandler.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="proto\src\proto\dataconfig_drop.pb.cc">
+      <Filter>Game\Config\proto</Filter>
+    </ClCompile>
+    <ClCompile Include="proto\src\proto\dataconfig_map.pb.cc">
+      <Filter>Game\Config\proto</Filter>
+    </ClCompile>
+    <ClCompile Include="proto\src\proto\dataconfig_monster.pb.cc">
+      <Filter>Game\Config\proto</Filter>
+    </ClCompile>
+    <ClCompile Include="DropLoader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterLoader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MapLoader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -385,6 +427,42 @@
     </ClInclude>
     <ClInclude Include="ManagerHandler.h">
       <Filter>Game\Hander\ManagerHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="FileUtil.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="MapManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MapHandler.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="proto\src\proto\dataconfig_drop.pb.h">
+      <Filter>Game\Config\proto</Filter>
+    </ClInclude>
+    <ClInclude Include="proto\src\proto\dataconfig_map.pb.h">
+      <Filter>Game\Config\proto</Filter>
+    </ClInclude>
+    <ClInclude Include="proto\src\proto\dataconfig_monster.pb.h">
+      <Filter>Game\Config\proto</Filter>
+    </ClInclude>
+    <ClInclude Include="DropLoader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterLoader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MapLoader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -13,6 +13,8 @@ using std::endl;
 #include "App.h"
 #include "FrameWithOption.h"
 #include "PropertyFrame.h"
+#include "Log.h"
+#include "MapLoader.h"
 
 TestUnit::TestUnit()
 {
@@ -30,7 +32,9 @@ void TestUnit::Run()
     //TEST(TestPointer);
     //TEST(TestFrame);
     //TEST(TestPropertyFrame);
-    TEST(TestProtobuf);
+    //TEST(TestProtobuf);
+    //TEST(TestLog);
+    TEST(TestMapConfig);
 
 
 
@@ -149,5 +153,24 @@ bool TestUnit::TestProtobuf()
 
     const google::protobuf::Descriptor *pDes = item.GetDescriptor();
 
+    return true;
+}
+
+bool TestUnit::TestLog()
+{
+
+    GLog(Log::LOG_DEBUG, "Test Test");
+
+    Log m_Log("Test",Log::LOG_DEBUG);
+
+    m_Log.MLog(Log::LOG_DEBUG, "Test Test");
+
+    return true;
+}
+
+bool TestUnit::TestMapConfig()
+{
+    MapLoader &mapLoader = MapLoader::GetInstance();
+    mapLoader.Init();
     return true;
 }

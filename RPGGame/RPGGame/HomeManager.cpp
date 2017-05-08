@@ -1,5 +1,5 @@
 #include "HomeManager.h"
-
+#include "FileUtil.h"
 
 
 HomeManager::HomeManager()
@@ -24,11 +24,39 @@ bool HomeManager::Init()
 
 bool HomeManager::Save(const string sFile)
 {
+    if (sFile.empty())
+        return true;
+
+    FILE *pFile = fopen(sFile.c_str(), "wb");
+    if (pFile == NULL)
+        return false;
+
+
+    char csBuffer[10240];
+    int  iLength = sizeof(csBuffer);
+
+    if (!m_oStorage.Save(iLength, csBuffer))
+        return false;
+
+    if (FileUtil::SaveFileWithBinary(sFile, csBuffer, iLength) <= 0)
+        return false;
+
     return true;
 }
 
 bool HomeManager::Load(const string sFile)
 {
+    char csBuffer[10240];
+    int iLength = sizeof(csBuffer);
+
+    iLength = FileUtil::LoadFileWithBinary(sFile, csBuffer, iLength);
+
+    if (iLength <= 0)
+        return false;
+
+    if (!m_oStorage.Load(iLength, csBuffer))
+        return false;
+
     return true;
 }
 
