@@ -1,11 +1,11 @@
 #ifndef __SINGLETON_H__
 #define __SINGLETON_H__
 
-template<class T>
 
 /**
 * @brief 单例设计模式
 */
+template<class T>
 class Singleton
 {
 public:

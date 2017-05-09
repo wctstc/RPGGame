@@ -249,25 +249,34 @@
     <ClCompile Include="proto\src\proto\dataconfig_monster.pb.cc">
       <Filter>Game\Config\proto</Filter>
     </ClCompile>
-    <ClCompile Include="DropLoader.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="MonsterLoader.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Map.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Loader.cpp">
       <Filter>Game\Data\Map</Filter>
     </ClCompile>
-    <ClCompile Include="MapLoader.cpp">
-      <Filter>Game\Data\Map</Filter>
-    </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="MapActionLoader.cpp">
+      <Filter>Game\Data\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="proto\src\proto\dataconfig_mapaction.pb.cc">
+      <Filter>Game\Config\proto</Filter>
+    </ClCompile>
     <ClCompile Include="Drop.cpp">
+      <Filter>Game\Data\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="DropLoader.cpp">
+      <Filter>Game\Data\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Game\Data\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="MapAction.cpp">
+      <Filter>Game\Data\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="MapLoader.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -455,25 +464,34 @@
     <ClInclude Include="proto\src\proto\dataconfig_monster.pb.h">
       <Filter>Game\Config\proto</Filter>
     </ClInclude>
-    <ClInclude Include="DropLoader.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="MonsterLoader.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Loader.h">
       <Filter>Game\Data\Map</Filter>
     </ClInclude>
-    <ClInclude Include="MapLoader.h">
-      <Filter>Game\Data\Map</Filter>
-    </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="MapActionLoader.h">
+      <Filter>Game\Data\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="proto\src\proto\dataconfig_mapaction.pb.h">
+      <Filter>Game\Config\proto</Filter>
+    </ClInclude>
     <ClInclude Include="Drop.h">
+      <Filter>Game\Data\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="DropLoader.h">
+      <Filter>Game\Data\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Game\Data\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="MapAction.h">
+      <Filter>Game\Data\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="MapLoader.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

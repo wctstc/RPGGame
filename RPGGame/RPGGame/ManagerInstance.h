@@ -8,7 +8,7 @@
 #include "PlayerManager.h"
 #include "ItemManager.h"
 #include "ShopManager.h"
-
+#include "MapManager.h"
 
 /*!< 家实例 */
 #define g_HomeManager HomeManager::GetInstance()
@@ -21,5 +21,7 @@
 
 /*!< 商店实例 */
 #define g_ShopManager ShopManager::GetInstance()
+
+#define g_MapManager MapManager::GetInstance()
 
 #endif // __MANAGERINSTANCE_H__

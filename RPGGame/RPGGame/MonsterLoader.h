@@ -25,6 +25,11 @@ public:
      * @brief 通过编号获取怪物
      */
     const Monster &GetMonsterByID(const int iID)const;
+
+    /**
+     * @brief 获取怪物数量
+     */
+    int GetMonsterNum()const;
 private:
     map<int, Monster> m_mapMonsters;
 };

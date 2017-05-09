@@ -9,15 +9,15 @@ namespace cmd
 	/**
 	 * @brief 命令枚举
 	 */
-	enum Command
-	{
-		/*!< 空 */
-		COMMAND_IDLE = 0,
+    enum Command
+    {
+        /*!< 空 */
+        COMMAND_IDLE = 0,
 
-		/*!< 开始 */
-		COMMAND_START,
+        /*!< 开始 */
+        COMMAND_START,
 
-		/*!< 展示背包 */
+        /*!< 展示背包 */
         COMMAND_SHOW_BAG = 2100000,
 
         /*!< 展示物品 */
@@ -31,7 +31,7 @@ namespace cmd
 
         /*!< 展示仓库 */
         COMMAND_SHOW_STOGAE = 1121000,
-        
+
         /*!< 展示仓库物品 */
         COMMAND_SHOW_STOGAE_ITEM = 1121100,
 
@@ -40,6 +40,15 @@ namespace cmd
 
         /*!< 在家展示背包物品 */
         COMMAND_HOME_SHOW_BAG_ITEM = 1122100,
+
+        /*!< 展示地图 */
+        COMMAND_SHOW_MAP = 3000000,
+
+        /*!< 地图动作 */
+        COMMAND_SHOW_MAP_ACTION = 3100000,
+
+        /*!< 遇到怪物 */
+        COMMAND_MEET_MONSTER = 3120000,
 
     };
 

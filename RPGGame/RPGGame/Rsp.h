@@ -105,6 +105,10 @@ namespace rsp
 	    */
 	    const bool HasVector(string sKey)const;
 
+        /**
+         * @brief 清理
+         */
+        void Clear();
     private:
 	    /*!< 整型参数映射 */
 	    map<string, int> m_mapIntArg;

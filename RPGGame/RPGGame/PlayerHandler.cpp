@@ -19,7 +19,7 @@ int PlayerHandler::HandleShowBag(const cmd::Command eCmd, const  req::Req &oReq,
     //背包为空
     if (oBag.GetUsedCapacity() <= 0)
     {
-        g_ManagerHandler.RspWithNoItem(oRsp);
+        g_ManagerHandler.RspWithNoOption("无物品",oRsp);
         return 0;
     }
 

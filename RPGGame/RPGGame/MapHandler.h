@@ -8,6 +8,7 @@
 #include "Rsp.h"
 #include "Notify.h"
 
+
 /**
  * @brief 野外
  */
@@ -19,9 +20,17 @@ public:
 
 public:
     /**
+     * @brief 展示地图列表
+     */
+    int HandlerShowMap(const cmd::Command eCmd, const  req::Req &oReq, rsp::Rsp &oRsp);
+    /**
+     * @brief 展示地图操作
+     */
+    int HandlerShowMapAction(const cmd::Command eCmd, const  req::Req &oReq, rsp::Rsp &oRsp);
+    /**
     * @brief 找怪
     */
-    int HandleFindEnemy(const cmd::Command eCmd, const  req::Req &oReq, rsp::Rsp &oRsp);
+    int HandlerMeetMonster(const cmd::Command eCmd, const  req::Req &oReq, rsp::Rsp &oRsp);
 };
 
 

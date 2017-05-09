@@ -59,7 +59,7 @@ public:
     /**
     * @brief 检查请求数据参数
     */
-    bool CheckReqData(const int iDataMax, const req::Req &oReq, rsp::Rsp &oRsp) const;
+    bool CheckReqData(const req::Req &oReq, rsp::Rsp &oRsp) const;
 
     /**
      * @brief 检查通知数据参数
@@ -67,9 +67,9 @@ public:
     bool CheckNotifyData(const int iDataMax, const notify::Notify &oNotify) const;
 
     /**
-     * @brief 返回无物品
+     * @brief 返回无选项
      */
-    bool RspWithNoItem(rsp::Rsp &oRsp);
+    bool RspWithNoOption(const string sDescription, rsp::Rsp &oRsp);
 
 };
 

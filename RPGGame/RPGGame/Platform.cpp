@@ -1,5 +1,7 @@
 #include "Platform.h"
 
+#include <time.h>
+#include <stdlib.h>
 
 
 const std::string platform::UTF_82ASCII(const std::string& sUtf8Code)
@@ -14,4 +16,13 @@ const std::string platform::UTF_82ASCII(const std::string& sUtf8Code)
 	::WideCharToMultiByte(CP_OEMCP, 0, sWideChar, -1, sAsciiChar, MAX_STRING_LENGTH, NULL, NULL);
 
 	return string(sAsciiChar);
+}
+
+int platform::Rank(const int iMax)
+{
+    srand(time(NULL));
+
+    int iRankMax = (iMax <= 0) ? 1 : iMax;
+
+    return rand()% iRankMax;
 }

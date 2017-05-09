@@ -62,3 +62,8 @@ const Monster & MonsterLoader::GetMonsterByID(const int iID)const
 
     return Monster::GetNoMonster();
 }
+
+int MonsterLoader::GetMonsterNum() const
+{
+    return m_mapMonsters.size();
+}

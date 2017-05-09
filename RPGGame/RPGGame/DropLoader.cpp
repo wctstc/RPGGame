@@ -33,3 +33,18 @@ bool DropLoader::Load()
 
     return true;
 }
+
+const Drop & DropLoader::GetDropByID(const int iID) const
+{
+    map<int, Drop>::const_iterator it = m_mapDrop.find(iID);
+
+    if (it != m_mapDrop.end())
+        return it->second;
+
+    return Drop::GetNoDrop();
+}
+
+int DropLoader::GetDropNum() const
+{
+    return m_mapDrop.size();
+}

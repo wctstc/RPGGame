@@ -5,11 +5,8 @@
 Map::Map()
 {
     m_stMapData.iID = 0;
-    m_stMapData.eType = MapType::MAP_TYPE_NO_MAP;
-    m_stMapData.iMaxTime = 0;
-    m_stMapData.iRecovery = 0;
-    m_stMapData.vMonsterID.clear();
-    m_stMapData.vDropID.clear();
+    m_stMapData.sName = "ÎÞµØÍ¼";
+    m_stMapData.vMapActionID.clear();
 }
 
 
@@ -29,20 +26,10 @@ bool Map::Init(const Map &oMap)
     return true;
 }
 
-bool Map::Init(
-    const int          iID, 
-    const MapType      eType, 
-    const int          iMaxTime, 
-    const int          iRecovery, 
-    const vector<int> &vMonsterID, 
-    const vector<int> &vDropID)
+bool Map::Init(const int iID, const string sName, const vector<int> &vMapActionID)
 {
-    m_stMapData.iID        = iID;
-    m_stMapData.eType      = eType;
-    m_stMapData.iMaxTime   = iMaxTime;
-    m_stMapData.iRecovery  = iRecovery;
-    m_stMapData.vMonsterID = vMonsterID;
-    m_stMapData.vDropID    = vDropID;
-
+    m_stMapData.iID          = iID;
+    m_stMapData.sName        = sName;
+    m_stMapData.vMapActionID = vMapActionID;
     return true;
 }

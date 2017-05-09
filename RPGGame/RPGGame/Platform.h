@@ -19,7 +19,10 @@ namespace platform
 	*/
 	const std::string UTF_82ASCII(const std::string& sUtf8Code);
 
-
+    /**
+     * @brief 生成随机数
+     */
+    int Rank(const int iMax);
 };
 
 #endif

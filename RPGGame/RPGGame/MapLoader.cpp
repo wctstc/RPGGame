@@ -1,15 +1,10 @@
 #include "MapLoader.h"
 
-
 #include "dataconfig_map.pb.h"
-
 #include "Platform.h"
-#include "FileUtil.h"
 
-
-
-using dataconfig::MAP;
 using dataconfig::MAPArray;
+using dataconfig::MAP;
 
 using platform::UTF_82ASCII;
 
@@ -25,43 +20,38 @@ MapLoader::~MapLoader()
 bool MapLoader::Load()
 {
     MAPArray arrayMap;
+
     if (!GetConfigArray(arrayMap))
         return false;
 
     m_mapMaps.clear();
-
-    vector<int> vMonster;
-    vector<int> vDrop;
+    vector<int> vMapActionID;
     for (int i = 0; i < arrayMap.items_size(); ++i)
     {
-        vMonster.clear();
-        vDrop.clear();
+        vMapActionID.clear();
 
-        const MAP *pConfig = &(arrayMap.items(i));
+        const MAP &pConfig = arrayMap.items(i);
 
-        for (int j = 0; j < pConfig->monster_id_size(); ++j)
-            vMonster.push_back(pConfig->monster_id(j));
-
-        for (int j = 0; j < pConfig->drop_id_size(); ++j)
-            vDrop.push_back(pConfig->drop_id(j));
+        for (int j = 0; j < pConfig.action_id_size(); ++j)
+            vMapActionID.push_back(pConfig.action_id(j));
 
         Map oMap;
-        if (!oMap.Init(
-            pConfig->id(),
-            static_cast<Map::MapType>(pConfig->type()),
-            pConfig->maxtime(),
-            pConfig->recovery(),
-            vMonster,
-            vDrop))
+        if (!oMap.Init(pConfig.id(), UTF_82ASCII(pConfig.name()), vMapActionID))
             return false;
 
         m_mapMaps.insert(make_pair(oMap.GetID(), oMap));
     }
 
+
     return true;
 }
 
-const Map &MapLoader::GetMapByID(const int iID)const
+int MapLoader::GetMapNum() const
+{
+    return m_mapMaps.size();
+}
+
+const Map & MapLoader::GetMapByID(const int iID)const
 {
     map<int, Map>::const_iterator it = m_mapMaps.find(iID);
     if (it != m_mapMaps.end())

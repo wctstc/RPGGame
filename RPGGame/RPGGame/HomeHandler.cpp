@@ -18,7 +18,7 @@ int HomeHandler::HandleShowStorage(const cmd::Command eCmd, const req::Req &oReq
     const Bag &oStorage = g_HomeManager.GetStorage();
     if (oStorage.GetUsedCapacity() <= 0)
     {
-        g_ManagerHandler.RspWithNoItem(oRsp);
+        g_ManagerHandler.RspWithNoOption("ÎÞÎïÆ·", oRsp);
         return 0;
     }
 

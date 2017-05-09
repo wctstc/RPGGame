@@ -150,8 +150,10 @@
     <ClCompile Include="Hander.cpp" />
     <ClCompile Include="ArrowManager.cpp" />
     <ClCompile Include="Map.cpp" />
-    <ClCompile Include="MapLoader.cpp" />
+    <ClCompile Include="MapAction.cpp" />
+    <ClCompile Include="MapActionLoader.cpp" />
     <ClCompile Include="MapHandler.cpp" />
+    <ClCompile Include="MapLoader.cpp" />
     <ClCompile Include="MapManager.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="MonsterLoader.cpp" />
@@ -166,6 +168,7 @@
     <ClCompile Include="proto\src\proto\dataconfig_frame.pb.cc" />
     <ClCompile Include="proto\src\proto\dataconfig_item.pb.cc" />
     <ClCompile Include="proto\src\proto\dataconfig_map.pb.cc" />
+    <ClCompile Include="proto\src\proto\dataconfig_mapaction.pb.cc" />
     <ClCompile Include="proto\src\proto\dataconfig_monster.pb.cc" />
     <ClCompile Include="Req.cpp" />
     <ClCompile Include="App.cpp" />
@@ -216,8 +219,10 @@
     <ClInclude Include="ArrowManager.h" />
     <ClInclude Include="ManagerInstance.h" />
     <ClInclude Include="Map.h" />
-    <ClInclude Include="MapLoader.h" />
+    <ClInclude Include="MapAction.h" />
+    <ClInclude Include="MapActionLoader.h" />
     <ClInclude Include="MapHandler.h" />
+    <ClInclude Include="MapLoader.h" />
     <ClInclude Include="MapManager.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="MonsterLoader.h" />
@@ -233,6 +238,7 @@
     <ClInclude Include="proto\src\proto\dataconfig_frame.pb.h" />
     <ClInclude Include="proto\src\proto\dataconfig_item.pb.h" />
     <ClInclude Include="proto\src\proto\dataconfig_map.pb.h" />
+    <ClInclude Include="proto\src\proto\dataconfig_mapaction.pb.h" />
     <ClInclude Include="proto\src\proto\dataconfig_monster.pb.h" />
     <ClInclude Include="Req.h" />
     <ClInclude Include="App.h" />

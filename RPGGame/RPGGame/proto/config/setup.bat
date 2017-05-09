@@ -1,6 +1,7 @@
 call xls_deploy_tool.bat frame.xlsx FRAME
 call xls_deploy_tool.bat item.xlsx ITEM
 call xls_deploy_tool.bat map.xlsx MAP
+call xls_deploy_tool.bat map.xlsx MAPACTION
 call xls_deploy_tool.bat map.xlsx MONSTER
 call xls_deploy_tool.bat map.xlsx DROP
 

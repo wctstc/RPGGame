@@ -7,10 +7,12 @@
 #include "HomeHandler.h"
 #include "ShopHandler.h"
 #include "PlayerHandler.h"
+#include "MapHandler.h"
 
-#define g_HomeHandler HomeHandler::GetInstance()
-#define g_ShopHandler ShopHandler::GetInstance()
+#define g_HomeHandler   HomeHandler::GetInstance()
+#define g_ShopHandler   ShopHandler::GetInstance()
 #define g_PlayerHandler PlayerHandler::GetInstance()
+#define g_MapHandler    MapHandler::GetInstance()
 
 ManagerHandler::ManagerHandler()
 {
@@ -34,6 +36,8 @@ bool ManagerHandler::Init(Config *pConfig)
 		return false;
     if (!g_ShopManager.Init())
         return false;
+    if (!g_MapManager.Init())
+        return false;
 
     g_PlayerManger.Load("Player.sav");
     g_HomeManager.Load("Home.sav");
@@ -46,6 +50,9 @@ bool ManagerHandler::Init(Config *pConfig)
     RegisterCmd(cmd::COMMAND_SHOW_STOGAE_ITEM);
     RegisterCmd(cmd::COMMAND_HOME_SHOW_BAG);
     RegisterCmd(cmd::COMMAND_HOME_SHOW_BAG_ITEM);
+    RegisterCmd(cmd::COMMAND_SHOW_MAP);
+    RegisterCmd(cmd::COMMAND_SHOW_MAP_ACTION);
+    RegisterCmd(cmd::COMMAND_MEET_MONSTER);
 
     RegisterNotify(cmd::NOTIFY_SHOP_BUY);
     RegisterNotify(cmd::NOTIFY_SHOP_SELL);
@@ -100,6 +107,14 @@ int ManagerHandler::Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
     case cmd::COMMAND_HOME_SHOW_BAG_ITEM:
         iRetCode = g_HomeHandler.HandleShowBagItem(eCmd, oReq, oRsp);
         break;
+    case cmd::COMMAND_SHOW_MAP:
+        iRetCode = g_MapHandler.HandlerShowMap(eCmd, oReq, oRsp);
+        break;
+    case cmd::COMMAND_SHOW_MAP_ACTION:
+        iRetCode = g_MapHandler.HandlerShowMapAction(eCmd, oReq, oRsp);
+        break;
+    case cmd::COMMAND_MEET_MONSTER:
+        iRetCode = g_MapHandler.HandlerMeetMonster(eCmd, oReq, oRsp);
 	default:
 		break;
 	}
@@ -166,7 +181,7 @@ bool ManagerHandler::CheckReqIndex(const int iIndexMax, const req::Req &oReq, rs
     return true;
 }
 
-bool ManagerHandler::CheckReqData(const int iDataMax, const req::Req &oReq, rsp::Rsp &oRsp) const
+bool ManagerHandler::CheckReqData(const req::Req &oReq, rsp::Rsp &oRsp) const
 {
     if (!oReq.HasInt(req::i_Data))
     {
@@ -175,14 +190,12 @@ bool ManagerHandler::CheckReqData(const int iDataMax, const req::Req &oReq, rsp:
     }
 
     const int iData = oReq.GetInt(req::i_Data);
-    if (iData < 0 || iData >= iDataMax)
+    if (iData < 0)
     {
         oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_ERROR_DATAID);
         return false;
     }
-
     return true;
-
 }
 
 bool ManagerHandler::CheckNotifyData(const int iDataMax, const notify::Notify &oNotify) const
@@ -202,11 +215,11 @@ bool ManagerHandler::CheckNotifyData(const int iDataMax, const notify::Notify &o
     return true;
 }
 
-bool ManagerHandler::RspWithNoItem(rsp::Rsp &oRsp)
+bool ManagerHandler::RspWithNoOption(const string sDescription, rsp::Rsp &oRsp)
 {
     vector<rsp::Rsp> vRspOption;
     rsp::Rsp oRspOption;
-    oRspOption.Add(rsp::s_Option_Description, "ŒﬁŒÔ∆∑");
+    oRspOption.Add(rsp::s_Option_Description, sDescription);
     oRspOption.Add(rsp::i_Option_FrameID, -2);
     oRspOption.Add(rsp::i_Option_Notify, cmd::NOTIFY_IDLE);
     oRspOption.Add(rsp::i_Option_Data, 0);

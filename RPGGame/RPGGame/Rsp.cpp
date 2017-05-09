@@ -68,3 +68,10 @@ const bool Rsp::HasVector(string sKey) const
 {
 	return m_mapVectorArg.find(sKey) != m_mapVectorArg.end();
 }
+
+void rsp::Rsp::Clear()
+{
+    m_mapIntArg.clear();
+    m_mapStringArg.clear();
+    m_mapVectorArg.clear();
+}
