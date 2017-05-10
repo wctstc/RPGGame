@@ -17,12 +17,13 @@ namespace rsp
 {
     const string i_RetCode = "i_RetCode";
 
+    const string i_State              = "i_State";
     const string s_Description        = "s_Description";
     const string v_Option             = "v_Option";
     const string s_Option_Description = "s_Option_Description";
     const string i_Option_FrameID     = "s_Option_FrameID";
     const string i_Option_Notify      = "i_Option_Notify";
-    const string i_Option_Data      = "i_Option_Data";
+    const string i_Option_Data        = "i_Option_Data";
 
     const string v_ShopItem          = "v_ShopItem";
 

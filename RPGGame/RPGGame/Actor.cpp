@@ -4,6 +4,12 @@
 
 Actor::Actor()
 {
+    m_stActorData.iID = -1;
+    m_stActorData.sName = "无行动者";
+    m_stActorData.iHp = 0;
+    m_stActorData.iMaxHp = 0;
+    m_stActorData.iAttack = 0;
+    m_stActorData.iDefance = 0;
 }
 
 
@@ -28,6 +34,7 @@ bool Actor::Init(
 {
 	m_stActorData.iID      = iID;
     m_stActorData.sName    = sName;
+    m_stActorData.iPreHp   = iHp;
 	m_stActorData.iHp      = iHp;
 	m_stActorData.iMaxHp   = iMaxHp;
 	m_stActorData.iAttack  = iAttack;
@@ -37,23 +44,28 @@ bool Actor::Init(
 
 void Actor::Reset()
 {
+    m_stActorData.iPreHp = m_stActorData.iHp;
 	m_stActorData.iHp = GetMaxHp();
 }
 
 void Actor::Defance(const int iDamage)
 {
 	int iRealDamage = iDamage - m_stActorData.iDefance;
+
 	if (iRealDamage <= 0)
-		iRealDamage = 1;
+        iRealDamage = 1;
+
+    m_stActorData.iPreHp = m_stActorData.iHp;
+
 	m_stActorData.iHp -= iRealDamage;
 }
 
-int Actor::Attack()
+int Actor::Attack()const
 {
 	return m_stActorData.iAttack;
 }
 
-bool Actor::IsDie()
+bool Actor::IsDie()const
 {
 	return m_stActorData.iHp <= 0;
 }

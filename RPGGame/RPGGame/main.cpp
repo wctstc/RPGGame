@@ -27,17 +27,16 @@ using dataconfig::FRAMEArray;
 int main()
 {
     TestUnit test;
- //   test.Run();
- 
-
-    App &app = App::GetInstance();
-    app.Init();
-    app.Start();
-
- 
- 	system("pause");
+    test.Run();
 
 
-	
-	return 0;
+//     App &app = App::GetInstance();
+//     app.Init();
+//     app.Start();
+
+    system("pause");
+
+
+
+    return 0;
 }

@@ -74,10 +74,35 @@ public:
 
 public:
     /**
-     * @brief 随机野怪
+     * @brief 获取怪物
      */
-    const Monster &MeetMonster(const int iMapActionID);
+    const Monster &GetCurrentMonster(const int iMapActionID );
+
+    /**
+    * @brief 获取当前怪物
+    */
+    Monster &GetCurrentMonster();
+
+    /**
+     * @brief 逃跑
+     */
+    bool Escape();
 private:
+    /**
+     * @brief 逃跑状态枚举
+     */
+    enum EscapeState
+    {
+        /*!< 逃跑失败 */
+        ESCAPE_STATE_FAIL = 0,
+
+        /*!< 逃跑成功 */
+        ESCAPE_STATE_SUCCEED = 1
+    };
+private:
+    /*!< 逃跑状态 */
+    EscapeState m_eEscapeState;
+
     /*!< 遇到的怪物 */
     Monster m_oCurrentMonster;
 };

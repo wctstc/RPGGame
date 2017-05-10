@@ -69,6 +69,10 @@ namespace cmd
         NOTIFY_STORAGE_TAKEOUT = 1121101,
         NOTIFY_STORAGE_DEPOSIT = 1122101,
 
+        /*!< Ò°Íâ */
+        NOTIFY_MAP_ATTACK = 3110001,
+        NOTIFY_MAP_RUN = 3110002,
+
 
         /*!< ½çÃæ */
         NOTIFY_UPDATE_PROPERTY = 20001,

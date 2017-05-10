@@ -9,7 +9,7 @@ public:
     enum MonsterType
     {
         /*!< ÎÂºÍ */
-        MONSTER_TPE_GENTLE,
+        MONSTER_TYPE_GENTLE,
 
         /*!< ÖĞÁ¢ */
         MONSTER_TYPE_NEUTRAL,

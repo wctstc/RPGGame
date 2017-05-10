@@ -25,6 +25,7 @@ private:
     bool TestProtobuf();
     bool TestLog();
     bool TestMapConfig();
+    bool TestMacro();
 };
 
 

@@ -89,6 +89,7 @@ public:
 public:
 	SET_GET(int,                   i, ID,          m_oFrameData.iID)
 	SET_GET(data::FrameType,       e, Type,        m_oFrameData.eType)
+    SET_GET(data::FrameState,      e, State,       m_oFrameData.eState)
 	SET_GET(data::Position&,       o, Position,    m_oFrameData.oPosition)
 	SET_GET(data::Size&,           o, Size,        m_oFrameData.oSize)
 	SET_GET(string,                s, Description, m_oFrameData.sDescription)

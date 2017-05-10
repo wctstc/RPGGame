@@ -194,6 +194,7 @@
     <ClInclude Include="Cmd.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="ContainerData.h" />
+    <ClInclude Include="DataConfig.h" />
     <ClInclude Include="Drop.h" />
     <ClInclude Include="DropLoader.h" />
     <ClInclude Include="Equipment.h" />

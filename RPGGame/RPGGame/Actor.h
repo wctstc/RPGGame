@@ -40,19 +40,20 @@ public:
 	/**
 	 * @brief 普攻伤害
 	 */
-    virtual int Attack();
+    virtual int Attack()const;
 
 	/**
 	 * @brief 判断是否死亡
 	 */
-    virtual bool IsDie();
+    virtual bool IsDie()const;
 public:
-	SET_GET(int,    i, ID,      m_stActorData.iID);
-	SET_GET(string, s, Name,    m_stActorData.sName);
-	SET_GET(int,    i, Hp,      m_stActorData.iHp);
-	SET_GET(int,    i, MaxHp,   m_stActorData.iMaxHp);
-	SET_GET(int,    i, Attack,  m_stActorData.iAttack);
-	SET_GET(int,    i, Defance, m_stActorData.iDefance);
+	SET_GET(int,    i, ID,      m_stActorData.iID)
+	SET_GET(string, s, Name,    m_stActorData.sName)
+    SET_GET(int,    i, PreHp,   m_stActorData.iPreHp)
+	SET_GET(int,    i, Hp,      m_stActorData.iHp)
+	SET_GET(int,    i, MaxHp,   m_stActorData.iMaxHp)
+	SET_GET(int,    i, Attack,  m_stActorData.iAttack)
+	SET_GET(int,    i, Defance, m_stActorData.iDefance)
 private:
     /**
     * @brief 行动者数据
@@ -63,6 +64,8 @@ private:
         int iID;
         /*!< 名字 */
         string sName;
+        /*!< 上一次生命 */
+        int iPreHp;
         /*!< 生命 */
         int iHp;
         /*!< 生命上限 */

@@ -494,5 +494,8 @@
     <ClInclude Include="MapLoader.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="DataConfig.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

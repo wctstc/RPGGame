@@ -55,6 +55,11 @@ public:
     */
     bool Sell(const int iItemID, const int iPrice);
 
+
+    /**
+     * @brief ¹¥»÷
+     */
+    void Attack(Actor &oActor);
     /**
      * @brief »ñÈ¡Íæ¼Ò
      */

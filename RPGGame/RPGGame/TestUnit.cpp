@@ -17,6 +17,8 @@ using std::endl;
 #include "MapActionLoader.h"
 #include "MonsterLoader.h"
 #include "DropLoader.h"
+#include "DataConfig.h"
+
 
 TestUnit::TestUnit()
 {
@@ -36,7 +38,8 @@ void TestUnit::Run()
     //TEST(TestPropertyFrame);
     //TEST(TestProtobuf);
     //TEST(TestLog);
-    TEST(TestMapConfig);
+    //TEST(TestMapConfig);
+    TEST(TestMacro);
 
 
 
@@ -181,6 +184,13 @@ bool TestUnit::TestMapConfig()
     DropLoader &dropLoader = DropLoader::GetInstance();
     dropLoader.Init("proto/data/dataconfig_drop.data");
 
+
+    return true;
+}
+
+bool TestUnit::TestMacro()
+{
+    cout << MACRO_2_STRING(D(2)) << endl;
 
     return true;
 }

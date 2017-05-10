@@ -91,6 +91,15 @@ namespace data
         FRAME_TYPE_SHOP_ITEM = 4,
 	};
 
+    /**
+     * @brief 框状态
+     */
+    enum FrameState
+    {
+        FRAME_STATE_NORMAL = 0,
+        FRAME_STATE_FINISH = 1,
+    };
+
 	//-简单结构----------------------------------------------------//
 	/**
 	 * @brief 位置
@@ -148,6 +157,9 @@ namespace data
 
 		/*!< 类型 */
 		FrameType eType;
+
+        /*!< 状态 */
+        FrameState eState;
 
 		/*!< 位置 */
 		Position oPosition;

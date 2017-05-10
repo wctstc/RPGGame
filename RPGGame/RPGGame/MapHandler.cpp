@@ -88,7 +88,7 @@ int MapHandler::HandlerShowMapAction(const cmd::Command eCmd, const req::Req &oR
     return 0;
 }
 
-int MapHandler::HandlerMeetMonster(const cmd::Command eCmd, const req::Req &oReq, rsp::Rsp &oRsp)
+int MapHandler::HandlerShowMonster(const cmd::Command eCmd, const req::Req &oReq, rsp::Rsp &oRsp)
 {
     if (!g_ManagerHandler.CheckReqData(oReq, oRsp))
         return 0;
@@ -101,23 +101,89 @@ int MapHandler::HandlerMeetMonster(const cmd::Command eCmd, const req::Req &oReq
         return 0;
     }
 
-    const Monster &oMonster = g_MapManager.MeetMonster(iMapActionID);
-    if (&oMonster == &Monster::GetNoMonster())
+    const Monster &oMonster = g_MapManager.GetCurrentMonster(iMapActionID);
+    if (oMonster.GetID() == Monster::GetNoMonster().GetID())
     {
-        g_ManagerHandler.RspWithNoOption("无怪物", oRsp);
+        oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_SUCCEED);
+        oRsp.Add(rsp::i_State, 1);
         return 0;
     }
+    else
+    {
+        oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_SUCCEED);
+        oRsp.Add(
+            rsp::s_Description,
+            StrUtil::Format(
+                "名字：%s\n描述：%s\n血量：%d/%d\n攻击力：%d\n防御力：%d",
+                oMonster.GetName().c_str(),
+                oMonster.GetDescription().c_str(),
+                oMonster.GetHp(),
+                oMonster.GetMaxHp(),
+                oMonster.GetAttack(),
+                oMonster.GetDefance()));
+    }
 
-    oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_SUCCEED);
-    oRsp.Add(
-        rsp::s_Description,
-        StrUtil::Format(
-            "名字：%s\n描述：%s\n血量：%d\n攻击力：%d\n防御力：%d",
-            oMonster.GetName().c_str(),
-            oMonster.GetDescription().c_str(),
-            oMonster.GetMaxHp(),
-            oMonster.GetAttack(),
-            oMonster.GetDefance()));
+    return 0;
+}
 
+int MapHandler::HandleMapAttack(const cmd::NotifyCommand eNotifyCommand, const notify::Notify &oNotify)
+{
+    string sTips;
+    Monster &oCurrentMonst = g_MapManager.GetCurrentMonster();
+    const Player &oPlayer = g_PlayerManger.GetPlayer();
+
+    g_PlayerManger.Attack(oCurrentMonst);
+
+
+    if (oPlayer.IsDie())
+    {
+        sTips = "你死翘翘了~~";
+    }
+
+    if (oCurrentMonst.IsDie())
+    {
+        const vector<int>& vDrops = oCurrentMonst.GetDrop();
+        string sDropInfo;
+
+        for (unsigned int i = 0; i < vDrops.size(); ++i)
+        {
+            const Drop &oDrop = g_MapManager.GetDropByID(vDrops[i]);
+            g_PlayerManger.AddToBag(oDrop.GetItemID(), oDrop.GetItemNum());
+
+            //生成提示
+            if (!sDropInfo.empty())
+                sDropInfo.append(",");
+
+            sDropInfo.append(
+                StrUtil::Format(
+                    "%s*%d",
+                    g_ItemManager.GetNameByID(oDrop.GetItemID()).c_str(),
+                    oDrop.GetItemNum()));
+        }
+
+        sTips = StrUtil::Format("恭喜，击杀%s获得%s",oCurrentMonst.GetName().c_str(),sDropInfo.c_str());
+    }
+    else
+    {
+        sTips = StrUtil::Format("你攻击%s,%s收到%d伤害\n%s攻击你，你受到%d伤害",
+            oCurrentMonst.GetName().c_str(),
+            oCurrentMonst.GetName().c_str(),
+            oCurrentMonst.GetPreHp()-oCurrentMonst.GetHp(),
+            oCurrentMonst.GetName().c_str(),
+            oPlayer.GetPreHp()-oPlayer.GetHp());
+    }
+
+
+    g_ManagerHandler.UpdateTipsFrame(sTips);
+    g_ManagerHandler.UpdatePropertyFrame();
+    return 0;
+}
+
+int MapHandler::HandleMapRun(const cmd::NotifyCommand eNotifyCommand, const notify::Notify &oNotify)
+{
+    if (g_MapManager.Escape())
+    {
+        g_ManagerHandler.UpdateTipsFrame("逃跑成功");
+    }
     return 0;
 }

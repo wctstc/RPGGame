@@ -32,6 +32,8 @@ bool MapManager::Init()
         return false;
     if (!g_MapLoader.Init("proto/data/dataconfig_map.data"))
         return false;
+
+    m_eEscapeState = EscapeState::ESCAPE_STATE_FAIL;
     return true;
 }
 
@@ -85,18 +87,43 @@ int MapManager::GetMapTotalNum()
     return g_MapLoader.GetMapNum();
 }
 
-const Monster & MapManager::MeetMonster(const int iMapActionID)
+const Monster & MapManager::GetCurrentMonster(const int iMapActionID)
 {
-    const MapAction &oMapAction = g_MapActionLoader.GetMapActionByID(iMapActionID);
-    if (&oMapAction == &MapAction::GetNoMapAction())
-        return Monster::GetNoMonster();
+    //逃跑成功
+    if (m_eEscapeState == EscapeState::ESCAPE_STATE_SUCCEED)
+    {
+        m_oCurrentMonster = Monster::GetNoMonster();
+        m_eEscapeState = EscapeState::ESCAPE_STATE_FAIL;
+    }
+    //杀死怪物
+    else if (m_oCurrentMonster.GetID() != Monster::GetNoMonster().GetID() && m_oCurrentMonster.GetHp() <= 0)
+    {
+        m_oCurrentMonster = Monster::GetNoMonster();
+    }
+    //遇见怪物
+    else if (m_oCurrentMonster.GetID() == Monster::GetNoMonster().GetID())
+    {
+        const MapAction &oMapAction = g_MapActionLoader.GetMapActionByID(iMapActionID);
+        if (&oMapAction == &MapAction::GetNoMapAction())
+            return Monster::GetNoMonster();
 
-    const vector<int> vMonsterIDs = oMapAction.GetMonsterID();
+        const vector<int> vMonsterIDs = oMapAction.GetMonsterID();
 
-    int iRand = platform::Rank(vMonsterIDs.size());
+        int iRand = platform::Rank(vMonsterIDs.size());
 
-    m_oCurrentMonster = g_MonsterLoader.GetMonsterByID(iRand);
-
+        m_oCurrentMonster = g_MonsterLoader.GetMonsterByID(iRand);
+    }
     return m_oCurrentMonster;
 
+}
+
+Monster & MapManager::GetCurrentMonster()
+{
+    return m_oCurrentMonster;
+}
+
+bool MapManager::Escape()
+{
+    m_eEscapeState = EscapeState::ESCAPE_STATE_SUCCEED;
+    return true;
 }

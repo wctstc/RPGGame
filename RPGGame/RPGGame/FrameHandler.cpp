@@ -90,7 +90,7 @@ int FrameHandler::HandleStart(req::Req &oReq)
 		pFrame = m_vStackFrames.back();
         
         //数据请求填充
-        if (DoForword(pFrame) < 0)
+        if (DoForword(pFrame) < 0 || pFrame->GetState()==data::FRAME_STATE_FINISH)
         {
             PopStackFrame();
             continue;
@@ -118,7 +118,7 @@ int FrameHandler::HandleStart(req::Req &oReq)
                 DoNotify(stOption.eNotify, iIndex, pFrame->GetData());
 
 
-            //一次性框，显示后弹出
+            //弹出
             if (stOption.iFrameID == -2)
                 PopStackFrame();
 

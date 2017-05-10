@@ -116,6 +116,8 @@ void Player::Defance( const int iDamage)
     int iRealDamage = iDamage - GetDefance();
     if (iRealDamage <= 0)
         iRealDamage = 1;
+
+    Actor::SetPreHp(Actor::GetHp());
     Actor::SetHp(Actor::GetHp()-iRealDamage);
 }
 

@@ -58,6 +58,8 @@ bool ManagerHandler::Init(Config *pConfig)
     RegisterNotify(cmd::NOTIFY_SHOP_SELL);
     RegisterNotify(cmd::NOTIFY_STORAGE_TAKEOUT);
     RegisterNotify(cmd::NOTIFY_STORAGE_DEPOSIT);
+    RegisterNotify(cmd::NOTIFY_MAP_ATTACK);
+    RegisterNotify(cmd::NOTIFY_MAP_RUN);
 
 	return true;
 }
@@ -114,7 +116,7 @@ int ManagerHandler::Handle(cmd::Command eCmd, req::Req &oReq, rsp::Rsp &oRsp)
         iRetCode = g_MapHandler.HandlerShowMapAction(eCmd, oReq, oRsp);
         break;
     case cmd::COMMAND_MEET_MONSTER:
-        iRetCode = g_MapHandler.HandlerMeetMonster(eCmd, oReq, oRsp);
+        iRetCode = g_MapHandler.HandlerShowMonster(eCmd, oReq, oRsp);
 	default:
 		break;
 	}
@@ -140,6 +142,12 @@ void ManagerHandler::Handle(const cmd::NotifyCommand eNotify, const notify::Noti
     case cmd::NOTIFY_STORAGE_DEPOSIT:
         g_HomeHandler.HandleStorageDeposit(eNotify, oNotify);
         break;
+    case cmd::NOTIFY_MAP_ATTACK:
+        g_MapHandler.HandleMapAttack(eNotify, oNotify);
+        break;
+    case cmd::NOTIFY_MAP_RUN:
+        g_MapHandler.HandleMapRun(eNotify, oNotify);
+        break;
     default:
         break;
     }
@@ -157,6 +165,7 @@ void ManagerHandler::UpdateTipsFrame(const string sNotifyMessage)
 void ManagerHandler::UpdatePropertyFrame()
 {
     notify::Notify oPropertyNotify;
+    oPropertyNotify.Add(notify::i_PropertyFrame_Hp,       g_PlayerManger.GetPlayer().GetHp());
     oPropertyNotify.Add(notify::i_PropertyFrame_Money,    g_PlayerManger.GetPlayer().GetMoney());
     oPropertyNotify.Add(notify::i_PropertyFrame_Bag,      g_PlayerManger.GetBag().GetUsedCapacity());
     oPropertyNotify.Add(notify::i_PropertyFrame_TotalBag, g_PlayerManger.GetBag().GetCapacity());

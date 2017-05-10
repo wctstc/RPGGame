@@ -23,6 +23,7 @@ bool FrameLoader::Init()
 		pFrameConfig = &(ayFrames.items(i));
 		oFrameData.iID = pFrameConfig->id();
 		oFrameData.eType = static_cast<data::FrameType>(pFrameConfig->type());
+        oFrameData.eState = data::FRAME_STATE_NORMAL;
 		oFrameData.eDirection = static_cast<data::Direction>(pFrameConfig->direction());
 		oFrameData.oPosition.iX = pFrameConfig->x();
 		oFrameData.oPosition.iY = pFrameConfig->y();

@@ -3,7 +3,12 @@
 
 
 Monster::Monster()
+    :Actor()
 {
+
+    m_stMonsterData.eType = MONSTER_TYPE_GENTLE;
+    m_stMonsterData.sDescription = "Œﬁπ÷ŒÔ";
+    m_stMonsterData.vDrop.clear();
 }
 
 

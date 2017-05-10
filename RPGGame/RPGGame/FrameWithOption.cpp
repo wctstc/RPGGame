@@ -49,6 +49,9 @@ void FrameWithOption::PrepareRsp(const rsp::Rsp &oRsp)
         return;
     }
 
+    if (oRsp.HasInt(rsp::i_State))
+        SetState(static_cast<data::FrameState>(oRsp.GetInt(rsp::i_State)));
+
     if (oRsp.HasString(rsp::s_Description))
         SetDescription(oRsp.GetString(rsp::s_Description));
 

@@ -126,10 +126,10 @@ public://-模块数据获取----------------------------------------------------//
     //const Bag& GetBag()const;
 
 public:
-    SET_GET(int,  i, Money,    m_stPlayerData.iMoney);
-    SET_GET(int,  i, Level,    m_stPlayerData.iLevel);
-    SET_GET(int,  i, Exp,      m_stPlayerData.iExp);
-    SET_GET(int,  i, TotalExp, m_stPlayerData.iTotalExp);
+    SET_GET(int,  i, Money,    m_stPlayerData.iMoney)
+    SET_GET(int,  i, Level,    m_stPlayerData.iLevel)
+    SET_GET(int,  i, Exp,      m_stPlayerData.iExp)
+    SET_GET(int,  i, TotalExp, m_stPlayerData.iTotalExp)
 private:
     /**
      * @brief 玩家数据

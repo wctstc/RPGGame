@@ -13,14 +13,12 @@ PlayerManager::~PlayerManager()
 
 bool PlayerManager::Init()
 {
-    m_oPlayer.Init(10,"lost",10, 10, 10, 1, 1,1,1, 1000);
+    m_oPlayer.Init(10,"lost",10000, 10000, 10, 1, 10000,1,1, 1000);
 
     m_oBag.Init(1, 20);
     m_oBag.Add(1, 2);
     m_oBag.Add(2, 3);
     m_oBag.Add(3, 5);
-
-    m_oPlayer.SetMoney(10000);
 
 	return true;
 }
@@ -128,6 +126,18 @@ bool PlayerManager::Sell(const int iItemID, const int iPrice)
     }
 
     return true;
+}
+
+void PlayerManager::Attack(Actor &oActor)
+{
+    int iDamage = m_oPlayer.Attack();
+
+    oActor.Defance(iDamage);
+    if (!oActor.IsDie())
+    {
+        iDamage = oActor.Attack();
+        m_oPlayer.Defance(iDamage);
+    }
 }
 
 const Player & PlayerManager::GetPlayer()

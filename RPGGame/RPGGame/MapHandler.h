@@ -30,7 +30,18 @@ public:
     /**
     * @brief ’“π÷
     */
-    int HandlerMeetMonster(const cmd::Command eCmd, const  req::Req &oReq, rsp::Rsp &oRsp);
+    int HandlerShowMonster(const cmd::Command eCmd, const  req::Req &oReq, rsp::Rsp &oRsp);
+
+    /**
+     * @brief π•ª˜
+     */
+    int HandleMapAttack(const cmd::NotifyCommand eNotifyCommand, const notify::Notify &oNotify);
+
+
+    /**
+    * @brief Ã”≈‹
+    */
+    int HandleMapRun(const cmd::NotifyCommand eNotifyCommand, const notify::Notify &oNotify);
 };
 
 
