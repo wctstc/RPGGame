@@ -188,6 +188,17 @@ bool TestUnit::TestMapConfig()
     return true;
 }
 
+#define A1 1
+#define A2 2
+#define A3 3
+#define A4 4
+#define A5 5
+#define A6 6
+
+#define E(n) 
+#define D(n) B(n)
+#define B(n) A##n
+
 bool TestUnit::TestMacro()
 {
     cout << MACRO_2_STRING(D(2)) << endl;

@@ -1,13 +1,16 @@
 # Workspace Files 工程文件
 RPGGame/.*
 RPGGame/RPGGame.VC.*
+XMLTools/.*
+XMLTools/XMLTools.VC.*
 
 # Compiled Temp Files 编译临时文件
 RPGGame/RPGGame/Debug/*
+XMLTools/XMLTools/Debug/*
 
 # Compiled Object Files 编译文件
-RPGGame/Debug/*.ilk
-RPGGame/Debug/*.pdb
+RPGGame/Debug/*.*
+XMLTools/Debug/*.*
 
 # Protobuf Temp Files
 RPGGame/RPGGame/proto/data/*.*
@@ -17,6 +20,7 @@ RPGGame/RPGGame/proto/python/*.*
 RPGGame/RPGGame/proto/src/proto/*.*
 RPGGame/RPGGame/proto/xls/~$*
 RPGGame/RPGGame/proto/xls_deploy_tool.log
-RPGGame/Debug/RPGGame.exe
-*.sav
-*.sav
+RPGGame/RPGGame/*.sav
+
+
+
