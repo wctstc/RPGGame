@@ -2,10 +2,10 @@
 #define __PARSEXML_H__
 
 #include <string>
+#include <map>
 #include <vector>
 
-using std::string;
-using std::vector;
+using namespace std;
 
 #include "tinyxml2.h"
 
@@ -18,126 +18,63 @@ using namespace tinyxml2;
 class ParseXML
 {
 public:
-    /**
-     * @brief 结构类型枚举
-     */
-    enum Type
-    {
-        /*!< 未知类型 */
-        UNKNOWN,
-
-        /*!< 类 */
-        CLASS,
-
-        /*!< 结构体 */
-        STRUCT,
-
-        /*!< 枚举 */
-        ENUM,
-    };
-    /**
-     * @brief 结构数据结构
-     */
-    struct StructureData
-    {
-        /*!< 结构类型 */
-        Type type;
-
-        /*!< 结构名字 */
-        string name;
-    };
-    /**
-     * @brief 变量数据结构
-     */
-    struct VariableData
-    {
-        /*!< 变量名 */
-        string name;
-
-        /*!< 变量类型 */
-        string type;
-
-        /*!< 类型前缀 */
-        string prefix;
-
-        /*!< 类型格式化输出 */
-        string format;
-
-        /*!< 注释 */
-        string comment;
-    };
-
-
-public:
     ParseXML();
     ~ParseXML();
 
 public:
+    struct Data
+    {
+        string node;
+        map<string, string> mapClassAttr;
+        vector<map<string,string>> vecPropertyAttr;
+        vector<Data> vecInner;
+    };
+public:
+    /**
+    * @brief 解析xml
+    */
+    bool Parse(const string sFileName);
+
+    /**
+    * @brief 清理
+    */
+    void Clear();
+private:
     /**
      * @brief 解析xml
      */
-    bool Parse( const XMLElement *cpXmlElement);
-    
+    bool Parse(const XMLElement *cpXmlElement, Data &stData);
+   
     /**
-     * @brief 获取类型
+     * @brief 解析类
      */
-    const ParseXML::Type GetType() const;
-
-    /**
-     * @brief 获取结构数据
-     */
-    const StructureData &GetStructureData()const;
-
-
-    /**
-     * @brief 获取变量数量
-     */
-    int GetVariableDataNum()const;
-
-
-    /**
-     * @brief 获取变量数据
-     */
-    const VariableData *GetVariableData(int iIndex)const;
-
-private:
-    /**
-    * @brief 解析类
-    */
-    bool ParseClass(const XMLElement *cpXmlElement);
+    bool ParseClass(const XMLElement *cpXmlElement, Data &stData);
     
     /**
      * @brief 解析结构体
      */
-    bool ParseStruct(const XMLElement *cpXmlElement);
+    bool ParseStruct(const XMLElement *cpXmlElement, Data &stData);
     
     /**
      * @brief 解析枚举
      */
-    bool ParseEnum(const XMLElement *cpXmlElement);
+    bool ParseEnum(const XMLElement *cpXmlElement, Data &stData);
 
     /**
-     * @brief 判断变量类型是否正确
+     * @brief 解析成员
      */
-    bool CheckVariableType(const string type);
+    bool ParseProperty(const XMLElement *cpXmlElement, Data &stData);
 
     /**
-     * @brief 根据变量类型获取前缀
+     * @brief 解析属性
      */
-    string GetPrefixByVariableType(const string type);
+    bool ParseAttribute(const XMLElement *cpXmlElement, map<string,string> &mapAttr);
 
-    /**
-     * @brief 根据变量类型获取格式输出
-     */
-    string GetFormatByVariableType(const string type);
+
 private:
-    /*!< 结构数据 */
-    StructureData m_stStructureData;
+    string m_sFileName;
 
-    /*!< 变量数据 */
-    vector<VariableData> m_vVariables;
-
-
+    vector<Data> m_vecData;
 };
 
 #endif // __PARSEXML_H__

@@ -6,3 +6,8 @@
     <property name="X" prefix="i" type="int" default="0"/>
     <property name="Y" prefix="i" type="int" default="0"/>
 </class>
+
+<class name="Size">
+    <property name="Width" prefix="i" type="int" default="0"/>
+    <property name="Heigt" prefix="i" type="int" default="0"/>
+</class>

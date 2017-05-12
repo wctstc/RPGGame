@@ -13,164 +13,227 @@ ParseXML::~ParseXML()
 {
 }
 
-bool ParseXML::Parse(const XMLElement *cpXmlElement)
+bool ParseXML::Parse(const string sFileName)
+{
+    XMLDocument xmlDocument;
+
+    if (XMLError::XML_SUCCESS != xmlDocument.LoadFile(sFileName.c_str()))
+    {
+        printf("(0)ParseXML::Parse XMLDocument::LoadFile fail, file:%s", sFileName.c_str());
+        xmlDocument.PrintError();
+        return false;
+    }
+
+    m_sFileName = sFileName;
+    const XMLElement *cpXmlElement = xmlDocument.FirstChildElement();
+
+    while (cpXmlElement)
+    {
+        Data stData;
+        
+        if (!Parse(cpXmlElement,stData))
+            return false;
+        
+        m_vecData.push_back(stData);
+
+
+        cpXmlElement = cpXmlElement->NextSiblingElement();
+    }
+    return true;
+}
+
+void ParseXML::Clear()
+{
+    m_sFileName.clear();
+    m_vecData.clear();
+}
+
+bool ParseXML::Parse(const XMLElement *cpXmlElement, Data &stData)
 {
     if (cpXmlElement == NULL)
     {
-        cout << "ParseXML::Parse cpXmlElement is NULL" << endl;
+        printf("(%d)ParseXML::Parse cpXmlElement is NULL",cpXmlElement->GetLineNum());
         return false;
     }
 
-    string node = cpXmlElement->Name();
-    if (node.empty())
+    const char *csNode = cpXmlElement->Name();
+    if (csNode==NULL)
     {
-        cout << "ParseXML::Parse the node of cpXmlElement is empty" << endl;
+        printf("(%d)ParseXML::Parse csNode is NULL", cpXmlElement->GetLineNum());
         return false;
     }
 
-    if (node == "class")
+    stData.node = csNode;
+    if (stData.node == "class")
     {
-        return ParseClass(cpXmlElement);
+        return ParseClass(cpXmlElement, stData);
     }
-    else if (node == "struct")
+    else if (stData.node == "struct")
     {
-        return ParseStruct(cpXmlElement);
+        return ParseStruct(cpXmlElement, stData);
     }
-    else if (node == "enum")
+    else if (stData.node == "enum")
     {
-        return ParseEnum(cpXmlElement);
+        return ParseEnum(cpXmlElement, stData);
     }
-    else
-    {
-        cout << "ParseXML::Parse the node of cpXmlElement is "<<node.c_str()<< ". not class, struct, enum. it is case sensitive" << endl;
-        return false;
-    }
-    cout << "ParseXML::Parse unknow error" << endl;
+
+    printf("(%d)ParseXML::Parse sNode is unknown, sNode:%s", cpXmlElement->GetLineNum(), stData.node.c_str());
     return false;
 }
 
-const ParseXML::Type ParseXML::GetType() const
+bool ParseXML::ParseClass(const XMLElement *cpXmlElement, Data &stData)
 {
-    return m_stStructureData.type;
-}
-
-const ParseXML::StructureData & ParseXML::GetStructureData() const
-{
-    return m_stStructureData;
-}
-
-int ParseXML::GetVariableDataNum() const
-{
-    return m_vVariables.size();
-}
-
-const ParseXML::VariableData *ParseXML::GetVariableData(int iIndex) const
-{
-    if (iIndex >= 0 && iIndex < m_vVariables.size())
-        return &m_vVariables[iIndex];
-
-    cout << "ParseXML::GetVariableData iIndex is "<< iIndex <<" not in 0 ~ " << m_vVariables.size() << endl;
-    return NULL;
-}
-
-bool ParseXML::ParseClass(const XMLElement *cpXmlElement)
-{
-    m_stStructureData.type = CLASS;
-
-    string name = cpXmlElement->Attribute("name");
-    if (name.empty())
+    if (!ParseAttribute(cpXmlElement,stData.mapClassAttr))
     {
-        cout << "ParseXML::ParseClass name Attribute is empty" << endl;
+        printf("(%d)ParseXML::ParseClass ParseAttribute fail", cpXmlElement->GetLineNum());
         return false;
     }
 
-    m_stStructureData.name = name;
-
     const XMLElement *cpChildElement = cpXmlElement->FirstChildElement();
+
     while (cpChildElement)
     {
-        string node = cpChildElement->Name();
-        if (node.empty())
+        const char *csNode = cpChildElement->Name();
+
+        if (csNode == NULL)
         {
-            cout << "ParseXML::ParseClass node is empty" << endl;
+            printf("(%d)ParseXML::ParseClass Name is null", cpChildElement->GetLineNum());
             return false;
         }
-        if (node == "property")
+
+
+        Data stChildData;
+        stChildData.node = csNode;
+        if (stChildData.node == "property")
         {
-            string name = cpChildElement->Attribute("name");
-            string type = cpChildElement->Attribute("type");
-            
-            if (name.empty())
+            if (!ParseProperty(cpChildElement, stData))
             {
-                cout << "ParseXML::ParseClass " << m_vVariables.size() << "th node'name is empty" << endl;
+                printf("(%d)ParseXML::ParseClass ParseProperty Fail", cpChildElement->GetLineNum());
                 return false;
             }
-            
-            if (type.empty())
-            {
-                cout << "ParseXML::ParseClass " << m_vVariables.size() << "th node'type is empty" << endl;
-                return false;
-            }
-            
-            if (!CheckVariableType(type))
-            {
-                cout << "ParseXML::ParseClass " << m_vVariables.size() << "th node'type is " << type.c_str() << ", not support" << endl;
-                return false;
-            }
-
-            VariableData oVariableData;
-            oVariableData.name = name;
-            oVariableData.type = type;
-            oVariableData.prefix = GetPrefixByVariableType(type);
-            oVariableData.format = GetFormatByVariableType(type);
-
-
-            m_vVariables.push_back(oVariableData);
         }
         else
         {
-            cout << "ParseXML::ParseClass node is "<< node.c_str() <<", not variable" << endl;
-            return false;
-        }
+            if (stChildData.node == "class")
+            {
+                if (!ParseClass(cpChildElement, stChildData))
+                {
+                    printf("(%d)ParseXML::ParseClass ParseClass Fail", cpChildElement->GetLineNum());
+                    return false;
+                }
+            }
+            else if (stChildData.node == "struct")
+            {
+                if (!ParseStruct(cpChildElement, stChildData))
+                {
+                    printf("(%d)ParseXML::ParseClass ParseStruct Fail", cpChildElement->GetLineNum());
+                    return false;
+                }
+            }
+            else if (stChildData.node == "enum")
+            {
+                if (!ParseEnum(cpChildElement, stChildData))
+                {
+                    printf("(%d)ParseXML::ParseClass ParseEnum Fail", cpChildElement->GetLineNum());
+                    return false;
+                }
+            }
+            else
+            {
+                printf("(%d)ParseXML::ParseClass Node error", cpChildElement->GetLineNum());
+                return false;
+            }
 
+            stData.vecInner.push_back(stChildData);
+        }
+        
         cpChildElement = cpChildElement->NextSiblingElement();
     }
     return true;
 }
 
-bool ParseXML::ParseStruct(const XMLElement *cpXmlElement)
+bool ParseXML::ParseStruct(const XMLElement *cpXmlElement, Data &stData)
 {
+    if (!ParseAttribute(cpXmlElement, stData.mapClassAttr))
+    {
+        printf("(%d)ParseXML::ParseEnum ParseAttribute fail", cpXmlElement->GetLineNum());
+        return false;
+    }
+
+
+    const XMLElement *cpChildElement = cpXmlElement->FirstChildElement();
+
+    while (cpChildElement)
+    {
+        if (!ParseProperty(cpChildElement, stData))
+        {
+            printf("(%d)ParseXML::ParseClass Name or Value is null", cpChildElement->GetLineNum());
+            return false;
+        }
+        cpChildElement = cpChildElement->NextSiblingElement();
+    }
 
     return true;
 }
 
-bool ParseXML::ParseEnum(const XMLElement *cpXmlElement)
+bool ParseXML::ParseEnum(const XMLElement *cpXmlElement, Data &stData)
 {
+    if (!ParseAttribute(cpXmlElement, stData.mapClassAttr))
+    {
+        printf("(%d)ParseXML::ParseEnum ParseAttribute fail",cpXmlElement->GetLineNum());
+        return false;
+    }
+
+    const XMLElement *cpChildElement = cpXmlElement->FirstChildElement();
+
+    while (cpChildElement)
+    {
+        if (ParseProperty(cpChildElement, stData))
+        {
+            printf("(%d)ParseXML::ParseEnum ParseProperty fail", cpChildElement->GetLineNum());
+            return false;
+        }
+        cpChildElement = cpChildElement->NextSiblingElement();
+    }
+    return true;
+}
+
+bool ParseXML::ParseProperty(const XMLElement *cpXmlElement, Data &stData)
+{
+    const XMLAttribute *cpXmlAtt1ribute = cpXmlElement->FirstAttribute();
+
+    map<string, string> mapProperty;
+
+    if (!ParseXML::ParseAttribute(cpXmlElement, mapProperty))
+    {
+        printf("(%d)ParseXML::ParseProperty ParseAttribute fail",cpXmlElement->GetLineNum());
+        return false;
+    }
+
+    stData.vecPropertyAttr.push_back(mapProperty);
 
     return true;
 }
 
-bool ParseXML::CheckVariableType(const string type)
+bool ParseXML::ParseAttribute(const XMLElement *cpXmlElement, map<string, string> &mapAttr)
 {
-    if (type == "int" || type == "bool" || type == "string" || type == "array")
-        return true;
+    const XMLAttribute *cpXmlAttribute = cpXmlElement->FirstAttribute();
 
-    return false;
-}
+    while (cpXmlAttribute)
+    {
+        const char *csName = cpXmlAttribute->Name();
+        const char *csValue = cpXmlAttribute->Value();
 
-string ParseXML::GetPrefixByVariableType(const string type)
-{
-    if (type == "int")
-        return "i";
-    else if (type == "bool")
-        return "b";
-    return "";
-}
+        if (csName == NULL || csValue == NULL)
+        {
+            printf("(%d)ParseXML::ParseAttribute Name or Value is null", cpXmlAttribute->GetLineNum());
+            return false;
+        }
 
-string ParseXML::GetFormatByVariableType(const string type)
-{
-    if (type == "int")
-        return "%d";
+        mapAttr.insert(make_pair(csName, csValue));
 
-    return "";
+        cpXmlAttribute = cpXmlAttribute->Next();
+    }
+
+    return true;
 }
