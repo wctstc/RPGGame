@@ -110,14 +110,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CreateCppFile.cpp" />
+    <ClCompile Include="CreateFile.cpp" />
     <ClCompile Include="FileUtil.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ParseXML.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CreateCppFile.h" />
+    <ClInclude Include="CreateFile.h" />
     <ClInclude Include="FileUtil.h" />
     <ClInclude Include="ParseXML.h" />
     <ClInclude Include="tinyxml2.h" />

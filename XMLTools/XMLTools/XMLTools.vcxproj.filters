@@ -33,11 +33,11 @@
     <ClCompile Include="ParseXML.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="CreateCppFile.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="FileUtil.cpp">
       <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateFile.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -47,11 +47,11 @@
     <ClInclude Include="ParseXML.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="CreateCppFile.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="FileUtil.h">
       <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateFile.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

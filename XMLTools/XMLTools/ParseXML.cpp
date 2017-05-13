@@ -48,6 +48,11 @@ void ParseXML::Clear()
     m_vecData.clear();
 }
 
+const std::vector<ParseXML::Data>& ParseXML::GetData() const
+{
+    return m_vecData;
+}
+
 bool ParseXML::Parse(const XMLElement *cpXmlElement, Data &stData)
 {
     if (cpXmlElement == NULL)
@@ -188,7 +193,7 @@ bool ParseXML::ParseEnum(const XMLElement *cpXmlElement, Data &stData)
 
     while (cpChildElement)
     {
-        if (ParseProperty(cpChildElement, stData))
+        if (!ParseProperty(cpChildElement, stData))
         {
             printf("(%d)ParseXML::ParseEnum ParseProperty fail", cpChildElement->GetLineNum());
             return false;

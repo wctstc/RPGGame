@@ -18,80 +18,100 @@ xml字符转义:
 -->
 
 
+
 <!-------------->
 <!-- 基础数据 -->
 <!-------------->
+
 <class_name type="base" node="class" attr="name"/>
 <class_lower_name type="base" node="class" attr="name" param="lower"/>
 <class_upper_name type="base" node="class" attr="name" param="upper"/>
 
-<property type="baselist">
+<class_property type="list">
 	<property_name type="base" node="property" attr="name"/>
 	<property_lower_name type="base" node="property" attr="name" param="lower"/>
 	<property_upper_name type="base" node="property" attr="name" param="upper"/>
-	<!--<propertyprefix node="property" attr="prefix"/>-->
 	<property_type type="base" node="property" attr="type"/>
 	<property_default type="base" node="property" attr="default" default="0"/>
-</property>
-
-
-<!-------------->
-<!-- 合成数据 -->
-<!-------------->
+</class_property>
 
 <!-- init函数的参数列表 -->
-<init_para_declaration type="compose" param="list" gap=",">
+<init_para_declaration type="compose" ref="class_property" gap=",">
 const #property_type #property_lower_name
 </init_para_declaration>
 
-
 <!-- Get函数 -->
-<get_function type="compose" param="list" gap="">
+<get_function type="compose" ref="class_property" gap="">
     inline const #property_type Get#property_name() const{return m_#property_lower_name;}
 
 </get_function>
 
 <!-- Set函数 -->
-<set_function type="compose" param="list" gap="">
+<set_function type="compose" ref="class_property" gap="">
     inline void Set#property_name(const #property_type #property_lower_name){m_#property_lower_name=#property_lower_name;}
 
 </set_function>
 
 <!-- 成员变量声明 -->
-<property_declaration type="compose" param="list" gap="">
+<property_declaration type="compose" ref="class_property" gap="">
     #property_type m_#property_lower_name;
 
 </property_declaration>
 
 <!-- 空构造函数的初始化列表 -->
-<create_null_init_list type="compose" param="list" gap=",">
+<create_null_init_list type="compose" ref="class_property" gap=",">
 m_#property_lower_name(#property_default)
 
 </create_null_init_list>
 
 <!-- 空构造函数的初始化列表 -->
-<init_null_assignment type="compose" param="list" gap="">
+<init_null_assignment type="compose" ref="class_property" gap="">
     m_#property_lower_name = #property_default;
 
 </init_null_assignment>
 
 <!-- 空init函数的赋值 -->
-<init_null_assignment type="compose" param="list" gap="">
+<init_null_assignment type="compose" ref="class_property" gap="">
     m_#property_lower_name = #property_default;
 
 </init_null_assignment>
 
 <!-- 拷贝init函数的赋值 -->
-<init_self_assignment type="compose" param="list" gap="">
+<init_self_assignment type="compose" ref="class_property" gap="">
     m_#property_lower_name = #class_lower_name.m_#property_lower_name;
 
 </init_self_assignment>
 
 <!-- 参数init函数的赋值 -->
-<init_para_assignment type="compose" param="list" gap="">
+<init_para_assignment type="compose" ref="class_property" gap="">
     m_#property_lower_name = #property_lower_name;
 
 </init_para_assignment>
+
+<enum_class type="enum">	
+	<name_enum_class type="base" node="enum" attr="name"/>
+	<enum_property type="list">
+		<name_enum_property type="base" node="property" attr="name"/>
+		<value_enum_property type="base" node="property" attr="value"/>
+	</enum_property>
+	
+	<declare_enum_property type="compose" ref="enum_property" gap=','>
+
+        #enum_property_name = #enum_property_value
+	</declare_enum_property>
+		
+</enum_class>
+
+<inner_enum_list type="compose" ref="enum_class" gap="">
+  enum #enum_name
+  {
+#declare_enum_property
+  };
+
+
+</inner_enum_list>
+
+
 <!-------------->
 <!-- 生成文件 -->
 <!-------------->
@@ -108,6 +128,8 @@ public:
     #class_name();  
     ~#class_name();  
        
+public:
+#inner_enum_list
 public:  
     virtual bool Init();  
     virtual bool Init(const #class_name &amp;#class_lower_name);  

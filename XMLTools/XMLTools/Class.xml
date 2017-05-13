@@ -3,8 +3,18 @@
 
 
 <class name="Point">
-    <property name="X" prefix="i" type="int" default="0"/>
-    <property name="Y" prefix="i" type="int" default="0"/>
+		<enum name="Direction">
+		    <property name="LEFT" value="0"/>
+		    <property name="RIGTH" value="1"/>
+		</enum>
+		<enum name="Type">
+		    <property name="ONE" value="0"/>
+		    <property name="TWO" value="1"/>
+		</enum>
+    <property name="X" type="int" default="0"/>
+    <property name="Y" type="int" default="0"/>
+    <property name="Type" type="Type" default="0"/>
+    <property name="Direction"type="Direction" default="0"/>
 </class>
 
 <class name="Size">

@@ -22,23 +22,40 @@ public:
     ~ParseXML();
 
 public:
+    /**
+     * @brief 解析数据
+     */
     struct Data
     {
+        /*!< 节点名称 */
         string node;
+
+        /*!< 节点属性 */
         map<string, string> mapClassAttr;
-        vector<map<string,string>> vecPropertyAttr;
+
+        /*!< 成员变量 */
+        vector<map<string, string>> vecPropertyAttr;
+
+        /*!< 内嵌数据 */
         vector<Data> vecInner;
     };
 public:
     /**
-    * @brief 解析xml
-    */
+     * @brief 解析xml
+     */
     bool Parse(const string sFileName);
 
     /**
-    * @brief 清理
-    */
+     * @brief 清理
+     */
     void Clear();
+
+    /**
+     * @brief 获取数据
+     */
+    const vector<Data>& GetData()const;
+
+
 private:
     /**
      * @brief 解析xml
@@ -72,8 +89,10 @@ private:
 
 
 private:
+    /*!< 文件名 */
     string m_sFileName;
 
+    /*!< 解析数据 */
     vector<Data> m_vecData;
 };
 
