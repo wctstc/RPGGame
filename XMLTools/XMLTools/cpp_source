@@ -1,0 +1,55 @@
+
+#include "Point.h"
+
+Point::Point()
+:m_pos(0)
+,m_type(0)
+,m_direction(0)
+  
+{  
+  
+}  
+  
+Point::~Point()  
+{  
+  
+}  
+  
+bool Point::Init()  
+{  
+    m_pos = 0;
+    m_type = 0;
+    m_direction = 0;
+
+    return true;  
+}  
+  
+bool Point::Init(const Point &point)  
+{  
+    m_pos = point.m_pos;
+    m_type = point.m_type;
+    m_direction = point.m_direction;
+
+    return true;  
+}  
+      
+bool Point::Init(const Point::Pos pos,const Point::Type type,const Point::Direction direction)  
+{  
+    m_pos = pos;
+    m_type = type;
+    m_direction = direction;
+
+    return true;  
+}  
+      
+string Point::ToString()const
+{  
+    char csBuffer[10240] = {'\0'};  
+    return csBuffer;  
+}  
+  
+bool Point::FromString(const string sBuffer)
+{  
+    return true;  
+}  
+  

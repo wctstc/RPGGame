@@ -48,7 +48,7 @@ int main()
     CreateFile createFile;
     for (unsigned int i = 0; i < vecData.size(); ++i)
     {
-        if (!createFile.Create("template.xml", vecData[i]))
+        if (!createFile.Create("template2.xml", vecData[i]))
         {
             break;
         }

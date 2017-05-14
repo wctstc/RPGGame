@@ -125,7 +125,8 @@ bool ParseXML::ParseClass(const XMLElement *cpXmlElement, Data &stData)
                 {
                     printf("(%d)ParseXML::ParseClass ParseClass Fail", cpChildElement->GetLineNum());
                     return false;
-                }
+				}
+				stData.vecClass.push_back(stChildData);
             }
             else if (stChildData.node == "struct")
             {
@@ -133,7 +134,8 @@ bool ParseXML::ParseClass(const XMLElement *cpXmlElement, Data &stData)
                 {
                     printf("(%d)ParseXML::ParseClass ParseStruct Fail", cpChildElement->GetLineNum());
                     return false;
-                }
+				}
+				stData.vecStruct.push_back(stChildData);
             }
             else if (stChildData.node == "enum")
             {
@@ -141,7 +143,8 @@ bool ParseXML::ParseClass(const XMLElement *cpXmlElement, Data &stData)
                 {
                     printf("(%d)ParseXML::ParseClass ParseEnum Fail", cpChildElement->GetLineNum());
                     return false;
-                }
+				}
+				stData.vecEnum.push_back(stChildData);
             }
             else
             {
@@ -217,6 +220,10 @@ bool ParseXML::ParseProperty(const XMLElement *cpXmlElement, Data &stData)
 
     stData.vecPropertyAttr.push_back(mapProperty);
 
+
+	Data stNewData;
+	stNewData.mapClassAttr = mapProperty;
+	stData.vecProperty.push_back(stNewData);
     return true;
 }
 

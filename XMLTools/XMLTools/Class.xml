@@ -11,10 +11,13 @@
 		    <property name="ONE" value="0"/>
 		    <property name="TWO" value="1"/>
 		</enum>
-    <property name="X" type="int" default="0"/>
-    <property name="Y" type="int" default="0"/>
-    <property name="Type" type="Type" default="0"/>
-    <property name="Direction"type="Direction" default="0"/>
+		<struct name="Pos">
+		    <property name="X" type="int" default="0"/>
+		    <property name="Y" type="int" default="0"/>
+		</struct>
+		<property name="Pos" type="Point::Pos" default="0"/>
+    <property name="Type" type="Point::Type" default="0"/>
+    <property name="Direction"type="Point::Direction" default="0"/>
 </class>
 
 <class name="Size">

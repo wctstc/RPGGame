@@ -1,0 +1,55 @@
+
+#ifndef __POINT_H__  
+#define __POINT_H__  
+
+#include <string> 
+  
+using std::string;
+class Point  
+{  
+public:  
+    Point();  
+    ~Point();  
+       
+public:
+  enum Direction
+  {
+        LEFT = 0,
+        RIGTH = 1
+  };  enum Type
+  {
+        ONE = 0,
+        TWO = 1
+  };
+
+  struct Pos
+  {
+        int X;,
+        int Y;
+  };
+public:  
+    virtual bool Init();  
+    virtual bool Init(const Point &point);  
+    virtual bool Init(const Point::Pos pos,const Point::Type type,const Point::Direction direction);  
+      
+  
+    virtual string ToString()const;  
+    virtual bool FromString(const string sBuffer);  
+      
+public:    
+    inline const Point::Pos GetPos() const{return m_pos;}
+    inline const Point::Type GetType() const{return m_type;}
+    inline const Point::Direction GetDirection() const{return m_direction;}
+
+    inline void SetPos(const Point::Pos pos){m_pos=pos;}
+    inline void SetType(const Point::Type type){m_type=type;}
+    inline void SetDirection(const Point::Direction direction){m_direction=direction;}
+
+private:  
+    Point::Pos m_pos;
+    Point::Type m_type;
+    Point::Direction m_direction;
+  
+};  
+  
+#endif //__POINT_H__

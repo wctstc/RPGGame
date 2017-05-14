@@ -36,8 +36,17 @@ public:
         /*!< 成员变量 */
         vector<map<string, string>> vecPropertyAttr;
 
-        /*!< 内嵌数据 */
-        vector<Data> vecInner;
+		/*!< 内嵌数据 */
+		vector<Data> vecInner;
+
+		/*!< 内嵌数据 */
+		vector<Data> vecProperty;
+		/*!< 内嵌数据 */
+		vector<Data> vecClass;
+		/*!< 内嵌数据 */
+		vector<Data> vecEnum;
+		/*!< 内嵌数据 */
+		vector<Data> vecStruct;
     };
 public:
     /**
