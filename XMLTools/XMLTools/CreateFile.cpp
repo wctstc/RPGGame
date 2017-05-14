@@ -4,8 +4,18 @@
 #include <iostream>
  
 using namespace std;
- 
 
+const string TYPE_CLASS = "class";
+const string TYPE_ENUM = "enum";
+const string TYPE_STRUCT = "struct";
+
+const string TYPE_ATTR = "base";
+
+/*!< 属性列表 */
+const string TYPE_PROPERTY = "list";
+
+/*!< 属性合成属性 */
+const string TYPE_COMPOSE = "compose";
 
 CreateFile::CreateFile()
 {
@@ -15,173 +25,7 @@ CreateFile::CreateFile()
 CreateFile::~CreateFile()
 {
 }
- 
 
-// 
-// ParseXML parseXml;
-// parseXml.Parse(xmlDocument.FirstChildElement());
-// 
-// 
-// map<string, string> mapBase;
-// vector<map<string, string>> vecBaseList;
-// map<string, string> mapCompose;
-// map<string, string> mapFile;
-// 
-// xmlError = xmlDocument.LoadFile("template.xml");
-// if (xmlError != XML_SUCCESS)
-// {
-//     cout << xmlError << endl;
-//     return 0;
-// }
-// 
-//
-// XMLElement *xmlElement = xmlDocument.FirstChildElement();
-// while (xmlElement)
-// {
-//     string name = xmlElement->Name();
-//     string type = xmlElement->Attribute("type");
-// 
-//     if (xmlElement->Attribute("type", "base"))
-//     {
-//         if (xmlElement->Attribute("node", "class"))
-//         {
-//             if (xmlElement->Attribute("attr", "name"))
-//             {
-//                 string value = parseXml.GetStructureData().name;
-//                 if (xmlElement->Attribute("param", "lower"))
-//                 {
-//                     for (int i = 0; i < value.length(); ++i)
-//                     {
-//                         if (value[i] >= 'A' && value[i] <= 'Z')
-//                             value[i] = value[i] - 'A' + 'a';
-//                     }
-//                 }
-//                 else if (xmlElement->Attribute("param", "upper"))
-//                 {
-//                     for (int i = 0; i < value.length(); ++i)
-//                     {
-//                         if (value[i] >= 'a' && value[i] <= 'z')
-//                             value[i] = value[i] - 'a' + 'A';
-//                     }
-//                 }
-//                 mapBase.insert(make_pair("#" + name, value));
-//             }
-//         }
-//     }
-//     else if (xmlElement->Attribute("type", "baselist"))
-//     {
-// 
-//         for (int i = 0; i < parseXml.GetVariableDataNum(); ++i)
-//         {
-//             XMLElement *childElement = xmlElement->FirstChildElement();
-//             map<string, string> mapBaseListItem;
-//             while (childElement)
-//             {
-//                 string name = childElement->Name();
-//                 string node = childElement->Attribute("node");
-//                 if (childElement->Attribute("node", "property"))
-//                 {
-//                     if (childElement->Attribute("attr", "name"))
-//                     {
-//                         string value = parseXml.GetVariableData(i)->name;
-// 
-//                         if (childElement->Attribute("param", "lower"))
-//                         {
-//                             for (int i = 0; i < value.length(); ++i)
-//                             {
-//                                 if (value[i] >= 'A' && value[i] <= 'Z')
-//                                     value[i] = value[i] - 'A' + 'a';
-//                             }
-//                         }
-//                         else if (childElement->Attribute("param", "upper"))
-//                         {
-//                             for (int i = 0; i < value.length(); ++i)
-//                             {
-//                                 if (value[i] >= 'a' && value[i] <= 'z')
-//                                     value[i] = value[i] - 'a' + 'A';
-//                             }
-//                         }
-//                         mapBaseListItem.insert(make_pair("#" + name, value));
-//                     }
-//                     else if (childElement->Attribute("attr", "type"))
-//                     {
-//                         string value = parseXml.GetVariableData(i)->type;
-//                         mapBaseListItem.insert(make_pair("#" + name, value));
-//                     }
-//                     else if (childElement->Attribute("attr", "default"))
-//                     {
-//                         string value = childElement->Attribute("default");
-//                         mapBaseListItem.insert(make_pair("#" + name, value));
-//                     }
-//                 }
-//                 childElement = childElement->NextSiblingElement();
-//             }
-//             vecBaseList.push_back(mapBaseListItem);
-//         }
-//     }
-//     else if (xmlElement->Attribute("type", "compose"))
-//     {
-//         if (xmlElement->Attribute("param", "list"))
-//         {
-//             string name = xmlElement->Name();
-//             string gap = xmlElement->Attribute("gap");
-//             string text = xmlElement->GetText();
-//             text = text.substr(1, text.size() - 2);
-//             string temp;
-//             string value;
-// 
-//             for (vector<map<string, string>>::iterator vIt = vecBaseList.begin(); vIt != vecBaseList.end(); ++vIt)
-//             {
-//                 temp = text;
-// 
-//                 for (map<string, string>::iterator mIt = vIt->begin(); mIt != vIt->end(); ++mIt)
-//                 {
-//                     Replace(temp, mIt->first, mIt->second);
-//                 }
-//                 for (map<string, string>::iterator mIt = mapBase.begin(); mIt != mapBase.end(); ++mIt)
-//                 {
-//                     Replace(temp, mIt->first, mIt->second);
-//                 }
-// 
-//                 if (!value.empty())
-//                     value.append(gap);
-//                 value.append(temp);
-//             }
-// 
-//             mapCompose.insert(make_pair("#" + name, value));
-//         }
-//     }
-//     else if (xmlElement->Attribute("type", "file"))
-//     {
-//         string file = xmlElement->Attribute("file");
-//         for (map<string, string>::iterator mIt = mapBase.begin(); mIt != mapBase.end(); ++mIt)
-//         {
-//             Replace(file, mIt->first, mIt->second);
-//         }
-// 
-//         string value = xmlElement->GetText();
-//         for (map<string, string>::iterator mIt = mapBase.begin(); mIt != mapBase.end(); ++mIt)
-//         {
-//             Replace(value, mIt->first, mIt->second);
-//         }
-//         for (map<string, string>::iterator mIt = mapCompose.begin(); mIt != mapCompose.end(); ++mIt)
-//         {
-//             Replace(value, mIt->first, mIt->second);
-//         }
-// 
-//         mapFile.insert(make_pair(file, value));
-//     }
-// 
-//     xmlElement = xmlElement->NextSiblingElement();
-// }
-// 
-// 
-// for (map<string, string>::iterator mIt = mapFile.begin(); mIt != mapFile.end(); ++mIt)
-// {
-//     FileUtil::SaveFileWithChar(mIt->first, mIt->second.c_str(), mIt->second.length());
-//     cout << mIt->first.c_str() << ":" << endl;
-//     cout << mIt->second.c_str() << endl;
-// }
 bool CreateFile::Create(const string sTemplateFile, const ParseXML::Data &stData)
 {
     XMLDocument xmlDocument;
@@ -197,11 +41,52 @@ bool CreateFile::Create(const string sTemplateFile, const ParseXML::Data &stData
 
     const XMLElement *cpXmlElement = xmlDocument.FirstChildElement();
 
-    if (!Create(cpXmlElement,stData))
-    {
-        printf("CreateFile::Create Create fail");
-        return false;
-    }
+	while (cpXmlElement)
+	{
+		const char *csType = cpXmlElement->Attribute("type");
+
+		if (csType == NULL)
+		{
+			printf("CreateFile::Create Type is NULL.");
+			return false;
+		}
+
+		string sType = csType;
+
+		if (sType == "class")
+		{
+			const XMLElement *cpChildElement = cpXmlElement->FirstChildElement();
+
+			TranslateClass translateClass;
+			if (!translateClass.Translate(cpChildElement, stData, m_mapBase))
+			{
+				printf("CreateFile::Create Translate fail");
+				return false;
+			}
+		}
+		else if(sType == "file")
+		{
+			if (!TranslateFile(cpXmlElement, m_mapFile))
+			{
+				printf("CreateFile::Create TranslateFile fail");
+				return false;
+			}
+		}
+
+
+		cpXmlElement = cpXmlElement->NextSiblingElement();
+	}
+
+	for (map<string, string>::const_iterator cmIt = m_mapFile.begin(); cmIt != m_mapFile.end(); ++cmIt)
+	{
+		FileUtil::SaveFileWithChar(cmIt->first, cmIt->second.c_str(), cmIt->second.length());
+	}
+
+//     if (!Create(cpXmlElement,stData))
+//     {
+//         printf("CreateFile::Create Create fail");
+//         return false;
+//     }
 
     return true;
 }
@@ -264,7 +149,14 @@ bool CreateFile::Create(const XMLElement *cpXmlElement, const ParseXML::Data &st
             for (unsigned int i = 0; i < stData.vecInner.size(); ++i)
             {
                 map<string, string> mapEnum;
-                if (!TranslateEnum(cpXmlElement, stData.vecInner[i], mapEnum))
+				const XMLElement *cpChildElement = cpXmlElement->FirstChildElement();
+				if (cpChildElement == NULL)
+				{
+					printf("CreateFile::Create ChildElement is null");
+					return false;
+				}
+
+                if (!TranslateEnum(cpChildElement, stData.vecInner[i], mapEnum))
                 {
                     printf("CreateFile::Create TranslateCompose fail.");
                     return false;
@@ -347,7 +239,7 @@ bool CreateFile::TranslateBase(const XMLElement *cpXmlElement, const map<string,
         return false;
     }
 
-    mapBase.insert(make_pair("#" + sName, sValue));
+    mapBase.insert(make_pair("#" + sName + "#", sValue));
     return true;
 }
 
@@ -423,7 +315,7 @@ bool CreateFile::TranslateCompose(const XMLElement *cpXmlElement, map<string, st
         sValue.append(sTemp);
     }
 
-    mapBase.insert(make_pair("#" + sName, sValue));
+    mapBase.insert(make_pair("#" + sName + "#", sValue));
 
     return true;
 }
@@ -437,72 +329,6 @@ bool CreateFile::TranslateEnum(const XMLElement *cpXmlElement, const ParseXML::D
         return false;
     }
     return true;
-//     if (cpXmlElement == NULL)
-//     {
-//         printf("CreateFile::TranslateEnum XmlElement is null");
-//         return false;
-//     }
-// 
-// 
-//     vector <map<string, string>> vEnum;
-//     for (unsigned int i = 0; i < stData.vecInner.size(); ++i)
-//     {
-//         const ParseXML::Data &stChildData = stData.vecInner[i];
-//         if (stChildData.node == "enum")
-//         {
-//             vector <map<string, string>> vProperty;
-//             map<string, string> mapEnum;
-// 
-//             const XMLElement *cpChildElement = cpXmlElement->FirstChildElement();
-// 
-//             vector<map<string, string>> vecMap;
-//             while (cpChildElement)
-//             {
-//                 const char * csType = cpChildElement->Attribute("type");
-// 
-//                 if (csType == NULL)
-//                 {
-//                     printf("CreateFile::TranslateEnum Type is null. line:%d", cpChildElement->GetLineNum());
-//                     return false;
-//                 }
-// 
-//                 string sType = csType;
-//                 if (sType == "base")
-//                 {
-//                     if (!TranslateBase(cpChildElement, stChildData.mapClassAttr, mapEnum))
-//                     {
-//                         printf("CreateFile::TranslateEnum TranslateBase fail");
-//                         return false;
-//                     }
-//                 }
-//                 else if (sType == "list")
-//                 {
-//                     if (!TranslateBaseList(cpChildElement, stChildData.vecPropertyAttr, vecMap))
-//                     {
-//                         printf("CreateFile::TranslateEnum TranslateBaseList fail");
-//                         return false;
-//                     }
-//                 }
-//                 else if (sType == "compose")
-//                 {
-// //                     string sValue;
-// //                     for (unsigned int i = 0; i < mIt->second.size(); ++i)
-// //                     {
-// //                         string sTemp = sText;
-// //                         Replace(sTemp, m_mapBase);
-// //                         Replace(sTemp, (mIt->second)[i]);
-// //                         Replace(sTemp, m_mapCompose);
-// // 
-// //                         if (!sValue.empty())
-// //                             sValue.append(sGap);
-// // 
-// //                         sValue.append(sTemp);
-// //                     }
-//                 }
-//                 cpChildElement = cpChildElement->NextSiblingElement();
-//             }
-//         }
-//     }
 }
 
 bool CreateFile::TranslateFile(const XMLElement *cpXmlElement, map<string, string> &mapBase)
@@ -543,7 +369,7 @@ string CreateFile::Format(const char *csFormat, ...)
  
 void CreateFile::Replace(string &sSrcStr,const string sOldStr,const string sNewStr)const
 {
-    for(unsigned int iIndex = 0; iIndex < sSrcStr.length(); iIndex += sNewStr.length())
+    for( int iIndex = 0; iIndex < sSrcStr.length(); iIndex += sNewStr.length())
     {
         iIndex = sSrcStr.find(sOldStr,iIndex);
         if (iIndex == string::npos)
@@ -616,7 +442,30 @@ void CreateFile::Replace(string &sSrcStr, const map<string, string> &mapReplace)
                 printf("CreateFile::TranslateClass::Create TranslateCompose fail.");
                 return false;
             }
-        }
+		}
+		else if (sType == "enum")
+		{
+			vector<map<string, string>> vecEnum;
+			for (unsigned int i = 0; i < stData.vecInner.size(); ++i)
+			{
+				map<string, string> mapEnum;
+				const XMLElement *cpChildElement = cpXmlElement->FirstChildElement();
+				if (cpChildElement == NULL)
+				{
+					printf("CreateFile::Create ChildElement is null");
+					return false;
+				}
+
+				TranslateClass translateClass;
+				if (!translateClass.Translate(cpChildElement, stData.vecInner[i], mapEnum))
+				{
+					printf("CreateFile::TranslateEnum Translate fail.");
+					return false;
+				}
+				vecEnum.push_back(mapEnum);
+			}
+			m_vecBaseList.insert(make_pair("enum_class", vecEnum));
+		}
 
         cpXmlElement = cpXmlElement->NextSiblingElement();
     }
@@ -685,7 +534,7 @@ bool CreateFile::TranslateClass::TranslateBase(const XMLElement *cpXmlElement, c
         return false;
     }
 
-    mapBase.insert(make_pair("#" + sName, sValue));
+    mapBase.insert(make_pair("#" + sName + "#", sValue));
     return true;
 }
 
@@ -736,7 +585,9 @@ bool CreateFile::TranslateClass::TranslateCompose(const XMLElement *cpXmlElement
     string sGap = csGap;
     string sText = csText;
 
-    sText = sText.substr(1, sText.length() - 2);
+	int iFirstEnter = sText.find_first_of('\n')+1;
+	int iLastEnter = sText.find_last_of('\n');
+    sText = sText.substr(iFirstEnter, iLastEnter- iFirstEnter);
 
     map<string, vector<map<string, string>>>::const_iterator mIt = m_vecBaseList.find(sRef);
     if (mIt == m_vecBaseList.end())
@@ -758,14 +609,14 @@ bool CreateFile::TranslateClass::TranslateCompose(const XMLElement *cpXmlElement
         sValue.append(sTemp);
     }
 
-    mapBase.insert(make_pair("#" + sName, sValue));
+    mapBase.insert(make_pair("#" + sName + "#", sValue));
 
     return true;
 }
 
 void CreateFile::TranslateClass::Replace(string &sSrcStr, const string sOldStr, const string sNewStr) const
 {
-    for (unsigned int iIndex = 0; iIndex < sSrcStr.length(); iIndex += sNewStr.length())
+    for ( int iIndex = 0; iIndex < sSrcStr.length(); iIndex += sNewStr.length())
     {
         iIndex = sSrcStr.find(sOldStr, iIndex);
         if (iIndex == string::npos)
