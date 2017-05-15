@@ -39,6 +39,9 @@
     <ClCompile Include="CreateFile.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="StrUtil.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tinyxml2.h">
@@ -52,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="CreateFile.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="StrUtil.h">
+      <Filter>Base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

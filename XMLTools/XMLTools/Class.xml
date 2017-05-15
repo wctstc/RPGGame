@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-
-<class name="Point">
-		<enum name="Direction">
-		    <property name="LEFT" value="0"/>
-		    <property name="RIGTH" value="1"/>
-		</enum>
-		<enum name="Type">
-		    <property name="ONE" value="0"/>
-		    <property name="TWO" value="1"/>
-		</enum>
-		<struct name="Pos">
-		    <property name="X" type="int" default="0"/>
-		    <property name="Y" type="int" default="0"/>
-		</struct>
-		<property name="Pos" type="Point::Pos" default="0"/>
-    <property name="Type" type="Point::Type" default="0"/>
-    <property name="Direction"type="Point::Direction" default="0"/>
+<class name="Monster" comment="怪物">
+	<enum name="MosterType" comment="怪物类型">
+		<property name="MONSTER_TYPE_GENTLE"  value="0" comment="温和"/>
+		<property name="MONSTER_TYPE_NEUTRAL" value="1" comment="中立"/>
+		<property name="MOSTER_TYPE_HOSTIL"   value="2" comment="敌对"/>
+	</enum>
+	<property name="Type"        prefix="e" type="Monster::MonsterType" default="Monster::MONSTER_TYPE_GENTLE" comment="怪物类型"/>
+	<property name="Description" prefix="i" type="string"               default="&quot;&quot;"                 comment="描述"/>
+	<property name="Drop"        prefix="v" type="vector<int>&"         default="vector<int>()"                comment="掉落"/>
 </class>
 
-<class name="Size">
-    <property name="Width" prefix="i" type="int" default="0"/>
-    <property name="Heigt" prefix="i" type="int" default="0"/>
+<class name="Actor" comment="行动者">
+	<property name="ID"          prefix="i" type="int"    default="0"            comment="编号"/>
+	<property name="Name"        prefix="s" type="string" default="&quot;&quot;" comment="名字"/>
+	<property name="PreHp"       prefix="i" type="int"    default="0"            comment="上一次生命值"/>
+	<property name="Hp"          prefix="i" type="int"    default="0"            comment="生命值"/>
+	<property name="BaseMaxHp"   prefix="i" type="int"    default="0"            comment="基础生命值上限"/>
+	<property name="BaseAttack"  prefix="i" type="int"    default="0"            comment="基础攻击力"/>
+	<property name="BaseDefance" prefix="i" type="int"    default="0"            comment="基础防御力"/>
 </class>

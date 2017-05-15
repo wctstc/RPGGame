@@ -33,6 +33,7 @@ public:
         /*!< 节点属性 */
         map<string, string> mapClassAttr;
 
+
         /*!< 成员变量 */
         vector<map<string, string>> vecPropertyAttr;
 

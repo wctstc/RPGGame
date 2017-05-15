@@ -1,54 +1,54 @@
 
-#include "Point.h"
+#include "Monster.h"
 
-Point::Point()
-:m_pos(0)
-,m_type(0)
-,m_direction(0)
+Monster::Monster()
+:m_eType(Monster::MONSTER_TYPE_GENTLE)
+,m_iDescription("")
+,m_vDrop(vector<int>())
   
 {  
   
 }  
   
-Point::~Point()  
+Monster::~Monster()  
 {  
   
 }  
   
-bool Point::Init()  
+bool Monster::Init()  
 {  
-    m_pos = 0;
-    m_type = 0;
-    m_direction = 0;
-
-    return true;  
-}  
-  
-bool Point::Init(const Point &point)  
-{  
-    m_pos = point.m_pos;
-    m_type = point.m_type;
-    m_direction = point.m_direction;
+    m_eType = Monster::MONSTER_TYPE_GENTLE;
+    m_iDescription = "";
+    m_vDrop = vector<int>();
 
     return true;  
 }  
-      
-bool Point::Init(const Point::Pos pos,const Point::Type type,const Point::Direction direction)  
+  
+bool Monster::Init(const Monster &monster)  
 {  
-    m_pos = pos;
-    m_type = type;
-    m_direction = direction;
+    m_eType = monster.m_eType;
+    m_iDescription = monster.m_iDescription;
+    m_vDrop = monster.m_vDrop;
 
     return true;  
 }  
       
-string Point::ToString()const
+bool Monster::Init(const Monster::MonsterType eType,const string iDescription,const vector<int>& vDrop)  
+{  
+    m_eType = eType;
+    m_iDescription = iDescription;
+    m_vDrop = vDrop;
+
+    return true;  
+}  
+      
+string Monster::ToString()const
 {  
     char csBuffer[10240] = {'\0'};  
     return csBuffer;  
 }  
   
-bool Point::FromString(const string sBuffer)
+bool Monster::FromString(const string sBuffer)
 {  
     return true;  
 }  

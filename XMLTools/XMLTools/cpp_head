@@ -1,55 +1,98 @@
 
-#ifndef __POINT_H__  
-#define __POINT_H__  
+#ifndef __MONSTER_H__
+#define __MONSTER_H__
 
-#include <string> 
-  
+#include <string>
+
 using std::string;
-class Point  
-{  
-public:  
-    Point();  
-    ~Point();  
-       
+
+/**
+ * @brief 怪物
+ */
+class Monster
+{
 public:
-  enum Direction
+    Monster();
+    ~Monster();
+public:
+		/**
+		 * @brief 空
+		 */
+    static const Monster sGetNoMonster();
+public:
+	/**
+	 * @brief 怪物类型
+	 */
+	enum MosterType
   {
-        LEFT = 0,
-        RIGTH = 1
-  };  enum Type
-  {
-        ONE = 0,
-        TWO = 1
+        /*<! 温和*/
+        MONSTER_TYPE_GENTLE = 0,
+        /*<! 中立*/
+        MONSTER_TYPE_NEUTRAL = 1,
+        /*<! 敌对*/
+        MOSTER_TYPE_HOSTIL = 2
   };
 
-  struct Pos
-  {
-        int X;,
-        int Y;
-  };
-public:  
-    virtual bool Init();  
-    virtual bool Init(const Point &point);  
-    virtual bool Init(const Point::Pos pos,const Point::Type type,const Point::Direction direction);  
-      
-  
-    virtual string ToString()const;  
-    virtual bool FromString(const string sBuffer);  
-      
+public:
+    /**
+		 * @brief 初始化
+		 */
+    virtual bool Init();
+    
+    /**
+		 * @brief 初始化
+		 */
+    virtual bool Init(const Monster &monster);
+    
+    /**
+		 * @brief 初始化
+		 */
+    virtual bool Init(const Monster::MonsterType eType,const string iDescription,const vector<int>& vDrop);
+
+    /**
+		 * @brief 字符串化
+		 */
+    virtual string ToString()const;
+    /**
+		 * @brief 反字符串化
+		 */
+    virtual bool FromString(const string sBuffer);
+
 public:    
-    inline const Point::Pos GetPos() const{return m_pos;}
-    inline const Point::Type GetType() const{return m_type;}
-    inline const Point::Direction GetDirection() const{return m_direction;}
+    /**
+		 * @brief 获取怪物类型
+		 */
+    inline const Monster::MonsterType GetType() const{return m_eType;}
+    /**
+		 * @brief 获取描述
+		 */
+    inline const string GetDescription() const{return m_iDescription;}
+    /**
+		 * @brief 获取掉落
+		 */
+    inline const vector<int>& GetDrop() const{return m_vDrop;}
 
-    inline void SetPos(const Point::Pos pos){m_pos=pos;}
-    inline void SetType(const Point::Type type){m_type=type;}
-    inline void SetDirection(const Point::Direction direction){m_direction=direction;}
+    /**
+		 * @brief 设置怪物类型
+		 */
+    inline void SetType(const Monster::MonsterType eType){m_eType = eType;}
+    /**
+		 * @brief 设置描述
+		 */
+    inline void SetDescription(const string iDescription){m_iDescription = iDescription;}
+    /**
+		 * @brief 设置掉落
+		 */
+    inline void SetDrop(const vector<int>& vDrop){m_vDrop = vDrop;}
 
 private:  
-    Point::Pos m_pos;
-    Point::Type m_type;
-    Point::Direction m_direction;
+    /*<! 怪物类型*/
+    Monster::MonsterType m_eType;
+    /*<! 描述*/
+    string m_iDescription;
+    /*<! 掉落*/
+    vector<int>& m_vDrop;
   
 };  
   
-#endif //__POINT_H__
+#endif //__MONSTER_H__

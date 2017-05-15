@@ -27,105 +27,120 @@ xml字符转义:
 <base name="class_name"       attr="name"/>
 <base name="class_name_lower" attr="name" param="lower"/>
 <base name="class_name_upper" attr="name" param="upper"/>
+<base name="class_comment"    attr="comment"/>
 
 <property>
 	<base name="property_name"       attr="name"/>
-	<base name="property_lower_name" attr="name" param="lower"/>
-	<base name="property_upper_name" attr="name" param="upper"/>
+	<base name="property_prefix"     attr="prefix"/>
 	<base name="property_type"       attr="type"/>
 	<base name="property_default"    attr="default" default="0"/>
+	<base name="property_comment"    attr="comment"/>
 </property>
 
 <!-- init函数的参数列表 -->
-<compose name="init_para_declaration" ref="property" gap=",">
-const #property_type# #property_lower_name#
+<compose name="compose_init_arg" ref="property" gap=",">
+const #property_type# #property_prefix##property_name#
 </compose>
 
 <!-- Get函数 -->
-<compose name="get_function" ref="property" gap="">
-    inline const #property_type# Get#property_name#() const{return m_#property_lower_name#;}
+<compose name="compose_get" ref="property" gap="">
+    /**
+		 * @brief 获取#property_comment#
+		 */
+    inline const #property_type# Get#property_name#() const{return m_#property_prefix##property_name#;}
 
 </compose>
 
 <!-- Set函数 -->
-<compose name="set_function" ref="property" gap="">
-    inline void Set#property_name#(const #property_type# #property_lower_name#){m_#property_lower_name#=#property_lower_name#;}
+<compose name="compose_set" ref="property" gap="">
+    /**
+		 * @brief 设置#property_comment#
+		 */
+    inline void Set#property_name#(const #property_type# #property_prefix##property_name#){m_#property_prefix##property_name# = #property_prefix##property_name#;}
 
 </compose>
 
 <!-- 成员变量声明 -->
-<compose name="property_declaration" ref="property" gap="">
-    #property_type# m_#property_lower_name#;
+<compose name="compose_property_declaration" ref="property" gap="">
+    /*&lt;! #property_comment#*/
+    #property_type# m_#property_prefix##property_name#;
 
 </compose>
 
 <!-- 空构造函数的初始化列表 -->
-<compose name="create_null_init_list" ref="property" gap=",">
-m_#property_lower_name#(#property_default#)
-
-</compose>
-
-<!-- 空构造函数的初始化列表 -->
-<compose name="init_null_assignment" ref="property" gap="">
-    m_#property_lower_name# = #property_default#;
+<compose name="compose_create_implement" ref="property" gap=",">
+m_#property_prefix##property_name#(#property_default#)
 
 </compose>
 
 <!-- 空init函数的赋值 -->
-<compose name="init_null_assignment" ref="property" gap="">
-    m_#property_lower_name# = #property_default#;
+<compose name="compose_init_implement" ref="property" gap="">
+    m_#property_prefix##property_name# = #property_default#;
 
 </compose>
 
 <!-- 拷贝init函数的赋值 -->
-<compose name="init_self_assignment" ref="property" gap="">
-    m_#property_lower_name# = #class_name_lower#.m_#property_lower_name#;
+<compose name="compose_init_self_implement" ref="property" gap="">
+    m_#property_prefix##property_name# = #class_name_lower#.m_#property_prefix##property_name#;
 
 </compose>
 
 <!-- 参数init函数的赋值 -->
-<compose name="init_para_assignment" ref="property" gap="">
-    m_#property_lower_name# = #property_lower_name#;
+<compose name="compose_init_arg_implement" ref="property" gap="">
+    m_#property_prefix##property_name# = #property_prefix##property_name#;
 
 </compose>
 
 <enum>	
 	<base name="enum_name" attr="name"/>
+	<base name="enum_comment" attr="comment"/>
 	<property>
-		<base name="enum_property_name"  attr="name"/>
-		<base name="enum_property_value" attr="value"/>
+		<base name="enum_property_name"    attr="name"/>
+		<base name="enum_property_value"   attr="value"/>
+		<base name="enum_property_comment" attr="comment"/>
 	</property>
 	
 	<compose name="declare_enum_property" ref="property" gap=",">
 
+        /*&lt;! #enum_property_comment#*/
         #enum_property_name# = #enum_property_value#
 	</compose>
-		
 </enum>
 
 <compose name="inner_enum_list" ref="enum" gap="">
-  enum #enum_name#
+	/**
+	 * @brief #enum_comment#
+	 */
+	enum #enum_name#
   {#declare_enum_property#
   };
+
 </compose>
 
 
 <struct>
 	<base name="struct_name" attr="name"/>
+	<base name="struct_comment" attr="comment"/>
 	<property>
 		<base name="struct_property_name"  attr="name"/>
 		<base name="struct_property_type" attr="type"/>
+		<base name="struct_property_comment" attr="comment"/>
 	</property>
 	<compose name="declare_struct_property" ref="property" gap="">
 
+        /*&lt;! #struct_property_comment#*/
         #struct_property_type# #struct_property_name#;
 	</compose>
 </struct>
 
 <compose name="inner_struct_list" ref="struct" gap="">
+	/**
+	 * @brief #struct_comment#
+	 */
   struct #struct_name#
   {#declare_struct_property#
   };
+
 </compose>
 
 </class>
@@ -134,36 +149,58 @@ m_#property_lower_name#(#property_default#)
 <!-- 生成文件 -->
 <!-------------->
 <cpp_head type="file" file="#class_name#.h">
-#ifndef __#class_name_upper#_H__  
-#define __#class_name_upper#_H__  
+#ifndef __#class_name_upper#_H__
+#define __#class_name_upper#_H__
 
-#include &lt;string&gt; 
-  
+#include &lt;string&gt;
+
 using std::string;
-class #class_name#  
-{  
-public:  
-    #class_name#();  
-    ~#class_name#();  
-       
+
+/**
+ * @brief #class_comment#
+ */
+class #class_name#
+{
+public:
+    #class_name#();
+    ~#class_name#();
+public:
+		/**
+		 * @brief 空
+		 */
+    static const #class_name# &GetNo#class_name#();
 public:
 #inner_enum_list#
+public:
+    /**
+		 * @brief 初始化
+		 */
+    virtual bool Init();
+    
+    /**
+		 * @brief 初始化
+		 */
+    virtual bool Init(const #class_name# &amp;#class_name_lower#);
+    
+    /**
+		 * @brief 初始化
+		 */
+    virtual bool Init(#compose_init_arg#);
 
-#inner_struct_list#
-public:  
-    virtual bool Init();  
-    virtual bool Init(const #class_name# &amp;#class_name_lower#);  
-    virtual bool Init(#init_para_declaration#);  
-      
-  
-    virtual string ToString()const;  
-    virtual bool FromString(const string sBuffer);  
-      
+    /**
+		 * @brief 字符串化
+		 */
+    virtual string ToString()const;
+    /**
+		 * @brief 反字符串化
+		 */
+    virtual bool FromString(const string sBuffer);
+
 public:    
-#get_function#
-#set_function#
+#compose_get#
+#compose_set#
 private:  
-#property_declaration#  
+#compose_property_declaration#  
 };  
   
 #endif //__#class_name_upper#_H__
@@ -175,7 +212,7 @@ private:
 #include &quot;#class_name#.h&quot;
 
 #class_name#::#class_name#()
-:#create_null_init_list#  
+:#compose_create_implement#  
 {  
   
 }  
@@ -187,19 +224,19 @@ private:
   
 bool #class_name#::Init()  
 {  
-#init_null_assignment#
+#compose_init_implement#
     return true;  
 }  
   
 bool #class_name#::Init(const #class_name# &amp;#class_name_lower#)  
 {  
-#init_self_assignment#
+#compose_init_self_implement#
     return true;  
 }  
       
-bool #class_name#::Init(#init_para_declaration#)  
+bool #class_name#::Init(#compose_init_arg#)  
 {  
-#init_para_assignment#
+#compose_init_arg_implement#
     return true;  
 }  
       
