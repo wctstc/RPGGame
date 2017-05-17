@@ -94,6 +94,17 @@ bool ParseXML::ParseClass(const XMLElement *cpXmlElement, Data &stData)
         return false;
     }
 
+    map<string, string>::iterator mapParentIt = stData.mapClassAttr.find("parent");
+    if (mapParentIt != stData.mapClassAttr.end())
+    {
+        stData.parent = mapParentIt->second;
+    }
+    map<string, string>::iterator mapNameIt = stData.mapClassAttr.find("name");
+    if (mapNameIt != stData.mapClassAttr.end())
+    {
+        stData.name = mapNameIt->second;
+    }
+
     const XMLElement *cpChildElement = cpXmlElement->FirstChildElement();
 
     while (cpChildElement)

@@ -39,7 +39,7 @@ CreateFile::~CreateFile()
 {
 }
 
-bool CreateFile::Create(const string sTemplateFile, const ParseXML::Data &stData)
+bool CreateFile::Create(const string sTemplateFile, const ParseXML::Data &stData, const map<string,string> &mapParent)
 {
     XMLDocument xmlDocument;
     XMLError xmlError;
@@ -71,7 +71,7 @@ bool CreateFile::Create(const string sTemplateFile, const ParseXML::Data &stData
 			const XMLElement *cpChildElement = cpXmlElement->FirstChildElement();
 
 			TranslateClass translateClass;
-			if (!translateClass.Translate2(cpChildElement, stData, m_mapBase))
+			if (!translateClass.Translate2(cpChildElement, stData,mapParent, m_mapBase))
 			{
 				printf("CreateFile::Create Translate fail");
 				return false;
@@ -104,6 +104,11 @@ bool CreateFile::Create(const string sTemplateFile, const ParseXML::Data &stData
     return true;
 }
 
+const map<string, string> & CreateFile::GetBase()
+{
+    return m_mapBase;
+}
+
 bool CreateFile::TranslateFile(const XMLElement *cpXmlElement, map<string, string> &mapBase)
 {
     const char *csName = cpXmlElement->Name();
@@ -121,15 +126,25 @@ bool CreateFile::TranslateFile(const XMLElement *cpXmlElement, map<string, strin
     string sText = csText;
 
     StrUtil::Replace(sText, m_mapBase);
+    StrUtil::Replace(sFile, m_mapBase);
 
-    mapBase.insert(make_pair(sName, sText));
+    mapBase.insert(make_pair(sFile, sText));
 
     return true;
 }
 
- bool CreateFile::TranslateClass::Translate2(const XMLElement *cpXmlElement, const ParseXML::Data &stData, map<string, string> &mapBase)
+ bool CreateFile::TranslateClass::Translate2(
+     const XMLElement *cpXmlElement, 
+     const ParseXML::Data &stData, 
+     const map<string, string> &mapParent, 
+     map<string, string> &mapBase)
  {
 	 m_mapBase.clear();
+
+     for (map<string, string>::const_iterator mapIt = mapParent.begin(); mapIt != mapParent.end(); ++mapIt)
+     {
+         m_mapParent.insert(make_pair("#parent#"+mapIt->first, mapIt->second));
+     }
 
 	 if (cpXmlElement == NULL)
 	 {
@@ -154,10 +169,10 @@ bool CreateFile::TranslateFile(const XMLElement *cpXmlElement, map<string, strin
 				 printf("CreateFile::TranslateClass::Create TranslateBase fail.");
 				 return false;
 			 }
-		 }
+         }
          if (sNode == NODE_PARENT)
          {
-             if (!TranslateAttr(cpXmlElement, stData.mapClassAttr, m_mapParent))
+             if (!TranslateParent(cpXmlElement, m_mapBase))
              {
                  printf("CreateFile::TranslateClass::Create TranslateBase fail.");
                  return false;
@@ -291,7 +306,7 @@ bool CreateFile::TranslateClass::TranslateList(const XMLElement *cpXmlElement, c
 
 		map<string, string> mapBase;
 		TranslateClass translateClass;
-		if (!translateClass.Translate2(cpChildElement, vecData[i], mapBase))
+		if (!translateClass.Translate2(cpChildElement, vecData[i], map<string,string>(),mapBase))
 		{
 			printf("translate class fail. Line:%d\n", cpChildElement->GetLineNum());
 			return false;
@@ -315,8 +330,8 @@ bool CreateFile::TranslateClass::TranslateCompose2(const XMLElement *cpXmlElemen
 	}
 
 	string sName = csName;
-	string sRef = csRef;
-	string sGap = csGap;
+	string sRef  = csRef;
+	string sGap  = csGap;
 	string sText = csText;
 
 	//去除前后回车
@@ -366,4 +381,46 @@ bool CreateFile::TranslateClass::TranslateCompose2(const XMLElement *cpXmlElemen
 	mapBase.insert(make_pair("#" + sName + "#", sValue));
 
 	return true;
+}
+
+bool CreateFile::TranslateClass::TranslateParent(const XMLElement *cpXmlElement, map<string, string> &mapBase)
+{
+    const char *csName = cpXmlElement->Attribute(ATTR_NAME.c_str());
+    const char *csText = cpXmlElement->GetText();
+
+    if (csName == NULL || csText == NULL)
+    {
+        printf("name or text is null, Line:%d\n", cpXmlElement->GetLineNum());
+        return false;
+    }
+
+    string sName = csName;
+    string sText = csText;
+
+    //去除前后回车
+    int iFirstEnter = sText.find_first_of('\n') + 1;
+    int iLastEnter = sText.find_last_of('\n');
+
+    if (iFirstEnter == string::npos || iLastEnter == string::npos || iFirstEnter >= iLastEnter)
+    {
+        printf("text should has two enter at least. Line:%d\n", cpXmlElement->GetLineNum());
+        return false;
+    }
+
+    sText = sText.substr(iFirstEnter, iLastEnter - iFirstEnter);
+
+    //替换
+    if (m_mapParent.empty())
+    {
+        mapBase.insert(make_pair("#" + sName + "#", ""));
+    }
+    else
+    {
+        StrUtil::Replace(sText, m_mapParent);
+        StrUtil::Replace(sText, m_mapBase);
+
+        mapBase.insert(make_pair("#" + sName + "#", sText));
+    }
+
+    return true;
 }

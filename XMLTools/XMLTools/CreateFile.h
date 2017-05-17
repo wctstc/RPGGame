@@ -19,15 +19,20 @@ public:
     class TranslateClass
     {
 	public:
-		bool Translate2(const XMLElement *cpXmlElement, const ParseXML::Data &stData, map<string, string> &mapBase);
+		bool Translate2(
+            const XMLElement *cpXmlElement, 
+            const ParseXML::Data &stData,
+            const map<string,string> &mapParent,
+            map<string, string> &mapBase);
     private:
         bool ConvertParam(string &sValue, const char * csParam);
 		bool TranslateAttr(const XMLElement *cpXmlElement, const map<string, string> &mapData, map<string, string> &mapBase);
 		bool TranslateList(
 			const XMLElement *cpXmlElement,
 			const vector<ParseXML::Data> vecData,
-			vector<map<string, string>> &vecBaseList);
-		bool TranslateCompose2(const XMLElement *cpXmlElement, map<string, string> &mapBase);
+            vector<map<string, string>> &vecBaseList);
+        bool TranslateCompose2(const XMLElement *cpXmlElement, map<string, string> &mapBase);
+        bool TranslateParent(const XMLElement *cpXmlElement, map<string, string> &mapBase);
     private:
         //基础属性
         map<string, string> m_mapBase;
@@ -42,8 +47,15 @@ public:
     /**
     * @brief 创建源文件
     */
-    bool Create(const string sTemplateFile, const ParseXML::Data &stData);
+    bool Create(
+        const string sTemplateFile, 
+        const ParseXML::Data &stData,
+        const map<string, string> &mapParent = map<string, string>());
  
+    /**
+     * @brief 获取基础属性
+     */
+    const map<string, string> &GetBase();
 private:
     /**
      * @brief 转化文件

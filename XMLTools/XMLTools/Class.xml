@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<class name="Monster" comment="怪物">
-	<enum name="MosterType" comment="怪物类型">
-		<property name="MONSTER_TYPE_GENTLE"  value="0" comment="温和"/>
-		<property name="MONSTER_TYPE_NEUTRAL" value="1" comment="中立"/>
-		<property name="MOSTER_TYPE_HOSTIL"   value="2" comment="敌对"/>
-	</enum>
-	<property name="Type"        prefix="e" type="Monster::MonsterType" default="Monster::MONSTER_TYPE_GENTLE" comment="怪物类型"/>
-	<property name="Description" prefix="i" type="string"               default="&quot;&quot;"                 comment="描述"/>
-	<property name="Drop"        prefix="v" type="vector<int>&"         default="vector<int>()"                comment="掉落"/>
-</class>
-
 <class name="Actor" comment="行动者">
 	<property name="ID"          prefix="i" type="int"    default="0"            comment="编号"/>
 	<property name="Name"        prefix="s" type="string" default="&quot;&quot;" comment="名字"/>
@@ -19,4 +8,15 @@
 	<property name="BaseMaxHp"   prefix="i" type="int"    default="0"            comment="基础生命值上限"/>
 	<property name="BaseAttack"  prefix="i" type="int"    default="0"            comment="基础攻击力"/>
 	<property name="BaseDefance" prefix="i" type="int"    default="0"            comment="基础防御力"/>
+</class>
+
+<class name="Monster" parent="Actor" comment="怪物">
+	<enum name="MosterType" comment="怪物类型">
+		<property name="MONSTER_TYPE_GENTLE"  value="0" comment="温和"/>
+		<property name="MONSTER_TYPE_NEUTRAL" value="1" comment="中立"/>
+		<property name="MOSTER_TYPE_HOSTIL"   value="2" comment="敌对"/>
+	</enum>
+	<property name="Type"        prefix="e" type="Monster::MonsterType" default="Monster::MONSTER_TYPE_GENTLE" comment="怪物类型"/>
+	<property name="Description" prefix="i" type="string"               default="&quot;&quot;"                 comment="描述"/>
+	<property name="Drop"        prefix="v" type="vector<int>&"         default="vector<int>()"                comment="掉落"/>
 </class>

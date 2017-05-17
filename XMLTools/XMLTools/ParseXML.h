@@ -30,6 +30,11 @@ public:
         /*!< 节点名称 */
         string node;
 
+        string name;
+
+        /*!< 节点名称 */
+        string parent;
+
         /*!< 节点属性 */
         map<string, string> mapClassAttr;
 
@@ -38,7 +43,7 @@ public:
         vector<map<string, string>> vecPropertyAttr;
 
 		/*!< 内嵌数据 */
-		vector<Data> vecInner;
+        vector<Data> vecInner;
 
 		/*!< 内嵌数据 */
 		vector<Data> vecProperty;

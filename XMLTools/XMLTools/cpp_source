@@ -1,54 +1,71 @@
 
-#include "Monster.h"
+#include "Actor.h"
 
-Monster::Monster()
-:m_eType(Monster::MONSTER_TYPE_GENTLE)
-,m_iDescription("")
-,m_vDrop(vector<int>())
+Actor::Actor()
+:m_iID(0)
+,m_sName("")
+,m_iPreHp(0)
+,m_iHp(0)
+,m_iBaseMaxHp(0)
+,m_iBaseAttack(0)
+,m_iBaseDefance(0)
   
 {  
   
 }  
   
-Monster::~Monster()  
+Actor::~Actor()  
 {  
   
 }  
   
-bool Monster::Init()  
-{  
-    m_eType = Monster::MONSTER_TYPE_GENTLE;
-    m_iDescription = "";
-    m_vDrop = vector<int>();
+bool Actor::Init()  
+{
+
+    m_iID = 0;
+    m_sName = "";
+    m_iPreHp = 0;
+    m_iHp = 0;
+    m_iBaseMaxHp = 0;
+    m_iBaseAttack = 0;
+    m_iBaseDefance = 0;
 
     return true;  
 }  
   
-bool Monster::Init(const Monster &monster)  
+bool Actor::Init(const Actor &actor)  
 {  
-    m_eType = monster.m_eType;
-    m_iDescription = monster.m_iDescription;
-    m_vDrop = monster.m_vDrop;
+    m_iID = actor.m_iID;
+    m_sName = actor.m_sName;
+    m_iPreHp = actor.m_iPreHp;
+    m_iHp = actor.m_iHp;
+    m_iBaseMaxHp = actor.m_iBaseMaxHp;
+    m_iBaseAttack = actor.m_iBaseAttack;
+    m_iBaseDefance = actor.m_iBaseDefance;
 
     return true;  
 }  
       
-bool Monster::Init(const Monster::MonsterType eType,const string iDescription,const vector<int>& vDrop)  
+bool Actor::Init(const int iID,const string sName,const int iPreHp,const int iHp,const int iBaseMaxHp,const int iBaseAttack,const int iBaseDefance)  
 {  
-    m_eType = eType;
-    m_iDescription = iDescription;
-    m_vDrop = vDrop;
+    m_iID = iID;
+    m_sName = sName;
+    m_iPreHp = iPreHp;
+    m_iHp = iHp;
+    m_iBaseMaxHp = iBaseMaxHp;
+    m_iBaseAttack = iBaseAttack;
+    m_iBaseDefance = iBaseDefance;
 
     return true;  
 }  
       
-string Monster::ToString()const
+string Actor::ToString()const
 {  
     char csBuffer[10240] = {'\0'};  
     return csBuffer;  
 }  
   
-bool Monster::FromString(const string sBuffer)
+bool Actor::FromString(const string sBuffer)
 {  
     return true;  
 }  

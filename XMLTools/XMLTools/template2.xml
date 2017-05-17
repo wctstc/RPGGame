@@ -24,6 +24,7 @@ xml字符转义:
 <!-------------->
 
 <class type="class">
+
 <base name="class_name"       attr="name"/>
 <base name="class_name_lower" attr="name" param="lower"/>
 <base name="class_name_upper" attr="name" param="upper"/>
@@ -81,7 +82,7 @@ m_#property_prefix##property_name#(#property_default#)
 
 <!-- 拷贝init函数的赋值 -->
 <compose name="compose_init_self_implement" ref="property" gap="">
-    m_#property_prefix##property_name# = #class_name_lower#.m_#property_prefix##property_name#;
+    m_#property_prefix##property_name# = o#class_name#.m_#property_prefix##property_name#;
 
 </compose>
 
@@ -91,6 +92,19 @@ m_#property_prefix##property_name#(#property_default#)
 
 </compose>
 
+<parent name="parent_inherit">
+:public #parent##class_name#
+</parent>
+
+<parent name="parent_init_implement">
+    if(!#parent##class_name#::Init())
+        return false;
+</parent>
+
+<parent name="parent_init_self_implement">
+    if(!#parent##class_name#::Init(&amp;o#class_name#))
+        return false;
+</parent>
 <enum>	
 	<base name="enum_name" attr="name"/>
 	<base name="enum_comment" attr="comment"/>
@@ -159,16 +173,16 @@ using std::string;
 /**
  * @brief #class_comment#
  */
-class #class_name#
+class #class_name# #parent_inherit#
 {
 public:
     #class_name#();
     ~#class_name#();
 public:
 		/**
-		 * @brief 空
+		 * @brief 空对象
 		 */
-    static const #class_name# &GetNo#class_name#();
+    static const #class_name# &amp;GetNo#class_name#();
 public:
 #inner_enum_list#
 public:
@@ -180,7 +194,7 @@ public:
     /**
 		 * @brief 初始化
 		 */
-    virtual bool Init(const #class_name# &amp;#class_name_lower#);
+    virtual bool Init(const #class_name# &amp;o#class_name#);
     
     /**
 		 * @brief 初始化
@@ -223,13 +237,15 @@ private:
 }  
   
 bool #class_name#::Init()  
-{  
+{
+#parent_init_implement#
 #compose_init_implement#
     return true;  
 }  
   
-bool #class_name#::Init(const #class_name# &amp;#class_name_lower#)  
+bool #class_name#::Init(const #class_name# &amp;o#class_name#)  
 {  
+#parent_init_self_implement#
 #compose_init_self_implement#
     return true;  
 }  

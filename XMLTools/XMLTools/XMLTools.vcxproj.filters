@@ -27,9 +27,6 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="tinyxml2.cpp">
-      <Filter>tinyXml2</Filter>
-    </ClCompile>
     <ClCompile Include="ParseXML.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -42,11 +39,11 @@
     <ClCompile Include="StrUtil.cpp">
       <Filter>Base</Filter>
     </ClCompile>
+    <ClCompile Include="tool\tinyxml2.cpp">
+      <Filter>tinyXml2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="tinyxml2.h">
-      <Filter>tinyXml2</Filter>
-    </ClInclude>
     <ClInclude Include="ParseXML.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -58,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="StrUtil.h">
       <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="tool\tinyxml2.h">
+      <Filter>tinyXml2</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

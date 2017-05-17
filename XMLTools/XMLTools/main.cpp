@@ -31,13 +31,22 @@ int main()
 
     const vector<ParseXML::Data>& vecData = parseXml.GetData();
 
-    CreateFile createFile;
+    map<string, CreateFile > mapCreateFile;
     for (unsigned int i = 0; i < vecData.size(); ++i)
     {
-        if (!createFile.Create("template2.xml", vecData[i]))
+        CreateFile createFile;
+        map<string, CreateFile>::iterator mapIt = mapCreateFile.find(vecData[i].parent);
+        if (mapIt == mapCreateFile.end())
         {
-            break;
+            if (!createFile.Create("template2.xml", vecData[i]))
+                break;
         }
+        else
+        {
+            if (!createFile.Create("template2.xml", vecData[i], mapIt->second.GetBase()))
+                break;
+        }
+        mapCreateFile.insert(make_pair(vecData[i].name, createFile));
     }
 
     system("pause");
