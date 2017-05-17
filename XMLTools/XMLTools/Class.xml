@@ -11,7 +11,11 @@
 </class>
 
 <class name="Monster" parent="Actor" comment="怪物">
-	<enum name="MosterType" comment="怪物类型">
+	<macro name="DROP_MAX" value="10" comment="最大掉落数量"/>
+	<macro name="DROP_MIX" value="1" comment="最小掉落数量"/>
+	<globle name="Count" prefix="i" type="int" default="0" comment="测试全局"/>
+	<globle name="Count2" prefix="i" type="int" default="0" comment="测试全局2"/>
+	<enum name="MonsterType" comment="怪物类型">
 		<property name="MONSTER_TYPE_GENTLE"  value="0" comment="温和"/>
 		<property name="MONSTER_TYPE_NEUTRAL" value="1" comment="中立"/>
 		<property name="MOSTER_TYPE_HOSTIL"   value="2" comment="敌对"/>
@@ -19,4 +23,7 @@
 	<property name="Type"        prefix="e" type="Monster::MonsterType" default="Monster::MONSTER_TYPE_GENTLE" comment="怪物类型"/>
 	<property name="Description" prefix="i" type="string"               default="&quot;&quot;"                 comment="描述"/>
 	<property name="Drop"        prefix="v" type="vector<int>&"         default="vector<int>()"                comment="掉落"/>
+
+	<array_property name="Drop" prefix="i"  type="int" max="DROP_MAX" default="0" comment="掉落"/>
+	<array_property name="Drop2" prefix="i" type="int" max="DROP_MAX" default="0" comment="掉落"/>
 </class>

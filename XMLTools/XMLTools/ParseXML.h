@@ -30,29 +30,37 @@ public:
         /*!< 节点名称 */
         string node;
 
+        /*!< 节点名字 */
         string name;
 
-        /*!< 节点名称 */
+        /*!< 节点父类 */
         string parent;
 
         /*!< 节点属性 */
         map<string, string> mapClassAttr;
 
 
-        /*!< 成员变量 */
-        vector<map<string, string>> vecPropertyAttr;
+		/*!< 属性数据 */
+        vector<Data> vecProperty;
 
-		/*!< 内嵌数据 */
-        vector<Data> vecInner;
+        /*!< 数组属性数据 */
+        vector<Data> vecArrayProperty;
+		
+        /*!< 宏数据 */
+        vector<Data> vecMacro;
 
-		/*!< 内嵌数据 */
-		vector<Data> vecProperty;
-		/*!< 内嵌数据 */
+        /*!< 全局数据 */
+        vector<Data> vecGloble;
+
+        /*!< 内部类数据 */
 		vector<Data> vecClass;
-		/*!< 内嵌数据 */
+
+		/*!< 内部枚举数据 */
 		vector<Data> vecEnum;
-		/*!< 内嵌数据 */
+
+		/*!< 内部结构体数据 */
 		vector<Data> vecStruct;
+
     };
 public:
     /**
@@ -96,6 +104,18 @@ private:
      * @brief 解析成员
      */
     bool ParseProperty(const XMLElement *cpXmlElement, Data &stData);
+    /**
+    * @brief 解析数组成员
+    */
+    bool ParseArrayProperty(const XMLElement *cpXmlElement, Data &stData);
+    /**
+    * @brief 解析宏
+    */
+    bool ParseMacro(const XMLElement *cpXmlElement, Data &stData);
+    /**
+    * @brief 解析全局
+    */
+    bool ParseGloble(const XMLElement *cpXmlElement, Data &stData);
 
     /**
      * @brief 解析属性

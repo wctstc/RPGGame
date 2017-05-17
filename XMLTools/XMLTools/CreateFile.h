@@ -38,7 +38,10 @@ public:
         map<string, string> m_mapBase;
         map<string, string> m_mapParent;
 
-		vector<map<string, string>> m_vecProperty;
+        vector<map<string, string>> m_vecProperty;
+        vector<map<string, string>> m_vecArrayProperty;
+        vector<map<string, string>> m_vecMacro;
+        vector<map<string, string>> m_vecGlobe;
 		vector<map<string, string>> m_vecEnum;
 		vector<map<string, string>> m_vecStruct;
 		vector<map<string, string>> m_vecClass;

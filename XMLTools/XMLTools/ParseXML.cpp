@@ -117,20 +117,47 @@ bool ParseXML::ParseClass(const XMLElement *cpXmlElement, Data &stData)
             return false;
         }
 
+        string sNode = csNode;
 
-        Data stChildData;
-        stChildData.node = csNode;
-        if (stChildData.node == "property")
+        if (sNode == "property")
         {
+            stData.node = sNode;
             if (!ParseProperty(cpChildElement, stData))
             {
                 printf("(%d)ParseXML::ParseClass ParseProperty Fail", cpChildElement->GetLineNum());
                 return false;
             }
         }
+        else if (sNode == "array_property")
+        {
+            stData.node = sNode;
+            if (!ParseArrayProperty(cpChildElement, stData))
+            {
+                printf("(%d)ParseXML::ParseClass ParseArrayProperty Fail", cpChildElement->GetLineNum());
+                return false;
+            }
+        }
+        else if (sNode == "macro")
+        {
+            if (!ParseMacro(cpChildElement, stData))
+            {
+                printf("(%d)ParseXML::ParseClass ParseMacro Fail", cpChildElement->GetLineNum());
+                return false;
+            }
+        }
+        else if (sNode == "globle")
+        {
+            if (!ParseGloble(cpChildElement, stData))
+            {
+                printf("(%d)ParseXML::ParseClass ParseGloble Fail", cpChildElement->GetLineNum());
+                return false;
+            }
+        }
         else
         {
-            if (stChildData.node == "class")
+            Data stChildData;
+            stChildData.node = csNode;
+            if (sNode == "class")
             {
                 if (!ParseClass(cpChildElement, stChildData))
                 {
@@ -139,7 +166,7 @@ bool ParseXML::ParseClass(const XMLElement *cpXmlElement, Data &stData)
 				}
 				stData.vecClass.push_back(stChildData);
             }
-            else if (stChildData.node == "struct")
+            else if (sNode == "struct")
             {
                 if (!ParseStruct(cpChildElement, stChildData))
                 {
@@ -148,7 +175,7 @@ bool ParseXML::ParseClass(const XMLElement *cpXmlElement, Data &stData)
 				}
 				stData.vecStruct.push_back(stChildData);
             }
-            else if (stChildData.node == "enum")
+            else if (sNode == "enum")
             {
                 if (!ParseEnum(cpChildElement, stChildData))
                 {
@@ -162,8 +189,6 @@ bool ParseXML::ParseClass(const XMLElement *cpXmlElement, Data &stData)
                 printf("(%d)ParseXML::ParseClass Node error", cpChildElement->GetLineNum());
                 return false;
             }
-
-            stData.vecInner.push_back(stChildData);
         }
         
         cpChildElement = cpChildElement->NextSiblingElement();
@@ -221,20 +246,67 @@ bool ParseXML::ParseProperty(const XMLElement *cpXmlElement, Data &stData)
 {
     const XMLAttribute *cpXmlAtt1ribute = cpXmlElement->FirstAttribute();
 
-    map<string, string> mapProperty;
+    Data stNewData;
 
-    if (!ParseXML::ParseAttribute(cpXmlElement, mapProperty))
+    if (!ParseXML::ParseAttribute(cpXmlElement, stNewData.mapClassAttr))
     {
         printf("(%d)ParseXML::ParseProperty ParseAttribute fail",cpXmlElement->GetLineNum());
         return false;
     }
 
-    stData.vecPropertyAttr.push_back(mapProperty);
-
-
-	Data stNewData;
-	stNewData.mapClassAttr = mapProperty;
 	stData.vecProperty.push_back(stNewData);
+
+    return true;
+}
+
+bool ParseXML::ParseArrayProperty(const XMLElement *cpXmlElement, Data &stData)
+{
+    const XMLAttribute *cpXmlAtt1ribute = cpXmlElement->FirstAttribute();
+
+    Data stNewData;
+
+    if (!ParseXML::ParseAttribute(cpXmlElement, stNewData.mapClassAttr))
+    {
+        printf("(%d)ParseXML::ParseProperty ParseAttribute fail", cpXmlElement->GetLineNum());
+        return false;
+    }
+
+    stData.vecArrayProperty.push_back(stNewData);
+
+    return true;
+}
+
+bool ParseXML::ParseMacro(const XMLElement *cpXmlElement, Data &stData)
+{
+    const XMLAttribute *cpXmlAtt1ribute = cpXmlElement->FirstAttribute();
+
+    Data stNewData;
+
+    if (!ParseXML::ParseAttribute(cpXmlElement, stNewData.mapClassAttr))
+    {
+        printf("(%d)ParseXML::ParseMacro ParseAttribute fail", cpXmlElement->GetLineNum());
+        return false;
+    }
+
+    stData.vecMacro.push_back(stNewData);
+
+    return true;
+}
+
+bool ParseXML::ParseGloble(const XMLElement *cpXmlElement, Data &stData)
+{
+    const XMLAttribute *cpXmlAtt1ribute = cpXmlElement->FirstAttribute();
+
+    Data stNewData;
+
+    if (!ParseXML::ParseAttribute(cpXmlElement, stNewData.mapClassAttr))
+    {
+        printf("(%d)ParseXML::ParseGloble ParseAttribute fail", cpXmlElement->GetLineNum());
+        return false;
+    }
+
+    stData.vecGloble.push_back(stNewData);
+
     return true;
 }
 

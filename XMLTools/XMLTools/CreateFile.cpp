@@ -13,6 +13,9 @@ static const string NODE_COMPOSE = "compose";
 
 /*!< ÁÐ±í */
 static const string NODE_PROPERTY = "property";
+static const string NODE_ARRAY_PROPERTY = "array_property";
+static const string NODE_MACRO    = "macro";
+static const string NODE_GLOBLE   = "globle";
 static const string NODE_CLASS    = "class";
 static const string NODE_ENUM     = "enum";
 static const string NODE_STRUCT   = "struct";
@@ -194,7 +197,34 @@ bool CreateFile::TranslateFile(const XMLElement *cpXmlElement, map<string, strin
 					 cpXmlElement->GetLineNum(), sNode.c_str());
 				 return false;
 			 }
-		 }
+         }
+         else if (sNode == NODE_ARRAY_PROPERTY)
+         {
+             if (!TranslateList(cpXmlElement, stData.vecArrayProperty, m_vecArrayProperty))
+             {
+                 printf("translate list fail.Line:%d Node:%s\n",
+                     cpXmlElement->GetLineNum(), sNode.c_str());
+                 return false;
+             }
+         }
+         else if (sNode == NODE_MACRO)
+         {
+             if (!TranslateList(cpXmlElement, stData.vecMacro, m_vecMacro))
+             {
+                 printf("translate list fail.Line:%d Node:%s\n",
+                     cpXmlElement->GetLineNum(), sNode.c_str());
+                 return false;
+             }
+         }
+         else if (sNode == NODE_GLOBLE)
+         {
+             if (!TranslateList(cpXmlElement, stData.vecGloble, m_vecGlobe))
+             {
+                 printf("translate list fail.Line:%d Node:%s\n",
+                     cpXmlElement->GetLineNum(), sNode.c_str());
+                 return false;
+             }
+         }
 		 else if (sNode == NODE_CLASS)
 		 {
 			 if (!TranslateList(cpXmlElement, stData.vecClass, m_vecClass))
@@ -349,14 +379,21 @@ bool CreateFile::TranslateClass::TranslateCompose2(const XMLElement *cpXmlElemen
 	//Ìæ»»
 	const vector<map<string, string>> *cpVecMap = NULL;
 
-	if (sRef == NODE_PROPERTY)
-		cpVecMap = &m_vecProperty;
-	else if (sRef == NODE_CLASS)
+    if (sRef == NODE_PROPERTY)
+        cpVecMap = &m_vecProperty;
+    if (sRef == NODE_ARRAY_PROPERTY)
+        cpVecMap = &m_vecArrayProperty;
+    else if (sRef == NODE_MACRO)
+        cpVecMap = &m_vecMacro;
+    else if (sRef == NODE_GLOBLE)
+        cpVecMap = &m_vecGlobe;
+    else if (sRef == NODE_CLASS)
 		cpVecMap = &m_vecClass;
 	else if (sRef == NODE_ENUM)
 		cpVecMap = &m_vecEnum;
 	else if (sRef == NODE_STRUCT)
 		cpVecMap = &m_vecStruct;
+
 	
 	if (cpVecMap == NULL)
 	{
