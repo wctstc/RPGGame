@@ -22,8 +22,7 @@ Monster::~Monster()
 
 bool Monster::Init()
 {
-    if(!Actor::Init())
-        return false;
+
     m_eType = Monster::MONSTER_TYPE_GENTLE;
     m_iDescription = "";
     m_vDrop = vector<int>();
@@ -39,8 +38,7 @@ bool Monster::Init()
 
 bool Monster::Init(const Monster &oMonster)
 {
-    if(!Actor::Init(oMonster))
-        return false;
+
     m_eType = oMonster.m_eType;
     m_iDescription = oMonster.m_iDescription;
     m_vDrop = oMonster.m_vDrop;

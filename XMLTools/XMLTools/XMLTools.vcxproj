@@ -75,7 +75,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>tool;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>tool;Base;Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -112,18 +112,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CreateFile.cpp" />
-    <ClCompile Include="FileUtil.cpp" />
+    <ClCompile Include="Core\CreateFile.cpp" />
+    <ClCompile Include="Base\FileUtil.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ParseXML.cpp" />
-    <ClCompile Include="StrUtil.cpp" />
+    <ClCompile Include="Core\ParseXML.cpp" />
+    <ClCompile Include="Base\StrUtil.cpp" />
+    <ClCompile Include="Core\TemplateManager.cpp" />
     <ClCompile Include="tool\tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CreateFile.h" />
-    <ClInclude Include="FileUtil.h" />
-    <ClInclude Include="ParseXML.h" />
-    <ClInclude Include="StrUtil.h" />
+    <ClInclude Include="Core\CreateFile.h" />
+    <ClInclude Include="Base\FileUtil.h" />
+    <ClInclude Include="Core\ParseXML.h" />
+    <ClInclude Include="Base\StrUtil.h" />
+    <ClInclude Include="Core\TemplateManager.h" />
     <ClInclude Include="tool\tinyxml2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -4,7 +4,7 @@
 
 #include <string>
 
-#include "Actor.h"
+
 
 /*<! 最大掉落数量*/
 #define DROP_MAX 10/*<! 最小掉落数量*/
@@ -21,7 +21,7 @@ using std::string;
 /**
  * @brief 怪物
  */
-class Monster :public Actor
+class Monster 
 {
 public:
     Monster();

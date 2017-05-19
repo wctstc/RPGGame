@@ -27,37 +27,43 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="ParseXML.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="FileUtil.cpp">
-      <Filter>Base</Filter>
-    </ClCompile>
-    <ClCompile Include="CreateFile.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="StrUtil.cpp">
-      <Filter>Base</Filter>
-    </ClCompile>
     <ClCompile Include="tool\tinyxml2.cpp">
       <Filter>tinyXml2</Filter>
     </ClCompile>
+    <ClCompile Include="Base\FileUtil.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\StrUtil.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CreateFile.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\ParseXML.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\TemplateManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ParseXML.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="FileUtil.h">
-      <Filter>Base</Filter>
-    </ClInclude>
-    <ClInclude Include="CreateFile.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="StrUtil.h">
-      <Filter>Base</Filter>
-    </ClInclude>
     <ClInclude Include="tool\tinyxml2.h">
       <Filter>tinyXml2</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\FileUtil.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\StrUtil.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CreateFile.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\ParseXML.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\TemplateManager.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

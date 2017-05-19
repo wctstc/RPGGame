@@ -59,6 +59,7 @@ public:
      * @brief 获取基础属性
      */
     const map<string, string> &GetBase();
+    const map<string, string> &GetFile();
 private:
     /**
      * @brief 转化文件

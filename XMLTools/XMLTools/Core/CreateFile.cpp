@@ -93,10 +93,10 @@ bool CreateFile::Create(const string sTemplateFile, const ParseXML::Data &stData
 		cpXmlElement = cpXmlElement->NextSiblingElement();
 	}
 
-	for (map<string, string>::const_iterator cmIt = m_mapFile.begin(); cmIt != m_mapFile.end(); ++cmIt)
-	{
-		FileUtil::SaveFileWithChar(cmIt->first, cmIt->second.c_str(), cmIt->second.length());
-	}
+// 	for (map<string, string>::const_iterator cmIt = m_mapFile.begin(); cmIt != m_mapFile.end(); ++cmIt)
+// 	{
+// 		FileUtil::SaveFileWithChar(cmIt->first, cmIt->second.c_str(), cmIt->second.length());
+// 	}
 
 //     if (!Create(cpXmlElement,stData))
 //     {
@@ -110,6 +110,11 @@ bool CreateFile::Create(const string sTemplateFile, const ParseXML::Data &stData
 const map<string, string> & CreateFile::GetBase()
 {
     return m_mapBase;
+}
+
+const map<string, string> & CreateFile::GetFile()
+{
+    return m_mapFile;
 }
 
 bool CreateFile::TranslateFile(const XMLElement *cpXmlElement, map<string, string> &mapBase)

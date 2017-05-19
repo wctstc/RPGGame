@@ -1,0 +1,3 @@
+<template name="template2.xml" path="xml/src">
+	<data file="Class.xml"/>
+</template>
