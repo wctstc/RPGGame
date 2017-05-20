@@ -6,6 +6,7 @@
  
 using namespace std;
 
+
 /*!< ÊôÐÔ */
 static const string NODE_ATTR = "base";
 static const string NODE_PARENT = "parent";
@@ -172,7 +173,7 @@ bool CreateFile::TranslateFile(const XMLElement *cpXmlElement, map<string, strin
 		 string sNode = csNode;
 		 if (sNode == NODE_ATTR)
 		 {
-			 if (!TranslateAttr(cpXmlElement, stData.mapClassAttr, m_mapBase))
+			 if (!TranslateAttr(cpXmlElement, stData.mapAttr, m_mapBase))
 			 {
 				 printf("CreateFile::TranslateClass::Create TranslateBase fail.");
 				 return false;
@@ -384,20 +385,26 @@ bool CreateFile::TranslateClass::TranslateCompose2(const XMLElement *cpXmlElemen
 	//Ìæ»»
 	const vector<map<string, string>> *cpVecMap = NULL;
 
-    if (sRef == NODE_PROPERTY)
-        cpVecMap = &m_vecProperty;
-    if (sRef == NODE_ARRAY_PROPERTY)
-        cpVecMap = &m_vecArrayProperty;
-    else if (sRef == NODE_MACRO)
-        cpVecMap = &m_vecMacro;
-    else if (sRef == NODE_GLOBLE)
-        cpVecMap = &m_vecGlobe;
-    else if (sRef == NODE_CLASS)
-		cpVecMap = &m_vecClass;
-	else if (sRef == NODE_ENUM)
-		cpVecMap = &m_vecEnum;
-	else if (sRef == NODE_STRUCT)
-		cpVecMap = &m_vecStruct;
+    vector<string> vecRef;
+    StrUtil::Split(sRef, ",", vecRef);
+
+    for (int i = 0; i < vecRef.size(); ++i)
+    {
+        if (sRef == NODE_PROPERTY)
+            cpVecMap = &m_vecProperty;
+        if (sRef == NODE_ARRAY_PROPERTY)
+            cpVecMap = &m_vecArrayProperty;
+        else if (sRef == NODE_MACRO)
+            cpVecMap = &m_vecMacro;
+        else if (sRef == NODE_GLOBLE)
+            cpVecMap = &m_vecGlobe;
+        else if (sRef == NODE_CLASS)
+            cpVecMap = &m_vecClass;
+        else if (sRef == NODE_ENUM)
+            cpVecMap = &m_vecEnum;
+        else if (sRef == NODE_STRUCT)
+            cpVecMap = &m_vecStruct;
+    }
 
 	
 	if (cpVecMap == NULL)
@@ -411,8 +418,8 @@ bool CreateFile::TranslateClass::TranslateCompose2(const XMLElement *cpXmlElemen
 	for (unsigned int i = 0; i < cpVecMap->size(); ++i)
 	{
 		string sTemp = sText;
-		StrUtil::Replace(sTemp, m_mapBase);
         StrUtil::Replace(sTemp, (*cpVecMap)[i]);
+		StrUtil::Replace(sTemp, m_mapBase);
 
 		if (!sValue.empty())
 			sValue.append(sGap);

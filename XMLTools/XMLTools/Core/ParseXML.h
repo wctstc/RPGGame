@@ -37,8 +37,10 @@ public:
         string parent;
 
         /*!< 节点属性 */
-        map<string, string> mapClassAttr;
+        map<string, string> mapAttr;
 
+        /*!< 子类 */
+        map<string, vector<Data>> mapChildren;
 
 		/*!< 属性数据 */
         vector<Data> vecProperty;
@@ -84,6 +86,11 @@ private:
      * @brief 解析xml
      */
     bool Parse(const XMLElement *cpXmlElement, Data &stData);
+
+    /**
+    * @brief 解析xml
+    */
+    bool Parse2(const XMLElement *cpXmlElement, Data &stData);
    
     /**
      * @brief 解析类
@@ -122,6 +129,10 @@ private:
      */
     bool ParseAttribute(const XMLElement *cpXmlElement, map<string,string> &mapAttr);
 
+    /**
+    * @brief 解析属性
+    */
+    bool ParseAttribute(const XMLElement *cpXmlElement, Data &stData);
 
 private:
     /*!< 文件名 */

@@ -114,7 +114,6 @@ m_#property_prefix##property_name#(#property_default#)
     <base name="array_property_prefix"  attr="prefix"/>
     <base name="array_property_type"    attr="type"/>
     <base name="array_property_max"     attr="max"/>
-    <base name="array_property_default" attr="default"/>
     <base name="array_property_comment" attr="comment"/>
 </array_property>
 

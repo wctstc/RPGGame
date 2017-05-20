@@ -4,7 +4,6 @@
 param:
 lower -> 小写
 upper -> 大写
-list  -> 数组（必定有gap属性）
 
 
 
@@ -59,6 +58,7 @@ static #globle_type# g_#globle_prefix##globle_name# = #globle_default#;
 
 <property>
     <base name="property_name"       attr="name"/>
+    <base name="property_name_lower" attr="name" param="lower"/>
     <base name="property_prefix"     attr="prefix"/>
     <base name="property_type"       attr="type"/>
     <base name="property_default"    attr="default" default="0"/>
@@ -108,9 +108,16 @@ m_#property_prefix##property_name#(#property_default#)
 
 </compose>
 
+<!-- 加载函数赋值 -->
+<compose name="compose_config" ref="property" gap="">
+    m_#property_prefix##property_name# = (#property_type#)oConfig.#property_name_lower#();
+
+</compose>
+
 
 <array_property>
     <base name="array_property_name"    attr="name"/>
+    <base name="array_property_name_lower" attr="name" param="lower"/>
     <base name="array_property_prefix"  attr="prefix"/>
     <base name="array_property_type"    attr="type"/>
     <base name="array_property_max"     attr="max"/>
@@ -224,12 +231,18 @@ bool #class_name#::Remove#array_property_name#(int iIndex)
     m_i#array_property_name#Ref = 0;
 
 </compose>
+
 <!-- 空构造函数的初始化列表 -->
 <compose name="compose_init_array_implement" ref="array_property" gap="">
     memset(m_a#array_property_prefix##array_property_name#, 0, sizeof(#array_property_type#)*#array_property_max#);
 
 </compose>
 
+<!-- 加载函数赋值 -->
+<compose name="compose_array_config" ref="array_property" gap="">
+    m_#property_prefix##property_name# = (#property_type#)oConfig.#property_name_lower#();
+
+</compose>
 
 <parent name="parent_include">
 #include "#parent##class_name#.h"
@@ -280,26 +293,12 @@ bool #class_name#::Remove#array_property_name#(int iIndex)
     <property>
         <base name="struct_property_name"  attr="name"/>
         <base name="struct_property_type" attr="type"/>
-        <base name="struct_property_prefix" attr="prefix"/>
         <base name="struct_property_comment" attr="comment"/>
     </property>
     <compose name="declare_struct_property" ref="property" gap="">
 
         /*&lt;! #struct_property_comment#*/
         #struct_property_type# #struct_property_name#;
-    </compose>
-    <compose name="struct_property_set" ref="property" gap="">
-    bool Set#struct_name##struct_property_name#( const int iIndex, const #struct_property_type# #struct_property_prefix##struct_property_name# );
-    </compose>
-    <compose name="struct_property_set_implement" ref="property" gap="">
-    bool #class_name#::Set#struct_name##struct_property_name#( const int iIndex, const #struct_property_type# #struct_property_prefix##struct_property_name# )
-    {
-        if(iIndex &lt; 0 || iIndex &gt;= m_i#array_property_name#Ref)
-        return false;
-
-        m_a#array_property_prefix##array_property_name#[iIndex].#struct_property_name# = #struct_property_prefix##struct_property_name#;
-        return true;
-    }
     </compose>
 </struct>
 
@@ -313,14 +312,6 @@ bool #class_name#::Remove#array_property_name#(int iIndex)
 
 </compose>
 
-<compose name="struct_set" ref="struct" gap="">
-#struct_property_set#
-
-</compose>
-<compose name="struct_set_implement" ref="struct" gap="">
-#struct_property_set_implement#
-
-</compose>
 </class>
 
 <!-------------->
@@ -331,6 +322,11 @@ bool #class_name#::Remove#array_property_name#(int iIndex)
 #define __#class_name_upper#_H__
 
 #include &lt;string&gt;
+
+#include "dataconfig_#class_name_lower#.pb.h"
+
+using dataconfig::#class_name_upper#;
+
 
 #parent_include#
 
@@ -367,14 +363,9 @@ public:
     virtual bool Init(const #class_name# &amp;o#class_name#);
     
     /**
-     * @brief 字符串化
+     * @brief 从配置文件加载
      */
-    virtual string ToString()const;
-    
-    /**
-     * @brief 反字符串化
-     */
-    virtual bool FromString(const string sBuffer);
+    virtual bool LoadFromConfig(const #class_name_upper# &oConfig);
 
 public:    
 #compose_get#
@@ -383,7 +374,6 @@ public:
 #compose_array_get#
 #compose_add#
 #compose_remove#
-#struct_set#
 private:  
 #compose_property_declaration#
 #compose_array_property_declaration#
@@ -425,14 +415,10 @@ bool #class_name#::Init(const #class_name# &amp;o#class_name#)
     return true;
 }
 
-string #class_name#::ToString()const
+bool #class_name#::LoadFromConfig(const #class_name_upper# &oConfig)
 {
-    char csBuffer[10240] = {&apos;\0&apos;};
-    return csBuffer;
-}
-
-bool #class_name#::FromString(const string sBuffer)
-{
+#compose_config#
+#compose_array_config#
     return true;
 }
 #compose_array_get_num_implement#
@@ -440,6 +426,4 @@ bool #class_name#::FromString(const string sBuffer)
 
 #compose_add_implement#
 #compose_remove_implement#
-
-#struct_set_implement#
 </cpp_source>

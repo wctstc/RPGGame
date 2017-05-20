@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<class name="Actor" comment="行动者">
+<class name="ActorData" comment="行动者数据">
 	<property name="ID"          prefix="i" type="int"    default="0"            comment="编号"/>
-	<property name="Name"        prefix="s" type="string" default="&quot;&quot;" comment="名字"/>
-	<property name="PreHp"       prefix="i" type="int"    default="0"            comment="上一次生命值"/>
 	<property name="Hp"          prefix="i" type="int"    default="0"            comment="生命值"/>
-	<property name="BaseMaxHp"   prefix="i" type="int"    default="0"            comment="基础生命值上限"/>
-	<property name="BaseAttack"  prefix="i" type="int"    default="0"            comment="基础攻击力"/>
-	<property name="BaseDefance" prefix="i" type="int"    default="0"            comment="基础防御力"/>
 </class>
-
+<class name="PlayerData" parent="ActorData" comment="玩家数据">
+	
+	<property name="Hp"          prefix="i" type="int"    default="0"            comment="生命值"/>
+	<property name="Hp"          prefix="i" type="int"    default="0"            comment="生命值"/>
+	<property name="Hp"          prefix="i" type="int"    default="0"            comment="生命值"/>
+	<property name="Hp"          prefix="i" type="int"    default="0"            comment="生命值"/>
+	<property name="Hp"          prefix="i" type="int"    default="0"            comment="生命值"/>
+	<property name="Hp"          prefix="i" type="int"    default="0"            comment="生命值"/>
+</class>
 <class name="Monster" parent="Actor" comment="怪物">
 	<macro name="DROP_MAX" value="10" comment="最大掉落数量"/>
 	<macro name="DROP_MIX" value="1" comment="最小掉落数量"/>
@@ -20,10 +23,13 @@
 		<property name="MONSTER_TYPE_NEUTRAL" value="1" comment="中立"/>
 		<property name="MOSTER_TYPE_HOSTIL"   value="2" comment="敌对"/>
 	</enum>
+	<struct name="Drop" comment="掉落">
+		<property name="ID" prefix="i" type="int" default="0" comment="掉落编号"/>
+		<property name="Num" prefix="i" type="int" default="0" comment="掉落数量"/>
+	</struct>
 	<property name="Type"        prefix="e" type="Monster::MonsterType" default="Monster::MONSTER_TYPE_GENTLE" comment="怪物类型"/>
 	<property name="Description" prefix="i" type="string"               default="&quot;&quot;"                 comment="描述"/>
 	<property name="Drop"        prefix="v" type="vector<int>&"         default="vector<int>()"                comment="掉落"/>
 
-	<array_property name="Drop" prefix="i"  type="int" max="DROP_MAX" default="0" comment="掉落"/>
-	<array_property name="Drop2" prefix="i" type="int" max="DROP_MAX" default="0" comment="掉落"/>
+	<array_property name="Drops" prefix="st" type="Drop" max="DROP_MAX" default="0" comment="掉落"/>
 </class>
