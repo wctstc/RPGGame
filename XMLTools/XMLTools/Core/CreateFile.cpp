@@ -9,6 +9,7 @@ using namespace std;
 
 /*!< 属性 */
 static const string NODE_ATTR = "base";
+static const string NODE_LIST = "list";
 static const string NODE_PARENT = "parent";
 static const string NODE_COMPOSE = "compose";
 
@@ -33,6 +34,10 @@ static const string ATTR_PARAM   = "param";
 /*!< xml属性 NODE_COMPOSE节点属性 */
 static const string ATTR_REF = "ref";
 static const string ATTR_GAP = "gap";
+
+/*!< Param属性值 */
+static const string PARAM_LOWER = "lower";
+static const string PARAM_UPPER = "upper";
 
 CreateFile::CreateFile()
 {
@@ -469,6 +474,353 @@ bool CreateFile::TranslateClass::TranslateParent(const XMLElement *cpXmlElement,
         StrUtil::Replace(sText, m_mapBase);
 
         mapBase.insert(make_pair("#" + sName + "#", sText));
+    }
+
+    return true;
+}
+
+bool CreateFile::Translate::Parse(const XMLElement *cpXmlElement, const ParseXML::Data &stData, const map<string, string> &mapParent, map<string, string> &mapBase)
+{
+    if (cpXmlElement == NULL)
+        return false;
+    
+    const char *csNode = cpXmlElement->Name();
+
+    if (csNode == NULL)
+    {
+        return false;
+    }
+
+    string sNode = csNode;
+
+    if (sNode == NODE_ATTR)
+    {
+    }
+    else if (sNode == NODE_LIST)
+    {
+
+    }
+    else if (sNode == NODE_COMPOSE)
+    {
+
+    }
+    else
+    {
+        return false;
+    }
+    return true;
+}
+
+
+bool CreateFile::Translate::TranslateAttr(const XMLElement *cpXmlElement, const map<string, string> &mapData, map<string, string> &mapBase)
+{
+    if (cpXmlElement == NULL)
+    {
+        printf("xmlelement is null\n");
+        return false;
+    }
+
+    const char *csName = cpXmlElement->Attribute(ATTR_NAME.c_str());
+    const char *csAttr = cpXmlElement->Attribute(ATTR_ATTR.c_str());
+
+    if (csName == NULL || csAttr == NULL)
+        return false;
+
+    string sName = csName;
+    string sAttr = csAttr;
+
+    map<string, string>::const_iterator mIt = mapData.find(sAttr);
+    if (mIt == mapData.end())
+    {
+        printf("attr can't find. Line:%d Name:%s  Attr:%s\n", cpXmlElement->GetLineNum(), sName.c_str(), sAttr.c_str());
+        return false;
+    }
+
+    string sValue = mIt->second;
+
+
+    string sParam = cpXmlElement->Attribute(ATTR_PARAM.c_str());
+
+    if (sParam == "lower")
+    {
+        for (unsigned int i = 0; i < sValue.length(); ++i)
+            if (sValue[i] >= 'A' && sValue[i] <= 'Z')
+                sValue[i] = sValue[i] - 'A' + 'a';
+    }
+    else if (sParam == "upper")
+    {
+        for (unsigned int i = 0; i < sValue.length(); ++i)
+            if (sValue[i] >= 'a' && sValue[i] <= 'z')
+                sValue[i] = sValue[i] - 'a' + 'A';
+    }
+
+
+    mapBase.insert(make_pair("#" + sName + "#", sValue));
+    return true;
+}
+
+bool CreateFile::Translate::TranslateList(const XMLElement *cpXmlElement, const vector<ParseXML::Data> vecData, vector<map<string, string>> &vecBaseList)
+{
+    if (cpXmlElement == NULL)
+    {
+        printf("xmlelement is null\n");
+        return false;
+    }
+
+    for (unsigned int i = 0; i < vecData.size(); ++i)
+    {
+        const XMLElement *cpChildElement = cpXmlElement->FirstChildElement();
+
+        map<string, string> mapBase;
+        TranslateClass translateClass;
+        if (!translateClass.Translate2(cpChildElement, vecData[i], map<string, string>(), mapBase))
+        {
+            printf("translate class fail. Line:%d\n", cpChildElement->GetLineNum());
+            return false;
+        }
+
+        vecBaseList.push_back(mapBase);
+    }
+    return true;
+}
+bool CreateFile::Translate::TranslateCompose2(const XMLElement *cpXmlElement, map<string, string> &mapBase)
+{
+    const char *csName = cpXmlElement->Attribute(ATTR_NAME.c_str());
+    const char *csRef = cpXmlElement->Attribute(ATTR_REF.c_str());
+    const char *csGap = cpXmlElement->Attribute(ATTR_GAP.c_str());
+    const char *csText = cpXmlElement->GetText();
+
+    if (csName == NULL || csRef == NULL || csGap == NULL || csText == NULL)
+    {
+        printf("name or ref or gap or text is null, Line:%d\n", cpXmlElement->GetLineNum());
+        return false;
+    }
+
+    string sName = csName;
+    string sRef = csRef;
+    string sGap = csGap;
+    string sText = csText;
+
+    //去除前后回车
+    int iFirstEnter = sText.find_first_of('\n') + 1;
+    int iLastEnter = sText.find_last_of('\n');
+
+    if (iFirstEnter == string::npos || iLastEnter == string::npos || iFirstEnter >= iLastEnter)
+    {
+        printf("text should has two enter at least. Line:%d\n", cpXmlElement->GetLineNum());
+        return false;
+    }
+
+    sText = sText.substr(iFirstEnter, iLastEnter - iFirstEnter);
+
+    //替换
+    const vector<map<string, string>> *cpVecMap = NULL;
+
+    vector<string> vecRef;
+    StrUtil::Split(sRef, ",", vecRef);
+
+    for (int i = 0; i < vecRef.size(); ++i)
+    {
+//         if (sRef == NODE_PROPERTY)
+//             cpVecMap = &m_vecProperty;
+//         if (sRef == NODE_ARRAY_PROPERTY)
+//             cpVecMap = &m_vecArrayProperty;
+//         else if (sRef == NODE_MACRO)
+//             cpVecMap = &m_vecMacro;
+//         else if (sRef == NODE_GLOBLE)
+//             cpVecMap = &m_vecGlobe;
+//         else if (sRef == NODE_CLASS)
+//             cpVecMap = &m_vecClass;
+//         else if (sRef == NODE_ENUM)
+//             cpVecMap = &m_vecEnum;
+//         else if (sRef == NODE_STRUCT)
+//             cpVecMap = &m_vecStruct;
+    }
+
+
+    if (cpVecMap == NULL)
+    {
+        printf("ref is not list or class or enum or strcut.Line:%d Ref:%s\n",
+            cpXmlElement->GetLineNum(), sRef.c_str());
+        return false;
+    }
+
+    string sValue;
+    for (unsigned int i = 0; i < cpVecMap->size(); ++i)
+    {
+        string sTemp = sText;
+        StrUtil::Replace(sTemp, (*cpVecMap)[i]);
+       // StrUtil::Replace(sTemp, m_mapBase);
+
+        if (!sValue.empty())
+            sValue.append(sGap);
+
+        sValue.append(sTemp);
+    }
+
+    mapBase.insert(make_pair("#" + sName + "#", sValue));
+
+    return true;
+}
+
+bool Template::Parse(const XMLElement *cpXmlElement, const ParseXML::Data stData)
+{
+    while (cpXmlElement)
+    {
+        const char *csNode = cpXmlElement->Name();
+
+        if (csNode == NULL)
+            return false;
+
+        string sName = csNode;
+
+        if (sName == NODE_ATTR)
+        {
+            if (!ParseBase(cpXmlElement, stData))
+                return false;
+        }
+        else if (sName == NODE_COMPOSE)
+        {
+            if (!ParseCompose(cpXmlElement, stData))
+                return false;
+        }
+        else if (sName == NODE_LIST)
+        {
+            if (!ParseList(cpXmlElement, stData))
+                return false;
+        }
+
+        cpXmlElement = cpXmlElement->NextSiblingElement();
+    }
+    return true;
+}
+
+bool Template::ParseBase(const XMLElement *cpXmlElement, const ParseXML::Data stData)
+{
+    if (cpXmlElement == NULL)
+        return false;
+
+    const char *csName = cpXmlElement->Attribute(ATTR_NAME.c_str());
+    const char *csAttr = cpXmlElement->Attribute(ATTR_ATTR.c_str());
+    const char *csParam = cpXmlElement->Attribute(ATTR_PARAM.c_str());
+
+    if (csName == NULL || csAttr == NULL)
+        return false;
+
+    const map<string, string>::const_iterator cIt = stData.mapAttr.find(csName);
+    
+    if (cIt == stData.mapAttr.end())
+        return false;
+
+    string sName = csName;
+    string sValue = cIt->second;
+
+    if (csParam)
+    {
+        string sParam = csParam;
+
+        if (sParam == PARAM_LOWER)
+        {
+            for (unsigned int i = 0; i < sValue.length(); ++i)
+                if (sValue[i] >= 'A' && sValue[i] <= 'Z')
+                    sValue[i] = sValue[i] - 'A' + 'a';
+        }
+        else if (sParam == PARAM_UPPER)
+        {
+            for (unsigned int i = 0; i < sValue.length(); ++i)
+                if (sValue[i] >= 'a' && sValue[i] <= 'z')
+                    sValue[i] = sValue[i] - 'a' + 'A';
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    m_stReplaceData.m_mapBase.insert(make_pair("#" + sName + "#", sValue));
+
+    return true;
+}
+
+bool Template::ParseCompose(const XMLElement *cpXmlElement, const ParseXML::Data stData)
+{
+    const char *csName = cpXmlElement->Attribute(ATTR_NAME.c_str());
+    const char *csRef = cpXmlElement->Attribute(ATTR_REF.c_str());
+    const char *csGap = cpXmlElement->Attribute(ATTR_GAP.c_str());
+    const char *csText = cpXmlElement->GetText();
+
+    if (csName == NULL || csRef == NULL || csGap == NULL || csText == NULL)
+    {
+        return false;
+    }
+
+    string sName = csName;
+    string sRef = csRef;
+    string sGap = csGap;
+    string sText = csText;
+
+    //去除前后回车
+    int iFirstEnter = sText.find_first_of('\n') + 1;
+    int iLastEnter = sText.find_last_of('\n');
+
+    if (iFirstEnter == string::npos || iLastEnter == string::npos || iFirstEnter >= iLastEnter)
+    {
+        return false;
+    }
+
+    sText = sText.substr(iFirstEnter, iLastEnter - iFirstEnter);
+
+    //替换
+    const map<string, vector<ReplaceData>>::const_iterator cmapIt = m_stReplaceData.m_mapList.find(csRef);
+
+    if (cmapIt == m_stReplaceData.m_mapList.end())
+        return false;
+    
+    
+    const vector<ReplaceData> &vecReplaceData = cmapIt->second;
+    string sSubValue;
+    string sValue;
+
+    for (vector<ReplaceData>::const_iterator cvecIt = vecReplaceData.begin(); cvecIt != vecReplaceData.end(); ++cvecIt)
+    {
+        sSubValue = sText;
+        StrUtil::Replace(sSubValue, cvecIt->m_mapBase);
+
+        if (!sValue.empty())
+            sValue.append(sGap);
+
+        sValue.append(sSubValue);
+    }
+
+    m_stReplaceData.m_mapBase.insert(make_pair("#" + sName + "#", sValue));
+
+    return true;
+}
+
+bool Template::ParseList(const XMLElement *cpXmlElement, const ParseXML::Data stData)
+{
+    const char *csName = cpXmlElement->Attribute(ATTR_NAME.c_str());
+
+    if (csName == NULL)
+        return false;
+
+    string sName = csName;
+
+    vector<ReplaceData> &vecReplaceData = m_stReplaceData.m_mapList[sName];
+
+    const map<string, vector<ParseXML::Data>>::const_iterator cmapIt = stData.mapChildren.find(sName);
+
+    if (cmapIt != stData.mapChildren.end())
+    {
+        const vector<ParseXML::Data> &vecData = cmapIt->second;
+        for (vector<ParseXML::Data>::const_iterator cvecIt = vecData.begin(); cvecIt != vecData.end(); ++cvecIt)
+        {
+            Template oTemplate;
+            
+            if (!oTemplate.Parse(cpXmlElement->FirstChildElement(), (*cvecIt)))
+                return false;
+            vecReplaceData.push_back(oTemplate.m_stReplaceData);
+        }
     }
 
     return true;

@@ -16,6 +16,26 @@ public:
     ~CreateFile();
 
 public:
+    class Translate
+    {
+    public:
+        bool Parse(
+            const XMLElement *cpXmlElement,
+            const ParseXML::Data &stData,
+            const map<string, string> &mapParent,
+            map<string, string> &mapBase);
+    private:
+        bool TranslateAttr(const XMLElement *cpXmlElement, const map<string, string> &mapData, map<string, string> &mapBase);
+        bool TranslateList(
+            const XMLElement *cpXmlElement,
+            const vector<ParseXML::Data> vecData,
+            vector<map<string, string>> &vecBaseList);
+        bool TranslateCompose2(const XMLElement *cpXmlElement, map<string, string> &mapBase);
+    private:
+        string m_sName;
+        map<string, string> m_mapKeyValue;
+        map<string, Translate> m_mapTranslate;
+    };
     class TranslateClass
     {
 	public:
@@ -75,5 +95,24 @@ private:
 };
  
  
+class Template
+{
+public:
+public:
+    bool Parse(const XMLElement *cpXmlElement, const ParseXML::Data stData);
+private:
+    bool ParseBase(const XMLElement *cpXmlElement, const ParseXML::Data stData);
+    bool ParseCompose(const XMLElement *cpXmlElement, const ParseXML::Data stData);
+    bool ParseList(const XMLElement *cpXmlElement, const ParseXML::Data stData);
+private:
+    struct ReplaceData
+    {
+        map<string, string> m_mapBase;
+        map<string, vector<ReplaceData>> m_mapList;
+    };
+    
+    ReplaceData m_stReplaceData;
+};
+
  
 #endif // __CREATECPPFILE_H__

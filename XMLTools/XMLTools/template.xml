@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+param:
+lower -> 小写
+upper -> 大写
+list  -> 数组（必定有gap属性）
+
+
+
+
+xml字符转义:
+&amp;         &
+&lt;         <
+&gt;         >
+&quot;       "
+&apos;     '
+-->
+
+
+
+<!-------------->
+<!-- 基础数据 -->
+<!-------------->
+
+<class type="class">
+	<base name="class_name"       attr="name"/>
+	<base name="class_name_lower" attr="name" param="lower"/>
+	<base name="class_name_upper" attr="name" param="upper"/>
+	<base name="class_comment"    attr="comment"/>
+
+
+</class>
+
+<!-------------->
+<!-- 生成文件 -->
+<!-------------->
+<cpp_head type="file" file="#class_name#.h">
+#ifndef __#class_name_upper#_H__
+#define __#class_name_upper#_H__
+
+#include &lt;string&gt;
+
+#parent_include#
+
+#compose_macro#
+
+#compose_globle#
+
+using std::string;
+
+/**
+ * @brief #class_comment#
+ */
+class #class_name# #parent_inherit#
+{
+public:
+    #class_name#();
+    ~#class_name#();
+public:
+    /**
+     * @brief 空对象
+     */
+    static const #class_name# &amp;GetNo#class_name#();
+public:
+#inner_enum_list#
+public:
+    /**
+     * @brief 初始化
+     */
+    virtual bool Init();
+    
+    /**
+     * @brief 初始化
+     */
+    virtual bool Init(const #class_name# &amp;o#class_name#);
+    
+    /**
+     * @brief 字符串化
+     */
+    virtual string ToString()const;
+    
+    /**
+     * @brief 反字符串化
+     */
+    virtual bool FromString(const string sBuffer);
+
+public:    
+#compose_get#
+#compose_set#
+#compose_array_get_num#
+#compose_array_get#
+#compose_add#
+#compose_remove#
+#struct_set#
+private:  
+#compose_property_declaration#
+#compose_array_property_declaration#
+};
+
+#endif //__#class_name_upper#_H__
+</cpp_head>
+
+
+<!-- 生成文件 -->
+<cpp_source type="file" file="#class_name#.cpp">
+#include &quot;#class_name#.h&quot;
+
+#class_name#::#class_name#()
+:#compose_create_implement#
+{
+#compose_init_ref_implement#
+#compose_init_array_implement#
+}
+
+#class_name#::~#class_name#()
+{
+
+}
+
+bool #class_name#::Init()
+{
+#parent_init_implement#
+#compose_init_implement#
+#compose_init_ref_implement#
+#compose_init_array_implement#
+    return true;
+}
+
+bool #class_name#::Init(const #class_name# &amp;o#class_name#)
+{
+#parent_init_self_implement#
+#compose_init_self_implement#
+    return true;
+}
+
+string #class_name#::ToString()const
+{
+    char csBuffer[10240] = {&apos;\0&apos;};
+    return csBuffer;
+}
+
+bool #class_name#::FromString(const string sBuffer)
+{
+    return true;
+}
+#compose_array_get_num_implement#
+#compose_array_get_implement#
+
+#compose_add_implement#
+#compose_remove_implement#
+
+#struct_set_implement#
+</cpp_source>
