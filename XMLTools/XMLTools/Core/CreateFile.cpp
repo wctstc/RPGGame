@@ -695,6 +695,59 @@ bool Template::Parse(const XMLElement *cpXmlElement, const ParseXML::Data stData
     return true;
 }
 
+bool Template::Parse(const string sFileName, const ParseXML::Data &stData, const Template *cpParent)
+{
+    XMLDocument xmlDocument;
+    XMLError xmlError;
+
+    xmlError = xmlDocument.LoadFile(sFileName.c_str());
+    if (xmlError != XML_SUCCESS)
+    {
+        printf("CreateFile::Create File load fail. File:%s", sFileName.c_str());
+        xmlDocument.PrintError();
+        return false;
+    }
+
+    const XMLElement *cpXmlElement = xmlDocument.FirstChildElement();
+
+    while (cpXmlElement)
+    {
+        const char *csNode = cpXmlElement->Name();
+
+        if (csNode == NULL)
+        {
+            printf("CreateFile::Create csNode is NULL.");
+            return false;
+        }
+
+        string sNode = csNode;
+
+        if (sNode == "class")
+        {
+            const XMLElement *cpChildElement = cpXmlElement->FirstChildElement();
+
+            Template oTemplate;
+            if (!oTemplate.Parse(cpChildElement, stData))
+            {
+                printf("CreateFile::Create Translate fail");
+                return false;
+            }
+        }
+        else if (sNode == "file")
+        {
+            if (!TranslateFile(cpXmlElement, m_mapFile))
+            {
+                printf("CreateFile::Create TranslateFile fail");
+                return false;
+            }
+        }
+
+        cpXmlElement = cpXmlElement->NextSiblingElement();
+    }
+    return true;
+
+}
+
 bool Template::ParseBase(const XMLElement *cpXmlElement, const ParseXML::Data stData)
 {
     if (cpXmlElement == NULL)
@@ -822,6 +875,30 @@ bool Template::ParseList(const XMLElement *cpXmlElement, const ParseXML::Data st
             vecReplaceData.push_back(oTemplate.m_stReplaceData);
         }
     }
+
+    return true;
+}
+
+bool Template::ParseFile(const XMLElement *cpXmlElement)
+{
+    const char *csName = cpXmlElement->Name();
+    const char *csFile = cpXmlElement->Attribute("file");
+    const char *csText = cpXmlElement->GetText();
+
+    if (csName == NULL || csFile == NULL || csText == NULL)
+    {
+        printf("CreateFile::TranslateFile Node or File or Text is null");
+        return false;
+    }
+
+    string sName = csName;
+    string sFile = csFile;
+    string sText = csText;
+
+    StrUtil::Replace(sText, m_stReplaceData.m_mapBase);
+    StrUtil::Replace(sFile, m_stReplaceData.m_mapBase);
+
+    mapBase.insert(make_pair(sFile, sText));
 
     return true;
 }

@@ -99,11 +99,13 @@ class Template
 {
 public:
 public:
-    bool Parse(const XMLElement *cpXmlElement, const ParseXML::Data stData);
+    bool Parse(const string sFileName, const ParseXML::Data &stData, const Template *cpParent = NULL);
 private:
+    bool Parse(const XMLElement *cpXmlElement, const ParseXML::Data stData);
     bool ParseBase(const XMLElement *cpXmlElement, const ParseXML::Data stData);
     bool ParseCompose(const XMLElement *cpXmlElement, const ParseXML::Data stData);
     bool ParseList(const XMLElement *cpXmlElement, const ParseXML::Data stData);
+    bool ParseFile(const XMLElement *cpXmlElement);
 private:
     struct ReplaceData
     {
@@ -112,6 +114,7 @@ private:
     };
     
     ReplaceData m_stReplaceData;
+    map<string, string>m_mapFiles;
 };
 
  

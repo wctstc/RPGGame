@@ -49,10 +49,20 @@ int main()
 //         }
 //         mapCreateFile.insert(make_pair(vecData[i].name, createFile));
 //     }
-    TemplateManager oTemplateManager;
+//     TemplateManager oTemplateManager;
+// 
+//     oTemplateManager.Init("config.xml");
+//     oTemplateManager.Run();
 
-    oTemplateManager.Init("config.xml");
-    oTemplateManager.Run();
+    ParseData oParseData;
+
+    oParseData.Parse("Class.xml");
+
+    vector<ParseData::Data> vecData = oParseData.GetData();
+
+    cout << vecData.size() << endl;
+
+    Template oTemplate;
 
     system("pause");
     return 0;
