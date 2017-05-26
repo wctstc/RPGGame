@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<class name="ActorData" comment="è¡ŒåŠ¨è€…æ•°æ®">
-	<property name="ID"          prefix="i" type="int"    default="0"            comment="ç¼–å·"/>
-	<property name="Hp"          prefix="i" type="int"    default="0"            comment="ç”Ÿå‘½å€¼"/>
+<class name="ActorData" comment="ÐÐ¶¯ÕßÊý¾Ý">
+	<property name="ID"          prefix="i" type="int"    default="0" comment="±àºÅ"/>
+	<property name="Hp"          prefix="i" type="int"    default="0" comment="ÉúÃüÖµ"/>
 </class>
 
-<class name="Monster" parent="Actor" comment="æ€ªç‰©">
-	<macro name="DROP_MAX" value="10" comment="æœ€å¤§æŽ‰è½æ•°é‡"/>
-	<enum name="MonsterType" comment="æ€ªç‰©ç±»åž‹">
-		<property name="MONSTER_TYPE_GENTLE"  value="0" comment="æ¸©å’Œ"/>
-		<property name="MONSTER_TYPE_NEUTRAL" value="1" comment="ä¸­ç«‹"/>
-		<property name="MOSTER_TYPE_HOSTIL"   value="2" comment="æ•Œå¯¹"/>
+<class name="Monster" parent="ActorData" comment="¹ÖÎï">
+	<macro name="DROP_MAX" value="10" comment="×î´óµôÂäÊýÁ¿"/>
+	<enum name="MonsterType" comment="¹ÖÎïÀàÐÍ">
+		<property name="MONSTER_TYPE_GENTLE"  value="0" comment="ÎÂºÍ"/>
+		<property name="MONSTER_TYPE_NEUTRAL" value="1" comment="ÖÐÁ¢"/>
+		<property name="MOSTER_TYPE_HOSTIL"   value="2" comment="µÐ¶Ô"/>
 	</enum>
-	<property name="Type"        prefix="e" type="Monster::MonsterType" default="Monster::MONSTER_TYPE_GENTLE" comment="æ€ªç‰©ç±»åž‹"/>
-	<property name="Description" prefix="i" type="string"               default="&quot;&quot;"                 comment="æè¿°"/>
+	<property name="Type"        prefix="e" type="Monster::MonsterType" default="Monster::MONSTER_TYPE_GENTLE" comment="¹ÖÎïÀàÐÍ"/>
+	<property name="Description" prefix="i" type="string"               default="&quot;&quot;"                 comment="ÃèÊö"/>
 
-	<array_property name="Drops" prefix="st" type="Drop" max="DROP_MAX" comment="æŽ‰è½">
-		<struct name="Drop" comment="æŽ‰è½">
-			<property name="ID" prefix="i" type="int" default="0" comment="æŽ‰è½ç¼–å·"/>
-			<property name="Num" prefix="i" type="int" default="0" comment="æŽ‰è½æ•°é‡"/>
+	<array_property name="Drops" prefix="st" type="Drop" max="DROP_MAX" comment="µôÂä">
+		<struct name="Drop" comment="µôÂä">
+			<property name="ID" prefix="i" type="int" default="0" comment="µôÂä±àºÅ"/>
+			<property name="Num" prefix="i" type="int" default="0" comment="µôÂäÊýÁ¿"/>
 		</struct>
 	</array_property>
 </class>

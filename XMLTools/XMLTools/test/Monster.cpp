@@ -19,7 +19,8 @@ Monster::~Monster()
 
 bool Monster::Init()
 {
-
+    if(!ActorData::Init())
+        return false;
     m_eType = Monster::MONSTER_TYPE_GENTLE;
     m_iDescription = "";
 
@@ -32,7 +33,8 @@ bool Monster::Init()
 
 bool Monster::Init(const Monster &oMonster)
 {
-
+    if(!ActorData::Init(oMonster))
+        return false;
     m_eType = oMonster.m_eType;
     m_iDescription = oMonster.m_iDescription;
 
@@ -89,19 +91,20 @@ bool Monster::RemoveDrops(int iIndex)
 
 
 
-    bool Monster::SetDropID( const int iIndex, const int iID )
-    {
-        if(iIndex < 0 || iIndex >= m_i#array_property_name#Ref)
-        return false;
 
-        m_a#array_property_prefix##array_property_name#[iIndex].ID = iID;
-        return true;
-    }    bool Monster::SetDropNum( const int iIndex, const int iNum )
-    {
-        if(iIndex < 0 || iIndex >= m_i#array_property_name#Ref)
-        return false;
 
-        m_a#array_property_prefix##array_property_name#[iIndex].Num = iNum;
-        return true;
-    }
 
+	
+	int Monster::GetDropsID(const int iIndex) const
+	{
+		if (iIndex < m_stDropsRef ef iIndex >= 0) 
+			return m_astDrops[iIndex];
+		return 0;
+	}
+	int Monster::GetDropsNum(const int iIndex) const
+	{
+		if (iIndex < m_stDropsRef ef iIndex >= 0) 
+			return m_astDrops[iIndex];
+		return 0;
+	}
+	

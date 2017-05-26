@@ -4,9 +4,9 @@
 
 #include <string>
 
+#include "ActorData.h"
 
-
-/*<! æœ€å¤§æŽ‰è½æ•°é‡*/
+/*<! ×î´óµôÂäÊýÁ¿*/
 #define DROP_MAX 10
 
 
@@ -14,103 +14,108 @@
 using std::string;
 
 /**
- * @brief æ€ªç‰©
+ * @brief ¹ÖÎï
  */
-class Monster 
+class Monster :public ActorData
 {
 public:
     Monster();
     ~Monster();
 public:
     /**
-     * @brief ç©ºå¯¹è±¡
+     * @brief ¿Õ¶ÔÏó
      */
     static const Monster &GetNoMonster();
 public:
     /**
-     * @brief æ€ªç‰©ç±»åž‹
+     * @brief ¹ÖÎïÀàÐÍ
      */
     enum MonsterType
     {
-        /*<! æ¸©å’Œ*/
+        /*<! ÎÂºÍ*/
         MONSTER_TYPE_GENTLE = 0,
-        /*<! ä¸­ç«‹*/
+        /*<! ÖÐÁ¢*/
         MONSTER_TYPE_NEUTRAL = 1,
-        /*<! æ•Œå¯¹*/
+        /*<! µÐ¶Ô*/
         MOSTER_TYPE_HOSTIL = 2
     };
 
 public:
     /**
-     * @brief åˆå§‹åŒ–
+     * @brief ³õÊ¼»¯
      */
     virtual bool Init();
     
     /**
-     * @brief åˆå§‹åŒ–
+     * @brief ³õÊ¼»¯
      */
     virtual bool Init(const Monster &oMonster);
     
     /**
-     * @brief å­—ç¬¦ä¸²åŒ–
+     * @brief ×Ö·û´®»¯
      */
     virtual string ToString()const;
     
     /**
-     * @brief åå­—ç¬¦ä¸²åŒ–
+     * @brief ·´×Ö·û´®»¯
      */
     virtual bool FromString(const string sBuffer);
 
 public:    
     /**
-     * @brief èŽ·å–æ€ªç‰©ç±»åž‹
+     * @brief »ñÈ¡¹ÖÎïÀàÐÍ
      */
     inline const Monster::MonsterType GetType() const{return m_eType;}
     /**
-     * @brief èŽ·å–æè¿°
+     * @brief »ñÈ¡ÃèÊö
      */
     inline const string GetDescription() const{return m_iDescription;}
 
     /**
-     * @brief è®¾ç½®æ€ªç‰©ç±»åž‹
+     * @brief ÉèÖÃ¹ÖÎïÀàÐÍ
      */
     inline void SetType(const Monster::MonsterType eType){m_eType = eType;}
     /**
-     * @brief è®¾ç½®æè¿°
+     * @brief ÉèÖÃÃèÊö
      */
     inline void SetDescription(const string iDescription){m_iDescription = iDescription;}
 
     /**
-     * @brief èŽ·å–æŽ‰è½æ•°é‡
+     * @brief »ñÈ¡µôÂäÊýÁ¿
      */
     int GetDropsNum() const;
 
     /**
-     * @brief èŽ·å–æŽ‰è½
+     * @brief »ñÈ¡µôÂä
      */
     bool GetDrops(const int iIndex, Drop &stDrops) const;
 
     /**
-     * @brief æ·»åŠ æŽ‰è½
+     * @brief Ìí¼ÓµôÂä
      */
     bool AddDrops(Drop stDrops);
 
 
 
     /**
-     * @brief ç§»é™¤æŽ‰è½
+     * @brief ÒÆ³ýµôÂä
      */
     bool RemoveDrops(int iIndex);
 
-    bool SetDropID( const int iIndex, const int iID );    bool SetDropNum( const int iIndex, const int iNum );
 
+	
+	int Monster::GetDropsID(const int iIndex) const
+
+	int Monster::GetDropsNum(const int iIndex) const
+
+	
 private:  
-    /*<! æ€ªç‰©ç±»åž‹*/
+    /*<! ¹ÖÎïÀàÐÍ*/
     Monster::MonsterType m_eType;
-    /*<! æè¿°*/
+    /*<! ÃèÊö*/
     string m_iDescription;
 
-    /*<! æŽ‰è½*/
+    /*<! µôÂä*/
     Drop m_astDrops[DROP_MAX];
     int m_stDropsRef;
 

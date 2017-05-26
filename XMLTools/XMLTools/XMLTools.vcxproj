@@ -112,18 +112,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Core\CreateFile.cpp" />
+    <ClCompile Include="Core\Template.cpp" />
     <ClCompile Include="Base\FileUtil.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Core\ParseXML.cpp" />
+    <ClCompile Include="Core\ParseData.cpp" />
     <ClCompile Include="Base\StrUtil.cpp" />
     <ClCompile Include="Core\TemplateManager.cpp" />
     <ClCompile Include="tool\tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Core\CreateFile.h" />
+    <ClInclude Include="Core\Template.h" />
     <ClInclude Include="Base\FileUtil.h" />
-    <ClInclude Include="Core\ParseXML.h" />
+    <ClInclude Include="Core\ParseData.h" />
     <ClInclude Include="Base\StrUtil.h" />
     <ClInclude Include="Core\TemplateManager.h" />
     <ClInclude Include="tool\tinyxml2.h" />

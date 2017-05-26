@@ -36,14 +36,14 @@
     <ClCompile Include="Base\StrUtil.cpp">
       <Filter>Base</Filter>
     </ClCompile>
-    <ClCompile Include="Core\CreateFile.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\ParseXML.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="Core\TemplateManager.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Template.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\ParseData.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,14 +56,14 @@
     <ClInclude Include="Base\StrUtil.h">
       <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="Core\CreateFile.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\ParseXML.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="Core\TemplateManager.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Template.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\ParseData.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

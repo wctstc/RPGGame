@@ -13,7 +13,7 @@
 using std::string;
 
 /**
- * @brief è¡ŒåŠ¨è€…æ•°æ®
+ * @brief ĞĞ¶¯ÕßÊı¾İ
  */
 class ActorData 
 {
@@ -22,48 +22,48 @@ public:
     ~ActorData();
 public:
     /**
-     * @brief ç©ºå¯¹è±¡
+     * @brief ¿Õ¶ÔÏó
      */
     static const ActorData &GetNoActorData();
 public:
 
 public:
     /**
-     * @brief åˆå§‹åŒ–
+     * @brief ³õÊ¼»¯
      */
     virtual bool Init();
     
     /**
-     * @brief åˆå§‹åŒ–
+     * @brief ³õÊ¼»¯
      */
     virtual bool Init(const ActorData &oActorData);
     
     /**
-     * @brief å­—ç¬¦ä¸²åŒ–
+     * @brief ×Ö·û´®»¯
      */
     virtual string ToString()const;
     
     /**
-     * @brief åå­—ç¬¦ä¸²åŒ–
+     * @brief ·´×Ö·û´®»¯
      */
     virtual bool FromString(const string sBuffer);
 
 public:    
     /**
-     * @brief è·å–ç¼–å·
+     * @brief »ñÈ¡±àºÅ
      */
     inline const int GetID() const{return m_iID;}
     /**
-     * @brief è·å–ç”Ÿå‘½å€¼
+     * @brief »ñÈ¡ÉúÃüÖµ
      */
     inline const int GetHp() const{return m_iHp;}
 
     /**
-     * @brief è®¾ç½®ç¼–å·
+     * @brief ÉèÖÃ±àºÅ
      */
     inline void SetID(const int iID){m_iID = iID;}
     /**
-     * @brief è®¾ç½®ç”Ÿå‘½å€¼
+     * @brief ÉèÖÃÉúÃüÖµ
      */
     inline void SetHp(const int iHp){m_iHp = iHp;}
 
@@ -72,10 +72,11 @@ public:
 
 
 
+
 private:  
-    /*<! ç¼–å·*/
+    /*<! ±àºÅ*/
     int m_iID;
-    /*<! ç”Ÿå‘½å€¼*/
+    /*<! ÉúÃüÖµ*/
     int m_iHp;
 
 
