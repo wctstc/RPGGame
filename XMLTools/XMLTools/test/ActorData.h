@@ -27,6 +27,7 @@ public:
     static const ActorData &GetNoActorData();
 public:
 
+
 public:
     /**
      * @brief 初始化
@@ -49,35 +50,41 @@ public:
     virtual bool FromString(const string sBuffer);
 
 public:    
-    /**
-     * @brief 获取编号
-     */
-    inline const int GetID() const{return m_iID;}
-    /**
-     * @brief 获取生命值
-     */
-    inline const int GetHp() const{return m_iHp;}
 
-    /**
-     * @brief 设置编号
-     */
-    inline void SetID(const int iID){m_iID = iID;}
-    /**
-     * @brief 设置生命值
-     */
-    inline void SetHp(const int iHp){m_iHp = iHp;}
+	/**
+	 * @brief 获取编号
+	 */
+	inline const int GetID() const{return m_iID;}
+
+	/**
+	 * @brief 获取生命值
+	 */
+	inline const int GetHp() const{return m_iHp;}
+
+	
+	/**
+	 * @brief 设置编号
+	 */
+	inline void SetID(const int iID){m_iID = iID;}
+	
+	/**
+	 * @brief 设置生命值
+	 */
+	inline void SetHp(const int iHp){m_iHp = iHp;}
 
 
 
 
 
-
+#struct_set#
 
 private:  
-    /*<! 编号*/
-    int m_iID;
-    /*<! 生命值*/
-    int m_iHp;
+
+	/*<! 编号*/
+	int m_iID;
+
+	/*<! 生命值*/
+	int m_iHp;
 
 
 };

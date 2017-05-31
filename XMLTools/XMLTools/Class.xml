@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!--
+<class> name comment
+<macro> name value comment
+<globel> name prefix type default comment
+<property> name prefix type default comment
+<array_property> name prefix type max comment
+-->
 <class name="ActorData" comment="行动者数据">
 	<property name="ID"          prefix="i" type="int"    default="0" comment="编号"/>
 	<property name="Hp"          prefix="i" type="int"    default="0" comment="生命值"/>

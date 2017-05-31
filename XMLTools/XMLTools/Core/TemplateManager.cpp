@@ -130,10 +130,20 @@ bool TemplateManager::Run()
         for (map<string, string>::iterator mapFileIt = mapFiles.begin();
             mapFileIt != mapFiles.end(); ++mapFileIt)
         {
-            FileUtil::SaveFileWithChar(
-                mapIt->second.sPath + "/" + mapFileIt->first,
-                mapFileIt->second.c_str(),
-                mapFileIt->second.length());
+            if (mapIt->second.sPath.empty())
+            {
+                FileUtil::SaveFileWithChar(
+                    mapFileIt->first,
+                    mapFileIt->second.c_str(),
+                    mapFileIt->second.length());
+            }
+            else
+            {
+                FileUtil::SaveFileWithChar(
+                    mapIt->second.sPath + "/" + mapFileIt->first,
+                    mapFileIt->second.c_str(),
+                    mapFileIt->second.length());
+            }
 
             printf("create file succeed : %s/%s\n", mapIt->second.sPath.c_str(), mapFileIt->first.c_str());
         }
