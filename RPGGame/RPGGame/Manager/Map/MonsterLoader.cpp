@@ -1,10 +1,10 @@
 #include "MonsterLoader.h"
 
-#include "dataconfig_monster.pb.h"
+#include "dataconfig_monsterconfig.pb.h"
 #include "Platform.h"
 
-using dataconfig::MONSTERArray;
-using dataconfig::MONSTER;
+using dataconfig::MonsterConfigArray;
+using dataconfig::MonsterConfig;
 
 using platform::UTF_82ASCII;
 
@@ -19,7 +19,7 @@ MonsterLoader::~MonsterLoader()
 
 bool MonsterLoader::Load()
 {
-    MONSTERArray arrayMonster;
+    MonsterConfigArray arrayMonster;
     if (!GetConfigArray(arrayMonster))
         return false;
 
@@ -30,10 +30,10 @@ bool MonsterLoader::Load()
     {
         vDrop.clear();
 
-        const MONSTER &oConfig = arrayMonster.items(i);
+        const MonsterConfig &oConfig = arrayMonster.items(i);
 
-        for (int j = 0; j < oConfig.drop_id_size(); ++j)
-            vDrop.push_back(oConfig.drop_id(j));
+        for (int j = 0; j < oConfig.dropid_size(); ++j)
+            vDrop.push_back(oConfig.dropid(j));
 
         Monster oMonster;
         oMonster.Init(

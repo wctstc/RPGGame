@@ -1,11 +1,13 @@
 
-#ifndef __FRAME_LOADER_H__
-#define __FRAME_LOADER_H__
+#ifndef __FRAMECONFIG_LOADER_H__
+#define __FRAMECONFIG_LOADER_H__
 
 
 /*!< 选项最大数量 */
 #define MAX_OPTION_NUM 5
 
+
+#define g_FrameConfigLoader FrameConfigLoader::GetInstance()
 
 #include <vector>
 #include <string>
@@ -27,7 +29,7 @@ struct Option
 	int iNotify;
 
 	/*!< 对应框ID */
-	int iFrame_id;
+	int iFrameID;
 
 
 	/*!< 选项描述 */
@@ -38,13 +40,13 @@ struct Option
 /**
  * @brief 框数据
  */
-struct Frame
+struct FrameConfig
 {	
 		/*!< 编号 */
 		int iID;
 		
 		/*!< 对应处理 */
-		int iHandle_id;
+		int iHandleID;
 	
 	
 		/*!< 名称 */
@@ -60,7 +62,7 @@ struct Frame
 
 };
 
-class FrameConfig : public Singleton<FrameConfig>
+class FrameConfigLoader : public Singleton<FrameConfigLoader>
 {
 public:
 	/**
@@ -69,31 +71,40 @@ public:
     bool Init();
 	
 public:
+	/**
+	 * @brief 获取全部配置
+	 */
+	const vector<FrameConfig> &GetAllConfig();
+	
+	/**
+	 * @brief 通过索引获取配置
+	 */
+	const FrameConfig *GetFrameConfigByIndex(const unsigned int uIndex);
 	
 	/**
 	 * @brief 通过编号获取配置
 	 */
-	const Frame *GetFrameByID(const int iID);
+	const FrameConfig *GetFrameConfigByID(const int iID);
 		
 	/**
 	 * @brief 通过对应处理获取配置
 	 */
-	const Frame *GetFrameByHandle_id(const int iHandle_id);
+	const FrameConfig *GetFrameConfigByHandleID(const int iHandleID);
 	
 	
 	/**
 	 * @brief 通过名称获取配置
 	 */
-	const Frame *GetFrameByName(const string sName);
+	const FrameConfig *GetFrameConfigByName(const string sName);
 		
 	/**
 	 * @brief 通过描述获取配置
 	 */
-	const Frame *GetFrameByDescription(const string sDescription);
+	const FrameConfig *GetFrameConfigByDescription(const string sDescription);
 	
 private:
 	/*!< 配置数据 */
-    vector<Frame> m_vecRecords;
+    vector<FrameConfig> m_vecRecords;
 };
 
-#endif //__FRAME_LOADER_H__
+#endif //__FRAMECONFIG_LOADER_H__

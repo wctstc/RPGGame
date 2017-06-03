@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+<class> name comment
+<macro> name value comment
+<globel> name prefix type default comment
+<property> name prefix type default comment
+<string_property> name prefix type max comment
+<array_property> name prefix type max comment
+<enum> name value comment
+
+xml字符转义:
+&amp;        &
+&lt;         <
+&gt;         >
+&quot;       "
+&apos;       '
+-->
+
+<!--物品-------------------------------------------------------------------->
+<class name="ItemData" comment="物品数据">
+	<property name="ID" prefix="i" type="int" default="0" comment="编号"/>
+	<property name="Num" prefix="i" type="int" default="0" comment="数量"/>
+</class>
+
+
+
+<!--容器-------------------------------------------------------------------->
+
+
+<class name="Container" comment="容器">
+    <macro name="MAX_CONTAINER_CAPACITY" value="30" comment="容器容量"/>
+    <property name="ID" prefix="i" type="int" default="0" comment="编号"/>
+	<array_property name="Cell" prefix="st" type="CellData" max="MAX_CONTAINER_CAPACITY" comment="容器数据">
+		<struct name="CellData" comment="单元格数据">
+			<property name="ID" prefix="i" type="int" default="0" comment="编号"/>
+			<property name="ItemID" prefix="i" type="int" default="0" comment="物品编号"/>
+			<property name="ItemNum" prefix="i" type="int" default="0" comment="物品数量"/>
+			<property name="UnitCapacity" prefix="i" type="int" default="0" comment="物品最大叠加"/>
+		</struct>
+	</array_property>
+</class>
+
+
+
+<!--玩家-------------------------------------------------------------------->
+<class name="PlayerData" comment="行动者数据">
+	<macro name="EQUIPMENT_SLOT_SIZE" value="3" comment="装备槽数量"/>
+	<property name="ID"    prefix="i" type="int" default="0" comment="编号"/>
+	<property name="Hp"    prefix="i" type="int" default="0" comment="生命值"/>
+	<property name="Money" prefix="i" type="int" default="0" comment="钱"/>
+	<property name="Level" prefix="i" type="int" default="0" comment="等级"/>
+	<property name="Exp"   prefix="i" type="int" default="0" comment="当前获得经验"/>
+	
+	<enum name="EquipmentSlotType" comment="装备槽">
+		<property name="EQUIPMENT_SLOT_TYPE_WEAPON" value="0" comment="武器"/>
+		<property name="EQUIPMENT_SLOT_TYPE_AEMOR" value="0" comment="防具"/>
+		<property name="EQUIPMENT_SLOT_TYPE_ACCESSORY" value="0" comment="饰品"/>
+	</enum>
+	<array_property name="EquipmentSlot" prefix="st" type="EquipmentSlot" max="EQUIPMENT_SLOT_SIZE" comment="装备槽">
+		<struct name="EquipmentSlot" comment="装备槽">
+			<property name="EquipmentID" prefix="i" type="int" default="0" comment="编号"/>
+		</struct>
+	</array_property>
+</class>
+

@@ -1,9 +1,9 @@
-call xls_deploy_tool.bat frame.xlsx FRAME
-call xls_deploy_tool.bat item.xlsx ITEM
-call xls_deploy_tool.bat map.xlsx MAP
-call xls_deploy_tool.bat map.xlsx MAPACTION
-call xls_deploy_tool.bat map.xlsx MONSTER
-call xls_deploy_tool.bat map.xlsx DROP
+call xls_deploy_tool.bat frame.xlsx FrameConfig
+call xls_deploy_tool.bat item.xlsx ItemConfig
+call xls_deploy_tool.bat map.xlsx MapConfig
+call xls_deploy_tool.bat map.xlsx MapActionConfig
+call xls_deploy_tool.bat map.xlsx MonsterConfig
+call xls_deploy_tool.bat map.xlsx DropConfig
 
 ::---------------------------------------------------
 ::protobuf编译，生成c++源代码

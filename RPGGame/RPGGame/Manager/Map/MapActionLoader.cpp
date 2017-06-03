@@ -1,15 +1,15 @@
 #include "MapActionLoader.h"
 
 
-#include "dataconfig_mapaction.pb.h"
+#include "dataconfig_mapactionconfig.pb.h"
 
 #include "Platform.h"
 #include "FileUtil.h"
 
 
 
-using dataconfig::MAPACTION;
-using dataconfig::MAPACTIONArray;
+using dataconfig::MapActionConfig;
+using dataconfig::MapActionConfigArray;
 
 using platform::UTF_82ASCII;
 
@@ -24,7 +24,7 @@ MapActionLoader::~MapActionLoader()
 
 bool MapActionLoader::Load()
 {
-    MAPACTIONArray arrayMapAction;
+    MapActionConfigArray arrayMapAction;
     if (!GetConfigArray(arrayMapAction))
         return false;
 
@@ -37,13 +37,13 @@ bool MapActionLoader::Load()
         vMonster.clear();
         vDrop.clear();
 
-        const MAPACTION *pConfig = &(arrayMapAction.items(i));
+        const MapActionConfig *pConfig = &(arrayMapAction.items(i));
 
-        for (int j = 0; j < pConfig->monster_id_size(); ++j)
-            vMonster.push_back(pConfig->monster_id(j));
+        for (int j = 0; j < pConfig->monsterid_size(); ++j)
+            vMonster.push_back(pConfig->monsterid(j));
 
-        for (int j = 0; j < pConfig->drop_id_size(); ++j)
-            vDrop.push_back(pConfig->drop_id(j));
+        for (int j = 0; j < pConfig->dropid_size(); ++j)
+            vDrop.push_back(pConfig->dropid(j));
 
         MapAction oMapAction;
         if (!oMapAction.Init(
@@ -51,8 +51,8 @@ bool MapActionLoader::Load()
             static_cast<MapAction::MapActionType>(pConfig->type()),
             UTF_82ASCII(pConfig->name()),
             UTF_82ASCII(pConfig->description()),
-            pConfig->power_cost(),
-            pConfig->time_cost(),
+            pConfig->powercost(),
+            pConfig->timecost(),
             pConfig->maxtime(),
             pConfig->recovery(),
             vMonster,

@@ -1,9 +1,9 @@
 #include "DropLoader.h"
 
-#include "dataconfig_drop.pb.h"
+#include "dataconfig_dropconfig.pb.h"
 
-using dataconfig::DROPArray;
-using dataconfig::DROP;
+using dataconfig::DropConfigArray;
+using dataconfig::DropConfig;
 
 DropLoader::DropLoader()
 {
@@ -16,16 +16,16 @@ DropLoader::~DropLoader()
 
 bool DropLoader::Load()
 {
-    DROPArray arrayDrop;
+    DropConfigArray arrayDrop;
     if (!GetConfigArray(arrayDrop))
         return false;
 
     for (int i = 0; i < arrayDrop.items_size(); ++i)
     {
-        const DROP oConfig = arrayDrop.items(i);
+        const DropConfig oConfig = arrayDrop.items(i);
 
         Drop oDrop;
-        if (!oDrop.Init(oConfig.id(), oConfig.item_id(), oConfig.item_num()))
+        if (!oDrop.Init(oConfig.id(), oConfig.itemid(), oConfig.itemnum()))
             return false;
 
         m_mapDrop.insert(make_pair(oDrop.GetID(), oDrop));

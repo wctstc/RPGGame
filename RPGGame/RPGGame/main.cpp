@@ -17,12 +17,12 @@
 using namespace std;
 
 #include "StrUtil.h"
-#include "proto\dataconfig_frame.pb.h"
+#include "proto\dataconfig_frameconfig.pb.h"
 
 #include "TestUnit.h"
 
-using dataconfig::FRAME;
-using dataconfig::FRAMEArray;
+using dataconfig::FrameConfig;
+using dataconfig::FrameConfigArray;
 
 int main()
 {

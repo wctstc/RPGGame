@@ -101,12 +101,12 @@ enum #enum_name#
 	
 	<compose name="property_get_implement" ref="property" gap="">
 	
-const #class_name# *#class_name#Config::Get#class_name#By#property_name#(const #property_type# #property_prefix##property_name#)
+const #class_name# *#class_name#Loader::Get#class_name#By#property_name#(const #property_type# #property_prefix##property_name#)
 {
     for(size_t i = 0; i &lt; m_vecRecords.size(); ++i)
 	{
 	     if (m_vecRecords[i].#property_prefix##property_name# == #property_prefix##property_name#)
-		 return &amp;m_vecRecords[i];
+			return &amp;m_vecRecords[i];
 	}
 	return NULL;
 }
@@ -148,12 +148,12 @@ const #class_name# *#class_name#Config::Get#class_name#By#property_name#(const #
 	
 	<compose name="string_property_get_implement" ref="string_property" gap="">
 	
-const #class_name# *#class_name#Config::Get#class_name#By#string_property_name#(const #string_property_type# #string_property_prefix##string_property_name#)
+const #class_name# *#class_name#Loader::Get#class_name#By#string_property_name#(const #string_property_type# #string_property_prefix##string_property_name#)
 {
     for(size_t i = 0; i &lt; m_vecRecords.size(); ++i)
 	{
 	     if (m_vecRecords[i].#string_property_prefix##string_property_name# == #string_property_prefix##string_property_name#)
-		 return &amp;m_vecRecords[i];
+			return &amp;m_vecRecords[i];
 	}
 	return NULL;
 }
@@ -279,11 +279,13 @@ struct #struct_property_name#
 <!-------------->
 <!-- 生成文件 -->
 <!-------------->
-<file file="#class_name#Config.h">
+<file file="#class_name#Loader.h">
 #ifndef __#class_name_upper#_LOADER_H__
 #define __#class_name_upper#_LOADER_H__
 
 #macro_declaration#
+
+#define g_#class_name#Loader #class_name#Loader::GetInstance()
 
 #include &lt;vector&gt;
 #include &lt;string&gt;
@@ -306,7 +308,7 @@ struct #class_name#
 #struct_property_declaration#
 };
 
-class #class_name#Config : public Singleton&lt;#class_name#Config&gt;
+class #class_name#Loader : public Singleton&lt;#class_name#Loader&gt;
 {
 public:
 	/**
@@ -315,6 +317,15 @@ public:
     bool Init();
 	
 public:
+	/**
+	 * @brief 获取全部配置
+	 */
+	const vector&lt;#class_name#&gt; &amp;GetAllConfig();
+	
+	/**
+	 * @brief 通过索引获取配置
+	 */
+	const #class_name# *Get#class_name#ByIndex(const unsigned int uIndex);
 #property_get_declaration#
 #string_property_get_declaration#
 private:
@@ -327,14 +338,14 @@ private:
 
 
 <!-- 生成文件 -->
-<file file="#class_name#Config.cpp">
+<file file="#class_name#Loader.cpp">
 
-#include "#class_name#Config.h"
+#include "#class_name#Loader.h"
 
 #include "dataconfig_#class_name_lower#.pb.h"
 #include "Platform.h"
 
-bool #class_name#Config::Init()
+bool #class_name#Loader::Init()
 {
 	FILE *pFile;
 	pFile = fopen("proto/data/dataconfig_#class_name_lower#.data", "rb");
@@ -348,7 +359,7 @@ bool #class_name#Config::Init()
 	if (iLength &lt;= 0)
 	    return false;
 	
-	dataconfig::#class_name_upper#Array ay#class_name#;
+	dataconfig::#class_name#Array ay#class_name#;
 	if (!ay#class_name#.ParseFromArray(csBuffer, iLength))
 	    return false;
 	
@@ -365,6 +376,18 @@ bool #class_name#Config::Init()
 	}
 	
 	return true;
+}
+const vector&lt;#class_name#&gt; &amp;#class_name#Loader::GetAllConfig()
+{
+	return m_vecRecords;
+}
+const #class_name# *#class_name#Loader::Get#class_name#ByIndex(const unsigned int uIndex)
+{
+	if (uIndex &lt;= m_vecRecords.size())
+	{
+		return &amp;m_vecRecords[uIndex];
+	}
+	return NULL;
 }
 #property_get_implement#
 #string_property_get_implement#

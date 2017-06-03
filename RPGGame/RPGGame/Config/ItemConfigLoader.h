@@ -1,8 +1,10 @@
 
-#ifndef __ITEM_LOADER_H__
-#define __ITEM_LOADER_H__
+#ifndef __ITEMCONFIG_LOADER_H__
+#define __ITEMCONFIG_LOADER_H__
 
 
+
+#define g_ItemConfigLoader ItemConfigLoader::GetInstance()
 
 #include <vector>
 #include <string>
@@ -35,7 +37,7 @@ enum ItemType
 /**
  * @brief 物品数据
  */
-struct Item
+struct ItemConfig
 {	
 		/*!< 编号 */
 		int iID;
@@ -54,7 +56,7 @@ struct Item
 
 };
 
-class ItemConfig : public Singleton<ItemConfig>
+class ItemConfigLoader : public Singleton<ItemConfigLoader>
 {
 public:
 	/**
@@ -63,31 +65,40 @@ public:
     bool Init();
 	
 public:
+	/**
+	 * @brief 获取全部配置
+	 */
+	const vector<ItemConfig> &GetAllConfig();
+	
+	/**
+	 * @brief 通过索引获取配置
+	 */
+	const ItemConfig *GetItemConfigByIndex(const unsigned int uIndex);
 	
 	/**
 	 * @brief 通过编号获取配置
 	 */
-	const Item *GetItemByID(const int iID);
+	const ItemConfig *GetItemConfigByID(const int iID);
 		
 	/**
 	 * @brief 通过类型获取配置
 	 */
-	const Item *GetItemByType(const ItemType eType);
+	const ItemConfig *GetItemConfigByType(const ItemType eType);
 	
 	
 	/**
 	 * @brief 通过名字获取配置
 	 */
-	const Item *GetItemByName(const string sName);
+	const ItemConfig *GetItemConfigByName(const string sName);
 		
 	/**
 	 * @brief 通过描述获取配置
 	 */
-	const Item *GetItemByDescription(const string sDescription);
+	const ItemConfig *GetItemConfigByDescription(const string sDescription);
 	
 private:
 	/*!< 配置数据 */
-    vector<Item> m_vecRecords;
+    vector<ItemConfig> m_vecRecords;
 };
 
-#endif //__ITEM_LOADER_H__
+#endif //__ITEMCONFIG_LOADER_H__

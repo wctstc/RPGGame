@@ -1,10 +1,10 @@
 #include "MapLoader.h"
 
-#include "dataconfig_map.pb.h"
+#include "dataconfig_mapconfig.pb.h"
 #include "Platform.h"
 
-using dataconfig::MAPArray;
-using dataconfig::MAP;
+using dataconfig::MapConfigArray;
+using dataconfig::MapConfig;
 
 using platform::UTF_82ASCII;
 
@@ -19,7 +19,7 @@ MapLoader::~MapLoader()
 
 bool MapLoader::Load()
 {
-    MAPArray arrayMap;
+    MapConfigArray arrayMap;
 
     if (!GetConfigArray(arrayMap))
         return false;
@@ -30,10 +30,10 @@ bool MapLoader::Load()
     {
         vMapActionID.clear();
 
-        const MAP &pConfig = arrayMap.items(i);
+        const MapConfig &pConfig = arrayMap.items(i);
 
-        for (int j = 0; j < pConfig.action_id_size(); ++j)
-            vMapActionID.push_back(pConfig.action_id(j));
+        for (int j = 0; j < pConfig.actionid_size(); ++j)
+            vMapActionID.push_back(pConfig.actionid(j));
 
         Map oMap;
         if (!oMap.Init(pConfig.id(), UTF_82ASCII(pConfig.name()), vMapActionID))

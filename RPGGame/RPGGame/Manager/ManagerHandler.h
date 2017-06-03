@@ -5,7 +5,6 @@
 #include "Cmd.h"
 #include "Singleton.h"
 #include "Hander.h"
-#include "ItemLoader.h"
 
 /*!< 管理处理类实例 */
 #define g_ManagerHandler ManagerHandler::GetInstance()

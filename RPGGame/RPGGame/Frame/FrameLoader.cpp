@@ -2,7 +2,7 @@
 
 bool FrameLoader::Init()
 {
-	FRAMEArray ayFrames;
+    FrameConfigArray ayFrames;
 	FILE *file;
 	file = fopen("proto/data/dataconfig_frame.data", "rb");
 	if (file == NULL)
@@ -13,7 +13,7 @@ bool FrameLoader::Init()
 
 	ayFrames.ParseFromArray(buffer, length);
 
-	const FRAME *pFrameConfig;
+	const FrameConfig *pFrameConfig;
     data::FrameData oFrameData;
 	data::Option oOptionData;
 	vector<data::Option> vOptions;
@@ -24,20 +24,20 @@ bool FrameLoader::Init()
 		oFrameData.iID = pFrameConfig->id();
 		oFrameData.eType = static_cast<data::FrameType>(pFrameConfig->type());
         oFrameData.eState = data::FRAME_STATE_NORMAL;
-		oFrameData.eDirection = static_cast<data::Direction>(pFrameConfig->direction());
-		oFrameData.oPosition.iX = pFrameConfig->x();
-		oFrameData.oPosition.iY = pFrameConfig->y();
-		oFrameData.oSize.iWidth = pFrameConfig->width();
-		oFrameData.oSize.iHeigth = pFrameConfig->height();
+// 		oFrameData.eDirection = static_cast<data::Direction>(pFrameConfig->direction());
+// 		oFrameData.oPosition.iX = pFrameConfig->x();
+// 		oFrameData.oPosition.iY = pFrameConfig->y();
+// 		oFrameData.oSize.iWidth = pFrameConfig->width();
+// 		oFrameData.oSize.iHeigth = pFrameConfig->height();
 		oFrameData.sDescription = platform::UTF_82ASCII(pFrameConfig->description()).c_str();
-		if (pFrameConfig->has_handle_id())
-			oFrameData.iHandlerID = pFrameConfig->handle_id();
+		if (pFrameConfig->has_handleid())
+			oFrameData.iHandlerID = pFrameConfig->handleid();
 		else
 			oFrameData.iHandlerID = NO_HANDLER;
 		for (int j = 0; j < pFrameConfig->option().size(); ++j )
 		{
 			oOptionData.sDescription = platform::UTF_82ASCII(pFrameConfig->option(j).description());
-			oOptionData.iFrameID = pFrameConfig->option(j).frame_id();
+			oOptionData.iFrameID = pFrameConfig->option(j).frameid();
             oOptionData.eNotify = static_cast<cmd::NotifyCommand>(pFrameConfig->option(j).notify());
 			vOptions.push_back(oOptionData);
 		}

@@ -4,7 +4,7 @@
 #include <string>
 
 #include "Singleton.h"
-#include "Item.h"
+#include "ItemConfigLoader.h"
 
 using std::string;
 /**
@@ -24,7 +24,7 @@ public:
     /**
      * @brief 获取物品描述
      */
-    const Item::ItemType GetTypeByID(const int iID)const;
+    const ItemType GetTypeByID(const int iID)const;
 
     /**
      * @brief 获取物品描述
@@ -37,9 +37,9 @@ public:
     const string GetDescriptionByID(const int iID)const;
 
     /**
-     * @brief 获取物品描述
+     * @brief 获取物品配置
      */
-    const Item &GetItemByID(const int iID)const;
+    const ItemConfig *GetItemByID(const int iID)const;
 
 };
 

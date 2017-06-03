@@ -150,10 +150,10 @@ bool TestUnit::TestPropertyFrame()
 }
 
 #include "Struct.h"
-#include "dataconfig_item.pb.h"
+#include "dataconfig_itemconfig.pb.h"
 bool TestUnit::TestProtobuf()
 {
-    dataconfig::ITEM item;
+    dataconfig::ItemConfig item;
     item.set_type(2);
 
     const google::protobuf::Descriptor *pDes = item.GetDescriptor();

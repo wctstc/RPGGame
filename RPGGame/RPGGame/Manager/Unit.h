@@ -1,7 +1,7 @@
 #ifndef __UNIT_H__
 #define __UNIT_H__
 
-#include "Item.h"
+#include "Struct.h"
 
 class Unit
 {

@@ -6,7 +6,7 @@
 using std::map;
 using std::pair;
 
-#include "dataconfig_frame.pb.h"
+#include "dataconfig_frameconfig.pb.h"
 
 #include "Platform.h"
 #include "Singleton.h"
@@ -20,8 +20,8 @@ using std::pair;
 
 #define FRAMEFIEL "proto/data/dataconfig_frame.data"
 
-using dataconfig::FRAME;
-using dataconfig::FRAMEArray;
+using dataconfig::FrameConfig;
+using dataconfig::FrameConfigArray;
 
 using data::FrameType;
 using data::Direction;
