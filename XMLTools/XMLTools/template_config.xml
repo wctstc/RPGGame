@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+param:
+lower -> 小写
+upper -> 大写
+
+xml字符转义:
+&amp;        &
+&lt;         <
+&gt;         >
+&quot;       "
+&apos;       '
+-->
+
+
+
+<!-------------->
+<!-- 基础数据 -->
+<!-------------->
+
+<class type="class">
+
+	<!------------>
+	<!--基本数据-->
+	<!------------>
+	<base name="class_name"       attr="name"/>
+	<base name="class_name_lower" attr="name" param="lower"/>
+	<base name="class_name_upper" attr="name" param="upper"/>
+	<base name="class_comment"    attr="comment"/>
+
+	<!---------->
+	<!--宏定义-->
+	<!---------->
+	<list name="macro">
+		<base name="macro_name" attr="name"/>
+		<base name="macro_value" attr="value"/>
+		<base name="macro_comment" attr="comment"/>
+	</list>
+	<compose name="macro_declaration" ref="macro" gap="">
+
+/*!&lt; #macro_comment# */
+#define #macro_name# #macro_value#
+
+	</compose>
+	
+	<!-------->
+	<!--枚举-->
+	<!-------->
+	<list name="enum">
+		<base name="enum_name" attr="name"/>
+		<base name="enum_comment" attr="comment"/>
+		<list name="property">
+			<base name="property_name" attr="name"/>
+			<base name="property_value" attr="value"/>
+			<base name="property_comment" attr="comment"/>
+		</list>
+		<compose name="enum_property_declaration" ref="property" gap="">
+
+		/*!&lt; #property_comment# */
+		#property_name# = #property_value#;
+
+		</compose>
+	</list>
+	
+	<compose name="enum_declaration" ref="enum" gap="">
+	/**
+	 * @brief #enum_comment#
+	 */
+	enum #enum_name#
+	{#enum_property_declaration#
+	}
+	</compose>
+	
+	<!------------>
+	<!--基础属性-->
+	<!------------>
+	<list name="property">
+	    <base name="property_name" attr="name"/>
+	    <base name="property_name_lower" attr="name" param="lower"/>
+	    <base name="property_prefix" attr="prefix"/>
+	    <base name="property_type" attr="type"/>
+	    <base name="property_comment" attr="comment"/>
+	</list>
+	
+	<compose name="property_declaration" ref="property" gap="">
+	
+		/*!&lt; #property_comment# */
+		#property_type# #property_prefix##property_name#;
+	
+	</compose>
+	
+	<compose name="property_get_declaration" ref="property" gap="">
+	
+	/**
+	 * @brief 通过#property_comment#获取配置
+	 */
+	const #class_name# *Get#class_name#By#property_name#(const #property_type# #property_prefix##property_name#);
+	
+	</compose>
+	
+	<compose name="property_get_implement" ref="property" gap="">
+	
+const #class_name# *#class_name#Loader::Get#class_name#By#property_name#(const #property_type# #property_prefix##property_name#)
+{
+    for(size_t i = 0; i &lt; m_vecRecords.size(); ++i)
+	{
+	     if (m_vecRecords[i].#property_prefix##property_name# == #property_prefix##property_name#)
+		 return &amp;m_vecRecords[i];
+	}
+	return NULL;
+}
+	
+	</compose>
+	
+	<compose name="property_init_implement" ref="property" gap="">
+		o#class_name#.#property_prefix##property_name# = (property_type)(ay#class_name#.items(i).#property_name_lower#());
+
+	</compose>
+	
+	
+	<!-------------->
+	<!--字符串属性-->
+	<!-------------->
+	<list name="string_property">
+	    <base name="string_property_name" attr="name"/>
+	    <base name="string_property_name_lower" attr="name" param="lower"/>
+	    <base name="string_property_prefix" attr="prefix"/>
+	    <base name="string_property_type" attr="type"/>
+	    <base name="string_property_comment" attr="comment"/>
+	</list>
+	
+	<compose name="string_property_declaration" ref="string_property" gap="">
+	
+		/*!&lt; #string_property_comment# */
+		#string_property_type# #string_property_prefix##string_property_name#;
+	
+	</compose>
+	
+	<compose name="string_property_get_declaration" ref="string_property" gap="">
+	
+	/**
+	 * @brief 通过#string_property_comment#获取配置
+	 */
+	const #class_name# *Get#class_name#By#string_property_name#(const #string_property_type# #string_property_prefix##string_property_name#);
+	
+	</compose>
+	
+	<compose name="string_property_get_implement" ref="string_property" gap="">
+	
+const #class_name# *#class_name#Loader::Get#class_name#By#string_property_name#(const #string_property_type# #string_property_prefix##string_property_name#)
+{
+    for(size_t i = 0; i &lt; m_vecRecords.size(); ++i)
+	{
+	     if (m_vecRecords[i].#string_property_prefix##string_property_name# == #string_property_prefix##string_property_name#)
+		 return &amp;m_vecRecords[i];
+	}
+	return NULL;
+}
+	
+	</compose>
+	
+	<compose name="string_property_init_implement" ref="string_property" gap="">
+		o#class_name#.#string_property_prefix##string_property_name# = platform::UTF_82ASCII(ay#class_name#.items(i).#string_property_name_lower#());
+
+	</compose>
+	
+	
+	<!---------------->
+	<!--简单数组属性-->
+	<!---------------->
+	<list name="array_property">
+		<base name="array_property_name" attr="name"/>
+		<base name="array_property_name_lower" attr="name" param="lower"/>
+		<base name="array_property_prefix" attr="prefix"/>
+		<base name="array_property_type" attr="type"/>
+		<base name="array_property_comment" attr="comment"/>
+	</list>
+	
+	<compose name="array_property_declaration" ref="array_property" gap="">
+	
+		/*!&lt; #array_property_comment# */
+		vector&lt; #array_property_type# &gt; vec#array_property_prefix##array_property_name#;
+	
+	</compose>
+	
+	<compose name="array_property_init_implement" ref="array_property" gap="">
+		for(int j = 0; j &lt; ay#class_name#.items(i).#array_property_name_lower#_size(); ++j)
+		{
+			o#class_name#.vec#array_property_prefix##array_property_name#.push_back(ay#class_name#.items(i).#array_property_name_lower#());
+		}
+
+	</compose>
+	
+	
+	<!------------------>
+	<!--结构体数组属性-->
+	<!------------------>
+	<list name="struct_property">
+	    <base name="struct_property_name" attr="name"/>
+	    <base name="struct_property_name_lower" attr="name" param="lower"/>
+	    <base name="struct_property_max" attr="max"/>
+	    <base name="struct_property_comment" attr="comment"/>	
+		<list name="property">
+			<base name="property_name" attr="name"/>
+			<base name="property_name_lower" attr="name" param="lower"/>
+			<base name="property_prefix" attr="prefix"/>
+			<base name="property_type" attr="type"/>
+			<base name="property_comment" attr="comment"/>
+		</list>	
+		<list name="string_property">
+			<base name="string_property_name" attr="name"/>
+			<base name="string_property_name_lower" attr="name" param="lower"/>
+			<base name="string_property_prefix" attr="prefix"/>
+			<base name="string_property_type" attr="type"/>
+			<base name="string_property_comment" attr="comment"/>
+		</list>
+		
+		<compose name="struct_property_property_declaration" ref="property" gap="">
+
+		/*!&lt; #property_comment# */
+		#property_type# #property_prefix##property_name#;
+
+		</compose>
+		
+		<compose name="struct_property_property_init_implement" ref="property" gap="">
+
+			o#class_name#.st#struct_property_name#.#property_prefix##property_name# = (#property_type#)(ay#class_name#.items(i).#struct_property_name_lower#(j).#property_name_lower#());
+		</compose>
+		
+		<compose name="struct_property_string_property_declaration" ref="string_property" gap="">
+
+		/*!&lt; #string_property_comment# */
+		#string_property_type# #string_property_prefix##string_property_name#;
+
+		</compose>
+		
+		<compose name="struct_property_string_property_init_implement" ref="string_property" gap="">
+
+			o#class_name#.st#struct_property_name#.#string_property_prefix##string_property_name# = platform::UTF_82ASCII(ay#class_name#.items(i).#struct_property_name_lower#(j).#string_property_name_lower#());
+		</compose>
+	</list>
+	
+	<compose name="struct_property_struct_declaration" ref="struct_property" gap="">
+
+	/**
+	 * @brief #struct_property_comment#
+	 */
+	struct #struct_property_name#
+	{#struct_property_property_declaration#
+	#struct_property_string_property_declaration#
+	};
+
+	</compose>
+	
+	<compose name="struct_property_declaration" ref="struct_property" gap="">
+
+		/*!&lt; #struct_property_comment# */
+		vector&lt;#struct_property_name#&gt; vec#struct_property_name#;
+
+	</compose>
+	
+	
+	<compose name="struct_property_init_implement" ref="struct_property" gap="">
+
+		for (int j = 0; j &lt; ay#class_name#.items(i).#struct_property_name_lower#_size(); ++j)
+		{#struct_property_property_init_implement#
+#struct_property_string_property_init_implement#
+		}
+
+	</compose>
+
+</class>
+
+<!-------------->
+<!-- 生成文件 -->
+<!-------------->
+<file file="#class_name#Loader.h">
+#ifndef __#class_name_upper#_LOADER_H__
+#define __#class_name_upper#_LOADER_H__
+
+#macro_declaration#
+
+#include &lt;vector&gt;
+#include &lt;string&gt;
+
+#include "Singleton.h"
+
+
+using std::vector;
+using std::string;
+
+class #class_name#Loader : public Singleton&lt;#class_name#Loader&gt;
+{
+public:
+#enum_declaration#
+#struct_property_struct_declaration#
+
+	/**
+	 * @brief #class_comment#
+	 */
+	struct #class_name#
+	{#property_declaration#
+	#string_property_declaration#
+	#array_property_declaration#
+	#struct_property_declaration#
+	};
+
+public:
+	/**
+	 * @brief 初始化
+	 */
+    bool Init();
+	
+public:
+#property_get_declaration#
+#string_property_get_declaration#
+private:
+	/*!&lt; 配置数据 */
+    vector&lt;#class_name#&gt; m_vecRecords;
+}
+
+
+#endif //__#class_name_upper#_LOADER_H__
+</file>
+
+
+<!-- 生成文件 -->
+<file file="#class_name#Loader.cpp">
+
+#include "#class_name#Loader.h"
+
+#include "dataconfig_#class_name_lower#.pb.h"
+#include "Platform.h"
+
+bool #class_name#Loader::Init()
+{
+	FILE *pFile;
+	pFile = fopen("proto/data/dataconfig_#class_name_lower#.data", "rb");
+	
+	if (pFile == NULL)
+		return false;
+	
+	char csBuffer[1024*1024];
+	int iLength = fread(csBuffer, 1, 1024*1024, pFile);
+
+	if (iLength &lt;= 0)
+	    return false;
+	
+	dataconfig::#class_name_upper#Array ay#class_name#;
+	if (!ay#class_name#.ParseFromArray(csBuffer, iLength))
+	    return false;
+	
+	m_vecRecords.clear();
+	for(int i = 0;i &lt; ay#class_name#.items_size(); ++i)
+	{
+	    #class_name# o#class_name#;
+		
+#property_init_implement#
+#string_property_init_implement#
+#array_property_init_implement#
+#struct_property_init_implement#
+        m_vecRecords.push_back(o#class_name#);
+	}
+}
+#property_get_implement#
+#string_property_get_implement#
+</file>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

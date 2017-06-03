@@ -76,7 +76,8 @@ public:
 
 
 
-#struct_set#
+
+
 
 private:  
 
@@ -85,6 +86,7 @@ private:
 
 	/*<! ÉúÃüÖµ*/
 	int m_iHp;
+
 
 
 };

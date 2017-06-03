@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+<class> name comment
+<macro> name value comment
+<globel> name prefix type default comment
+<property> name prefix type default comment
+<string_property> name prefix type max comment
+<array_property> name prefix type max comment
+<enum> name value comment
+
+xml字符转义:
+&amp;        &
+&lt;         <
+&gt;         >
+&quot;       "
+&apos;       '
+-->
+
+<!--物品-------------------------------------------------------------------->
+<class name="Item" comment="物品数据">
+	<enum name="ItemType" comment="物品类型">
+		<property name="ITEM_TYPE_NO"        value="0" comment="空类型"/>
+		<property name="ITEM_TYPE_NORMAL"    value="1" comment="普通类型"/>
+		<property name="ITEM_TYPE_EQUIPMENT" value="2" comment="武器类型"/>
+		<property name="ITEM_TYPE_MAX"       value="3" comment="类型最大值"/>
+	</enum>
+	<property name="ID"   prefix="i" type="int" comment="编号"/>
+	<property name="Type" prefix="e" type="ItemType" comment="类型"/>
+	<string_property name="Name" prefix="s" type="string" comment="名字"/>
+	<string_property name="Description" prefix="s" type="string"  comment="描述"/>
+</class>
+
+
+<class name="Frame" comment="框数据">
+    <macro name="MAX_OPTION_NUM" value="5" comment="选项最大数量"/>
+	<property name="ID"   prefix="i" type="int" comment="编号"/>
+	<string_property name="Name"   prefix="s" type="string" comment="名称"/>
+	<string_property name="Description"   prefix="s" type="string" comment="描述"/>
+	<property name="Handle_id"   prefix="i" type="int" comment="对应处理"/>
+	<struct_property name="Option" max="MAX_OPTION_NUM" comment="选项">
+		<string_property name="Description"   prefix="s" type="string" comment="选项描述"/>
+		<property name="Notify"   prefix="i" type="int" comment="通知处理"/>
+		<property name="Frame_id"   prefix="i" type="int" comment="对应框ID"/>
+	</struct_property>
+</class>
+
+<class name="Map" comment="地图数据">
+	<property name="ID"   prefix="i" type="int" comment="编号"/>
+	<string_property name="Name"   prefix="s" type="string" comment="名称"/>
+	<array_property name="Action_id" prefix="i" type="int" comment="行动"/>
+</class>
+
+<class name="MapAction" comment="地图行为数据">
+	<enum name="MapActionType" comment="地图行为类型">
+		<property name="MAP_ACTION_TYPE_COLLECTION" value="1" comment="采集"/>
+		<property name="MAP_ACTION_TYPE_HANTING" value="2" comment="狩猎"/>
+	</enum>
+	<property name="ID" prefix="i" type="int" comment="编号"/>
+	<property name="Type" prefix="e" type="MapActionType" comment="类型"/>
+	<string_property name="Name"   prefix="s" type="string" comment="名字"/>
+	<string_property name="Description"   prefix="s" type="string" comment="描述"/>
+	<property name="Power_cost" prefix="i" type="int" comment="消耗体力值"/>
+	<property name="Time_cost" prefix="i" type="int" comment="消耗时间"/>
+	<property name="Maxtime" prefix="i" type="int" comment="最大次数"/>
+	<property name="Recovery" prefix="i" type="int" comment="恢复速度"/>
+	<array_property name="Monster_id" prefix="i" type="int" comment="怪物"/>
+	<array_property name="Drop_id" prefix="i" type="int" comment="掉落"/>
+</class>
+
+<class name="Monster" comment="怪物数据">
+	<enum name="MonsterType" comment="怪物类型">
+		<property name="MONSTER_TYPE_GENTLE" value="1" comment="温和"/>
+		<property name="MONSTER_TYPE_NEUTRAL" value="2" comment="中立"/>
+		<property name="MONSTER_TYPE_HOSTIL" value="3" comment="敌对"/>
+	</enum>
+	<property name="ID" prefix="i" type="int" comment="编号"/>
+	<property name="Type" prefix="e" type="MonsterType" comment="类型"/>
+	<string_property name="Name"   prefix="s" type="string" comment="名字"/>
+	<string_property name="Description"   prefix="s" type="string" comment="描述"/>
+	<property name="MaxHp" prefix="i" type="int" comment="生命上限"/>
+	<property name="Attack" prefix="i" type="int" comment="攻击力"/>
+	<property name="Defance" prefix="i" type="int" comment="防御力"/>
+	<array_property name="Drop_id" prefix="i" type="int" comment="掉落"/>
+</class>
+
+<class name="Drop" comment="掉落">
+	<property name="ID" prefix="i" type="int" comment="编号"/>
+	<property name="Item_id" prefix="i" type="int" comment="物品编号"/>
+	<property name="Item_num" prefix="i" type="int" comment="物品数量"/>
+</class>

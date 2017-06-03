@@ -4,11 +4,11 @@
 
 #include <string>
 
-	#include "ActorData.h"
+#include "ActorData.h"
 
 
-	/*<! 最大掉落数量*/
-	#define DROP_MAX 10
+/*<! 最大掉落数量*/
+#define DROP_MAX 10
 
 
 
@@ -18,7 +18,7 @@ using std::string;
 /**
  * @brief 怪物
  */
-class Monster 	:public ActorData
+class Monster :public ActorData
 {
 public:
     Monster();
@@ -35,13 +35,13 @@ public:
 	enum MonsterType
 	{
 		/*<! 温和*/
-		MONSTER_TYPE_GENTLE = 0
-,
+		MONSTER_TYPE_GENTLE = 0,
+
 		/*<! 中立*/
-		MONSTER_TYPE_NEUTRAL = 1
-,
+		MONSTER_TYPE_NEUTRAL = 1,
+
 		/*<! 敌对*/
-		MOSTER_TYPE_HOSTIL = 2
+		MOSTER_TYPE_HOSTIL = 2,
 
 	};
 
@@ -106,6 +106,8 @@ public:
 	inline void SetDescription(const string iDescription){m_iDescription = iDescription;}
 
 
+
+
 	/**
 	 * @brief 获取掉落数量
 	 */
@@ -121,16 +123,15 @@ public:
 	/**
 	 * @brief 添加掉落
 	 */
-	bool AddDrops(Drop stDrops);
+	bool AddDrops(const Drop &stDrops);
 
 
 	/**
 	 * @brief 移除掉落
 	 */
-	bool RemoveDrops(int iIndex);
+	bool RemoveDrops(const int iIndex);
 
-#struct_set#
-	
+
 		
 	/**
 	 * @brief 获取掉落编号
@@ -152,8 +153,10 @@ private:
 	string m_iDescription;
 
 
+
 	/*<! 掉落*/
 	Drop m_astDrops[DROP_MAX];
+	/*<! 掉落数量*/
 	int m_stDropsRef;
 
 };

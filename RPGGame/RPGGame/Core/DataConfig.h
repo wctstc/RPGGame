@@ -3,7 +3,7 @@
 #define MACRO_2_STRING(macro) MACROSTRING(macro)
 #define MACROSTRING(macro) #macro
 
-#
+
 #define CLASS1( type, prefix, format )
 
 

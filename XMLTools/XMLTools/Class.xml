@@ -4,8 +4,55 @@
 <macro> name value comment
 <globel> name prefix type default comment
 <property> name prefix type default comment
+<string_property> name prefix type max comment
 <array_property> name prefix type max comment
+<enum> name value comment
+
+xml字符转义:
+&amp;        &
+&lt;         <
+&gt;         >
+&quot;       "
+&apos;       '
 -->
+
+<!--物品-------------------------------------------------------------------->
+<class name="ItemData" comment="物品数据">
+	<macro name="MAX_NAME_SIZE" value="32" comment="名字最大长度"/>
+	<macro name="MAX_DESCRIPTION_SIZE" value="128" comment="描述最大长度"/>
+	<enum name="ItemType" comment="物品类型">
+		<property name="ITEM_TYPE_NO"        value="0" comment="空类型"/>
+		<property name="ITEM_TYPE_NORMAL"    value="1" comment="普通类型"/>
+		<property name="ITEM_TYPE_EQUIPMENT" value="2" comment="武器类型"/>
+		<property name="ITEM_TYPE_MAX"       value="3" comment="类型最大值"/>
+	</enum>
+	<property name="ID"   prefix="i" type="int"      default="0" comment="编号"/>
+	<property name="Type" prefix="e" type="ItemType" default="ItemData::ITEM_TYPE_NO" comment="类型"/>
+	
+	<string_property name="Name" prefix="s" type="char" max="MAX_NAME_SIZE" comment="名字"/>
+	<string_property name="Description" prefix="s" type="char" max="MAX_DESCRIPTION_SIZE" comment="描述"/>
+</class>
+
+
+
+<!--容器-------------------------------------------------------------------->
+
+
+<class name="Container" comment="容器">
+    <macro name="MAX_CONTAINER_CAPACITY" value="30" comment="容器容量"/>
+    <property name="ID" prefix="i" type="int" default="0" comment="编号"/>
+	<array_property name="Cell" prefix="st" type="CellData" max="MAX_CONTAINER_CAPACITY" comment="容器数据">
+		<struct name="CellData" comment="单元格数据">
+			<property name="ID" prefix="i" type="int" default="0" comment="编号"/>
+			<property name="ItemID" prefix="i" type="int" default="0" comment="物品编号"/>
+			<property name="ItemNum" prefix="i" type="int" default="0" comment="物品数量"/>
+			<property name="UnitCapacity" prefix="i" type="int" default="0" comment="物品最大叠加"/>
+		</struct>
+	</array_property>
+</class>
+
+
+
 <class name="ActorData" comment="行动者数据">
 	<property name="ID"          prefix="i" type="int"    default="0" comment="编号"/>
 	<property name="Hp"          prefix="i" type="int"    default="0" comment="生命值"/>

@@ -45,8 +45,8 @@ public:
     
 public:
     SET_GET(int, i, ID,           m_stUnitData.iID);
-    SET_GET(int, i, ItemID,       m_stUnitData.iItemID);
-    SET_GET(int, i, ItemNum,      m_stUnitData.iItemNum);
+    SET_GET(int, i, ItemID, m_stUnitData.iItemID);
+    SET_GET(int, i, ItemNum, m_stUnitData.iItemNum);
     SET_GET(int, i, UnitCapacity, m_stUnitData.iUnitCapacity);
 private:
     /**

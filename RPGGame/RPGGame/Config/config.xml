@@ -1,0 +1,3 @@
+<template name="template_config.xml" path="">
+	<data file="class_config.xml"/>
+</template>

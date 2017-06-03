@@ -37,20 +37,20 @@ xml字符转义:
 	<!--父类-->
 	<!-------->
 	<parent name="parent_include">
-	#include "#parent##class_name#.h"
+#include "#parent##class_name#.h"
 	</parent>
 	<parent name="parent_inherit">
-	:public #parent##class_name#
+:public #parent##class_name#
 	</parent>
 
 	<parent name="parent_init_implement">
-		if(!#parent##class_name#::Init())
-			return false;
+	if(!#parent##class_name#::Init())
+		return false;
 	</parent>
 
 	<parent name="parent_init_self_implement">
-		if(!#parent##class_name#::Init(o#class_name#))
-			return false;
+	if(!#parent##class_name#::Init(o#class_name#))
+		return false;
 	</parent>
 
 	<!---------->
@@ -65,8 +65,8 @@ xml字符转义:
 	<!-- 宏定义 -->
 	<compose name="compose_macro" ref="macro" gap="">
 
-	/*&lt;! #macro_comment#*/
-	#define #macro_name# #macro_value#
+/*&lt;! #macro_comment#*/
+#define #macro_name# #macro_value#
 
 	</compose>
 
@@ -84,8 +84,8 @@ xml字符转义:
 	<!-- 全局变量定义 -->
 	<compose name="compose_globle" ref="globle" gap="">
 
-	/*&lt;! #globle_comment#*/
-	static #globle_type# g_#globle_prefix##globle_name# = #globle_default#;
+/*&lt;! #globle_comment#*/
+static #globle_type# g_#globle_prefix##globle_name# = #globle_default#;
 
 	</compose>
 
@@ -149,6 +149,90 @@ xml字符转义:
 
 	</compose>
 
+	<!------------------>
+	<!--字符串成员变量-->
+	<!------------------>
+	<list name="string_property">
+		<base name="string_property_name"    attr="name"/>
+		<base name="string_property_prefix"  attr="prefix"/>
+		<base name="string_property_type"    attr="type"/>
+		<base name="string_property_max"     attr="max"/>
+		<base name="string_property_comment" attr="comment"/>
+	</list>
+	
+	<!--申明-->
+	<compose name="compose_string_property_declaration" ref="string_property" gap="">
+	
+	/*&lt;! #string_property_comment#*/
+	#string_property_type# m_#string_property_name#[#string_property_max#];
+	/*&lt;! #string_property_comment#长度*/
+	int m_i#string_property_name#Len;
+	
+	</compose>
+	
+	<!--初始化-->
+	<compose name="compose_string_property_init_implement" ref="string_property" gap="">
+	
+	m_i#string_property_name#Len = 0;
+	memset(m_#string_property_name#, 0, #string_property_max#);
+	
+	</compose>
+	
+	
+	<!--Get函数-->
+	<compose name="compose_string_property_get" ref="string_property" gap="">
+	
+	/**
+	 * @brief 获取#string_property_comment#
+	 */
+	const #string_property_type# *Get#string_property_name#() const;
+	
+	/**
+	 * @brief 获取#string_property_comment长度#
+	 */
+	const int Get#string_property_name#Len() const;
+	
+	</compose>
+	<!--Get函数-->
+	<compose name="compose_string_property_get_implement" ref="string_property" gap="">
+
+const #string_property_type# *#class_name#::Get#string_property_name#() const
+{
+	return m_#string_property_name#;
+}
+	
+const int #class_name#::Get#string_property_name#Len() const
+{
+	return m_i#string_property_name#Len;
+}
+
+	</compose>
+	
+	<!--Set函数-->
+	<compose name="compose_string_property_set" ref="string_property" gap="">
+	
+	/**
+	 * @brief 设置#string_property_comment#
+	 */
+	bool Set#string_property_name#(const #string_property_type# *p#string_property_name#, const int iLen);
+	
+	</compose>
+	<!--Set函数-->
+	<compose name="compose_string_property_set_implement" ref="string_property" gap="">
+
+bool #class_name#::Set#string_property_name#(const #string_property_type# *p#string_property_name#, const int iLen)
+{
+	if (p#string_property_name# == NULL || iLen &gt;= #string_property_max#)
+		return false;
+		
+	memcpy(m_#string_property_name#, p#string_property_name#, iLen);
+	m_i#string_property_name#Len = iLen;
+	
+	return true;
+}
+
+	</compose>
+	
 	<!---------------->
 	<!--数组成员变量-->
 	<!---------------->
@@ -209,7 +293,7 @@ xml字符转义:
 		<compose name="array_property_struct_declaration" ref="struct" gap="">
 
 	/**
-	 * @brief #array_property_comment#
+	 * @brief #struct_comment#
 	 */
 	struct #array_property_name#
 	{#array_property_struct_property_declaration#
@@ -229,6 +313,7 @@ xml字符转义:
 
 	/*&lt;! #array_property_comment#*/
 	#array_property_type# m_a#array_property_prefix##array_property_name#[#array_property_max#];
+	/*&lt;! #array_property_comment#数量*/
 	int m_#array_property_prefix##array_property_name#Ref;
 
 	</compose>
@@ -246,10 +331,10 @@ xml字符转义:
 	<!-- GetNum函数 -->
 	<compose name="compose_array_property_get_num_implement" ref="array_property" gap="">
 	
-	int #class_name#::Get#array_property_name#Num() const
-	{
-		return m_i#array_property_name#Ref;
-	}
+int #class_name#::Get#array_property_name#Num() const
+{
+	return m_i#array_property_name#Ref;
+}
 
 	</compose>
 
@@ -267,24 +352,24 @@ xml字符转义:
 	<!-- Get函数实现 -->
 	<compose name="compose_array_property_get_implement" ref="array_property" gap="">
 
-	bool #class_name#::Get#array_property_name#(const int iIndex, #array_property_type# &amp;#array_property_prefix##array_property_name#) const
-	{
-		if(iIndex &lt; 0 || iIndex &gt;= m_i#array_property_name#Ref)
-			return false;
+bool #class_name#::Get#array_property_name#(const int iIndex, #array_property_type# &amp;#array_property_prefix##array_property_name#) const
+{
+	if(iIndex &lt; 0 || iIndex &gt;= m_i#array_property_name#Ref)
+		return false;
 
-		#array_property_prefix##array_property_name# = m_a#array_property_prefix##array_property_name#[iIndex];
-		return true;
-	}
+	#array_property_prefix##array_property_name# = m_a#array_property_prefix##array_property_name#[iIndex];
+	return true;
+}
 
 	</compose>
 	
 	<!-- Get函数 -->
 	<compose name="compose_array_struct_get" ref="array_property" gap="">
-	#array_property_struct_get#
+#array_property_struct_get#
 	</compose>
 	<!-- Get函数实现 -->
 	<compose name="compose_array_struct_get_implement" ref="array_property" gap="">
-	#array_property_struct_get_implement#
+#array_property_struct_get_implement#
 	</compose>
 
 	<!-- Add函数 -->
@@ -293,21 +378,21 @@ xml字符转义:
 	/**
 	 * @brief 添加#array_property_comment#
 	 */
-	bool Add#array_property_name#(#array_property_type# #array_property_prefix##array_property_name#);
+	bool Add#array_property_name#(const #array_property_type# &amp;#array_property_prefix##array_property_name#);
 
 	</compose>
 
 	<!-- Add函数实现 -->
 	<compose name="compose_add_implement" ref="array_property" gap="">
-	bool #class_name#::Add#array_property_name#(#array_property_type# #array_property_prefix##array_property_name#)
-	{
-		if(m_i#array_property_name#Ref &gt;= #array_property_max#)
-			return false;
-			
-		m_a#array_property_prefix##array_property_name#[m_i#array_property_name#Ref++] = #array_property_prefix##array_property_name#;
-		return true;
-	}
 
+bool #class_name#::Add#array_property_name#(const #array_property_type# &amp;#array_property_prefix##array_property_name#)
+{
+	if(m_i#array_property_name#Ref &gt;= #array_property_max#)
+		return false;
+		
+	m_a#array_property_prefix##array_property_name#[m_i#array_property_name#Ref++] = #array_property_prefix##array_property_name#;
+	return true;
+}
 
 	</compose>
 
@@ -317,25 +402,25 @@ xml字符转义:
 	/**
 	 * @brief 移除#array_property_comment#
 	 */
-	bool Remove#array_property_name#(int iIndex);
+	bool Remove#array_property_name#(const int iIndex);
 
 	</compose>
 
 	<!-- Remove函数实现 -->
 	<compose name="compose_remove_implement" ref="array_property" gap="">
 	
-	bool #class_name#::Remove#array_property_name#(int iIndex)
-	{
-		if(iIndex &lt; 0 || iIndex &gt;= m_i#array_property_name#Ref)
-			return false;
+bool #class_name#::Remove#array_property_name#(const int iIndex)
+{
+	if(iIndex &lt; 0 || iIndex &gt;= m_i#array_property_name#Ref)
+		return false;
 
-		--m_i#array_property_name#Ref;
-		
-		for (int i = iIndex; i &lt; m_i#array_property_name#Ref; ++i)
-			m_a#array_property_prefix##array_property_name#[i] = m_a#array_property_prefix##array_property_name#[i+1];
+	--m_i#array_property_name#Ref;
+	
+	for (int i = iIndex; i &lt; m_i#array_property_name#Ref; ++i)
+		m_a#array_property_prefix##array_property_name#[i] = m_a#array_property_prefix##array_property_name#[i+1];
 
-		return true;
-	}
+	return true;
+}
 
 	</compose>
 
@@ -351,7 +436,14 @@ xml字符转义:
 	memset(m_a#array_property_prefix##array_property_name#, 0, sizeof(#array_property_type#)*#array_property_max#);
 
 	</compose>
+	<!-- init函数 -->
+	<compose name="compose_init_self_array_implement" ref="array_property" gap="">
 
+	memcpy(m_a#array_property_prefix##array_property_name#, o#class_name#.m_a#array_property_prefix##array_property_name#, sizeof(#array_property_type#)*o#class_name#.m_i#array_property_name#Ref);
+	
+	m_i#array_property_name#Ref = o#class_name#.m_i#array_property_name#Ref;
+
+	</compose>
 
 	
 	<!---------------->
@@ -366,10 +458,10 @@ xml字符转义:
 			<base name="enum_property_comment" attr="comment"/>
 		</list>
 		
-		<compose name="declare_enum_property" ref="property" gap=",">
+		<compose name="declare_enum_property" ref="property" gap="">
 
 		/*&lt;! #enum_property_comment#*/
-		#enum_property_name# = #enum_property_value#
+		#enum_property_name# = #enum_property_value#,
 
 		</compose>
 	</list>
@@ -442,6 +534,8 @@ public:
 public:    
 #compose_property_get#
 #compose_property_set#
+#compose_string_property_get#
+#compose_string_property_set#
 #compose_array_property_get_num#
 #compose_array_property_get#
 #compose_add#
@@ -449,6 +543,7 @@ public:
 #compose_array_struct_get#
 private:  
 #compose_property_declaration#
+#compose_string_property_declaration#
 #compose_array_property_declaration#
 };
 
@@ -463,6 +558,7 @@ private:
 #class_name#::#class_name#()
 :#compose_create_implement#
 {
+#compose_string_property_init_implement#
 #compose_init_ref_implement#
 #compose_init_array_implement#
 }
@@ -473,18 +569,19 @@ private:
 }
 
 bool #class_name#::Init()
-{
-#parent_init_implement#
+{#parent_init_implement#
 #compose_init_implement#
+#compose_string_property_init_implement#
 #compose_init_ref_implement#
 #compose_init_array_implement#
+
     return true;
 }
 
 bool #class_name#::Init(const #class_name# &amp;o#class_name#)
-{
-#parent_init_self_implement#
+{#parent_init_self_implement#
 #compose_init_self_implement#
+#compose_init_self_array_implement#
     return true;
 }
 
@@ -498,6 +595,8 @@ bool #class_name#::FromString(const string sBuffer)
 {
     return true;
 }
+#compose_string_property_get_implement#
+#compose_string_property_set_implement#
 #compose_array_property_get_num_implement#
 #compose_array_property_get_implement#
 
