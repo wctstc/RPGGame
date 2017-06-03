@@ -294,6 +294,9 @@
     <ClCompile Include="Data\ItemData.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Data\PlayerData.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\App.h">
@@ -525,6 +528,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Data\ItemData.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\PlayerData.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

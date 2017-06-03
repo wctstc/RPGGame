@@ -129,6 +129,7 @@
     <ClCompile Include="Config\MapConfigLoader.cpp" />
     <ClCompile Include="Config\MonsterConfigLoader.cpp" />
     <ClCompile Include="Data\ItemData.cpp" />
+    <ClCompile Include="Data\PlayerData.cpp" />
     <ClCompile Include="Manager\Actor.cpp" />
     <ClCompile Include="Manager\Bag.cpp" />
     <ClCompile Include="Manager\Container.cpp" />
@@ -199,6 +200,7 @@
     <ClInclude Include="Config\MapConfigLoader.h" />
     <ClInclude Include="Config\MonsterConfigLoader.h" />
     <ClInclude Include="Data\ItemData.h" />
+    <ClInclude Include="Data\PlayerData.h" />
     <ClInclude Include="Manager\Actor.h" />
     <ClInclude Include="Manager\Bag.h" />
     <ClInclude Include="Manager\Container.h" />
