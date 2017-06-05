@@ -128,20 +128,20 @@ namespace data
 	/**
 	 * @brief 选项
 	 */
-	struct Option
-	{
-		/*!< 文字描述 */
-		string sDescription;
-
-		/*!< 处理命令 */
-		cmd::NotifyCommand eNotify;
-
-		/*!< 选中后对应框的编号 */
-        int iFrameID;
-
-        /*!< 数据编号 */
-        int iData;
-	};
+// 	struct Option
+// 	{
+// 		/*!< 文字描述 */
+// 		string sDescription;
+// 
+// 		/*!< 处理命令 */
+// 		cmd::NotifyCommand eNotify;
+// 
+// 		/*!< 选中后对应框的编号 */
+//         int iFrameID;
+// 
+//         /*!< 数据编号 */
+//         int iData;
+// 	};
 
 	
 
@@ -150,41 +150,41 @@ namespace data
 	/**
 	 * @brief 框数据
 	 */
-	struct FrameData
-	{
-		/*!< 编号 */
-		int iID;
-
-		/*!< 类型 */
-		FrameType eType;
-
-        /*!< 状态 */
-        FrameState eState;
-
-		/*!< 位置 */
-		Position oPosition;
-
-		/*!< 大小 */
-		Size oSize;
-
-		/*!< 描述文字 */
-		string sDescription;
-
-		/*!< 选项方向 */
-		Direction eDirection;
-
-		/*!< 处理编号 */
-		int iHandlerID;
-
-        /*!< 数据编号 */
-        int iData;
-
-        /*!< 选中选项 */
-        int iIndex;
-
-        /*!< 选项数据 */
-		vector<Option> vOptions;
-	};
+// 	struct FrameData
+// 	{
+// 		/*!< 编号 */
+// 		int iID;
+// 
+// 		/*!< 类型 */
+// 		FrameType eType;
+// 
+//         /*!< 状态 */
+//         FrameState eState;
+// 
+// 		/*!< 位置 */
+// 		Position oPosition;
+// 
+// 		/*!< 大小 */
+// 		Size oSize;
+// 
+// 		/*!< 描述文字 */
+// 		string sDescription;
+// 
+// 		/*!< 选项方向 */
+// 		Direction eDirection;
+// 
+// 		/*!< 处理编号 */
+// 		int iHandlerID;
+// 
+//         /*!< 数据编号 */
+//         int iData;
+// 
+//         /*!< 选中选项 */
+//         int iIndex;
+// 
+//         /*!< 选项数据 */
+// 		vector<Option> vOptions;
+// 	};
 
     /**
      * @brief 背包单元格数据

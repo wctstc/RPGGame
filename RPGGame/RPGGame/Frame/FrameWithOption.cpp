@@ -12,7 +12,7 @@ FrameWithOption::~FrameWithOption(void)
 {
 }
 
-bool FrameWithOption::Init(const data::FrameData &oFrameData)
+bool FrameWithOption::Init(const FrameConfig &oFrameData)
 {
 	m_oFrameData = oFrameData;
 	return true;
@@ -81,30 +81,30 @@ void FrameWithOption::PrepareRsp(const rsp::Rsp &oRsp)
     }
 }
 
-bool FrameWithOption::GetArrawDefaultPosition(data::Position &stPosition) const
-{
-    stPosition.iX = 0;
-    stPosition.iY = 0;
-
-    switch (m_oFrameData.eDirection)
-    {
-    case data::DIRECTION_HORIZONTAL:
-        stPosition.iY = m_oFrameData.oPosition.iY + m_oFrameData.oSize.iHeigth - 1;
-        break;
-    case data::DIRECTION_VERTICAL:
-        stPosition.iY =
-            m_oFrameData.oPosition.iY
-            + m_oFrameData.oSize.iHeigth
-            - m_oFrameData.vOptions.size();
-        break;
-    default:
-        return false;
-    }
-
-
-    stPosition.iX = 2 + m_oFrameData.oPosition.iX;
-	return true;
-}
+// bool FrameWithOption::GetArrawDefaultPosition(data::Position &stPosition) const
+// {
+//     stPosition.iX = 0;
+//     stPosition.iY = 0;
+// 
+//     switch (m_oFrameData.eDirection)
+//     {
+//     case data::DIRECTION_HORIZONTAL:
+//         stPosition.iY = m_oFrameData.oPosition.iY + m_oFrameData.oSize.iHeigth - 1;
+//         break;
+//     case data::DIRECTION_VERTICAL:
+//         stPosition.iY =
+//             m_oFrameData.oPosition.iY
+//             + m_oFrameData.oSize.iHeigth
+//             - m_oFrameData.vOptions.size();
+//         break;
+//     default:
+//         return false;
+//     }
+// 
+// 
+//     stPosition.iX = 2 + m_oFrameData.oPosition.iX;
+// 	return true;
+// }
 
 void FrameWithOption::Show() const
 {

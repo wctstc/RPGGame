@@ -22,6 +22,7 @@
 /*!< 商店实例 */
 #define g_ShopManager ShopManager::GetInstance()
 
+/*!< 地图实例 */
 #define g_MapManager MapManager::GetInstance()
 
 #endif // __MANAGERINSTANCE_H__

@@ -55,7 +55,7 @@ FrameWithOption *FrameLoader::CreateFrameByID(int iID)
 	if (it != m_mapFrameDatas.end())
 	{
         const data::FrameType eFrameType = it->second.eType;
-        pFrame = CreateFrameInstanceByType(eFrameType);
+        pFrame = new FrameWithOption();
 		pFrame->Init(it->second);
 	}
 	return pFrame;

@@ -23,7 +23,7 @@ public:
 	/**
 	* @brief 初始化
 	*/
-	virtual bool Init( const data::FrameData &oFrameData );
+	virtual bool Init( const FrameConfig &oFrameData );
 
 	/**
 	* @brief 生成请求数据
@@ -39,7 +39,7 @@ public:
 	/**
 	* @brief 获取第一个选项位置
 	*/
-	bool GetArrawDefaultPosition(data::Position &stPosition) const;
+	//bool GetArrawDefaultPosition(data::Position &stPosition) const;
 
 	/**
 	* @brief 展示框
@@ -87,20 +87,23 @@ public:
     */
     bool CheckRsp(const rsp::Rsp &oRsp);
 public:
-	SET_GET(int,                   i, ID,          m_oFrameData.iID)
-	SET_GET(data::FrameType,       e, Type,        m_oFrameData.eType)
-    SET_GET(data::FrameState,      e, State,       m_oFrameData.eState)
-	SET_GET(data::Position&,       o, Position,    m_oFrameData.oPosition)
-	SET_GET(data::Size&,           o, Size,        m_oFrameData.oSize)
+    SET_GET(int, i, ID, m_oFrameData.iID)
+	//SET_GET(data::FrameType,       e, Type,        m_oFrameData.eType)
+    //SET_GET(data::FrameState,      e, State,       m_oFrameData.eState)
+	//SET_GET(data::Position&,       o, Position,    m_oFrameData.oPosition)
+	//SET_GET(data::Size&,           o, Size,        m_oFrameData.oSize)
 	SET_GET(string,                s, Description, m_oFrameData.sDescription)
-	SET_GET(data::Direction,       e, Direction,   m_oFrameData.eDirection)
-	SET_GET(int,                   i, Handler,     m_oFrameData.iHandlerID)
-    SET_GET(int,                   i, Data,        m_oFrameData.iData)
-    SET_GET(int,                   i, Index,       m_oFrameData.iIndex)
-	SET_GET(vector<data::Option>&, v, Options,     m_oFrameData.vOptions)
+	//SET_GET(data::Direction,       e, Direction, m_oFrameData.eDirection)
+	SET_GET(int,                   i, Handler, m_oFrameData.iHandleID)
+    SET_GET(int,                   i, Data,        m_iData)
+    SET_GET(int,                   i, Index, m_iIndex)
+	SET_GET(vector<data::Option>&, v, Options, m_oFrameData.vOptions)
 private:
     /*!< 框数据 */
-	data::FrameData m_oFrameData;
+    FrameConfig m_oFrameData;
+
+    int m_iData;
+    int m_iIndex;
 };
 
 

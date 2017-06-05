@@ -1,7 +1,7 @@
 #include "FrameHandler.h"
 #include "ArrowManager.h"
 #include "Cmd.h"
-#include "FrameLoader.h"
+#include "FrameConfigLoader.h"
 
 
 #include "PropertyFrame.h"
@@ -21,7 +21,7 @@ FrameHandler::~FrameHandler()
 
 bool FrameHandler::Init(Config *pConfig)
 {
-	if (!FrameLoader::GetInstance().Init())
+	if (!FrameConfigLoader::GetInstance().Init())
 		return false;
 
 	RegisterCmd(cmd::COMMAND_IDLE);
@@ -81,8 +81,8 @@ int FrameHandler::HandleStart(req::Req &oReq)
     TipsFrame::GetInstance().Show();
 
     //选择框
-    FrameLoader &oFrameLoader = FrameLoader::GetInstance();
-    FrameWithOption *pFrame = oFrameLoader.CreateFrameByID(0);
+    FrameConfigLoader &oFrameLoader = FrameConfigLoader::GetInstance();
+    FrameWithOption *pFrame = new FrameWithOption();
     m_vStackFrames.push_back(pFrame);
 
 	while (bIsRuning)
@@ -108,7 +108,7 @@ int FrameHandler::HandleStart(req::Req &oReq)
 		}
         else//Enter选中
         {
-            data::Option  stOption;
+            Option  stOption;
             //获取选项信息
             if (!pFrame->GetOptionByIndex(iIndex, stOption))
                 continue;
@@ -209,7 +209,7 @@ void FrameHandler::DoNotify(const cmd::NotifyCommand eNotifyCommand, const int i
 
 void FrameHandler::PushStackFrame(const int iIndex, const data::Option &stOption )
 {
-    FrameWithOption *const pFrame = FrameLoader::GetInstance().CreateFrameByID(stOption.iFrameID);
+    FrameWithOption *const pFrame = new FrameWithOption();
     if (pFrame != NULL)
     {
         pFrame->SetData(stOption.iData);
@@ -222,7 +222,8 @@ void FrameHandler::PopStackFrame()
 {
     if (m_vStackFrames.size() > 1)
     {
-        FrameLoader::GetInstance().ReleaseFrame(m_vStackFrames.back());
+        FrameWithOption *const pFrame = m_vStackFrames.back();
         m_vStackFrames.pop_back();
+        delete pFrame;
     }
 }
