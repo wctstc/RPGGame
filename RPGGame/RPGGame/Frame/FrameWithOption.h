@@ -12,7 +12,7 @@
 
 
 /**
-* @brief 框类
+* @brief 主界面选项框类
 */
 class FrameWithOption : public Frame
 {
@@ -39,7 +39,7 @@ public:
 	/**
 	* @brief 获取第一个选项位置
 	*/
-	//bool GetArrawDefaultPosition(data::Position &stPosition) const;
+	bool GetArrawDefaultPosition(int &iX, int &iY) const;
 
 	/**
 	* @brief 展示框
@@ -54,27 +54,27 @@ public:
     /**
      * @brief 获取选项
      */
-    bool GetOptionByIndex(unsigned int iIndex, data::Option &stOption)const;
+    bool GetOptionByIndex(unsigned int iIndex, Option &stOption)const;
 private:
     /**
      * @brief 清理框
      */
-    virtual void ClearFrame() const;
+    //virtual void ClearFrame() const;
 
     /**
      * @brief 清理内容
      */
-    virtual void ClearContent() const;
+    //virtual void ClearContent() const;
 
     /**
      * @brief 展示框
      */
-    virtual void ShowFrame() const;
+    //virtual void ShowFrame() const;
 
     /**
     * @brief 展示描述
     */
-    virtual void ShowDescription() const;
+    //0virtual void ShowDescription() const;
 
     /**
      * @brief 展示选项
@@ -87,23 +87,23 @@ public:
     */
     bool CheckRsp(const rsp::Rsp &oRsp);
 public:
-    SET_GET(int, i, ID, m_oFrameData.iID)
-	//SET_GET(data::FrameType,       e, Type,        m_oFrameData.eType)
-    //SET_GET(data::FrameState,      e, State,       m_oFrameData.eState)
-	//SET_GET(data::Position&,       o, Position,    m_oFrameData.oPosition)
-	//SET_GET(data::Size&,           o, Size,        m_oFrameData.oSize)
-	SET_GET(string,                s, Description, m_oFrameData.sDescription)
-	//SET_GET(data::Direction,       e, Direction, m_oFrameData.eDirection)
-	SET_GET(int,                   i, Handler, m_oFrameData.iHandleID)
-    SET_GET(int,                   i, Data,        m_iData)
-    SET_GET(int,                   i, Index, m_iIndex)
-	SET_GET(vector<data::Option>&, v, Options, m_oFrameData.vOptions)
+//     SET_GET(int, i, ID, m_oFrameData.iID)
+// 	//SET_GET(data::FrameType,       e, Type,        m_oFrameData.eType)
+//     //SET_GET(data::FrameState,      e, State,       m_oFrameData.eState)
+// 	//SET_GET(data::Position&,       o, Position,    m_oFrameData.oPosition)
+// 	//SET_GET(data::Size&,           o, Size,        m_oFrameData.oSize)
+// 	SET_GET(string,                s, Description, m_oFrameData.sDescription)
+// 	//SET_GET(data::Direction,       e, Direction, m_oFrameData.eDirection)
+// 	SET_GET(int,                   i, Handler, m_oFrameData.iHandleID)
+//     SET_GET(int,                   i, Data,        m_iData)
+//     SET_GET(int,                   i, Index, m_iIndex)
+// 	SET_GET(vector<data::Option>&, v, Options, m_oFrameData.vOptions)
 private:
     /*!< 框数据 */
-    FrameConfig m_oFrameData;
+    //FrameConfig m_oFrameData;
 
-    int m_iData;
-    int m_iIndex;
+    //int m_iData;
+    //int m_iIndex;
 };
 
 

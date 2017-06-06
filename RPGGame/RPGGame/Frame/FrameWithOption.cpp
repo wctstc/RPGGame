@@ -1,7 +1,22 @@
 #include "FrameWithOption.h"
+
+#include "Log.h"
 #include "UIBase.h"
 #include "App.h"
 #include "StrUtil.h"
+
+/*!< 横向边框 */
+#define FrameHorizontal "-"
+
+/*!< 箭头图案 */
+#define OptionArrow      "->"
+
+/*!< 清除箭头 */
+#define OptionClearArrow "  "
+
+/*!< 箭头空隙 */
+#define OptionArrowGap 3
+
 
 FrameWithOption::FrameWithOption(void)
 {
@@ -12,9 +27,15 @@ FrameWithOption::~FrameWithOption(void)
 {
 }
 
-bool FrameWithOption::Init(const FrameConfig &oFrameData)
+bool FrameWithOption::Init(const FrameConfig &stConfig)
 {
-	m_oFrameData = oFrameData;
+    if (!Frame::Init())
+    {
+        GLogError("Frame init fail");
+        return false;
+    }
+
+    Frame::SetFrameConfig(stConfig);
 	return true;
 }
 
@@ -22,7 +43,7 @@ void FrameWithOption::PrepareReq(const int iIndex, req::Req &oReq)
 {
     oReq.Init(cmd::COMMAND_IDLE);
     oReq.Add(req::i_Index, iIndex);
-    oReq.Add(req::i_Data,GetData());
+    oReq.Add(req::i_Data,GetFrameData().GetData());
 }
 
 void FrameWithOption::PrepareRsp(const rsp::Rsp &oRsp)
@@ -33,78 +54,58 @@ void FrameWithOption::PrepareRsp(const rsp::Rsp &oRsp)
     int iRetCode = oRsp.GetInt(rsp::i_RetCode);
     if (iRetCode != rsp::Rsp::RETCODE_SUCCEED)
     {
-        SetDescription(StrUtil::Format("错误，错误码：%d", iRetCode));
+        UseFrameConfig().sDescription = StrUtil::Format("错误，错误码：%d", iRetCode);
 
-        data::Option stOption;
+        Option stOption;
         stOption.sDescription = "返回";
-        stOption.eNotify = cmd::NOTIFY_IDLE;
+        stOption.iNotify = cmd::NOTIFY_IDLE;
         stOption.iFrameID = -2;
         stOption.iData = 0;
 
-        vector<data::Option> vOption;
-        vOption.push_back(stOption);
-
-        SetOptions(vOption);
+        UseFrameConfig().vecOption.clear();
+        UseFrameConfig().vecOption.push_back(stOption);
 
         return;
     }
 
     if (oRsp.HasInt(rsp::i_State))
-        SetState(static_cast<data::FrameState>(oRsp.GetInt(rsp::i_State)));
+        UseFrameData().SetState(static_cast<FrameData::FrameState>(oRsp.GetInt(rsp::i_State)));
 
     if (oRsp.HasString(rsp::s_Description))
-        SetDescription(oRsp.GetString(rsp::s_Description));
+        UseFrameConfig().sDescription = oRsp.GetString(rsp::s_Description);
 
     if (oRsp.HasVector(rsp::v_Option))
     {
         const vector<rsp::Rsp> &vRsp = oRsp.GetVector(rsp::v_Option);
-        vector<data::Option> vOption;
 
+        UseFrameConfig().vecOption.clear();
+        
         for (vector<rsp::Rsp>::const_iterator it = vRsp.begin(); it != vRsp.end(); ++it)
         {
-            data::Option stOption;
+            Option stOption;
             stOption.sDescription = it->GetString(rsp::s_Option_Description);
             stOption.iFrameID = -1;
-            stOption.eNotify = cmd::NOTIFY_IDLE;
+            stOption.iNotify = cmd::NOTIFY_IDLE;
             stOption.iData = 0;
 
             if (it->HasInt(rsp::i_Option_FrameID))
                 stOption.iFrameID = it->GetInt(rsp::i_Option_FrameID);
             if (it->HasInt(rsp::i_Option_Notify))
-                stOption.eNotify = static_cast<cmd::NotifyCommand>(it->GetInt(rsp::i_Option_Notify));
+                stOption.iNotify = it->GetInt(rsp::i_Option_Notify);
             if (it->HasInt(rsp::i_Option_Data))
                 stOption.iData = it->GetInt(rsp::i_Option_Data);
 
-            vOption.push_back(stOption);
+            UseFrameConfig().vecOption.push_back(stOption);
         }
-        SetOptions(vOption);
     }
 }
 
-// bool FrameWithOption::GetArrawDefaultPosition(data::Position &stPosition) const
-// {
-//     stPosition.iX = 0;
-//     stPosition.iY = 0;
-// 
-//     switch (m_oFrameData.eDirection)
-//     {
-//     case data::DIRECTION_HORIZONTAL:
-//         stPosition.iY = m_oFrameData.oPosition.iY + m_oFrameData.oSize.iHeigth - 1;
-//         break;
-//     case data::DIRECTION_VERTICAL:
-//         stPosition.iY =
-//             m_oFrameData.oPosition.iY
-//             + m_oFrameData.oSize.iHeigth
-//             - m_oFrameData.vOptions.size();
-//         break;
-//     default:
-//         return false;
-//     }
-// 
-// 
-//     stPosition.iX = 2 + m_oFrameData.oPosition.iX;
-// 	return true;
-// }
+bool FrameWithOption::GetArrawDefaultPosition(int &iX, int &iY) const
+{
+    iY = GetFrameConfig().iY + GetFrameConfig().iHeight - GetFrameConfig().vecOption.size();
+    iX = GetFrameConfig().iX + 2;
+    return true;
+}
 
 void FrameWithOption::Show() const
 {
@@ -120,12 +121,13 @@ int FrameWithOption::GetSelectIndex()
 {
     int input;
     unsigned int selected = 0;
-    data::Position stArrawPosition;
+    int iX;
+    int iY;
 
-    if (!GetArrawDefaultPosition(stArrawPosition))
+    if (!GetArrawDefaultPosition(iX, iY))
         return -1;
 
-    gotoxy(stArrawPosition.iX, stArrawPosition.iY);
+    gotoxy(iX, iY);
     printf(OptionArrow);
     while (true)
     {
@@ -147,75 +149,53 @@ int FrameWithOption::GetSelectIndex()
                 continue;
 
             input = _getch();
-            gotoxy(stArrawPosition.iX, stArrawPosition.iY);
+            gotoxy(iX, iY);
             printf(OptionClearArrow);
-            if ( m_oFrameData.eDirection == data::DIRECTION_HORIZONTAL)
+            switch (input)
             {
-                switch (input)//移动
+            case 72://上
+                if (selected > 0)
                 {
-                case 75://左
-                    if (selected > 0)
-                    {
-                        --selected;
-                        stArrawPosition.iX -= (m_oFrameData.vOptions[selected].sDescription.length() + OptionArrowGap);
-                    }
-                    break;
-                case 77://右
-                    if (selected < m_oFrameData.vOptions.size() - 1)
-                    {
-                        stArrawPosition.iX += (m_oFrameData.vOptions[selected].sDescription.length() + OptionArrowGap);
-                        ++selected;
-                    }
-                    break;
+                    --iY;
+                    --selected;
                 }
+                break;
+            case 80://下
+                if (selected < GetFrameConfig().vecOption.size() - 1)
+                {
+                    ++iY;
+                    ++selected;
+                }
+                break;
             }
-            else if (m_oFrameData.eDirection == data::DIRECTION_VERTICAL)
-            {
-                switch (input)
-                {
-                case 72://上
-                    if (selected > 0)
-                    {
-                        --stArrawPosition.iY;
-                        --selected;
-                    }
-                    break;
-                case 80://下
-                    if (selected < m_oFrameData.vOptions.size() - 1)
-                    {
-                        ++stArrawPosition.iY;
-                        ++selected;
-                    }
-                    break;
-                }
 
-            }
-            gotoxy(stArrawPosition.iX, stArrawPosition.iY);
+            gotoxy(iX, iY);
             printf(OptionArrow);
         }
     }
 }
 
-bool FrameWithOption::GetOptionByIndex(unsigned int iIndex, data::Option &stOption)const
+bool FrameWithOption::GetOptionByIndex(unsigned int iIndex, Option &stOption)const
 {
-    if (iIndex >= GetOptions().size())
+    if (iIndex >= GetFrameConfig().vecOption.size())
         return false;
 
-    stOption = GetOptions().at(iIndex);
+    stOption = GetFrameConfig().vecOption.at(iIndex);
     return true;
 }
 
 bool FrameWithOption::CheckRsp(const rsp::Rsp &oRsp)
 {
-    vector<data::Option> vOptions;
-    data::Option oOption;
     if (!oRsp.HasInt(rsp::i_RetCode))
     {
-        SetDescription("Unknown Error");
+        UseFrameConfig().sDescription = "Unknown Error";
+        
+        Option oOption;
         oOption.sDescription = "back";
         oOption.iFrameID = -1;
-        vOptions.push_back(oOption);
-        SetOptions(vOptions);
+
+        UseFrameConfig().vecOption.clear();
+        UseFrameConfig().vecOption.push_back(oOption);
         return false;
     }
 
@@ -223,137 +203,113 @@ bool FrameWithOption::CheckRsp(const rsp::Rsp &oRsp)
     {
         char sErrorBuffer[256];
         sprintf_s(sErrorBuffer,"error code:%d",oRsp.GetInt(rsp::i_RetCode));
-        SetDescription(sErrorBuffer);
+        UseFrameConfig().sDescription = sErrorBuffer;
+
+        Option oOption;
         oOption.sDescription = "back";
         oOption.iFrameID = -1;
-        vOptions.push_back(oOption);
-        SetOptions(vOptions);
+
+        UseFrameConfig().vecOption.clear();
+        UseFrameConfig().vecOption.push_back(oOption);
         return false;
     }
     return true;
 }
 
-void FrameWithOption::ClearFrame() const
-{
-    clearxy(
-        m_oFrameData.oPosition.iX,
-        m_oFrameData.oPosition.iY,
-        m_oFrameData.oPosition.iX + m_oFrameData.oSize.iWidth,
-        m_oFrameData.oPosition.iY + m_oFrameData.oSize.iHeigth);
-}
-
-void FrameWithOption::ClearContent() const
-{
-    clearxy(
-        m_oFrameData.oPosition.iX + 1,
-        m_oFrameData.oPosition.iY + 1,
-        m_oFrameData.oPosition.iX + m_oFrameData.oSize.iWidth - 1,
-        m_oFrameData.oPosition.iY + m_oFrameData.oSize.iHeigth - 1);
-}
-
-void FrameWithOption::ShowFrame() const
-{
-    for (int i = 0; i <= m_oFrameData.oSize.iHeigth; ++i)
-    {
-        for (int j = 0; j <= m_oFrameData.oSize.iWidth; ++j)
-        {
-            gotoxy(m_oFrameData.oPosition.iX + j, m_oFrameData.oPosition.iY + i);
-            if (i == 0 || i == m_oFrameData.oSize.iHeigth)
-            {
-                if (j == 0 || j == m_oFrameData.oSize.iWidth)
-                    printf(FrameCorner);
-                else
-                    printf(FrameHorizontal);
-            }
-            else
-            {
-                if (j == 0 || j == m_oFrameData.oSize.iWidth)
-                    printf(FrameVertical);
-            }
-        }
-    }
-}
-
-void FrameWithOption::ShowDescription() const
-{
-    int offset_y = 0;
-    vector<string> vDescription;
-    StrUtil::Split(m_oFrameData.sDescription, "\n", vDescription);
-
-    for (vector<string>::iterator it = vDescription.begin(); it != vDescription.end(); ++it)
-    {
-        string sub_description;
-        int offset_description = 0;
-        do
-        {
-            const int length = (*it).length();
-            //截取一行子串
-            if (offset_description + m_oFrameData.oSize.iWidth - 2 < length)
-                sub_description = (*it).substr(offset_description, m_oFrameData.oSize.iWidth - 2);
-            else
-                sub_description = (*it).substr(offset_description);
-
-
-            gotoxy(m_oFrameData.oPosition.iX + 1, m_oFrameData.oPosition.iY + offset_y + 1);
-            printf(sub_description.c_str());
-
-            offset_description += m_oFrameData.oSize.iWidth - 2;
-            ++offset_y;
-
-            if (offset_description >= length)
-                break;
-
-        } while (true);
-    }
-}
+// void FrameWithOption::ClearFrame() const
+// {
+//     const FrameConfig &stConfig = GetFrameConfig();
+//     clearxy(
+//         stConfig.iX,
+//         stConfig.iY,
+//         stConfig.iX + stConfig.iWidth,
+//         stConfig.iY + stConfig.iHeight);
+// }
+//
+// void FrameWithOption::ClearContent() const
+// {
+//     const FrameConfig &stConfig = GetFrameConfig();
+//     clearxy(
+//         stConfig.iX + 1,
+//         stConfig.iY + 1,
+//         stConfig.iX + stConfig.iWidth - 1,
+//         stConfig.iY + stConfig.iHeight - 1);
+// }
+// 
+// void FrameWithOption::ShowFrame() const
+// {
+//     for (int i = 0; i <= m_oFrameData.oSize.iHeigth; ++i)
+//     {
+//         for (int j = 0; j <= m_oFrameData.oSize.iWidth; ++j)
+//         {
+//             gotoxy(m_oFrameData.oPosition.iX + j, m_oFrameData.oPosition.iY + i);
+//             if (i == 0 || i == m_oFrameData.oSize.iHeigth)
+//             {
+//                 if (j == 0 || j == m_oFrameData.oSize.iWidth)
+//                     printf(FrameCorner);
+//                 else
+//                     printf(FrameHorizontal);
+//             }
+//             else
+//             {
+//                 if (j == 0 || j == m_oFrameData.oSize.iWidth)
+//                     printf(FrameVertical);
+//             }
+//         }
+//     }
+// }
+// 
+// void FrameWithOption::ShowDescription() const
+// {
+//     int offset_y = 0;
+//     vector<string> vDescription;
+//     StrUtil::Split(m_oFrameData.sDescription, "\n", vDescription);
+// 
+//     for (vector<string>::iterator it = vDescription.begin(); it != vDescription.end(); ++it)
+//     {
+//         string sub_description;
+//         int offset_description = 0;
+//         do
+//         {
+//             const int length = (*it).length();
+//             //截取一行子串
+//             if (offset_description + m_oFrameData.oSize.iWidth - 2 < length)
+//                 sub_description = (*it).substr(offset_description, m_oFrameData.oSize.iWidth - 2);
+//             else
+//                 sub_description = (*it).substr(offset_description);
+// 
+// 
+//             gotoxy(m_oFrameData.oPosition.iX + 1, m_oFrameData.oPosition.iY + offset_y + 1);
+//             printf(sub_description.c_str());
+// 
+//             offset_description += m_oFrameData.oSize.iWidth - 2;
+//             ++offset_y;
+// 
+//             if (offset_description >= length)
+//                 break;
+// 
+//         } while (true);
+//     }
+// }
 
 void FrameWithOption::ShowOptions() const
 {
-    if (m_oFrameData.eDirection == data::DIRECTION_HORIZONTAL)//水平
+    const int iSize = GetFrameConfig().vecOption.size();
+    int offset_y = GetFrameConfig().iHeight - iSize - 1;
+
+    //分割线
+    for (int i = 0; i < GetFrameConfig().iWidth - 2; ++i)
     {
-        const int iSize = m_oFrameData.vOptions.size();
-        int offset_x = 0;
-        int offset_y = m_oFrameData.oSize.iHeigth - 2;
-
-        //分割线
-        for (int i = 0; i < m_oFrameData.oSize.iWidth - 2; ++i)
-        {
-            gotoxy(m_oFrameData.oPosition.iX + i + 1, m_oFrameData.oPosition.iY+offset_y );
-            printf(FrameHorizontal);
-        }
-        ++offset_y;
-
-        //选项
-        for (int i = 0; i < iSize; ++i)
-        {
-            gotoxy(
-                m_oFrameData.oPosition.iX + offset_x + OptionArrowGap + 1,
-                m_oFrameData.oPosition.iY + offset_y);
-            printf(m_oFrameData.vOptions[i].sDescription.c_str());
-            offset_x += m_oFrameData.vOptions[i].sDescription.length() + OptionArrowGap;
-        }
+        gotoxy(GetFrameConfig().iX + i + 1, GetFrameConfig().iY + offset_y);
+        printf(FrameHorizontal);
     }
-    else if (m_oFrameData.eDirection == data::DIRECTION_VERTICAL)//垂直
+    ++offset_y;
+
+    //选项
+    for (int i = 0; i < iSize; ++i)
     {
-        const int iSize = m_oFrameData.vOptions.size();
-        int offset_y = m_oFrameData.oSize.iHeigth - iSize - 1;
-
-        //分割线
-        for (int i = 0; i < m_oFrameData.oSize.iWidth - 2; ++i)
-        {
-            gotoxy(m_oFrameData.oPosition.iX + i + 1, m_oFrameData.oPosition.iY + offset_y);
-            printf(FrameHorizontal);
-        }
+        gotoxy(GetFrameConfig().iX + OptionArrowGap + 1, GetFrameConfig().iY + offset_y);
+        printf(GetFrameConfig().vecOption[i].sDescription.c_str());
         ++offset_y;
-
-        //选项
-        for (int i = 0; i < iSize; ++i)
-        {
-            gotoxy(
-                m_oFrameData.oPosition.iX + OptionArrowGap + 1, 
-                m_oFrameData.oPosition.iY + offset_y);
-            printf(m_oFrameData.vOptions[i].sDescription.c_str());
-            ++offset_y;
-        }
     }
 }

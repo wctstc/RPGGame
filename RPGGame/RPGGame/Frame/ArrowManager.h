@@ -5,6 +5,7 @@
 #include "Struct.h"
 #include "UIBase.h"
 #include "Singleton.h"
+#include "FrameConfigLoader.h"
 
 using data::Direction;
 using data::Position;

@@ -21,9 +21,6 @@ using namespace std;
 
 #include "TestUnit.h"
 
-using dataconfig::FrameConfig;
-using dataconfig::FrameConfigArray;
-
 int main()
 {
 //    TestUnit test;

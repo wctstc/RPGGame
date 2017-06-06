@@ -31,6 +31,9 @@ struct Option
 	/*!< 对应框ID */
 	int iFrameID;
 
+	/*!< 选项数据 */
+	int iData;
+
 
 	/*!< 选项描述 */
 	string sDescription;
@@ -44,6 +47,18 @@ struct FrameConfig
 {	
 		/*!< 编号 */
 		int iID;
+		
+		/*!< 横坐标 */
+		int iX;
+		
+		/*!< 纵坐标 */
+		int iY;
+		
+		/*!< 宽度 */
+		int iWidth;
+		
+		/*!< 高度 */
+		int iHeight;
 		
 		/*!< 对应处理 */
 		int iHandleID;
@@ -85,6 +100,26 @@ public:
 	 * @brief 通过编号获取配置
 	 */
 	const FrameConfig *GetFrameConfigByID(const int iID);
+		
+	/**
+	 * @brief 通过横坐标获取配置
+	 */
+	const FrameConfig *GetFrameConfigByX(const int iX);
+		
+	/**
+	 * @brief 通过纵坐标获取配置
+	 */
+	const FrameConfig *GetFrameConfigByY(const int iY);
+		
+	/**
+	 * @brief 通过宽度获取配置
+	 */
+	const FrameConfig *GetFrameConfigByWidth(const int iWidth);
+		
+	/**
+	 * @brief 通过高度获取配置
+	 */
+	const FrameConfig *GetFrameConfigByHeight(const int iHeight);
 		
 	/**
 	 * @brief 通过对应处理获取配置

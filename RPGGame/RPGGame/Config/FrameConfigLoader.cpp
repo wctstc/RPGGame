@@ -13,8 +13,8 @@ bool FrameConfigLoader::Init()
 	if (pFile == NULL)
 		return false;
 	
-	char csBuffer[1024*1024];
-	int iLength = fread(csBuffer, 1, 1024*1024, pFile);
+	char csBuffer[128*1024];
+	int iLength = fread(csBuffer, 1, 128*1024, pFile);
 
 	if (iLength <= 0)
 	    return false;
@@ -29,6 +29,10 @@ bool FrameConfigLoader::Init()
 	    FrameConfig oFrameConfig;
 		
 		oFrameConfig.iID = (int)(ayFrameConfig.items(i).id());
+		oFrameConfig.iX = (int)(ayFrameConfig.items(i).x());
+		oFrameConfig.iY = (int)(ayFrameConfig.items(i).y());
+		oFrameConfig.iWidth = (int)(ayFrameConfig.items(i).width());
+		oFrameConfig.iHeight = (int)(ayFrameConfig.items(i).height());
 		oFrameConfig.iHandleID = (int)(ayFrameConfig.items(i).handleid());
 
 		oFrameConfig.sName = platform::UTF_82ASCII(ayFrameConfig.items(i).name());
@@ -42,6 +46,7 @@ bool FrameConfigLoader::Init()
 
 			stOption.iNotify = (int)(ayFrameConfig.items(i).option(j).notify());
 			stOption.iFrameID = (int)(ayFrameConfig.items(i).option(j).frameid());
+			stOption.iData = (int)(ayFrameConfig.items(i).option(j).data());
 
 			stOption.sDescription = platform::UTF_82ASCII(ayFrameConfig.items(i).option(j).description());
 
@@ -71,6 +76,46 @@ const FrameConfig *FrameConfigLoader::GetFrameConfigByID(const int iID)
     for(size_t i = 0; i < m_vecRecords.size(); ++i)
 	{
 	     if (m_vecRecords[i].iID == iID)
+			return &m_vecRecords[i];
+	}
+	return NULL;
+}
+		
+const FrameConfig *FrameConfigLoader::GetFrameConfigByX(const int iX)
+{
+    for(size_t i = 0; i < m_vecRecords.size(); ++i)
+	{
+	     if (m_vecRecords[i].iX == iX)
+			return &m_vecRecords[i];
+	}
+	return NULL;
+}
+		
+const FrameConfig *FrameConfigLoader::GetFrameConfigByY(const int iY)
+{
+    for(size_t i = 0; i < m_vecRecords.size(); ++i)
+	{
+	     if (m_vecRecords[i].iY == iY)
+			return &m_vecRecords[i];
+	}
+	return NULL;
+}
+		
+const FrameConfig *FrameConfigLoader::GetFrameConfigByWidth(const int iWidth)
+{
+    for(size_t i = 0; i < m_vecRecords.size(); ++i)
+	{
+	     if (m_vecRecords[i].iWidth == iWidth)
+			return &m_vecRecords[i];
+	}
+	return NULL;
+}
+		
+const FrameConfig *FrameConfigLoader::GetFrameConfigByHeight(const int iHeight)
+{
+    for(size_t i = 0; i < m_vecRecords.size(); ++i)
+	{
+	     if (m_vecRecords[i].iHeight == iHeight)
 			return &m_vecRecords[i];
 	}
 	return NULL;

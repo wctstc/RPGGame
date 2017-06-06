@@ -34,6 +34,10 @@ xml字符转义:
 <class name="FrameConfig" comment="框数据">
     <macro name="MAX_OPTION_NUM" value="5" comment="选项最大数量"/>
 	<property name="ID"   prefix="i" type="int" comment="编号"/>
+	<property name="X"   prefix="i" type="int" comment="横坐标"/>
+	<property name="Y"   prefix="i" type="int" comment="纵坐标"/>
+	<property name="Width"   prefix="i" type="int" comment="宽度"/>
+	<property name="Height"   prefix="i" type="int" comment="高度"/>
 	<string_property name="Name"   prefix="s" type="string" comment="名称"/>
 	<string_property name="Description"   prefix="s" type="string" comment="描述"/>
 	<property name="HandleID"   prefix="i" type="int" comment="对应处理"/>
@@ -41,6 +45,7 @@ xml字符转义:
 		<string_property name="Description"   prefix="s" type="string" comment="选项描述"/>
 		<property name="Notify"   prefix="i" type="int" comment="通知处理"/>
 		<property name="FrameID"   prefix="i" type="int" comment="对应框ID"/>
+		<property name="Data"   prefix="i" type="int" comment="选项数据"/>
 	</struct_property>
 </class>
 

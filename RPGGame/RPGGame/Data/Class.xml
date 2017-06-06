@@ -63,3 +63,21 @@ xml字符转义:
 	</array_property>
 </class>
 
+
+<!--框-------------------------------------------------------------------->
+<class name="FrameData" comment="框数据">
+	<enum name="FrameState" comment="框状态">
+		<property name="FRAME_STATE_NORMAL" value="0" comment="正常"/>
+		<property name="FRAME_STATE_FINISH" value="0" comment="结束"/>
+	</enum>
+	<property name="Data" prefix="i" type="int" default="0" comment="数据"/>
+	<property name="Index" prefix="i" type="int" default="0" comment="选中选项"/>
+	<property name="State" prefix="e" type="FrameData::FrameState" default="FrameData::FRAME_STATE_NORMAL" comment="框状态"/>
+</class>
+
+
+
+
+
+
+

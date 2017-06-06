@@ -98,7 +98,7 @@ int ArrowManager::GetSelectIndex()
 	}
 }
 
-data::Option ArrowManager::GetOptionByIndex( unsigned int iIndex )
+Option ArrowManager::GetOptionByIndex( unsigned int iIndex )
 {
 	if ( iIndex < m_vOptions.size())
 		return m_vOptions[iIndex];

@@ -39,7 +39,6 @@ void TestUnit::Run()
     //TEST(TestProtobuf);
     //TEST(TestLog);
     //TEST(TestMapConfig);
-    TEST(TestMacro);
 
 
 
@@ -117,34 +116,34 @@ bool TestUnit::TestFrame()
 {
     FrameWithOption frame;
 
-    data::FrameData stFrameData;
-    stFrameData.eDirection = data::DIRECTION_VERTICAL;
-    stFrameData.iHandlerID = 0;
-    stFrameData.iID = 0;
-    stFrameData.oPosition.iX = 0;
-    stFrameData.oPosition.iY = 0;
-    stFrameData.oSize.iWidth = 20;
-    stFrameData.oSize.iHeigth = 10;
-    stFrameData.sDescription = "adsfasfd\nadsfalasdfasdfsadfsasdfsadfsafsafsfsfsafsadfasdfdf\nksdjf";
-    data::Option option;
-    option.sDescription = "world";
-    stFrameData.vOptions.push_back(option);
-    option.sDescription = "hello!";
-    stFrameData.vOptions.push_back(option);
-
-
-    frame.Init(stFrameData);
-    frame.Show();
-    int iIndex = frame.GetSelectIndex();
+//     data::FrameData stFrameData;
+//     stFrameData.eDirection = data::DIRECTION_VERTICAL;
+//     stFrameData.iHandlerID = 0;
+//     stFrameData.iID = 0;
+//     stFrameData.oPosition.iX = 0;
+//     stFrameData.oPosition.iY = 0;
+//     stFrameData.oSize.iWidth = 20;
+//     stFrameData.oSize.iHeigth = 10;
+//     stFrameData.sDescription = "adsfasfd\nadsfalasdfasdfsadfsasdfsadfsafsafsfsfsafsadfasdfdf\nksdjf";
+//     data::Option option;
+//     option.sDescription = "world";
+//     stFrameData.vOptions.push_back(option);
+//     option.sDescription = "hello!";
+//     stFrameData.vOptions.push_back(option);
+// 
+// 
+//     frame.Init(stFrameData);
+//     frame.Show();
+//     int iIndex = frame.GetSelectIndex();
     return true;
 }
 
 bool TestUnit::TestPropertyFrame()
 {
-    PropertyFrame &oPropertyFrame = PropertyFrame::GetInstance();
-
-    oPropertyFrame.Init();
-    oPropertyFrame.Show();
+//     PropertyFrame &oPropertyFrame = PropertyFrame::GetInstance();
+// 
+//     oPropertyFrame.Init();
+//     oPropertyFrame.Show();
 
     return true;
 }
@@ -184,24 +183,6 @@ bool TestUnit::TestMapConfig()
 //     DropLoader &dropLoader = DropLoader::GetInstance();
 //     dropLoader.Init("proto/data/dataconfig_drop.data");
 
-
-    return true;
-}
-
-#define A1 1
-#define A2 2
-#define A3 3
-#define A4 4
-#define A5 5
-#define A6 6
-
-#define E(n) 
-#define D(n) B(n)
-#define B(n) A##n
-
-bool TestUnit::TestMacro()
-{
-    cout << MACRO_2_STRING(D(2)) << endl;
 
     return true;
 }

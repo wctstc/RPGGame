@@ -13,8 +13,8 @@ bool MapConfigLoader::Init()
 	if (pFile == NULL)
 		return false;
 	
-	char csBuffer[1024*1024];
-	int iLength = fread(csBuffer, 1, 1024*1024, pFile);
+	char csBuffer[128*1024];
+	int iLength = fread(csBuffer, 1, 128*1024, pFile);
 
 	if (iLength <= 0)
 	    return false;

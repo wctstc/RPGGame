@@ -2,6 +2,7 @@
 #define __FRAME_H__
 
 #include "FrameConfigLoader.h"
+#include "FrameData.h"
 
 class Frame
 {
@@ -14,17 +15,13 @@ public:
      */
     virtual bool Init();
 
-    /**
-     * @brief 初始化
-     */
-    virtual bool Init(const FrameConfig &oFrameConfig);
-
 public:
     /**
      * @brief 展示框
      */
     void Show()const;
-private:
+
+protected:
     /**
      * @brief 清理框
      */
@@ -44,20 +41,22 @@ private:
      * @brief 展示描述
      */
     virtual void ShowDescription() const;
+
 public:
-//     SET_GET(int,                   i, ID,          m_stFrameData.iID)
-//     SET_GET(data::FrameType,       e, Type,        m_stFrameData.eType)
-//     SET_GET(data::Position&,       o, Position,    m_stFrameData.oPosition)
-//     SET_GET(data::Size&,           o, Size,        m_stFrameData.oSize)
-//     SET_GET(string,                s, Description, m_stFrameData.sDescription)
-//     SET_GET(data::Direction,       e, Direction,   m_stFrameData.eDirection)
-//     SET_GET(int,                   i, Handler,     m_stFrameData.iHandlerID)
-//     SET_GET(int,                   i, Data,        m_stFrameData.iData)
-//     SET_GET(int,                   i, Index,       m_stFrameData.iIndex)
-//     SET_GET(vector<data::Option>&, v, Options,     m_stFrameData.vOptions)
+    inline FrameConfig &UseFrameConfig() { return m_stConfig; }
+    inline FrameData &UseFrameData() { return m_stData; }
+
+    inline const FrameConfig &GetFrameConfig() const { return m_stConfig; }
+    inline const FrameData &GetFrameData() const { return m_stData; }
+
+    inline void SetFrameConfig(const FrameConfig &stFrameConfig) { m_stConfig = stFrameConfig; }
+    inline void SetFrameData(const FrameData &stFrameData) { m_stData = stFrameData; }
 private:
+    /*!< 框配置 */
+    FrameConfig m_stConfig;
+
     /*!< 框数据 */
-    FrameConfig m_stFrameData;
+    FrameData m_stData;
 };
 
 #endif // __FRAME_H__

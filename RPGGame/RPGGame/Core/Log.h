@@ -8,6 +8,16 @@
 #define MLog( type, format, ... ) Write(type,#type,__LINE__,__FUNCTION__, format, ##__VA_ARGS__ )
 #define GLog( type, format, ... ) Log::GetInstance().Write(type,#type,__LINE__,__FUNCTION__, format, ##__VA_ARGS__ )
 
+#define MLogError(format, ...)   Write(Log::LOG_ERROR,  "LOG_ERROR",  __LINE__,__FUNCTION__, format, ##__VA_ARGS__ )
+#define MLogWarning(format, ...) Write(Log::LOG_WARNING,"LOG_WARNING",__LINE__,__FUNCTION__, format, ##__VA_ARGS__ )
+#define MLogInfo(format, ...)    Write(Log::LOG_INFO,   "LOG_INFO",   __LINE__,__FUNCTION__, format, ##__VA_ARGS__ )
+#define MLogDebug(format, ...)   Write(Log::LOG_DEBUG,  "LOG_DEBUG",  __LINE__,__FUNCTION__, format, ##__VA_ARGS__ )
+
+#define GLogError(format, ...)   Log::GetInstance().Write(Log::LOG_ERROR,  "LOG_ERROR",  __LINE__,__FUNCTION__, format, ##__VA_ARGS__ )
+#define GLogWarning(format, ...) Log::GetInstance().Write(Log::LOG_WARNING,"LOG_WARNING",__LINE__,__FUNCTION__, format, ##__VA_ARGS__ )
+#define GLogInfo(format, ...)    Log::GetInstance().Write(Log::LOG_INFO,   "LOG_INFO",   __LINE__,__FUNCTION__, format, ##__VA_ARGS__ )
+#define GLogDebug(format, ...)   Log::GetInstance().Write(Log::LOG_DEBUG,  "LOG_DEBUG",  __LINE__,__FUNCTION__, format, ##__VA_ARGS__ )
+
 using std::string;
 
 /**
@@ -25,7 +35,7 @@ public:
         LOG_ERROR = 1,
 
         /*!< ¾¯¸æ */
-        LOG_WARMING = 2,
+        LOG_WARNING = 2,
 
         /*!< ÐÅÏ¢ */
         LOG_INFO = 3,

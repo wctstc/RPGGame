@@ -3,7 +3,6 @@
 
 #include "Singleton.h"
 #include "Frame.h"
-#include "FrameStruct.h"
 
 
 
@@ -19,7 +18,7 @@ public:
     /**
     * @brief 初始化
     */
-    virtual bool Init();
+    virtual bool Init(const FrameConfig &stConfig);
 
 
 public:
@@ -29,16 +28,38 @@ public:
     virtual void Update();
 
 public:
-    SET_GET(int, i, Hp,       m_stPropertyFrameData.iHp)
-    SET_GET(int, i, MaxHp,    m_stPropertyFrameData.iMaxHp)
-    SET_GET(int, i, Money,    m_stPropertyFrameData.iMoney)
-    SET_GET(int, i, Level,    m_stPropertyFrameData.iLevel)
-    SET_GET(int, i, Exp,      m_stPropertyFrameData.iExp)
-    SET_GET(int, i, TotalExp, m_stPropertyFrameData.iTotalExp)
-    SET_GET(int, i, Bag,      m_stPropertyFrameData.iBag)
-    SET_GET(int, i, TotalBag, m_stPropertyFrameData.iTotalBag)
+    inline void SetHp(const int iHp) { m_iHp = iHp; }
+    inline void SetMaxHp(const int MaxHp) { m_iMaxHp = MaxHp; }
+    inline void SetMoney(const int iMoney) { m_iMoney = iMoney; }
+    inline void SetLevel(const int iLevel) { m_iLevel = iLevel; }
+    inline void SetExp(const int iExp) { m_iExp = iExp; }
+    inline void SetTotalExp(const int iTotalExp) { m_iTotalExp = iTotalExp; }
+    inline void SetBag(const int iBag) { m_iBag = iBag; }
+    inline void SetTotalBag(const int iTotalBag) { m_iTotalBag = iTotalBag; }
 private:
-    frame_data::PropertyFrameData m_stPropertyFrameData;
+    /*!< 血量 */
+    int m_iHp;
+
+    /*!< 最大血量 */
+    int m_iMaxHp;
+
+    /*!< 货币 */
+    int m_iMoney;
+
+    /*!< 等级 */
+    int m_iLevel;
+
+    /*!< 当前经验 */
+    int m_iExp;
+
+    /*!< 下级经验 */
+    int m_iTotalExp;
+
+    /*!< 背包物品数量 */
+    int m_iBag;
+
+    /*!< 背包总容量 */
+    int m_iTotalBag;
 };
 
 

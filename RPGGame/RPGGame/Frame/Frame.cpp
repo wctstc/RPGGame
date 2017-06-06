@@ -1,15 +1,10 @@
 
 #include "Frame.h"
 
+#include "Log.h"
+
 #include "UIBase.h"
 #include "StrUtil.h"
-
-#define POS_X 20
-#define POS_Y 0
-
-#define WIDTH 60
-#define HEIGHT 60
-
 
 /*!< 角落边框 */
 #define FrameCorner     "+"
@@ -22,15 +17,6 @@
 
 
 
-/*!< 箭头图案 */
-#define OptionArrow      "->"
-
-/*!< 清除箭头 */
-#define OptionClearArrow "  "
-
-/*!< 箭头空隙 */
-#define OptionArrowGap 3
-
 Frame::Frame()
 {
 }
@@ -42,26 +28,14 @@ Frame::~Frame()
 
 bool Frame::Init()
 {
-//     m_stFrameData.iID = 0;
-//     m_stFrameData.eType = data::FRAME_TYPE_NORMAL;
-//     m_stFrameData.oPosition.iX = 0;
-//     m_stFrameData.oPosition.iY = 0;
-//     m_stFrameData.oSize.iHeigth = 0;
-//     m_stFrameData.oSize.iWidth  = 0;
-//     m_stFrameData.sDescription = "";
-//     m_stFrameData.eDirection = data::DIRECTION_VERTICAL;
-//     m_stFrameData.iHandlerID = -1;
-// 
-//     m_stFrameData.vOptions.clear();
-
+    if (!m_stData.Init())
+    {
+        GLogError("m_stData Init fail.");
+        return false;
+    }
     return true;
 }
 
-bool Frame::Init(const FrameConfig &oFrameData)
-{
-    m_stFrameData = oFrameData;
-    return true;
-}
 
 
 void Frame::Show() const
@@ -74,38 +48,38 @@ void Frame::Show() const
 void Frame::ClearFrame() const
 {
     clearxy(
-        POS_X,
-        POS_Y,
-        POS_X + WIDTH,
-        POS_Y + HEIGHT);
+        m_stConfig.iX,
+        m_stConfig.iY,
+        m_stConfig.iX + m_stConfig.iWidth,
+        m_stConfig.iY + m_stConfig.iHeight);
 }
 
 void Frame::ClearContent() const
 {
     clearxy(
-        POS_X + 1,
-        POS_Y + 1,
-        POS_X + WIDTH - 1,
-        POS_Y + HEIGHT - 1);
+        m_stConfig.iX + 1,
+        m_stConfig.iY + 1,
+        m_stConfig.iX + m_stConfig.iWidth - 1,
+        m_stConfig.iY + m_stConfig.iHeight - 1);
 }
 
 void Frame::ShowFrame() const
 {
-    for (int i = 0; i <= HEIGHT; ++i)
+    for (int i = 0; i <= m_stConfig.iHeight; ++i)
     {
-        for (int j = 0; j <= WIDTH; ++j)
+        for (int j = 0; j <= m_stConfig.iWidth; ++j)
         {
-            gotoxy(POS_X + j, POS_Y + i);
-            if (i == 0 || i == HEIGHT)
+            gotoxy(m_stConfig.iX + j, m_stConfig.iY + i);
+            if (i == 0 || i == m_stConfig.iHeight)
             {
-                if (j == 0 || j == WIDTH)
+                if (j == 0 || j == m_stConfig.iWidth)
                     printf(FrameCorner);
                 else
                     printf(FrameHorizontal);
             }
             else
             {
-                if (j == 0 || j == HEIGHT)
+                if (j == 0 || j == m_stConfig.iWidth)
                     printf(FrameVertical);
             }
         }
@@ -116,7 +90,7 @@ void Frame::ShowDescription() const
 {
     int offset_y = 0;
     vector<string> vDescription;
-    StrUtil::Split(m_stFrameData.sDescription, "\n", vDescription);
+    StrUtil::Split(m_stConfig.sDescription, "\n", vDescription);
 
     for (vector<string>::iterator it = vDescription.begin(); it != vDescription.end(); ++it)
     {
@@ -126,16 +100,16 @@ void Frame::ShowDescription() const
         {
             const int length = (*it).length();
             //截取一行子串
-            if (offset_description + WIDTH - 2 < length)
-                sub_description = (*it).substr(offset_description, WIDTH - 2);
+            if (offset_description + m_stConfig.iWidth - 1 < length)
+                sub_description = (*it).substr(offset_description, m_stConfig.iWidth - 1);
             else
                 sub_description = (*it).substr(offset_description);
 
 
-            gotoxy(POS_X + 1, POS_Y + offset_y + 1);
+            gotoxy(m_stConfig.iX + 1, m_stConfig.iY + offset_y + 1);
             printf(sub_description.c_str());
 
-            offset_description += WIDTH - 2;
+            offset_description += m_stConfig.iWidth - 1;
             ++offset_y;
 
             if (offset_description >= length)

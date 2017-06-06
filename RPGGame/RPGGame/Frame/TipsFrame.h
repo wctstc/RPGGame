@@ -4,7 +4,9 @@
 #include "Frame.h"
 #include "Singleton.h"
 
-
+/**
+* @brief 主界面提示框类
+*/
 class TipsFrame : public Frame, public Singleton<TipsFrame>
 {
 public:
@@ -14,7 +16,7 @@ public:
     /**
     * @brief 初始化
     */
-    virtual bool Init();
+    virtual bool Init(const FrameConfig &stConfig);
 };
 
 

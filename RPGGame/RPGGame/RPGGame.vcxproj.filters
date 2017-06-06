@@ -96,29 +96,8 @@
     <ClCompile Include="Core\App.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
-    <ClCompile Include="Manager\Actor.cpp">
-      <Filter>Game\Data\Actor</Filter>
-    </ClCompile>
     <ClCompile Include="Frame\ArrowManager.cpp">
       <Filter>Game\UI\Frame</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\Bag.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Frame\BagFrame.cpp">
-      <Filter>Game\UI\Frame\MainFrame\FrameWithOption\PlayerFrame</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\Container.cpp">
-      <Filter>Game\Data\Actor\Player\Bag</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\Drop.cpp">
-      <Filter>Game\Data\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\DropLoader.cpp">
-      <Filter>Game\Data\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\Equipment.cpp">
-      <Filter>Game\Data\Actor\Player\Equipment</Filter>
     </ClCompile>
     <ClCompile Include="Core\FileUtil.cpp">
       <Filter>Base</Filter>
@@ -126,23 +105,8 @@
     <ClCompile Include="Frame\Frame.cpp">
       <Filter>Game\UI\Frame</Filter>
     </ClCompile>
-    <ClCompile Include="Frame\FrameHandler.cpp">
-      <Filter>Game\Hander</Filter>
-    </ClCompile>
-    <ClCompile Include="Frame\FrameLoader.cpp">
-      <Filter>Game\UI\Frame</Filter>
-    </ClCompile>
     <ClCompile Include="Frame\FrameWithOption.cpp">
       <Filter>Game\UI\Frame\MainFrame</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\Goods.cpp">
-      <Filter>Game\Manager\Shop</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\HomeHandler.cpp">
-      <Filter>Game\Hander\ManagerHandler</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\HomeManager.cpp">
-      <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Core\Hander.cpp">
       <Filter>Framework</Filter>
@@ -152,24 +116,6 @@
     </ClCompile>
     <ClCompile Include="Manager\Manager.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\ManagerHandler.cpp">
-      <Filter>Game\Hander\ManagerHandler</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\Player.cpp">
-      <Filter>Game\Data\Actor\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\PlayerHandler.cpp">
-      <Filter>Game\Hander\ManagerHandler</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\PlayerLoader.cpp">
-      <Filter>Game\Data\Actor\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\PlayerManager.cpp">
-      <Filter>Game\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Frame\ItemFrame.cpp">
-      <Filter>Game\UI\Frame\MainFrame\FrameWithOption\ItemFrame</Filter>
     </ClCompile>
     <ClCompile Include="Core\Config.cpp">
       <Filter>Framework</Filter>
@@ -183,29 +129,8 @@
     <ClCompile Include="Core\Notify.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
-    <ClCompile Include="Frame\ShopFrame.cpp">
-      <Filter>Game\UI\Frame\MainFrame\FrameWithOption\ShopFrame</Filter>
-    </ClCompile>
-    <ClCompile Include="Frame\ShopItemFrame.cpp">
-      <Filter>Game\UI\Frame\MainFrame\FrameWithOption\ShopFrame</Filter>
-    </ClCompile>
     <ClCompile Include="Frame\TipsFrame.cpp">
       <Filter>Game\UI\Frame\MainFrame</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\ShopManager.cpp">
-      <Filter>Game\Manager\Shop</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\ShopHandler.cpp">
-      <Filter>Game\Hander\ManagerHandler</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\Shop.cpp">
-      <Filter>Game\Manager\Shop</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\Skill.cpp">
-      <Filter>Game\Data\Actor\Player\Skill</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\SkillData.cpp">
-      <Filter>Game\Data\Actor\Player\Skill</Filter>
     </ClCompile>
     <ClCompile Include="Core\Rsp.cpp">
       <Filter>Framework</Filter>
@@ -221,9 +146,6 @@
     </ClCompile>
     <ClCompile Include="Core\UIBase.cpp">
       <Filter>Base</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\Unit.cpp">
-      <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Frame\PropertyFrame.cpp">
       <Filter>Game\UI\Frame\MainFrame</Filter>
@@ -264,9 +186,6 @@
     <ClCompile Include="proto\src\proto\dataconfig_monsterconfig.pb.cc">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Manager\Item\ItemManager.cpp">
-      <Filter>Game\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="Manager\Map\Map.cpp">
       <Filter>Game\Data\Map</Filter>
     </ClCompile>
@@ -275,9 +194,6 @@
     </ClCompile>
     <ClCompile Include="Manager\Map\MapActionLoader.cpp">
       <Filter>Game\Data\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\Map\MapHandler.cpp">
-      <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Manager\Map\MapLoader.cpp">
       <Filter>源文件</Filter>
@@ -297,6 +213,78 @@
     <ClCompile Include="Data\PlayerData.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Data\FrameData.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Map\Drop.cpp">
+      <Filter>Game\Data\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Map\DropLoader.cpp">
+      <Filter>Game\Data\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Player\Actor.cpp">
+      <Filter>Game\Data\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Player\Player.cpp">
+      <Filter>Game\Data\Actor\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Player\PlayerLoader.cpp">
+      <Filter>Game\Data\Actor\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Player\PlayerManager.cpp">
+      <Filter>Game\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Player\Skill.cpp">
+      <Filter>Game\Data\Actor\Player\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Player\SkillData.cpp">
+      <Filter>Game\Data\Actor\Player\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Player\ItemManager.cpp">
+      <Filter>Game\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Player\Bag.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Player\Container.cpp">
+      <Filter>Game\Data\Actor\Player\Bag</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Player\Equipment.cpp">
+      <Filter>Game\Data\Actor\Player\Equipment</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Town\Goods.cpp">
+      <Filter>Game\Manager\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Town\HomeManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Town\Shop.cpp">
+      <Filter>Game\Manager\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Town\ShopManager.cpp">
+      <Filter>Game\Manager\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Player\Unit.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Handler\ManagerHandler.cpp">
+      <Filter>Game\Hander\ManagerHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="Handler\HomeHandler.cpp">
+      <Filter>Game\Hander\ManagerHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="Handler\ShopHandler.cpp">
+      <Filter>Game\Hander\ManagerHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="Handler\PlayerHandler.cpp">
+      <Filter>Game\Hander\ManagerHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="Handler\MapHandler.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Handler\FrameHandler.cpp">
+      <Filter>Game\Hander</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\App.h">
@@ -305,32 +293,8 @@
     <ClInclude Include="Frame\ArrowManager.h">
       <Filter>Game\UI\Frame</Filter>
     </ClInclude>
-    <ClInclude Include="Manager\Actor.h">
-      <Filter>Game\Data\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\Bag.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Frame\BagFrame.h">
-      <Filter>Game\UI\Frame\MainFrame\FrameWithOption\PlayerFrame</Filter>
-    </ClInclude>
     <ClInclude Include="Core\Cmd.h">
       <Filter>Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\ContainerData.h">
-      <Filter>Game\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\Container.h">
-      <Filter>Game\Data\Actor\Player\Bag</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\Drop.h">
-      <Filter>Game\Data\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\DropLoader.h">
-      <Filter>Game\Data\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\Equipment.h">
-      <Filter>Game\Data\Actor\Player\Equipment</Filter>
     </ClInclude>
     <ClInclude Include="Core\FileUtil.h">
       <Filter>Base</Filter>
@@ -338,26 +302,8 @@
     <ClInclude Include="Frame\Frame.h">
       <Filter>Game\UI\Frame</Filter>
     </ClInclude>
-    <ClInclude Include="Frame\FrameHandler.h">
-      <Filter>Game\Hander</Filter>
-    </ClInclude>
-    <ClInclude Include="Frame\FrameLoader.h">
-      <Filter>Game\UI\Frame</Filter>
-    </ClInclude>
-    <ClInclude Include="Frame\FrameStruct.h">
-      <Filter>Game\Data</Filter>
-    </ClInclude>
     <ClInclude Include="Frame\FrameWithOption.h">
       <Filter>Game\UI\Frame\MainFrame</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\Goods.h">
-      <Filter>Game\Manager\Shop</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\HomeHandler.h">
-      <Filter>Game\Hander\ManagerHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\HomeManager.h">
-      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Core\Hander.h">
       <Filter>Framework</Filter>
@@ -368,32 +314,8 @@
     <ClInclude Include="Manager\Manager.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Manager\ManagerData.h">
-      <Filter>Game\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\ManagerHandler.h">
-      <Filter>Game\Hander\ManagerHandler</Filter>
-    </ClInclude>
     <ClInclude Include="Manager\ManagerInstance.h">
       <Filter>Game\Hander\ManagerHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\Player.h">
-      <Filter>Game\Data\Actor\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\PlayerData.h">
-      <Filter>Game\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\PlayerHandler.h">
-      <Filter>Game\Hander\ManagerHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\PlayerManager.h">
-      <Filter>Game\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\PlayerLoader.h">
-      <Filter>Game\Data\Actor\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Frame\ItemFrame.h">
-      <Filter>Game\UI\Frame\MainFrame\FrameWithOption\ItemFrame</Filter>
     </ClInclude>
     <ClInclude Include="Core\DataConfig.h">
       <Filter>头文件</Filter>
@@ -413,29 +335,8 @@
     <ClInclude Include="Core\Notify.h">
       <Filter>Framework</Filter>
     </ClInclude>
-    <ClInclude Include="Frame\ShopFrame.h">
-      <Filter>Game\UI\Frame\MainFrame\FrameWithOption\ShopFrame</Filter>
-    </ClInclude>
-    <ClInclude Include="Frame\ShopItemFrame.h">
-      <Filter>Game\UI\Frame\MainFrame\FrameWithOption\ShopFrame</Filter>
-    </ClInclude>
     <ClInclude Include="Frame\TipsFrame.h">
       <Filter>Game\UI\Frame\MainFrame</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\ShopManager.h">
-      <Filter>Game\Manager\Shop</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\ShopHandler.h">
-      <Filter>Game\Hander\ManagerHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\Shop.h">
-      <Filter>Game\Manager\Shop</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\Skill.h">
-      <Filter>Game\Data\Actor\Player\Skill</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\SkillData.h">
-      <Filter>Game\Data\Actor\Player\Skill</Filter>
     </ClInclude>
     <ClInclude Include="Core\Rsp.h">
       <Filter>Framework</Filter>
@@ -457,9 +358,6 @@
     </ClInclude>
     <ClInclude Include="Core\UIBase.h">
       <Filter>Base</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\Unit.h">
-      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Frame\PropertyFrame.h">
       <Filter>Game\UI\Frame\MainFrame</Filter>
@@ -500,9 +398,6 @@
     <ClInclude Include="proto\src\proto\dataconfig_monsterconfig.pb.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Manager\Item\ItemManager.h">
-      <Filter>Game\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="Manager\Map\Map.h">
       <Filter>Game\Data\Map</Filter>
     </ClInclude>
@@ -511,9 +406,6 @@
     </ClInclude>
     <ClInclude Include="Manager\Map\MapActionLoader.h">
       <Filter>Game\Data\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\Map\MapHandler.h">
-      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Manager\Map\MapLoader.h">
       <Filter>头文件</Filter>
@@ -532,6 +424,81 @@
     </ClInclude>
     <ClInclude Include="Data\PlayerData.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\FrameData.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Map\Drop.h">
+      <Filter>Game\Data\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Map\DropLoader.h">
+      <Filter>Game\Data\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Player\Actor.h">
+      <Filter>Game\Data\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Player\Player.h">
+      <Filter>Game\Data\Actor\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Player\PlayerLoader.h">
+      <Filter>Game\Data\Actor\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Player\PlayerManager.h">
+      <Filter>Game\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Player\Skill.h">
+      <Filter>Game\Data\Actor\Player\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Player\SkillData.h">
+      <Filter>Game\Data\Actor\Player\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Player\ItemManager.h">
+      <Filter>Game\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Player\Bag.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Player\Container.h">
+      <Filter>Game\Data\Actor\Player\Bag</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Player\ContainerData.h">
+      <Filter>Game\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Player\Equipment.h">
+      <Filter>Game\Data\Actor\Player\Equipment</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Town\Goods.h">
+      <Filter>Game\Manager\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Town\HomeManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Town\Shop.h">
+      <Filter>Game\Manager\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Town\ShopManager.h">
+      <Filter>Game\Manager\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Player\Unit.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Handler\ManagerHandler.h">
+      <Filter>Game\Hander\ManagerHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Handler\HomeHandler.h">
+      <Filter>Game\Hander\ManagerHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Handler\ShopHandler.h">
+      <Filter>Game\Hander\ManagerHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Handler\PlayerHandler.h">
+      <Filter>Game\Hander\ManagerHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Handler\MapHandler.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Handler\FrameHandler.h">
+      <Filter>Game\Hander</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

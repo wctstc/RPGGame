@@ -1,1 +1,5 @@
 2017-05-08 14:10:56 TestUnit::TestLog(160) Log::LOG_DEBUG:Test Test
+2017-06-06 19:03:51 FrameHandler::Init(52) LOG_ERROR:property frame init fail.
+2017-06-06 19:03:51 FrameHandler::HandleStart(125) LOG_ERROR:option frame init fail.
+2017-06-06 19:06:46 FrameHandler::HandleStart(125) LOG_ERROR:option frame init fail.
+2017-06-06 19:07:11 FrameHandler::HandleStart(125) LOG_ERROR:option frame init fail.

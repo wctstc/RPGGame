@@ -1,5 +1,5 @@
 #include "TipsFrame.h"
-
+#include "Log.h"
 
 
 TipsFrame::TipsFrame()
@@ -11,20 +11,14 @@ TipsFrame::~TipsFrame()
 {
 }
 
-bool TipsFrame::Init()
+bool TipsFrame::Init(const FrameConfig &stConfig)
 {
     if (!Frame::Init())
+    {
+        GLogError("Frame init fail");
         return false;
+    }
 
-    data::Position stPosition;
-    stPosition.iX = 0;
-    stPosition.iY = 16;
-    SetPosition(stPosition);
-
-    data::Size stSize;
-    stSize.iWidth = 56;
-    stSize.iHeigth = 5;
-    SetSize(stSize);
-
+    Frame::SetFrameConfig(stConfig);
     return true;
 }
