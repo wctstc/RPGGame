@@ -131,6 +131,8 @@ int MapHandler::HandleMapAttack(const cmd::NotifyCommand eNotifyCommand, const n
     string sTips;
     Monster &oCurrentMonst = g_MapManager.GetCurrentMonster();
     const Player &oPlayer = g_PlayerManger.GetPlayer();
+    const int iMonsterPreHp = oCurrentMonst.GetHp();
+    const int iPlayerPreHp = oPlayer.GetPlayerData().GetHp();
 
     g_PlayerManger.Attack(oCurrentMonst);
 
@@ -168,9 +170,9 @@ int MapHandler::HandleMapAttack(const cmd::NotifyCommand eNotifyCommand, const n
         sTips = StrUtil::Format("Äã¹¥»÷%s,%sÊÕµ½%dÉËº¦\n%s¹¥»÷Äã£¬ÄãÊÜµ½%dÉËº¦",
             oCurrentMonst.GetName().c_str(),
             oCurrentMonst.GetName().c_str(),
-            oCurrentMonst.GetPreHp()-oCurrentMonst.GetHp(),
+            iMonsterPreHp -oCurrentMonst.GetHp(),
             oCurrentMonst.GetName().c_str(),
-            oPlayer.GetPreHp()-oPlayer.GetHp());
+            iPlayerPreHp -oPlayer.GetPlayerData().GetHp());
     }
 
 

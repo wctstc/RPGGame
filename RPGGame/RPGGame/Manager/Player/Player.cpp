@@ -9,43 +9,11 @@
  {
  }
  
- bool Player::Init(const Player &oPlayer)
+ bool Player::Init()
  {
-     if (!Actor::Init(oPlayer))
-         return false;
- 
-     m_stPlayerData = oPlayer.m_stPlayerData;
- 
-     return true;
+     return m_stPlayerData.Init();
  }
- bool Player::Init(
-     const int iID,
-     const string sName,
-     const int iHp,
-     const int iMaxHp,
-     const int iAttack,
-     const int iDefance,
-     const int iMoney,
-     const int iLevel,
-     const int iExp,
-     const int iTotalExp)
- {
-     if (!Actor::Init(iID, sName, iHp, iMaxHp, iAttack, iDefance))
-         return false;
- 
- 
-     m_stPlayerData.SetMoney(iMoney);
-     m_stPlayerData.SetLevel(iLevel);
-     m_stPlayerData.SetExp(iExp);
- 
- 
-//      for (int i = 0; i < Equipment::EQUIPMENT_TYPE_MAX; ++i)
-//          m_ayEquipments[i].bIsEquip = false;
- 
-     return true;
- }
- 
- 
+
  bool Player::Save(int &iLength, char *csBuffer) const
  {
      int iSize = sizeof(m_stPlayerData);
@@ -68,62 +36,23 @@
      return true;
  }
  
- void Player::Reset()
+ 
+ bool Player::IsDie()const
  {
-     Actor::SetHp(GetMaxHp() + GetExtendMaxHp());
+     return GetPlayerData().GetHp() <= 0;
  }
+
+void Player::Defance( const int iDamage)
+{
+    int iRealDamage = iDamage - m_stPlayerData.GetBaseDefance();
+    if (iRealDamage <= 0)
+        iRealDamage = 1;
+}
  
-//  Player::EquipmentOperator Player::Equip(
-//      const EquipmentOperator eEquipmentOperator,
-//      const Equipment &oNewEquipment,
-//      Equipment &oOldEuipment)
-//  {
-//      EquipmentOperator eRet;
-//      EquipmentState *oTempEquipment = NULL;
-//      if (oNewEquipment.GetType() >= 0
-//          && oNewEquipment.GetType() < Equipment::EQUIPMENT_TYPE_MAX)
-//      {
-//          oTempEquipment = &m_ayEquipments[oNewEquipment.GetType()];
-//          switch (eEquipmentOperator)
-//          {
-//          case EQUIPMENT_OPERATOR_PUTON:
-//          case EQUIPMENT_OPERATOR_CHANGE:
-//              eRet = EQUIPMENT_OPERATOR_PUTON;
-//              if (oTempEquipment->bIsEquip)
-//              {
-//                  eRet = EQUIPMENT_OPERATOR_CHANGE;
-//                  oOldEuipment = oTempEquipment->oEquipment;
-//              }
-//  
-//              oTempEquipment->bIsEquip = true;
-//              oTempEquipment->oEquipment = oNewEquipment;
-//              break;
-//          case EQUIPMENT_OPERATOR_GETOFF:
-//              oTempEquipment->bIsEquip = false;
-//              oOldEuipment = oTempEquipment->oEquipment;
-//              eRet = EQUIPMENT_OPERATOR_GETOFF;
-//              break;
-//          }
-//          oTempEquipment = NULL;
-//      }
-//  
-//      return eEquipmentOperator;
-//  }
- 
- void Player::Defance( const int iDamage)
- {
-     int iRealDamage = iDamage - GetDefance();
-     if (iRealDamage <= 0)
-         iRealDamage = 1;
- 
-     Actor::SetPreHp(Actor::GetHp());
-     Actor::SetHp(Actor::GetHp()-iRealDamage);
- }
- 
- int Player::Attack()
- {
-     return GetAttack()+GetExtendAttack();
- }
+int Player::Attack()
+{
+    return m_stPlayerData.GetBaseAttack();
+}
  
  bool Player::AddMoney(const int iMoney)
  {

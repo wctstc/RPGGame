@@ -4,8 +4,10 @@
 <macro> name value comment
 <globel> name prefix type default comment
 <property> name prefix type default comment
-<string_property> name prefix type max comment
-<array_property> name prefix type max comment
+<string_property> name max comment
+<struct_array_property> name max comment
+	<struct_array_property_struct>name comment
+	    <base>property
 <enum> name value comment
 
 xml字符转义:
@@ -45,22 +47,20 @@ xml字符转义:
 <!--玩家-------------------------------------------------------------------->
 <class name="PlayerData" comment="行动者数据">
 	<macro name="EQUIPMENT_SLOT_SIZE" value="3" comment="装备槽数量"/>
-	<property name="ID"    prefix="i" type="int" default="0" comment="编号"/>
-	<property name="Hp"    prefix="i" type="int" default="0" comment="生命值"/>
-	<property name="Money" prefix="i" type="int" default="0" comment="钱"/>
-	<property name="Level" prefix="i" type="int" default="0" comment="等级"/>
-	<property name="Exp"   prefix="i" type="int" default="0" comment="当前获得经验"/>
-	
-	<enum name="EquipmentSlotType" comment="装备槽">
-		<property name="EQUIPMENT_SLOT_TYPE_WEAPON" value="0" comment="武器"/>
-		<property name="EQUIPMENT_SLOT_TYPE_AEMOR" value="0" comment="防具"/>
-		<property name="EQUIPMENT_SLOT_TYPE_ACCESSORY" value="0" comment="饰品"/>
-	</enum>
-	<array_property name="EquipmentSlot" prefix="st" type="EquipmentSlot" max="EQUIPMENT_SLOT_SIZE" comment="装备槽">
-		<struct name="EquipmentSlot" comment="装备槽">
-			<property name="EquipmentID" prefix="i" type="int" default="0" comment="编号"/>
-		</struct>
-	</array_property>
+	<macro name="NAME_MAX_LENGTH" value="64" comment="名字最大长度"/>
+	<string_property name="Name" prefix="s" type="char" max="NAME_MAX_LENGTH" comment="名字" />
+	<property name="ID"          prefix="i"  type="int" default="0" comment="编号"/>
+	<property name="Hp"          prefix="i"  type="int" default="0" comment="当前生命值"/>
+	<property name="MaxHp"       prefix="i"  type="int" default="0" comment="最大生命值"/>
+	<property name="BaseAttack"  prefix="i"  type="int" default="0" comment="基础攻击力"/>
+	<property name="BaseDefance" prefix="i"  type="int" default="0" comment="基础防御力"/>
+	<property name="Money"       prefix="i"  type="int" default="0" comment="钱"/>
+	<property name="Level"       prefix="i"  type="int" default="0" comment="等级"/>
+	<property name="Exp"         prefix="i"  type="int" default="0" comment="当前获得经验"/>
+	<property name="Weapon"      prefix="i"  type="int" default="0" comment="武器"/>
+	<property name="Armor"       prefix="i"  type="int" default="0" comment="防具"/>
+	<property name="Accessory"   prefix="i"  type="int" default="0" comment="饰品"/>
+	<property name="Bag"         prefix="st" type="Container" default="0" comment="背包"/>
 </class>
 
 

@@ -11,20 +11,20 @@
 /**
 * @brief 玩家类
 */
-class Player : public Actor
+class Player
 {
      /**
       * @brief 装备操作
       */
-     enum EquipmentOperator
-     {
-         /*!< 装上 */
-         EQUIPMENT_OPERATOR_PUTON,
-         /*!< 卸下 */
-         EQUIPMENT_OPERATOR_GETOFF,
-         /*!< 替换 */
-         EQUIPMENT_OPERATOR_CHANGE
-     };
+//      enum EquipmentOperator
+//      {
+//          /*!< 装上 */
+//          EQUIPMENT_OPERATOR_PUTON,
+//          /*!< 卸下 */
+//          EQUIPMENT_OPERATOR_GETOFF,
+//          /*!< 替换 */
+//          EQUIPMENT_OPERATOR_CHANGE
+//      };
  
 //      /**
 //       * @brief 行动装备位的状态
@@ -39,27 +39,12 @@ class Player : public Actor
  public:
  	Player();
  	~Player();
- public://-操作----------------------------------------------------//
+ public://-加载相关----------------------------------------------------//
      /**
-      * @brief 初始化数据
+      * @brief 初始化
       */
-     virtual bool Init(const Player &oPlayer);
-     /**
-      * @brief 初始化数据
-      */
-     virtual bool Init( 
-         const int iID,
-         const string sName,
-         const int iHp,
-         const int iMaxHp,
-         const int iAttack,
-         const int iDefance,
-         const int iMoney, 
-         const int iLevel,
-         const int iExp,
-         const int iTotalExp);
- 
- 
+     virtual bool Init();
+
      /**
       * @brief 保存
       */
@@ -71,28 +56,30 @@ class Player : public Actor
      virtual bool Load(int &iLength, const char *const csBuffer);
  
      /**
-      * @brief 重置生命值
-      */
-     virtual void Reset();
- 
-     /**
       * @brief 装上装备或者卸下装备
       */
-//      EquipmentOperator Equip(
-//          const EquipmentOperator eEquipmentOperator,
-//          const Equipment &oNewEquipment,
-//          Equipment &oOldEuipment);
+//     EquipmentOperator Equip(
+//         const EquipmentOperator eEquipmentOperator,
+//         const Equipment &oNewEquipment,
+//         Equipment &oOldEuipment);
+
+public://-战斗相关----------------------------------------------------//
+    /**
+     * @brief 是否死亡
+     */
+    virtual bool IsDie()const;
+
+    /**
+    * @brief 防御伤害
+    */
+    virtual void Defance(const int iDamage);
  
-     /**
-      * @brief 防御伤害
-      */
-     virtual void Defance(const int iDamage);
- 
-     /**
-      * @brief 普攻伤害
-      */
-     virtual int Attack();
- 
+    /**
+    * @brief 普攻伤害
+    */
+    virtual int Attack();
+
+public://-金钱相关----------------------------------------------------//
      /**
       * @brief 加钱
       */
@@ -126,16 +113,14 @@ class Player : public Actor
      // */
      //const Bag& GetBag()const;
 
-
      inline PlayerData &UsePlayerData() { return m_stPlayerData; }
-
 
      inline const PlayerData &GetPlayerData() const { return m_stPlayerData; }
      
+     inline void SetPlayerData(PlayerData &stPlayerData) { m_stPlayerData = stPlayerData; }
  private:
      /*!< 玩家数据 */
      PlayerData m_stPlayerData;
-//     EquipmentState m_ayEquipments[Equipment::EQUIPMENT_TYPE_MAX];
  };
 
 

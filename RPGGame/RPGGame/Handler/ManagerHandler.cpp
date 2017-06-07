@@ -68,8 +68,8 @@ int ManagerHandler::Start()
 {
     const Player &oPlayer = g_PlayerManger.GetPlayer();
     notify::Notify oPropertyNotify;
-    oPropertyNotify.Add(notify::i_PropertyFrame_Hp,       oPlayer.GetHp());
-    oPropertyNotify.Add(notify::i_PropertyFrame_MaxHp,    oPlayer.GetMaxHp());
+    oPropertyNotify.Add(notify::i_PropertyFrame_Hp,       oPlayer.GetPlayerData().GetHp());
+    oPropertyNotify.Add(notify::i_PropertyFrame_MaxHp,    oPlayer.GetPlayerData().GetMaxHp());
     oPropertyNotify.Add(notify::i_PropertyFrame_Money,    oPlayer.GetPlayerData().GetMoney());
     oPropertyNotify.Add(notify::i_PropertyFrame_Level,    oPlayer.GetPlayerData().GetLevel());
     oPropertyNotify.Add(notify::i_PropertyFrame_Exp,      oPlayer.GetPlayerData().GetExp());
@@ -164,8 +164,8 @@ void ManagerHandler::UpdateTipsFrame(const string sNotifyMessage)
 void ManagerHandler::UpdatePropertyFrame()
 {
     notify::Notify oPropertyNotify;
-    oPropertyNotify.Add(notify::i_PropertyFrame_Hp,       g_PlayerManger.GetPlayer().GetHp());
-    oPropertyNotify.Add(notify::i_PropertyFrame_Money,    g_PlayerManger.GetPlayer().GetPlayerData.GetMoney());
+    oPropertyNotify.Add(notify::i_PropertyFrame_Hp,       g_PlayerManger.GetPlayer().GetPlayerData().GetHp());
+    oPropertyNotify.Add(notify::i_PropertyFrame_Money,    g_PlayerManger.GetPlayer().GetPlayerData().GetMoney());
     oPropertyNotify.Add(notify::i_PropertyFrame_Bag,      g_PlayerManger.GetBag().GetUsedCapacity());
     oPropertyNotify.Add(notify::i_PropertyFrame_TotalBag, g_PlayerManger.GetBag().GetCapacity());
     Notify(cmd::NOTIFY_UPDATE_PROPERTY, oPropertyNotify);

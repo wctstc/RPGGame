@@ -29,33 +29,6 @@ public:
      */
     static const PlayerData &GetNoPlayerData();
 public:
-	/**
-	 * @brief 装备槽
-	 */
-	enum EquipmentSlotType
-	{
-		/*<! 武器*/
-		EQUIPMENT_SLOT_TYPE_WEAPON = 0,
-
-		/*<! 防具*/
-		EQUIPMENT_SLOT_TYPE_AEMOR = 0,
-
-		/*<! 饰品*/
-		EQUIPMENT_SLOT_TYPE_ACCESSORY = 0,
-
-	};
-
-
-	
-	/**
-	 * @brief 装备槽
-	 */
-	struct EquipmentSlot
-	{
-		/*<! 编号*/
-		int iEquipmentID;
-
-	};
 
 
 public:
@@ -87,9 +60,24 @@ public:
 	inline const int GetID() const{return m_iID;}
 
 	/**
-	 * @brief 获取生命值
+	 * @brief 获取当前生命值
 	 */
 	inline const int GetHp() const{return m_iHp;}
+
+	/**
+	 * @brief 获取最大生命值
+	 */
+	inline const int GetMaxHp() const{return m_iMaxHp;}
+
+	/**
+	 * @brief 获取基础攻击力
+	 */
+	inline const int GetBaseAttack() const{return m_iBaseAttack;}
+
+	/**
+	 * @brief 获取基础防御力
+	 */
+	inline const int GetBaseDefance() const{return m_iBaseDefance;}
 
 	/**
 	 * @brief 获取钱
@@ -106,6 +94,21 @@ public:
 	 */
 	inline const int GetExp() const{return m_iExp;}
 
+	/**
+	 * @brief 获取武器
+	 */
+	inline const int GetWeapon() const{return m_iWeapon;}
+
+	/**
+	 * @brief 获取防具
+	 */
+	inline const int GetArmor() const{return m_iArmor;}
+
+	/**
+	 * @brief 获取饰品
+	 */
+	inline const int GetAccessory() const{return m_iAccessory;}
+
 	
 	/**
 	 * @brief 设置编号
@@ -113,9 +116,24 @@ public:
 	inline void SetID(const int iID){m_iID = iID;}
 	
 	/**
-	 * @brief 设置生命值
+	 * @brief 设置当前生命值
 	 */
 	inline void SetHp(const int iHp){m_iHp = iHp;}
+	
+	/**
+	 * @brief 设置最大生命值
+	 */
+	inline void SetMaxHp(const int iMaxHp){m_iMaxHp = iMaxHp;}
+	
+	/**
+	 * @brief 设置基础攻击力
+	 */
+	inline void SetBaseAttack(const int iBaseAttack){m_iBaseAttack = iBaseAttack;}
+	
+	/**
+	 * @brief 设置基础防御力
+	 */
+	inline void SetBaseDefance(const int iBaseDefance){m_iBaseDefance = iBaseDefance;}
 	
 	/**
 	 * @brief 设置钱
@@ -131,48 +149,45 @@ public:
 	 * @brief 设置当前获得经验
 	 */
 	inline void SetExp(const int iExp){m_iExp = iExp;}
-
-
-
-
+	
 	/**
-	 * @brief 获取装备槽数量
+	 * @brief 设置武器
 	 */
-	int GetEquipmentSlotNum() const;
-
-
+	inline void SetWeapon(const int iWeapon){m_iWeapon = iWeapon;}
+	
 	/**
-	 * @brief 获取装备槽
+	 * @brief 设置防具
 	 */
-	bool GetEquipmentSlot(const int iIndex, EquipmentSlot &stEquipmentSlot) const;
-
-
+	inline void SetArmor(const int iArmor){m_iArmor = iArmor;}
+	
 	/**
-	 * @brief 添加装备槽
+	 * @brief 设置饰品
 	 */
-	bool AddEquipmentSlot(const EquipmentSlot &stEquipmentSlot);
+	inline void SetAccessory(const int iAccessory){m_iAccessory = iAccessory;}
 
 
-	/**
-	 * @brief 移除装备槽
-	 */
-	bool RemoveEquipmentSlot(const int iIndex);
 
 
-		
-	/**
-	 * @brief 获取编号
-	 */
-	int GetEquipmentSlotEquipmentID(const int iIndex) const;
 
-		
+
+
+
 private:  
 
 	/*<! 编号*/
 	int m_iID;
 
-	/*<! 生命值*/
+	/*<! 当前生命值*/
 	int m_iHp;
+
+	/*<! 最大生命值*/
+	int m_iMaxHp;
+
+	/*<! 基础攻击力*/
+	int m_iBaseAttack;
+
+	/*<! 基础防御力*/
+	int m_iBaseDefance;
 
 	/*<! 钱*/
 	int m_iMoney;
@@ -183,12 +198,16 @@ private:
 	/*<! 当前获得经验*/
 	int m_iExp;
 
+	/*<! 武器*/
+	int m_iWeapon;
+
+	/*<! 防具*/
+	int m_iArmor;
+
+	/*<! 饰品*/
+	int m_iAccessory;
 
 
-	/*<! 装备槽*/
-	EquipmentSlot m_astEquipmentSlot[EQUIPMENT_SLOT_SIZE];
-	/*<! 装备槽数量*/
-	int m_iEquipmentSlotRef;
 
 };
 

@@ -13,13 +13,7 @@ PlayerManager::~PlayerManager()
 
 bool PlayerManager::Init()
 {
-    m_oPlayer.Init(10,"lost",10000, 10000, 10, 1, 10000,1,1, 1000);
-
-    m_oBag.Init(1, 20);
-    m_oBag.Add(1, 2);
-    m_oBag.Add(2, 3);
-    m_oBag.Add(3, 5);
-
+    m_oPlayer.Init();
 	return true;
 }
 

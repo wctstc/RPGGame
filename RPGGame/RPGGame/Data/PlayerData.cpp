@@ -4,17 +4,19 @@
 PlayerData::PlayerData()
 :	m_iID(0)
 ,	m_iHp(0)
+,	m_iMaxHp(0)
+,	m_iBaseAttack(0)
+,	m_iBaseDefance(0)
 ,	m_iMoney(0)
 ,	m_iLevel(0)
 ,	m_iExp(0)
+,	m_iWeapon(0)
+,	m_iArmor(0)
+,	m_iAccessory(0)
 
 {
 
 
-	m_iEquipmentSlotRef = 0;
-
-
-	memset(m_astEquipmentSlot, 0, sizeof(EquipmentSlot)*EQUIPMENT_SLOT_SIZE);
 
 }
 
@@ -36,18 +38,26 @@ bool PlayerData::Init()
 	
 	m_iHp = 0;
 	
+	m_iMaxHp = 0;
+	
+	m_iBaseAttack = 0;
+	
+	m_iBaseDefance = 0;
+	
 	m_iMoney = 0;
 	
 	m_iLevel = 0;
 	
 	m_iExp = 0;
+	
+	m_iWeapon = 0;
+	
+	m_iArmor = 0;
+	
+	m_iAccessory = 0;
 
 
 
-	m_iEquipmentSlotRef = 0;
-
-
-	memset(m_astEquipmentSlot, 0, sizeof(EquipmentSlot)*EQUIPMENT_SLOT_SIZE);
 
 
     return true;
@@ -60,16 +70,24 @@ bool PlayerData::Init(const PlayerData &oPlayerData)
 
 	m_iHp = oPlayerData.m_iHp;
 
+	m_iMaxHp = oPlayerData.m_iMaxHp;
+
+	m_iBaseAttack = oPlayerData.m_iBaseAttack;
+
+	m_iBaseDefance = oPlayerData.m_iBaseDefance;
+
 	m_iMoney = oPlayerData.m_iMoney;
 
 	m_iLevel = oPlayerData.m_iLevel;
 
 	m_iExp = oPlayerData.m_iExp;
 
+	m_iWeapon = oPlayerData.m_iWeapon;
 
-	memcpy(m_astEquipmentSlot, oPlayerData.m_astEquipmentSlot, sizeof(EquipmentSlot)*oPlayerData.m_iEquipmentSlotRef);
-	
-	m_iEquipmentSlotRef = oPlayerData.m_iEquipmentSlotRef;
+	m_iArmor = oPlayerData.m_iArmor;
+
+	m_iAccessory = oPlayerData.m_iAccessory;
+
 
     return true;
 }
@@ -86,55 +104,10 @@ bool PlayerData::FromString(const string sBuffer)
 }
 
 
-	
-int PlayerData::GetEquipmentSlotNum() const
-{
-	return m_iEquipmentSlotRef;
-}
-
-
-bool PlayerData::GetEquipmentSlot(const int iIndex, EquipmentSlot &stEquipmentSlot) const
-{
-	if(iIndex < 0 || iIndex >= m_iEquipmentSlotRef)
-		return false;
-
-	stEquipmentSlot = m_astEquipmentSlot[iIndex];
-	return true;
-}
 
 
 
-bool PlayerData::AddEquipmentSlot(const EquipmentSlot &stEquipmentSlot)
-{
-	if(m_iEquipmentSlotRef >= EQUIPMENT_SLOT_SIZE)
-		return false;
-		
-	m_astEquipmentSlot[m_iEquipmentSlotRef++] = stEquipmentSlot;
-	return true;
-}
-
-	
-bool PlayerData::RemoveEquipmentSlot(const int iIndex)
-{
-	if(iIndex < 0 || iIndex >= m_iEquipmentSlotRef)
-		return false;
-
-	--m_iEquipmentSlotRef;
-	
-	for (int i = iIndex; i < m_iEquipmentSlotRef; ++i)
-		m_astEquipmentSlot[i] = m_astEquipmentSlot[i+1];
-
-	return true;
-}
 
 
 
-		
-int PlayerData::GetEquipmentSlotEquipmentID(const int iIndex) const
-{
-	if (iIndex < m_iEquipmentSlotRef && iIndex >= 0) 
-		return m_astEquipmentSlot[iIndex].iEquipmentID;
 
-	return 0;
-}
-		
