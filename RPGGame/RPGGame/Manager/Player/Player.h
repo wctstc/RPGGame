@@ -108,11 +108,6 @@ public://-金钱相关----------------------------------------------------//
  
  
  public://-模块数据获取----------------------------------------------------//
-     //**
-     // * @brief 获取背包
-     // */
-     //const Bag& GetBag()const;
-
      inline PlayerData &UsePlayerData() { return m_stPlayerData; }
 
      inline const PlayerData &GetPlayerData() const { return m_stPlayerData; }

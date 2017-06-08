@@ -8,24 +8,15 @@
 
 
 
-
-
 using std::string;
 
 /**
  * @brief 框数据
  */
-class FrameData 
+class FrameData
 {
 public:
-    FrameData();
-    ~FrameData();
-public:
-    /**
-     * @brief 空对象
-     */
-    static const FrameData &GetNoFrameData();
-public:
+
 	/**
 	 * @brief 框状态
 	 */
@@ -39,7 +30,14 @@ public:
 
 	};
 
-
+public:
+    FrameData();
+    ~FrameData();
+public:
+    /**
+     * @brief 空对象
+     */
+    static const FrameData &GetNoFrameData();
 public:
     /**
      * @brief 初始化
@@ -66,34 +64,49 @@ public:
 	/**
 	 * @brief 获取数据
 	 */
-	inline const int GetData() const{return m_iData;}
+	inline const int &GetData() const{return m_iData;}
 
 	/**
 	 * @brief 获取选中选项
 	 */
-	inline const int GetIndex() const{return m_iIndex;}
+	inline const int &GetIndex() const{return m_iIndex;}
 
 	/**
 	 * @brief 获取框状态
 	 */
-	inline const FrameData::FrameState GetState() const{return m_eState;}
+	inline const FrameData::FrameState &GetState() const{return m_eState;}
+
+
+	/**
+	 * @brief 使用数据
+	 */
+	inline int &UseData(){return m_iData;}
+
+	/**
+	 * @brief 使用选中选项
+	 */
+	inline int &UseIndex(){return m_iIndex;}
+
+	/**
+	 * @brief 使用框状态
+	 */
+	inline FrameData::FrameState &UseState(){return m_eState;}
 
 	
 	/**
 	 * @brief 设置数据
 	 */
-	inline void SetData(const int iData){m_iData = iData;}
+	inline void SetData(const int &iData){m_iData = iData;}
 	
 	/**
 	 * @brief 设置选中选项
 	 */
-	inline void SetIndex(const int iIndex){m_iIndex = iIndex;}
+	inline void SetIndex(const int &iIndex){m_iIndex = iIndex;}
 	
 	/**
 	 * @brief 设置框状态
 	 */
-	inline void SetState(const FrameData::FrameState eState){m_eState = eState;}
-
+	inline void SetState(const FrameData::FrameState &eState){m_eState = eState;}
 
 
 

@@ -1,12 +1,14 @@
 
-#ifndef __CONTAINER_H__
-#define __CONTAINER_H__
+#ifndef __CONTAINERDATA_H__
+#define __CONTAINERDATA_H__
 
 #include <string>
 
 
+#include "CellData.h"
 
-	
+
+
 /*<! 容器容量*/
 #define MAX_CONTAINER_CAPACITY 30
 
@@ -16,18 +18,18 @@ using std::string;
 /**
  * @brief 容器
  */
-class Container
+class ContainerData
 {
 public:
 
 public:
-    Container();
-    ~Container();
+    ContainerData();
+    ~ContainerData();
 public:
     /**
      * @brief 空对象
      */
-    static const Container &GetNoContainer();
+    static const ContainerData &GetNoContainerData();
 public:
     /**
      * @brief 初始化
@@ -37,7 +39,7 @@ public:
     /**
      * @brief 初始化
      */
-    virtual bool Init(const Container &oContainer);
+    virtual bool Init(const ContainerData &oContainerData);
     
     /**
      * @brief 字符串化
@@ -108,4 +110,4 @@ private:
 
 };
 
-#endif //__CONTAINER_H__
+#endif //__CONTAINERDATA_H__

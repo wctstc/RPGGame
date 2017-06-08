@@ -2,11 +2,10 @@
 #include "ItemData.h"
 
 ItemData::ItemData()
-:	m_iID(0)
-,	m_iNum(0)
+:m_iID(0)
+,m_iNum(0)
 
 {
-
 
 
 }
@@ -23,12 +22,10 @@ const ItemData &ItemData::GetNoItemData()
 }
 
 bool ItemData::Init()
-{
+{	
+	m_iID = int(0);
 	
-	m_iID = 0;
-	
-	m_iNum = 0;
-
+	m_iNum = int(0);
 
 
 
@@ -38,7 +35,6 @@ bool ItemData::Init()
 
 bool ItemData::Init(const ItemData &oItemData)
 {
-
 	m_iID = oItemData.m_iID;
 
 	m_iNum = oItemData.m_iNum;
@@ -57,8 +53,6 @@ bool ItemData::FromString(const string sBuffer)
 {
     return true;
 }
-
-
 
 
 

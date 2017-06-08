@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-param:
-lower -> Â∞èÂÜô
-upper -> Â§ßÂÜô
+<class> name comment
+	<inclue> name
+	<macro> name value comment
+	<enum> name comment
+		<property> name value comment
+	<property> name prefix type default comment
+	<string_property> name max comment
+	<array_property> name type max comment
+</class>
+	
 
-
-
-
-xmlÂ≠óÁ¨¶ËΩ¨‰πâ:
+xml◊÷∑˚◊™“Â:
 &amp;        &
 &lt;         <
 &gt;         >
@@ -19,42 +23,34 @@ xmlÂ≠óÁ¨¶ËΩ¨‰πâ:
 
 
 <!-------------->
-<!-- Âü∫Á°ÄÊï∞ÊçÆ -->
+<!-- ª˘¥° ˝æ› -->
 <!-------------->
 
 <class type="class">
-
 	<!------------>
-	<!--Âü∫Êú¨Â±ûÊÄß-->
+	<!--ª˘±æ Ù–‘-->
 	<!------------>
 	<base name="class_name"       attr="name"/>
 	<base name="class_name_lower" attr="name" param="lower"/>
 	<base name="class_name_upper" attr="name" param="upper"/>
 	<base name="class_comment"    attr="comment"/>
 
-
-	<!-------->
-	<!--Áà∂Á±ª-->
-	<!-------->
-	<parent name="parent_include">
-#include "#parent##class_name#.h"
-	</parent>
-	<parent name="parent_inherit">
-:public #parent##class_name#
-	</parent>
-
-	<parent name="parent_init_implement">
-	if(!#parent##class_name#::Init())
-		return false;
-	</parent>
-
-	<parent name="parent_init_self_implement">
-	if(!#parent##class_name#::Init(o#class_name#))
-		return false;
-	</parent>
-
 	<!---------->
-	<!--ÂÆèÂÆö‰πâ-->
+	<!--Õ∑Œƒº˛-->
+	<!---------->
+	<list name="include">
+		<base name="include_name" attr="name"/>
+	</list>
+	
+	<!-- Õ∑Œƒº˛…Í√˜ -->
+	<compose name="compose_include" ref="include" gap="">
+
+#include "#include_name#.h"
+
+	</compose>
+	
+	<!---------->
+	<!--∫Í∂®“Â-->
 	<!---------->
 	<list name="macro">
 		<base name="macro_name" attr="name"/>
@@ -62,66 +58,91 @@ xmlÂ≠óÁ¨¶ËΩ¨‰πâ:
 		<base name="macro_comment" attr="comment"/>
 	</list>
 
-	<!-- ÂÆèÂÆö‰πâ -->
+	<!-- ∫Í∂®“Â -->
 	<compose name="compose_macro" ref="macro" gap="">
 
 /*&lt;! #macro_comment#*/
 #define #macro_name# #macro_value#
 
 	</compose>
-
-	<!------------>
-	<!--ÂÖ®Â±ÄÂÆö‰πâ-->
-	<!------------>
-	<list name="globle">
-		<base name="globle_name"    attr="name"/>
-		<base name="globle_prefix"  attr="prefix"/>
-		<base name="globle_type"    attr="type"/>
-		<base name="globle_default" attr="default"/>
-		<base name="globle_comment" attr="comment"/>
-	</list>
-
-	<!-- ÂÖ®Â±ÄÂèòÈáèÂÆö‰πâ -->
-	<compose name="compose_globle" ref="globle" gap="">
-
-/*&lt;! #globle_comment#*/
-static #globle_type# g_#globle_prefix##globle_name# = #globle_default#;
-
-	</compose>
-
+	
+	
 	
 	<!---------------->
-	<!--Âü∫Êú¨ÊàêÂëòÂèòÈáè-->
+	<!--√∂æŸ ˝æ›Ω·ππ-->
 	<!---------------->
-	<list name="property">
-		<base name="property_name"       attr="name"/>
-		<base name="property_prefix"     attr="prefix"/>
-		<base name="property_type"       attr="type"/>
-		<base name="property_default"    attr="default" default="0"/>
-		<base name="property_comment"    attr="comment"/>
+	<list name="enum">    
+		<base name="enum_name" attr="name"/>
+		<base name="enum_comment" attr="comment"/>
+		<list name="property">
+			<base name="enum_property_name"    attr="name"/>
+			<base name="enum_property_value"   attr="value"/>
+			<base name="enum_property_comment" attr="comment"/>
+		</list>
+		
+		<compose name="compose_enum_property_declaration" ref="property" gap="">
+
+		/*&lt;! #enum_property_comment#*/
+		#enum_property_name# = #enum_property_value#,
+
+		</compose>
 	</list>
 
-	<!-- GetÂáΩÊï∞ -->
+	<compose name="compose_enum_declaration" ref="enum" gap="">
+
+	/**
+	 * @brief #enum_comment#
+	 */
+	enum #enum_name#
+	{#compose_enum_property_declaration#
+	};
+
+	</compose>
+	
+	
+	
+	<!---------------->
+	<!--ª˘±æ≥…‘±±‰¡ø-->
+	<!---------------->
+	<list name="property">
+		<base name="property_name"    attr="name"/>
+		<base name="property_prefix"  attr="prefix"/>
+		<base name="property_type"    attr="type"/>
+		<base name="property_default" attr="default" default="0"/>
+		<base name="property_comment" attr="comment"/>
+	</list>
+
+	<!-- Get∫Ø ˝ -->
 	<compose name="compose_property_get" ref="property" gap="">
 
 	/**
-	 * @brief Ëé∑Âèñ#property_comment#
+	 * @brief ªÒ»°#property_comment#
 	 */
-	inline const #property_type# Get#property_name#() const{return m_#property_prefix##property_name#;}
+	inline const #property_type# &amp;Get#property_name#() const{return m_#property_prefix##property_name#;}
 
 	</compose>
+	
+	<!-- Use∫Ø ˝ -->
+	<compose name="compose_property_use" ref="property" gap="">
 
-	<!-- SetÂáΩÊï∞ -->
+	/**
+	 * @brief  π”√#property_comment#
+	 */
+	inline #property_type# &amp;Use#property_name#(){return m_#property_prefix##property_name#;}
+
+	</compose>
+	
+	<!-- Set∫Ø ˝ -->
 	<compose name="compose_property_set" ref="property" gap="">
 	
 	/**
-	 * @brief ËÆæÁΩÆ#property_comment#
+	 * @brief …Ë÷√#property_comment#
 	 */
-	inline void Set#property_name#(const #property_type# #property_prefix##property_name#){m_#property_prefix##property_name# = #property_prefix##property_name#;}
+	inline void Set#property_name#(const #property_type# &amp;#property_prefix##property_name#){m_#property_prefix##property_name# = #property_prefix##property_name#;}
 
 	</compose>
 
-	<!-- ÊàêÂëòÂèòÈáèÂ£∞Êòé -->
+	<!-- ≥…‘±±‰¡ø…˘√˜ -->
 	<compose name="compose_property_declaration" ref="property" gap="">
 
 	/*&lt;! #property_comment#*/
@@ -129,20 +150,20 @@ static #globle_type# g_#globle_prefix##globle_name# = #globle_default#;
 
 	</compose>
 
-	<!-- Á©∫ÊûÑÈÄ†ÂáΩÊï∞ÁöÑÂàùÂßãÂåñÂàóË°® -->
+	<!-- ø’ππ‘Ï∫Ø ˝µƒ≥ı ºªØ¡–±Ì -->
 	<compose name="compose_create_implement" ref="property" gap=",">
-	m_#property_prefix##property_name#(#property_default#)
+m_#property_prefix##property_name#(#property_default#)
 
 	</compose>
 
-	<!-- Á©∫initÂáΩÊï∞ÁöÑËµãÂÄº -->
+	<!-- ø’init∫Ø ˝µƒ∏≥÷µ -->
 	<compose name="compose_init_implement" ref="property" gap="">
 	
-	m_#property_prefix##property_name# = #property_default#;
+	m_#property_prefix##property_name# = #property_type#(#property_default#);
 
 	</compose>
 
-	<!-- Êã∑Ë¥ùinitÂáΩÊï∞ÁöÑËµãÂÄº -->
+	<!-- øΩ±¥init∫Ø ˝µƒ∏≥÷µ -->
 	<compose name="compose_init_self_implement" ref="property" gap="">
 
 	m_#property_prefix##property_name# = o#class_name#.m_#property_prefix##property_name#;
@@ -150,7 +171,7 @@ static #globle_type# g_#globle_prefix##globle_name# = #globle_default#;
 	</compose>
 
 	<!------------------>
-	<!--Â≠óÁ¨¶‰∏≤ÊàêÂëòÂèòÈáè-->
+	<!--◊÷∑˚¥Æ≥…‘±±‰¡ø-->
 	<!------------------>
 	<list name="string_property">
 		<base name="string_property_name"    attr="name"/>
@@ -158,17 +179,17 @@ static #globle_type# g_#globle_prefix##globle_name# = #globle_default#;
 		<base name="string_property_comment" attr="comment"/>
 	</list>
 	
-	<!--Áî≥Êòé-->
+	<!--…Í√˜-->
 	<compose name="compose_string_property_declaration" ref="string_property" gap="">
 	
 	/*&lt;! #string_property_comment#*/
 	char m_s#string_property_name#[#string_property_max#];
-	/*&lt;! #string_property_comment#ÈïøÂ∫¶*/
+	/*&lt;! #string_property_comment#≥§∂»*/
 	int m_i#string_property_name#Len;
 	
 	</compose>
 	
-	<!--ÂàùÂßãÂåñ-->
+	<!--≥ı ºªØ-->
 	<compose name="compose_string_property_init_implement" ref="string_property" gap="">
 	
 	m_i#string_property_name#Len = 0;
@@ -177,21 +198,21 @@ static #globle_type# g_#globle_prefix##globle_name# = #globle_default#;
 	</compose>
 	
 	
-	<!--GetÂáΩÊï∞-->
+	<!--Get∫Ø ˝-->
 	<compose name="compose_string_property_get" ref="string_property" gap="">
 	
 	/**
-	 * @brief Ëé∑Âèñ#string_property_comment#
+	 * @brief ªÒ»°#string_property_comment#
 	 */
 	const char *Get#string_property_name#() const;
 	
 	/**
-	 * @brief Ëé∑Âèñ#string_property_commentÈïøÂ∫¶#
+	 * @brief ªÒ»°#string_property_comment≥§∂»#
 	 */
 	const int Get#string_property_name#Len() const;
 	
 	</compose>
-	<!--GetÂáΩÊï∞-->
+	<!--Get∫Ø ˝-->
 	<compose name="compose_string_property_get_implement" ref="string_property" gap="">
 
 const char *#class_name#::Get#string_property_name#() const
@@ -206,16 +227,16 @@ const int #class_name#::Get#string_property_name#Len() const
 
 	</compose>
 	
-	<!--SetÂáΩÊï∞-->
+	<!--Set∫Ø ˝-->
 	<compose name="compose_string_property_set" ref="string_property" gap="">
 	
 	/**
-	 * @brief ËÆæÁΩÆ#string_property_comment#
+	 * @brief …Ë÷√#string_property_comment#
 	 */
 	bool Set#string_property_name#(const char *p#string_property_name#, const int iLen);
 	
 	</compose>
-	<!--SetÂáΩÊï∞-->
+	<!--Set∫Ø ˝-->
 	<compose name="compose_string_property_set_implement" ref="string_property" gap="">
 
 bool #class_name#::Set#string_property_name#(const char *p#string_property_name#, const int iLen)
@@ -231,251 +252,144 @@ bool #class_name#::Set#string_property_name#(const char *p#string_property_name#
 
 	</compose>
 	
+	
 	<!---------------->
-	<!--Êï∞ÁªÑÊàêÂëòÂèòÈáè-->
+	<!-- ˝◊È≥…‘±±‰¡ø-->
 	<!---------------->
-	<list name="struct_array_property">
-		<base name="struct_array_property_name"    attr="name"/>
-		<base name="struct_array_property_type"    attr="type"/>
-		<base name="struct_array_property_max"     attr="max"/>
-		<base name="struct_array_property_comment" attr="comment"/>
-		<list name="struct">
-			<base name="struct_name" attr="name"/>
-			<base name="struct_comment" attr="comment"/>
-			<list name="property">
-				<base name="property_name" attr="name"/>
-				<base name="property_prefix" attr="prefix"/>
-				<base name="property_type" attr="type"/>
-				<base name="property_default" attr="default"/>
-				<base name="property_comment" attr="comment"/>
-			</list>
-			<compose name="array_property_struct_property_get" ref="property" gap="">
-
-	/**
-	 * @brief Ëé∑Âèñ#property_comment#
-	 */
-	#property_type# Get#struct_array_property_name##property_name#(const int iIndex) const;
-
-			</compose>
-			<compose name="array_property_struct_property_get_implement" ref="property" gap="">
-
-#property_type# #class_name#::Get#struct_array_property_name##property_name#(const int iIndex) const
-{
-	if (iIndex &lt; m_i#struct_array_property_name#Ref &amp;&amp; iIndex >= 0) 
-		return m_ast#struct_array_property_name#[iIndex].#property_prefix##property_name#;
-
-	return #property_default#;
-}
-			</compose>
-			
-			<compose name="array_property_struct_property_declaration" ref="property" gap="">
-
-		/*&lt;! #property_comment#*/
-		#property_type# #property_prefix##property_name#;
-
-			</compose>
-		</list>
-		
-		<compose name="array_property_struct_get" ref="struct" gap="">
-
-		#array_property_struct_property_get#
-		
-		</compose>
-		<compose name="array_property_struct_get_implement" ref="struct" gap="">
-
-		#array_property_struct_property_get_implement#
-		
-		</compose>
-		
-		<compose name="array_property_struct_declaration" ref="struct" gap="">
-
-	/**
-	 * @brief #struct_comment#
-	 */
-	struct #struct_array_property_name#
-	{#array_property_struct_property_declaration#
-	};
-
-		</compose>
+	<list name="array_property">
+		<base name="array_property_name"    attr="name"/>
+		<base name="array_property_type"    attr="type"/>
+		<base name="array_property_max"     attr="max"/>
+		<base name="array_property_comment" attr="comment"/>
 	</list>
 
-	<!-- ÁªìÊûÑÁî≥Êòé -->
-	<compose name="array_property_declaration" ref="struct_array_property" gap="">
+	<!-- ≥…‘±±‰¡ø…˘√˜ -->
+	<compose name="compose_array_property_declaration" ref="array_property" gap="">
 
-	#array_property_struct_declaration#
-
-	</compose>
-	<!-- ÊàêÂëòÂèòÈáèÂ£∞Êòé -->
-	<compose name="compose_array_property_declaration" ref="struct_array_property" gap="">
-
-	/*&lt;! #struct_array_property_comment#*/
-	#struct_array_property_type# m_ast#struct_array_property_name#[#struct_array_property_max#];
-	/*&lt;! #struct_array_property_comment#Êï∞Èáè*/
-	int m_i#struct_array_property_name#Ref;
+	/*&lt;! #array_property_comment#*/
+	#array_property_type# m_ast#array_property_name#[#array_property_max#];
+	/*&lt;! #array_property_comment# ˝¡ø*/
+	int m_i#array_property_name#Num;
 
 	</compose>
 
-	<!-- GetNumÂáΩÊï∞ -->
-	<compose name="compose_array_property_get_num" ref="struct_array_property" gap="">
+	<!-- GetNum∫Ø ˝ -->
+	<compose name="compose_array_property_get_num" ref="array_property" gap="">
 
 	/**
-	 * @brief Ëé∑Âèñ#struct_array_property_comment#Êï∞Èáè
+	 * @brief ªÒ»°#array_property_comment# ˝¡ø
 	 */
-	int Get#struct_array_property_name#Num() const;
+	int Get#array_property_name#Num() const;
 
 	</compose>
 
-	<!-- GetNumÂáΩÊï∞ -->
-	<compose name="compose_array_property_get_num_implement" ref="struct_array_property" gap="">
+	<!-- GetNum∫Ø ˝ -->
+	<compose name="compose_array_property_get_num_implement" ref="array_property" gap="">
 	
-int #class_name#::Get#struct_array_property_name#Num() const
+int #class_name#::Get#array_property_name#Num() const
 {
-	return m_i#struct_array_property_name#Ref;
+	return m_i#array_property_name#Num;
 }
 
 	</compose>
 
-	<!-- GetÂáΩÊï∞ -->
-	<compose name="compose_array_property_get" ref="struct_array_property" gap="">
+	<!-- Get∫Ø ˝ -->
+	<compose name="compose_array_property_get" ref="array_property" gap="">
 
 	/**
-	 * @brief Ëé∑Âèñ#struct_array_property_comment#
+	 * @brief ªÒ»°#array_property_comment#
 	 */
-	bool Get#struct_array_property_name#(const int iIndex, #struct_array_property_type# &amp;st#struct_array_property_name#) const;
+	bool Get#array_property_name#(const int iIndex, #array_property_type# &amp;st#array_property_name#) const;
 
 	</compose>
 
 
-	<!-- GetÂáΩÊï∞ÂÆûÁé∞ -->
-	<compose name="compose_array_property_get_implement" ref="struct_array_property" gap="">
+	<!-- Get∫Ø ˝ µœ÷ -->
+	<compose name="compose_array_property_get_implement" ref="array_property" gap="">
 
-bool #class_name#::Get#struct_array_property_name#(const int iIndex, #struct_array_property_type# &amp;st#struct_array_property_name#) const
+bool #class_name#::Get#array_property_name#(const int iIndex, #array_property_type# &amp;st#array_property_name#) const
 {
-	if(iIndex &lt; 0 || iIndex &gt;= m_i#struct_array_property_name#Ref)
+	if(iIndex &lt; 0 || iIndex &gt;= m_i#array_property_name#Num)
 		return false;
 
-	st#struct_array_property_name# = m_ast#struct_array_property_name#[iIndex];
+	st#array_property_name# = m_ast#array_property_name#[iIndex];
 	return true;
 }
 
 	</compose>
 	
-	<!-- GetÂáΩÊï∞ -->
-	<compose name="compose_array_struct_get" ref="struct_array_property" gap="">
-#array_property_struct_get#
-	</compose>
-	<!-- GetÂáΩÊï∞ÂÆûÁé∞ -->
-	<compose name="compose_array_struct_get_implement" ref="struct_array_property" gap="">
-#array_property_struct_get_implement#
-	</compose>
-
-	<!-- AddÂáΩÊï∞ -->
-	<compose name="compose_add" ref="struct_array_property" gap="">
+	<!-- Add∫Ø ˝ -->
+	<compose name="compose_add" ref="array_property" gap="">
 
 	/**
-	 * @brief Ê∑ªÂä†#struct_array_property_comment#
+	 * @brief ÃÌº”#array_property_comment#
 	 */
-	bool Add#struct_array_property_name#(const #struct_array_property_type# &amp;st#struct_array_property_name#);
+	bool Add#array_property_name#(const #array_property_type# &amp;st#array_property_name#);
 
 	</compose>
 
-	<!-- AddÂáΩÊï∞ÂÆûÁé∞ -->
-	<compose name="compose_add_implement" ref="struct_array_property" gap="">
+	<!-- Add∫Ø ˝ µœ÷ -->
+	<compose name="compose_add_implement" ref="array_property" gap="">
 
-bool #class_name#::Add#struct_array_property_name#(const #struct_array_property_type# &amp;st#struct_array_property_name#)
+bool #class_name#::Add#array_property_name#(const #array_property_type# &amp;st#array_property_name#)
 {
-	if(m_i#struct_array_property_name#Ref &gt;= #struct_array_property_max#)
+	if(m_i#array_property_name#Num &gt;= #array_property_max#)
 		return false;
 		
-	m_ast#struct_array_property_name#[m_i#struct_array_property_name#Ref++] = st#struct_array_property_name#;
+	m_ast#array_property_name#[m_i#array_property_name#Num++] = st#array_property_name#;
 	return true;
 }
 
 	</compose>
 
-	<!-- RemoveÂáΩÊï∞ -->
-	<compose name="compose_remove" ref="struct_array_property" gap="">
+	<!-- Remove∫Ø ˝ -->
+	<compose name="compose_remove" ref="array_property" gap="">
 
 	/**
-	 * @brief ÁßªÈô§#struct_array_property_comment#
+	 * @brief “∆≥˝#array_property_comment#
 	 */
-	bool Remove#struct_array_property_name#(const int iIndex);
+	bool Remove#array_property_name#(const int iIndex);
 
 	</compose>
 
-	<!-- RemoveÂáΩÊï∞ÂÆûÁé∞ -->
-	<compose name="compose_remove_implement" ref="struct_array_property" gap="">
+	<!-- Remove∫Ø ˝ µœ÷ -->
+	<compose name="compose_remove_implement" ref="array_property" gap="">
 	
-bool #class_name#::Remove#struct_array_property_name#(const int iIndex)
+bool #class_name#::Remove#array_property_name#(const int iIndex)
 {
-	if(iIndex &lt; 0 || iIndex &gt;= m_i#struct_array_property_name#Ref)
+	if(iIndex &lt; 0 || iIndex &gt;= m_i#array_property_name#Num)
 		return false;
 
-	--m_i#struct_array_property_name#Ref;
+	--m_i#array_property_name#Num;
 	
-	for (int i = iIndex; i &lt; m_i#struct_array_property_name#Ref; ++i)
-		m_ast#struct_array_property_name#[i] = m_ast#struct_array_property_name#[i+1];
+	for (int i = iIndex; i &lt; m_i#array_property_name#Num; ++i)
+		m_ast#array_property_name#[i] = m_ast#array_property_name#[i+1];
 
 	return true;
 }
 
 	</compose>
 
-	<!-- Á©∫ÊûÑÈÄ†ÂáΩÊï∞ÁöÑÂàùÂßãÂåñÂàóË°® -->
-	<compose name="compose_init_ref_implement" ref="struct_array_property" gap="">
+	<!-- ø’ππ‘Ï∫Ø ˝µƒ≥ı ºªØ¡–±Ì -->
+	<compose name="compose_init_array_implement" ref="array_property" gap="">
 
-	m_i#struct_array_property_name#Ref = 0;
-
-	</compose>
-	<!-- Á©∫ÊûÑÈÄ†ÂáΩÊï∞ÁöÑÂàùÂßãÂåñÂàóË°® -->
-	<compose name="compose_init_array_implement" ref="struct_array_property" gap="">
-
-	memset(m_ast#struct_array_property_name#, 0, sizeof(#struct_array_property_type#)*#struct_array_property_max#);
+	m_i#array_property_name#Num = 0;
+	memset(m_ast#array_property_name#, 0, sizeof(#array_property_type#)*#array_property_max#);
 
 	</compose>
-	<!-- initÂáΩÊï∞ -->
-	<compose name="compose_init_self_array_implement" ref="struct_array_property" gap="">
+	<!-- init∫Ø ˝ -->
+	<compose name="compose_init_self_array_implement" ref="array_property" gap="">
 
-	memcpy(m_ast#struct_array_property_name#, o#class_name#.m_ast#struct_array_property_name#, sizeof(#struct_array_property_type#)*o#class_name#.m_i#struct_array_property_name#Ref);
-	
-	m_i#struct_array_property_name#Ref = o#class_name#.m_i#struct_array_property_name#Ref;
+	m_i#array_property_name#Num = o#class_name#.m_i#array_property_name#Num;
+	memcpy(m_ast#array_property_name#, o#class_name#.m_ast#array_property_name#, sizeof(#array_property_type#)*o#class_name#.m_i#array_property_name#Num);
 
 	</compose>
 
 	
-	<!---------------->
-	<!--Êûö‰∏æÊï∞ÊçÆÁªìÊûÑ-->
-	<!---------------->
-	<list name="enum">    
-		<base name="enum_name" attr="name"/>
-		<base name="enum_comment" attr="comment"/>
-		<list name="property">
-			<base name="enum_property_name"    attr="name"/>
-			<base name="enum_property_value"   attr="value"/>
-			<base name="enum_property_comment" attr="comment"/>
-		</list>
-		
-		<compose name="declare_enum_property" ref="property" gap="">
-
-		/*&lt;! #enum_property_comment#*/
-		#enum_property_name# = #enum_property_value#,
-
-		</compose>
-	</list>
-
-	<compose name="inner_enum_list" ref="enum" gap="">
-	/**
-	 * @brief #enum_comment#
-	 */
-	enum #enum_name#
-	{#declare_enum_property#
-	};
-
-	</compose>
 </class>
 
 <!-------------->
-<!-- ÁîüÊàêÊñá‰ª∂ -->
+<!-- …˙≥…Œƒº˛ -->
 <!-------------->
 <file file="#class_name#.h">
 #ifndef __#class_name_upper#_H__
@@ -483,53 +397,51 @@ bool #class_name#::Remove#struct_array_property_name#(const int iIndex)
 
 #include &lt;string&gt;
 
-#parent_include#
+#compose_include#
 
 #compose_macro#
-
-#compose_globle#
 
 using std::string;
 
 /**
  * @brief #class_comment#
  */
-class #class_name# #parent_inherit#
+class #class_name#
 {
+public:
+#compose_enum_declaration#
 public:
     #class_name#();
     ~#class_name#();
 public:
     /**
-     * @brief Á©∫ÂØπË±°
+     * @brief ø’∂‘œÛ
      */
     static const #class_name# &amp;GetNo#class_name#();
 public:
-#inner_enum_list#
-#array_property_declaration#
-public:
     /**
-     * @brief ÂàùÂßãÂåñ
+     * @brief ≥ı ºªØ
      */
     virtual bool Init();
     
     /**
-     * @brief ÂàùÂßãÂåñ
+     * @brief ≥ı ºªØ
      */
     virtual bool Init(const #class_name# &amp;o#class_name#);
     
     /**
-     * @brief Â≠óÁ¨¶‰∏≤Âåñ
+     * @brief ◊÷∑˚¥ÆªØ
      */
     virtual string ToString()const;
     
     /**
-     * @brief ÂèçÂ≠óÁ¨¶‰∏≤Âåñ
+     * @brief ∑¥◊÷∑˚¥ÆªØ
      */
     virtual bool FromString(const string sBuffer);
 
 public:    
 #compose_property_get#
+#compose_property_use#
 #compose_property_set#
 #compose_string_property_get#
 #compose_string_property_set#
@@ -537,7 +449,6 @@ public:
 #compose_array_property_get#
 #compose_add#
 #compose_remove#
-#compose_array_struct_get#
 private:  
 #compose_property_declaration#
 #compose_string_property_declaration#
@@ -548,7 +459,7 @@ private:
 </file>
 
 
-<!-- ÁîüÊàêÊñá‰ª∂ -->
+<!-- …˙≥…Œƒº˛ -->
 <file file="#class_name#.cpp">
 #include &quot;#class_name#.h&quot;
 
@@ -556,7 +467,6 @@ private:
 :#compose_create_implement#
 {
 #compose_string_property_init_implement#
-#compose_init_ref_implement#
 #compose_init_array_implement#
 }
 
@@ -572,18 +482,15 @@ const #class_name# &amp;#class_name#::GetNo#class_name#()
 }
 
 bool #class_name#::Init()
-{#parent_init_implement#
-#compose_init_implement#
+{#compose_init_implement#
 #compose_string_property_init_implement#
-#compose_init_ref_implement#
 #compose_init_array_implement#
 
     return true;
 }
 
 bool #class_name#::Init(const #class_name# &amp;o#class_name#)
-{#parent_init_self_implement#
-#compose_init_self_implement#
+{#compose_init_self_implement#
 #compose_init_self_array_implement#
     return true;
 }
@@ -605,6 +512,4 @@ bool #class_name#::FromString(const string sBuffer)
 
 #compose_add_implement#
 #compose_remove_implement#
-
-#compose_array_struct_get_implement#
 </file>

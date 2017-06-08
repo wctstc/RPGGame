@@ -8,15 +8,15 @@
 
 
 
-
-
 using std::string;
 
 /**
  * @brief 物品数据
  */
-class ItemData 
+class ItemData
 {
+public:
+
 public:
     ItemData();
     ~ItemData();
@@ -25,9 +25,6 @@ public:
      * @brief 空对象
      */
     static const ItemData &GetNoItemData();
-public:
-
-
 public:
     /**
      * @brief 初始化
@@ -54,24 +51,34 @@ public:
 	/**
 	 * @brief 获取编号
 	 */
-	inline const int GetID() const{return m_iID;}
+	inline const int &GetID() const{return m_iID;}
 
 	/**
 	 * @brief 获取数量
 	 */
-	inline const int GetNum() const{return m_iNum;}
+	inline const int &GetNum() const{return m_iNum;}
+
+
+	/**
+	 * @brief 使用编号
+	 */
+	inline int &UseID(){return m_iID;}
+
+	/**
+	 * @brief 使用数量
+	 */
+	inline int &UseNum(){return m_iNum;}
 
 	
 	/**
 	 * @brief 设置编号
 	 */
-	inline void SetID(const int iID){m_iID = iID;}
+	inline void SetID(const int &iID){m_iID = iID;}
 	
 	/**
 	 * @brief 设置数量
 	 */
-	inline void SetNum(const int iNum){m_iNum = iNum;}
-
+	inline void SetNum(const int &iNum){m_iNum = iNum;}
 
 
 

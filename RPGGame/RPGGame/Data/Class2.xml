@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+<class> name comment
+<macro> name value comment
+<globel> name prefix type default comment
+<property> name prefix type default comment
+<string_property> name max comment
+<struct_array_property> name max comment
+	<struct_array_property_struct>name comment
+	    <base>property
+<enum> name value comment
+
+xml字符转义:
+&amp;        &
+&lt;         <
+&gt;         >
+&quot;       "
+&apos;       '
+-->
+
+<!--物品-------------------------------------------------------------------->
+<class name="ItemData" comment="物品数据">
+	<property name="ID" prefix="i" type="int" default="0" comment="编号"/>
+	<property name="Num" prefix="i" type="int" default="0" comment="数量"/>
+</class>
+
+
+
+<!--容器-------------------------------------------------------------------->
+
+<class name="CellData" comment="单元格数据">
+	<property name="ID" prefix="i" type="int" default="0" comment="编号"/>
+	<property name="ItemID" prefix="i" type="int" default="0" comment="物品编号"/>
+	<property name="ItemNum" prefix="i" type="int" default="0" comment="物品数量"/>
+	<property name="UnitCapacity" prefix="i" type="int" default="0" comment="物品最大叠加"/>
+</class>
+
+<class name="ContainerData" comment="容器">
+	<include name="CellData"/>
+    <macro name="MAX_CONTAINER_CAPACITY" value="30" comment="容器容量"/>
+    <property name="ID" prefix="i" type="int" default="0" comment="编号"/>
+	<array_property name="Cell" prefix="st" type="CellData" max="MAX_CONTAINER_CAPACITY" comment="容器数据"/>
+</class>
+
+
+
+<!--玩家-------------------------------------------------------------------->
+<class name="PlayerData" comment="行动者数据">
+	<include name="ContainerData"/> 
+	<macro name="EQUIPMENT_SLOT_SIZE" value="3" comment="装备槽数量"/>
+	<macro name="NAME_MAX_LENGTH" value="64" comment="名字最大长度"/>
+	<string_property name="Name" prefix="s" type="char" max="NAME_MAX_LENGTH" comment="名字" />
+	<property name="ID"          prefix="i"  type="int" default="0" comment="编号"/>
+	<property name="Hp"          prefix="i"  type="int" default="0" comment="当前生命值"/>
+	<property name="MaxHp"       prefix="i"  type="int" default="0" comment="最大生命值"/>
+	<property name="BaseAttack"  prefix="i"  type="int" default="0" comment="基础攻击力"/>
+	<property name="BaseDefance" prefix="i"  type="int" default="0" comment="基础防御力"/>
+	<property name="Money"       prefix="i"  type="int" default="0" comment="钱"/>
+	<property name="Level"       prefix="i"  type="int" default="0" comment="等级"/>
+	<property name="Exp"         prefix="i"  type="int" default="0" comment="当前获得经验"/>
+	<property name="Weapon"      prefix="i"  type="int" default="0" comment="武器"/>
+	<property name="Armor"       prefix="i"  type="int" default="0" comment="防具"/>
+	<property name="Accessory"   prefix="i"  type="int" default="0" comment="饰品"/>
+	<property name="Bag"         prefix="st" type="ContainerData" default="" comment="背包"/>
+</class>
+
+
+<!--框-------------------------------------------------------------------->
+<class name="FrameData" comment="框数据">
+	<enum name="FrameState" comment="框状态">
+		<property name="FRAME_STATE_NORMAL" value="0" comment="正常"/>
+		<property name="FRAME_STATE_FINISH" value="0" comment="结束"/>
+	</enum>
+	<property name="Data" prefix="i" type="int" default="0" comment="数据"/>
+	<property name="Index" prefix="i" type="int" default="0" comment="选中选项"/>
+	<property name="State" prefix="e" type="FrameData::FrameState" default="FrameData::FRAME_STATE_NORMAL" comment="框状态"/>
+</class>
+
+
+
+
+
+
+

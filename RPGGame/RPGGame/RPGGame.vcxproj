@@ -128,6 +128,8 @@
     <ClCompile Include="Config\MapActionConfigLoader.cpp" />
     <ClCompile Include="Config\MapConfigLoader.cpp" />
     <ClCompile Include="Config\MonsterConfigLoader.cpp" />
+    <ClCompile Include="Data\CellData.cpp" />
+    <ClCompile Include="Data\ContainerData.cpp" />
     <ClCompile Include="Data\FrameData.cpp" />
     <ClCompile Include="Data\ItemData.cpp" />
     <ClCompile Include="Data\PlayerData.cpp" />
@@ -195,6 +197,8 @@
     <ClInclude Include="Config\MapActionConfigLoader.h" />
     <ClInclude Include="Config\MapConfigLoader.h" />
     <ClInclude Include="Config\MonsterConfigLoader.h" />
+    <ClInclude Include="Data\CellData.h" />
+    <ClInclude Include="Data\ContainerData.h" />
     <ClInclude Include="Data\FrameData.h" />
     <ClInclude Include="Data\ItemData.h" />
     <ClInclude Include="Data\PlayerData.h" />

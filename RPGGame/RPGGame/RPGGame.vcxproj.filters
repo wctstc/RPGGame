@@ -285,6 +285,12 @@
     <ClCompile Include="Handler\FrameHandler.cpp">
       <Filter>Game\Hander</Filter>
     </ClCompile>
+    <ClCompile Include="Data\CellData.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\ContainerData.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\App.h">
@@ -499,6 +505,12 @@
     </ClInclude>
     <ClInclude Include="Handler\FrameHandler.h">
       <Filter>Game\Hander</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\CellData.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\ContainerData.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

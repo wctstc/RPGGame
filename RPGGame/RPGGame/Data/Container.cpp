@@ -6,10 +6,9 @@ Container::Container()
 
 {
 
+#compose_init_ref_implement#
 
-	m_iCellRef = 0;
-
-
+	m_iCellNum = 0;
 	memset(m_astCell, 0, sizeof(CellData)*MAX_CONTAINER_CAPACITY);
 
 }
@@ -26,15 +25,14 @@ const Container &Container::GetNoContainer()
 }
 
 bool Container::Init()
-{
+{#parent_init_implement#
 	
 	m_iID = 0;
 
 
+#compose_init_ref_implement#
 
-	m_iCellRef = 0;
-
-
+	m_iCellNum = 0;
 	memset(m_astCell, 0, sizeof(CellData)*MAX_CONTAINER_CAPACITY);
 
 
@@ -42,14 +40,13 @@ bool Container::Init()
 }
 
 bool Container::Init(const Container &oContainer)
-{
+{#parent_init_self_implement#
 
 	m_iID = oContainer.m_iID;
 
 
-	memcpy(m_astCell, oContainer.m_astCell, sizeof(CellData)*oContainer.m_iCellRef);
-	
-	m_iCellRef = oContainer.m_iCellRef;
+	m_iCellNum = oContainer.m_iCellNum;
+	memcpy(m_astCell, oContainer.m_astCell, sizeof(CellData)*oContainer.m_iCellNum);
 
     return true;
 }
@@ -69,13 +66,13 @@ bool Container::FromString(const string sBuffer)
 	
 int Container::GetCellNum() const
 {
-	return m_iCellRef;
+	return m_iCellNum;
 }
 
 
 bool Container::GetCell(const int iIndex, CellData &stCell) const
 {
-	if(iIndex < 0 || iIndex >= m_iCellRef)
+	if(iIndex < 0 || iIndex >= m_iCellNum)
 		return false;
 
 	stCell = m_astCell[iIndex];
@@ -86,56 +83,24 @@ bool Container::GetCell(const int iIndex, CellData &stCell) const
 
 bool Container::AddCell(const CellData &stCell)
 {
-	if(m_iCellRef >= MAX_CONTAINER_CAPACITY)
+	if(m_iCellNum >= MAX_CONTAINER_CAPACITY)
 		return false;
 		
-	m_astCell[m_iCellRef++] = stCell;
+	m_astCell[m_iCellNum++] = stCell;
 	return true;
 }
 
 	
 bool Container::RemoveCell(const int iIndex)
 {
-	if(iIndex < 0 || iIndex >= m_iCellRef)
+	if(iIndex < 0 || iIndex >= m_iCellNum)
 		return false;
 
-	--m_iCellRef;
+	--m_iCellNum;
 	
-	for (int i = iIndex; i < m_iCellRef; ++i)
+	for (int i = iIndex; i < m_iCellNum; ++i)
 		m_astCell[i] = m_astCell[i+1];
 
 	return true;
 }
 
-
-
-		
-int Container::GetCellID(const int iIndex) const
-{
-	if (iIndex < m_iCellRef && iIndex >= 0) 
-		return m_astCell[iIndex].iID;
-
-	return 0;
-}
-int Container::GetCellItemID(const int iIndex) const
-{
-	if (iIndex < m_iCellRef && iIndex >= 0) 
-		return m_astCell[iIndex].iItemID;
-
-	return 0;
-}
-int Container::GetCellItemNum(const int iIndex) const
-{
-	if (iIndex < m_iCellRef && iIndex >= 0) 
-		return m_astCell[iIndex].iItemNum;
-
-	return 0;
-}
-int Container::GetCellUnitCapacity(const int iIndex) const
-{
-	if (iIndex < m_iCellRef && iIndex >= 0) 
-		return m_astCell[iIndex].iUnitCapacity;
-
-	return 0;
-}
-		
