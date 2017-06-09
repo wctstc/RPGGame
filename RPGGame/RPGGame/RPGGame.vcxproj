@@ -207,7 +207,6 @@
     <ClInclude Include="Manager\Player\Container.h" />
     <ClInclude Include="Core\Cmd.h" />
     <ClInclude Include="Core\Config.h" />
-    <ClInclude Include="Manager\Player\ContainerData.h" />
     <ClInclude Include="Core\DataConfig.h" />
     <ClInclude Include="Manager\Map\Drop.h" />
     <ClInclude Include="Manager\Map\DropLoader.h" />

@@ -467,9 +467,6 @@
     <ClInclude Include="Manager\Player\Container.h">
       <Filter>Game\Data\Actor\Player\Bag</Filter>
     </ClInclude>
-    <ClInclude Include="Manager\Player\ContainerData.h">
-      <Filter>Game\Data</Filter>
-    </ClInclude>
     <ClInclude Include="Manager\Player\Equipment.h">
       <Filter>Game\Data\Actor\Player\Equipment</Filter>
     </ClInclude>
