@@ -317,9 +317,31 @@ bool #class_name#::Get#array_property_name#(const int iIndex, #array_property_ty
 }
 
 	</compose>
-	
+	<!-- Use函数 -->
+	<compose name="compose_array_property_use" ref="array_property" gap="">
+
+	/**
+	 * @brief 使用#array_property_comment#
+	 */
+	#array_property_type# *Use#array_property_name#(const int iIndex);
+
+	</compose>
+
+
+	<!-- Use函数实现 -->
+	<compose name="compose_array_property_use_implement" ref="array_property" gap="">
+
+#array_property_type# *Use#array_property_name#(const int iIndex)
+{
+	if(iIndex &lt; 0 || iIndex &gt;= m_i#array_property_name#Num)
+		return NULL;
+
+	return &amp;m_ast#array_property_name#[iIndex];
+}
+
+	</compose>
 	<!-- Add函数 -->
-	<compose name="compose_add" ref="array_property" gap="">
+	<compose name="compose_array_property_add" ref="array_property" gap="">
 
 	/**
 	 * @brief 添加#array_property_comment#
@@ -329,7 +351,7 @@ bool #class_name#::Get#array_property_name#(const int iIndex, #array_property_ty
 	</compose>
 
 	<!-- Add函数实现 -->
-	<compose name="compose_add_implement" ref="array_property" gap="">
+	<compose name="compose_array_property_add_implement" ref="array_property" gap="">
 
 bool #class_name#::Add#array_property_name#(const #array_property_type# &amp;st#array_property_name#)
 {
@@ -343,7 +365,7 @@ bool #class_name#::Add#array_property_name#(const #array_property_type# &amp;st#
 	</compose>
 
 	<!-- Remove函数 -->
-	<compose name="compose_remove" ref="array_property" gap="">
+	<compose name="compose_array_property_remove" ref="array_property" gap="">
 
 	/**
 	 * @brief 移除#array_property_comment#
@@ -353,7 +375,7 @@ bool #class_name#::Add#array_property_name#(const #array_property_type# &amp;st#
 	</compose>
 
 	<!-- Remove函数实现 -->
-	<compose name="compose_remove_implement" ref="array_property" gap="">
+	<compose name="compose_array_property_remove_implement" ref="array_property" gap="">
 	
 bool #class_name#::Remove#array_property_name#(const int iIndex)
 {
@@ -447,8 +469,9 @@ public:
 #compose_string_property_set#
 #compose_array_property_get_num#
 #compose_array_property_get#
-#compose_add#
-#compose_remove#
+#compose_array_property_add#
+#compose_array_property_use#
+#compose_array_property_remove#
 private:  
 #compose_property_declaration#
 #compose_string_property_declaration#
@@ -510,6 +533,7 @@ bool #class_name#::FromString(const string sBuffer)
 #compose_array_property_get_num_implement#
 #compose_array_property_get_implement#
 
-#compose_add_implement#
-#compose_remove_implement#
+#compose_array_property_add_implement#
+#compose_array_property_use_implement#
+#compose_array_property_remove_implement#
 </file>

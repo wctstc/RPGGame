@@ -40,28 +40,21 @@ class Player
  	Player();
  	~Player();
  public://-加载相关----------------------------------------------------//
-     /**
-      * @brief 初始化
-      */
-     virtual bool Init();
+    /**
+     * @brief 初始化
+     */
+    virtual bool Init();
 
-     /**
-      * @brief 保存
-      */
-     virtual bool Save(int &iLength, char *csBuffer)const;
+    /**
+     * @brief 保存
+     */
+    virtual bool Save(int &iLength, char *csBuffer)const;
  
-     /**
-      * @brief 加载
-      */
-     virtual bool Load(int &iLength, const char *const csBuffer);
- 
-     /**
-      * @brief 装上装备或者卸下装备
-      */
-//     EquipmentOperator Equip(
-//         const EquipmentOperator eEquipmentOperator,
-//         const Equipment &oNewEquipment,
-//         Equipment &oOldEuipment);
+    /**
+     * @brief 加载
+     */
+    virtual bool Load(int &iLength, const char *const csBuffer);
+
 
 public://-战斗相关----------------------------------------------------//
     /**
@@ -70,53 +63,53 @@ public://-战斗相关----------------------------------------------------//
     virtual bool IsDie()const;
 
     /**
-    * @brief 防御伤害
-    */
+     * @brief 防御伤害
+     */
     virtual void Defance(const int iDamage);
  
     /**
-    * @brief 普攻伤害
-    */
+     * @brief 普攻伤害
+     */
     virtual int Attack();
 
 public://-金钱相关----------------------------------------------------//
-     /**
-      * @brief 加钱
-      */
-     bool AddMoney(const int iMoney);
-     /**
-      * @brief 减钱
-      */
-     bool ReduceMoney(const int iMoney);
+    /**
+     * @brief 加钱
+     */
+    bool AddMoney(const int iMoney);
+    /**
+     * @brief 减钱
+     */
+    bool ReduceMoney(const int iMoney);
  
- public:
- 
-     /**
+
+public:
+    /**
      * @brief 获取加成的生命上限
      */
-     int GetExtendMaxHp()const;
+    int GetExtendMaxHp()const;
  
-     /**
-      * @brief 获取加成的攻击力
-      */
-     int GetExtendAttack()const;
+    /**
+     * @brief 获取加成的攻击力
+     */
+    int GetExtendAttack()const;
  
-     /**
-      * @brief 获取加成的防御力
-      */
-     int GetExtendDefance()const;
+    /**
+     * @brief 获取加成的防御力
+     */
+    int GetExtendDefance()const;
  
  
- public://-模块数据获取----------------------------------------------------//
-     inline PlayerData &UsePlayerData() { return m_stPlayerData; }
+public://-模块数据获取----------------------------------------------------//
+    inline PlayerData &UsePlayerData() { return m_stPlayerData; }
 
-     inline const PlayerData &GetPlayerData() const { return m_stPlayerData; }
+    inline const PlayerData &GetPlayerData() const { return m_stPlayerData; }
      
-     inline void SetPlayerData(PlayerData &stPlayerData) { m_stPlayerData = stPlayerData; }
- private:
-     /*!< 玩家数据 */
-     PlayerData m_stPlayerData;
- };
+    inline void SetPlayerData(PlayerData &stPlayerData) { m_stPlayerData = stPlayerData; }
+private:
+    /*!< 玩家数据 */
+    PlayerData m_stPlayerData;
+};
 
 
 #endif // __PLAYER_H__

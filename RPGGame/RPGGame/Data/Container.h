@@ -5,12 +5,6 @@
 #include <string>
 
 
-
-	
-/*<! ÈÝÆ÷ÈÝÁ¿*/
-#define MAX_CONTAINER_CAPACITY 30
-
-
 using std::string;
 
 /**

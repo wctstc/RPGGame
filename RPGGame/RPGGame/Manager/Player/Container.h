@@ -1,7 +1,7 @@
 #ifndef __CONTAINER_H__
 #define __CONTAINER_H__
 
-#include "struct.h"
+#include "ContainerData.h"
 
 /**
  * @brief 容器类
@@ -9,85 +9,79 @@
 class Container
 {
 public:
-    typedef vector<data::ContainerUnitData>                         VecContainerUnit;
-    typedef vector<data::ContainerUnitData>::iterator               VecContainerUnitIt;
-    typedef vector<data::ContainerUnitData>::const_iterator         VecContainerUnitCIt;
-    typedef vector<data::ContainerUnitData>::reverse_iterator       VecContainerUnitRevIt;
-    typedef vector<data::ContainerUnitData>::const_reverse_iterator VecContainerUnitCRevIt;
-public:
     Container();
-    Container(const int iID, const int iCapacity);
 	virtual ~Container();
 public:
     /**
      * @brief 初始化
      */
-    bool Init(const int iID, const int iCapacity);
+    bool Init(ContainerData *pstContainerData);
 
+public:
     /**
-     * @brief 单元格最大叠加
+     * @brief 获取容器容量
      */
-    int GetUnitCapacity() const;
-
-	/**
-	 * @brief 获取已使用格子
-	 */
-	int GetUsedCapacity()const;
-
-	/**
-	 * @brief 添加物品
-	 */
-    bool Add(const int iItemID, const int iNumber);
+    int GetCapacity() const;
 
     /**
-    * @brief 添加物品，如果容量不够则丢弃
+     * @brief 添加物品
+     */
+    int Add(const int iItemID, const int iNumber);
+
+    /**
+     * @brief 尝试添加物品
+     */
+    int TryAdd(const int iItemID, const int iNumber) const;
+
+    /**
+    * @brief 强制添加物品
     */
     void AddForce(const int iItemID, const int iNumber);
 
     /**
-     * @brief 是否能添加物品
-     */
-    bool CanAdd(const int iItemID, const int iNumber)const;
+    * @brief 移除物品
+    */
+    int Remove(const int iItemID, const int iNumber);
 
     /**
     * @brief 移除物品
     */
-    bool Remove(const int iItemID, const int iNumber);
+    int TryRemove(const int iItemID, const int iNumber);
 
     /**
-    * @brief 移除物品，如果物品不够就算了
+    * @brief 移除物品
     */
     void RemoveForce(const int iItemID, const int iNumber);
 
     /**
-    * @brief 移除物品
-    */
-    bool CanRemove(const int iItemID, const int iNumber);
+     * @brief 获取物品数量
+     */
+    int GetItemNumByItemID(const int iItemID) const;
 
     /**
-    * @brief 获取物品编号
+    * @brief 获取物品数量
     */
-    int GetItemID(const int iIndex)const;
+    int GetItemCapacityByItemID(const int iItemID) const;
 
-    /**
-    * @brief 获取数量
-    */
-    int GetItemNum(const int iIndex)const;
-
-	/**
-	 * @brief 获取物品数量
-	 */
-    int GetItemNumByItemID(const int iItemID)const;
-
-    
 public:
-    SET_GET(int, i, Capacity, m_stContainerData.iCapacity)
-private:
-    const static int g_iUnitMaxCapacity;
-	/*!< 物品 */
-	VecContainerUnit m_vContainerUnits;
+    /**
+     * @brief 获取容器数据
+     */
+    inline const ContainerData *GetContainerData() const { return m_pstContainerData; }
 
-    data::ContainerData m_stContainerData;
+    /**
+    * @brief 使用容器数据
+    */
+    inline ContainerData *UseContainerData() { return m_pstContainerData; }
+
+    /**
+    * @brief 设置容器数据
+    */
+    inline void SetContainerData(ContainerData *pstContainerData) { m_pstContainerData = pstContainerData; }
+
+private:
+    /*!< 容器数据 */
+    ContainerData *m_pstContainerData;
 };
 
 

@@ -92,6 +92,12 @@ public:
 
 
 	/**
+	 * @brief 使用容器数据
+	 */
+	CellData *UseCell(const int iIndex);
+
+
+	/**
 	 * @brief 移除容器数据
 	 */
 	bool RemoveCell(const int iIndex);

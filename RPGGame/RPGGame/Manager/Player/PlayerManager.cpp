@@ -79,9 +79,9 @@ bool PlayerManager::Load(const string sFile)
     return true;
 }
 
-const Bag & PlayerManager::GetBag()
+const ContainerData & PlayerManager::GetBag()const
 {
-    return m_oBag;
+    return m_oPlayer.GetPlayerData().GetBag();
 }
 
 bool PlayerManager::AddToBag(const int iItemID, const int iNum)

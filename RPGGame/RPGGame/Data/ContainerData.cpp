@@ -86,6 +86,15 @@ bool ContainerData::AddCell(const CellData &stCell)
 	return true;
 }
 
+
+CellData *UseCell(const int iIndex)
+{
+	if(iIndex < 0 || iIndex >= m_iCellNum)
+		return NULL;
+
+	return &m_astCell[iIndex];
+}
+
 	
 bool ContainerData::RemoveCell(const int iIndex)
 {
