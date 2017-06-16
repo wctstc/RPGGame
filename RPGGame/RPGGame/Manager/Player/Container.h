@@ -24,6 +24,10 @@ public:
     int GetCapacity() const;
 
     /**
+     * @brief 获取容器使用量
+     */
+    int GetUsedCapacity() const;
+    /**
      * @brief 添加物品
      */
     int Add(const int iItemID, const int iNumber);

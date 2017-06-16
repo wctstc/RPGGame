@@ -26,14 +26,7 @@ int Container::GetCapacity() const
 
 int Container::GetUsedCapacity() const
 {
-    int iCount = 0;
-    for (VecContainerUnitCIt it = m_vContainerUnits.begin(); it != m_vContainerUnits.end(); ++it)
-    {
-        if (it->iItemID != 0 && it->iItemNum > 0)
-            ++iCount;
-    }
-    return iCount;
-
+    return m_pstContainerData->GetCellNum();
 }
 
 int Container::Add(const int iItemID, const int iNumber)

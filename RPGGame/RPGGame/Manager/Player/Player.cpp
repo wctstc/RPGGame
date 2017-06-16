@@ -11,7 +11,13 @@
  
  bool Player::Init()
  {
-     return m_stPlayerData.Init();
+     if (!m_stPlayerData.Init())
+         return false;
+
+     if (!m_oContainer.Init(&m_stPlayerData.UseBag()))
+         return false;
+
+     return true;
  }
 
  bool Player::Save(int &iLength, char *csBuffer) const

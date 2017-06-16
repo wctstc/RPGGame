@@ -14,6 +14,7 @@ PlayerManager::~PlayerManager()
 bool PlayerManager::Init()
 {
     m_oPlayer.Init();
+
 	return true;
 }
 
@@ -86,12 +87,12 @@ const ContainerData & PlayerManager::GetBag()const
 
 bool PlayerManager::AddToBag(const int iItemID, const int iNum)
 {
-    return m_oBag.Add(iItemID, iNum);
+    return m_oPlayer.UseBag.Add(iItemID, iNum);
 }
 
 bool PlayerManager::ReduceFromBag(const int iItemID, const int iNum)
 {
-    return m_oBag.Reduce(iItemID, iNum);
+    return m_oPlayer.UseBag().Remove(iItemID, iNum);
 }
 
 bool PlayerManager::Buy(const int iItemID, const int iPrice)
@@ -99,11 +100,13 @@ bool PlayerManager::Buy(const int iItemID, const int iPrice)
     if (!m_oPlayer.ReduceMoney(iPrice))
         return false;
 
-    if (!m_oBag.Add(iItemID, 1))
+    if (!m_oPlayer.UseBag().Add(iItemID, 1))
     {
         m_oPlayer.AddMoney(iPrice);
         return false;
     }
+
+
 
     return true;
 }

@@ -7,6 +7,8 @@
 #include "Equipment.h"
 #include "Goods.h"
 
+#include "Container.h"
+
 #include "PlayerData.h"
 /**
 * @brief 玩家类
@@ -101,12 +103,23 @@ public:
  
  
 public://-模块数据获取----------------------------------------------------//
+
+    inline Container &UseBag() { return m_oBag; }
+
+    inline const Container &GetBag() const { return m_oBag; }
+
+    inline void SetBag(Container &oContainer) { m_oBag = oContainer; }
+
+
     inline PlayerData &UsePlayerData() { return m_stPlayerData; }
 
     inline const PlayerData &GetPlayerData() const { return m_stPlayerData; }
      
     inline void SetPlayerData(PlayerData &stPlayerData) { m_stPlayerData = stPlayerData; }
 private:
+    /*!< 容器 */
+    Container m_oBag;
+
     /*!< 玩家数据 */
     PlayerData m_stPlayerData;
 };

@@ -4,7 +4,7 @@
 #include "Singleton.h"
 #include "Manager.h"
 #include "Player.h"
-#include "Bag.h"
+#include "Container.h"
 /**
 * @brief 玩家管理
 */
@@ -65,9 +65,6 @@ public:
      */
     const Player & GetPlayer();
 private:
-    /*!< 背包 */
-    Bag m_oBag;
-
 	/*!< 玩家 */
 	Player m_oPlayer;
 };
