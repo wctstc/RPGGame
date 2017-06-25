@@ -3,3 +3,6 @@
 2017-06-06 19:03:51 FrameHandler::HandleStart(125) LOG_ERROR:option frame init fail.
 2017-06-06 19:06:46 FrameHandler::HandleStart(125) LOG_ERROR:option frame init fail.
 2017-06-06 19:07:11 FrameHandler::HandleStart(125) LOG_ERROR:option frame init fail.
+2017-06-18 09:56:12 Container::AddForce(146) LOG_ERROR:add force but capacity is not enough.item id:2 item num:1. left:1
+2017-06-18 09:56:13 Container::AddForce(146) LOG_ERROR:add force but capacity is not enough.item id:2 item num:1. left:1
+2017-06-18 09:56:14 Container::AddForce(146) LOG_ERROR:add force but capacity is not enough.item id:2 item num:1. left:1

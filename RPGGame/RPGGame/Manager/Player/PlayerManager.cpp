@@ -37,10 +37,10 @@ bool PlayerManager::Save(const string sFile)
     if (!m_oPlayer.Save(iLeft, csBuffer))
         return false;
 
-    iUsed += iLeft;
-    iLeft = iLength - iUsed;
-    if (!m_oBag.Save(iLeft, csBuffer+iUsed))
-        return false;
+//     iUsed += iLeft;
+//     iLeft = iLength - iUsed;
+//     if (!m_oBag.Save(iLeft, csBuffer+iUsed))
+//         return false;
         
     iUsed += iLeft;
     iUsed = fwrite(csBuffer, 1, iUsed, pFile);
@@ -71,28 +71,28 @@ bool PlayerManager::Load(const string sFile)
     if (!m_oPlayer.Load(iLeft, csBuffer))
         return false;
 
-    iUsed = iLeft;
-    iLeft = iLength - iUsed;
-
-    if (!m_oBag.Load(iLeft, csBuffer+iUsed))
-        return false;
+//     iUsed = iLeft;
+//     iLeft = iLength - iUsed;
+// 
+//     if (!m_oBag.Load(iLeft, csBuffer+iUsed))
+//         return false;
 
     return true;
 }
 
-const ContainerData & PlayerManager::GetBag()const
+const Container & PlayerManager::GetBag()const
 {
-    return m_oPlayer.GetPlayerData().GetBag();
+    return m_oPlayer.GetBag();
 }
 
 bool PlayerManager::AddToBag(const int iItemID, const int iNum)
 {
-    return m_oPlayer.UseBag.Add(iItemID, iNum);
+    return m_oPlayer.UseBag().Add(iItemID, iNum) == 0;
 }
 
 bool PlayerManager::ReduceFromBag(const int iItemID, const int iNum)
 {
-    return m_oPlayer.UseBag().Remove(iItemID, iNum);
+    return m_oPlayer.UseBag().Remove(iItemID, iNum) == 0;
 }
 
 bool PlayerManager::Buy(const int iItemID, const int iPrice)
@@ -113,12 +113,12 @@ bool PlayerManager::Buy(const int iItemID, const int iPrice)
 
 bool PlayerManager::Sell(const int iItemID, const int iPrice)
 {
-    if (!m_oBag.Reduce(iItemID, 1))
+    if (m_oPlayer.UseBag().Remove(iItemID, 1) != 0)
         return false;
 
     if (!m_oPlayer.AddMoney(iPrice))
     {
-        m_oBag.Add(iItemID, 1);
+        m_oPlayer.UseBag().Add(iItemID, 1);
         return false;
     }
 

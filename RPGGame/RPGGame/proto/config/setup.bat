@@ -4,6 +4,7 @@ call xls_deploy_tool.bat map.xlsx MapConfig
 call xls_deploy_tool.bat map.xlsx MapActionConfig
 call xls_deploy_tool.bat map.xlsx MonsterConfig
 call xls_deploy_tool.bat map.xlsx DropConfig
+call xls_deploy_tool.bat shop.xlsx ShopConfig
 
 ::---------------------------------------------------
 ::protobuf编译，生成c++源代码

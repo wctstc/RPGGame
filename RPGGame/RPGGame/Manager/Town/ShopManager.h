@@ -22,7 +22,7 @@ public:
     /**
     * @brief 购买商品
     */
-    bool BuyGoods(const int iIndex, const int iNum);
+    bool BuyGoods(const int iGoodsID, const int iNum, int &iPrice, int &iCapacity);
 
     /**
     * @brief 出售商品

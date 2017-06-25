@@ -44,10 +44,10 @@ int Container::Add(const int iItemID, const int iNumber)
     }
 
     if (TryAdd(iItemID, iNumber) != iNumber)
-        return false;
+        return -1;
     
     AddForce(iItemID, iNumber);
-    return true;
+    return 0;
 }
 
 void Container::AddForce(const int iItemID, const int iNumber)
@@ -185,11 +185,11 @@ int Container::Remove(const int iItemID, const int iNumber)
     }
 
     if (TryRemove(iItemID, iNumber) == iNumber)
-        return false;
+        return -1;
     
 
     RemoveForce(iItemID, iNumber);
-    return true;
+    return 0;
 }
 
 

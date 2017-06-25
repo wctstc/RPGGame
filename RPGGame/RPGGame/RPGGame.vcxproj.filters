@@ -108,9 +108,6 @@
     <ClCompile Include="Frame\FrameWithOption.cpp">
       <Filter>Game\UI\Frame\MainFrame</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Hander.cpp">
-      <Filter>Framework</Filter>
-    </ClCompile>
     <ClCompile Include="Manager\Loader.cpp">
       <Filter>Game\Data\Map</Filter>
     </ClCompile>
@@ -291,6 +288,12 @@
     <ClCompile Include="Data\ContainerData.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Handler.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Config\ShopConfigLoader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\App.h">
@@ -310,9 +313,6 @@
     </ClInclude>
     <ClInclude Include="Frame\FrameWithOption.h">
       <Filter>Game\UI\Frame\MainFrame</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Hander.h">
-      <Filter>Framework</Filter>
     </ClInclude>
     <ClInclude Include="Manager\Loader.h">
       <Filter>Game\Data\Map</Filter>
@@ -507,6 +507,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Data\ContainerData.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Handler.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Config\ShopConfigLoader.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

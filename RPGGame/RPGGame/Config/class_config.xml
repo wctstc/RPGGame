@@ -93,3 +93,11 @@ xml字符转义:
 	<property name="ItemID" prefix="i" type="int" comment="物品编号"/>
 	<property name="ItemNum" prefix="i" type="int" comment="物品数量"/>
 </class>
+
+<class name="ShopConfig" comment="掉落">
+	<property name="ID" prefix="i" type="int" comment="编号"/>
+	<property name="ItemID" prefix="i" type="int" comment="物品编号"/>
+	<property name="ItemNum" prefix="i" type="int" comment="物品数量"/>
+	<property name="Price" prefix="i" type="int" comment="价格"/>
+	<property name="Discount" prefix="i" type="int" comment="物品数量"/>
+</class>

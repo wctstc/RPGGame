@@ -25,7 +25,7 @@ ManagerHandler::~ManagerHandler()
 
 bool ManagerHandler::Init(Config *pConfig)
 {
-	if (!Hander::Init(pConfig))
+	if (!CHandler::Init(pConfig))
 		return false;
 
     if (!g_HomeManager.Init())

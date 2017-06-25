@@ -86,8 +86,8 @@ bool ContainerData::AddCell(const CellData &stCell)
 	return true;
 }
 
-
-CellData *UseCell(const int iIndex)
+ 
+CellData *ContainerData::UseCell(const int iIndex)
 {
 	if(iIndex < 0 || iIndex >= m_iCellNum)
 		return NULL;

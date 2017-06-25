@@ -4,7 +4,7 @@
 
 #include "Cmd.h"
 #include "Singleton.h"
-#include "Hander.h"
+#include "Handler.h"
 
 /*!< 管理处理类实例 */
 #define g_ManagerHandler ManagerHandler::GetInstance()
@@ -12,7 +12,7 @@
 /**
 * @brief 管理处理类，管理类的门户接口
 */
-class ManagerHandler :public Singleton<ManagerHandler>,public Hander
+class ManagerHandler :public Singleton<ManagerHandler>,public CHandler
 {
 public:
 	ManagerHandler();

@@ -72,7 +72,7 @@ int HomeHandler::HandleShowStorageItem(const cmd::Command eCmd, const req::Req &
 
 int HomeHandler::HandleShowBag(const cmd::Command eCmd, const req::Req &oReq, rsp::Rsp &oRsp)
 {
-    const Bag &oBag = g_PlayerManger.GetBag();
+    const Container &oBag = g_PlayerManger.GetBag();
     if (oBag.GetUsedCapacity() <= 0)
     {
         oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_NO_ITEM);
@@ -82,16 +82,26 @@ int HomeHandler::HandleShowBag(const cmd::Command eCmd, const req::Req &oReq, rs
     vector<rsp::Rsp> vRspOption;
     for (int i = 0; i < oBag.GetCapacity(); ++i)
     {
-        int iItemID = oBag.GetItemID(i);
-        if (iItemID > 0 && oBag.GetItemNum(i) >= 0)
+		CellData stCellData;
+		const ContainerData *pBagData = oBag.GetContainerData();
+
+		if (pBagData == NULL || pBagData->GetCell(i, stCellData))
+			return 0;
+
+
+        int iItemID = stCellData.GetItemID();
+		int iItemNum = stCellData.GetItemNum();
+        if (iItemID > 0 && iItemNum >= 0)
         {
             rsp::Rsp oRspOption;
+
             oRspOption.Add(
                 rsp::s_Option_Description,
                 StrUtil::Format(
                     "%s*%d",
                     g_ItemManager.GetNameByID(iItemID).c_str(),
-                    oBag.GetItemNum(i)));
+					iItemNum));
+
             oRspOption.Add(rsp::i_Option_FrameID, 1122100);
             oRspOption.Add(rsp::i_Option_Notify, cmd::NOTIFY_IDLE);
             oRspOption.Add(rsp::i_Option_Data, iItemID);
@@ -106,11 +116,18 @@ int HomeHandler::HandleShowBag(const cmd::Command eCmd, const req::Req &oReq, rs
 
 int HomeHandler::HandleShowBagItem(const cmd::Command eCmd, const req::Req &oReq, rsp::Rsp &oRsp)
 {
-    const Bag &oBag = g_PlayerManger.GetBag();
+    const Container &oBag = g_PlayerManger.GetBag();
     if (!g_ManagerHandler.CheckReqIndex(oBag.GetUsedCapacity(), oReq, oRsp))
         return 0;
 
-    int iItemID = oBag.GetItemID(oReq.GetInt(req::i_Index));
+	CellData stCellData;
+
+	const ContainerData *pContainData = oBag.GetContainerData();
+	if (pContainData == NULL || pContainData->GetCell(oReq.GetInt(req::i_Index), stCellData))
+	{
+		return 0;
+	}
+    int iItemID = stCellData.GetItemID();
 
     oRsp.Add(rsp::i_RetCode, rsp::Rsp::RETCODE_SUCCEED);
     oRsp.Add(
@@ -146,7 +163,6 @@ void HomeHandler::HandleStorageTakeOut(const cmd::NotifyCommand eNotify, const n
     }
 
     //物品先加到背包
-    const Bag &oBag = g_PlayerManger.GetBag();
     if (!g_PlayerManger.AddToBag(iItemID, iNum))
     {
         g_ManagerHandler.UpdateTipsFrame("背包已满");

@@ -24,13 +24,13 @@ MapManager::~MapManager()
 
 bool MapManager::Init()
 {
-    if (!g_DropLoader.Init("proto/data/dataconfig_drop.data"))
+    if (!g_DropLoader.Init("proto/data/dataconfig_dropconfig.data"))
         return false;
-    if (!g_MonsterLoader.Init("proto/data/dataconfig_monster.data"))
+    if (!g_MonsterLoader.Init("proto/data/dataconfig_monsterconfig.data"))
         return false;
-    if (!g_MapActionLoader.Init("proto/data/dataconfig_mapaction.data"))
+    if (!g_MapActionLoader.Init("proto/data/dataconfig_mapactionconfig.data"))
         return false;
-    if (!g_MapLoader.Init("proto/data/dataconfig_map.data"))
+    if (!g_MapLoader.Init("proto/data/dataconfig_mapconfig.data"))
         return false;
 
     m_eEscapeState = EscapeState::ESCAPE_STATE_FAIL;

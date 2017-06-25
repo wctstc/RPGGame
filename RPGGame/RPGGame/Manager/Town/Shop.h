@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "Goods.h"
+#include "ShopConfigLoader.h"
 
 using std::vector;
 
@@ -32,12 +33,12 @@ public:
     /**
     * @brief 获取全部商品信息
     */
-    const vector<Goods> &GetAllGoods()const;
+    const vector<ShopConfig> &GetAllGoods()const;
 
     /**
     * @brief 购买商品
     */
-    bool BuyGoods(const int iIndex, const int iNum);
+    bool BuyGoods(const int iGoodsID, const int iNum, int &iPrice, int &iCapacity);
 
     /**
     * @brief 出售商品
@@ -71,22 +72,10 @@ public:
     int GetGoodsSellPrice(const int iIndex)const;
 
 public:
-    SET_GET(int,      i, ID,   m_stData.iID)
-    SET_GET(ShopType, e, Type, m_stData.eType)
-
 private:
-    struct ShopData
-    {
-        /*!< 编号 */
-        int iID;
-
-        /*!< 类型 */
-        ShopType eType;
-    };
 private:
-    ShopData m_stData;
     /*!< 商品 */
-    vector<Goods> m_vGoods;
+    vector<ShopConfig> m_vecGoods;
 };
 
 

@@ -14,7 +14,7 @@
      if (!m_stPlayerData.Init())
          return false;
 
-     if (!m_oContainer.Init(&m_stPlayerData.UseBag()))
+     if (!m_oBag.Init(&m_stPlayerData.UseBag()))
          return false;
 
      return true;

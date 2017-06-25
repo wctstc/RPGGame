@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "Singleton.h"
-#include "Hander.h"
+#include "Handler.h"
 #include "FrameWithOption.h"
 
 
@@ -14,7 +14,7 @@ using std::vector;
 /**
 * @brief øÚ¥¶¿Ì¿‡
 */
-class FrameHandler : public Singleton<FrameHandler>,public Hander
+class FrameHandler : public Singleton<FrameHandler>,public CHandler
 {
 public:
 	FrameHandler();

@@ -74,7 +74,7 @@ bool FrameHandler::Init(Config *pConfig)
 
 int FrameHandler::Start()
 {
-	int iRet = Hander::Start();
+	int iRet = CHandler::Start();
 	if (iRet != 0)
 		return iRet;
 	//todo
@@ -83,7 +83,7 @@ int FrameHandler::Start()
 
 int FrameHandler::Stop()
 {
-	int iRet = Hander::Stop();
+	int iRet = CHandler::Stop();
 	if (iRet != 0)
 		return iRet;
 	//todo

@@ -33,7 +33,7 @@ public:
 	/**
 	* @brief 获取背包
 	*/
-	const ContainerData &GetBag()const;
+	const Container &GetBag()const;
 
     /**
     * @brief 添加到背包

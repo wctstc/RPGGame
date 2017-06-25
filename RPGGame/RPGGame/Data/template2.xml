@@ -331,7 +331,7 @@ bool #class_name#::Get#array_property_name#(const int iIndex, #array_property_ty
 	<!-- Useº¯ÊýÊµÏÖ -->
 	<compose name="compose_array_property_use_implement" ref="array_property" gap="">
 
-#array_property_type# *Use#array_property_name#(const int iIndex)
+#array_property_type# *#class_name#::Use#array_property_name#(const int iIndex)
 {
 	if(iIndex &lt; 0 || iIndex &gt;= m_i#array_property_name#Num)
 		return NULL;

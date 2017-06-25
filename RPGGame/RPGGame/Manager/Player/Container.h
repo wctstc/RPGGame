@@ -2,6 +2,7 @@
 #define __CONTAINER_H__
 
 #include "ContainerData.h"
+#include "ItemData.h"
 
 /**
  * @brief 容器类
@@ -38,18 +39,18 @@ public:
     int TryAdd(const int iItemID, const int iNumber) const;
 
     /**
-    * @brief 强制添加物品
-    */
+     * @brief 强制添加物品
+     */
     void AddForce(const int iItemID, const int iNumber);
 
     /**
-    * @brief 移除物品
-    */
+     * @brief 移除物品
+     */
     int Remove(const int iItemID, const int iNumber);
 
     /**
-    * @brief 移除物品
-    */
+     * @brief 移除物品
+     */
     int TryRemove(const int iItemID, const int iNumber);
 
     /**
@@ -63,8 +64,8 @@ public:
     int GetItemNumByItemID(const int iItemID) const;
 
     /**
-    * @brief 获取物品数量
-    */
+     * @brief 获取物品数量
+     */
     int GetItemCapacityByItemID(const int iItemID) const;
 
 public:
@@ -74,13 +75,13 @@ public:
     inline const ContainerData *GetContainerData() const { return m_pstContainerData; }
 
     /**
-    * @brief 使用容器数据
-    */
+     * @brief 使用容器数据
+     */
     inline ContainerData *UseContainerData() { return m_pstContainerData; }
 
     /**
-    * @brief 设置容器数据
-    */
+     * @brief 设置容器数据
+     */
     inline void SetContainerData(ContainerData *pstContainerData) { m_pstContainerData = pstContainerData; }
 
 private:

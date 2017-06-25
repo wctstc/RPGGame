@@ -128,6 +128,7 @@
     <ClCompile Include="Config\MapActionConfigLoader.cpp" />
     <ClCompile Include="Config\MapConfigLoader.cpp" />
     <ClCompile Include="Config\MonsterConfigLoader.cpp" />
+    <ClCompile Include="Config\ShopConfigLoader.cpp" />
     <ClCompile Include="Data\CellData.cpp" />
     <ClCompile Include="Data\ContainerData.cpp" />
     <ClCompile Include="Data\FrameData.cpp" />
@@ -153,7 +154,7 @@
     <ClCompile Include="Handler\ManagerHandler.cpp" />
     <ClCompile Include="Manager\Player\ItemManager.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Core\Hander.cpp" />
+    <ClCompile Include="Core\Handler.cpp" />
     <ClCompile Include="Frame\ArrowManager.cpp" />
     <ClCompile Include="Manager\Map\Map.cpp" />
     <ClCompile Include="Manager\Map\MapAction.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="Config\MapActionConfigLoader.h" />
     <ClInclude Include="Config\MapConfigLoader.h" />
     <ClInclude Include="Config\MonsterConfigLoader.h" />
+    <ClInclude Include="Config\ShopConfigLoader.h" />
     <ClInclude Include="Data\CellData.h" />
     <ClInclude Include="Data\ContainerData.h" />
     <ClInclude Include="Data\FrameData.h" />
@@ -223,7 +225,7 @@
     <ClInclude Include="Manager\Manager.h" />
     <ClInclude Include="Handler\ManagerHandler.h" />
     <ClInclude Include="Manager\Player\ItemManager.h" />
-    <ClInclude Include="Core\Hander.h" />
+    <ClInclude Include="Core\Handler.h" />
     <ClInclude Include="Frame\ArrowManager.h" />
     <ClInclude Include="Manager\ManagerInstance.h" />
     <ClInclude Include="Manager\Map\Map.h" />
