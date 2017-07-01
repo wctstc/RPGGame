@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="tag2fqnd" jpegQuality="80" compressPNG="true">
+  <resources>
+    <image id="jaxj2i" name="MainSceneButton_up_down_over.png" path="/MainScene/" exported="true"/>
+    <image id="jaxj35" name="MainSceneMenu_up_down_over.png" path="/MainScene/" exported="true"/>
+    <component id="jaxj3a" name="MainSceneMenu.xml" path="/MainScene/" exported="true"/>
+    <component id="jaxj3b" name="MainScene.xml" path="/" exported="true"/>
+    <component id="jaxj3d" name="MainSceneButton.xml" path="/MainScene/" exported="true"/>
+    <image id="jaxj3e" name="MainScene.png" path="/" exported="true"/>
+  </resources>
+  <publish name="Game" genCode="true"/>
+</packageDescription>

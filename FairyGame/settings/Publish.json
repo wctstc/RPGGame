@@ -1,0 +1,14 @@
+{
+	"codeGeneration":{
+		"classNamePrefix":"UI_",
+		"codePath":"F:\\git\\UnityGame\\UnityGame\\Assets\\ResourcesCode",
+		"codeType":"",
+		"getMemberByName":false,
+		"ignoreNoname":false,
+		"memberNamePrefix":"m_",
+		"packageName":""
+	},
+	"fileExtension":"",
+	"packageCount":2,
+	"path":"F:\\git\\UnityGame\\UnityGame\\Assets\\Resources"
+}

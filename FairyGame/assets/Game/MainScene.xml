@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="289,405">
+  <displayList>
+    <image id="n13_jaxj" name="n13" src="jaxj3e" xy="0,0"/>
+    <component id="n1_jaxj" name="n1" src="jaxj3a" xy="121,311">
+      <relation target="" sidePair="right-right"/>
+      <Button title="野外"/>
+    </component>
+    <component id="n4_jaxj" name="n4" src="jaxj3a" xy="122,266">
+      <relation target="" sidePair="right-right"/>
+      <Button title="村庄"/>
+    </component>
+    <component id="n5_jaxj" name="n5" src="jaxj3a" xy="122,354">
+      <relation target="" sidePair="right-right"/>
+      <Button title="活动"/>
+    </component>
+    <component id="n9_jaxj" name="n9" src="jaxj3d" xy="0,0">
+      <relation target="" sidePair="left-left"/>
+      <Button title="角色"/>
+    </component>
+    <component id="n10_jaxj" name="n10" src="jaxj3d" xy="0,77">
+      <relation target="" sidePair="left-left"/>
+      <Button title="背包"/>
+    </component>
+    <component id="n11_jaxj" name="n11" src="jaxj3d" xy="0,154">
+      <relation target="" sidePair="left-left"/>
+      <Button title="技能"/>
+    </component>
+    <component id="n12_jaxj" name="n12" src="jaxj3d" xy="0,230">
+      <relation target="" sidePair="left-left"/>
+      <Button title="成就"/>
+    </component>
+  </displayList>
+</component>
