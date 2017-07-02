@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="289,405" initName="MainScene">
+  <displayList>
+    <image id="n0_kxi1" name="n0" src="jaxj3e" xy="0,0"/>
+    <component id="n1_kxi1" name="n1" src="jaxj3a" xy="121,216">
+      <Button title="村庄"/>
+    </component>
+    <component id="n2_kxi1" name="n2" src="jaxj3a" xy="121,253">
+      <Button title="平原"/>
+    </component>
+    <component id="n3_kxi1" name="n3" src="jaxj3a" xy="121,327">
+      <Button title="河道"/>
+    </component>
+    <component id="n5_kxi1" name="n5" src="jaxj3d" xy="2,1">
+      <Button title="角色"/>
+    </component>
+    <component id="n6_kxi1" name="n6" src="jaxj3d" xy="2,80">
+      <Button title="背包"/>
+    </component>
+    <component id="n7_kxi1" name="n7" src="jaxj3d" xy="2,160">
+      <Button title="技能"/>
+    </component>
+    <component id="n8_kxi1" name="n8" src="jaxj3d" xy="2,240">
+      <Button title="成就"/>
+    </component>
+    <component id="n9_kxi1" name="n9" src="jaxj3a" xy="122,290">
+      <Button title="树林"/>
+    </component>
+    <component id="n10_kxi1" name="n10" src="jaxj3a" xy="121,364">
+      <Button title="矿区"/>
+    </component>
+  </displayList>
+</component>

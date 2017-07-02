@@ -1,14 +1,14 @@
 {
 	"codeGeneration":{
 		"classNamePrefix":"UI_",
-		"codePath":"F:\\git\\UnityGame\\UnityGame\\Assets\\ResourcesCode",
-		"codeType":"",
-		"getMemberByName":false,
+		"codePath":"G:\\git\\RGPGame\\RPGGame\\UnityGame\\UnityGame\\Assets\\Script\\FairyGUI",
+		"codeType":"C#",
+		"getMemberByName":true,
 		"ignoreNoname":false,
 		"memberNamePrefix":"m_",
-		"packageName":""
+		"packageName":"FairyGUI"
 	},
 	"fileExtension":"",
 	"packageCount":2,
-	"path":"F:\\git\\UnityGame\\UnityGame\\Assets\\Resources"
+	"path":"G:\\git\\RGPGame\\RPGGame\\UnityGame\\UnityGame\\Assets\\Resources\\FairyGUI"
 }

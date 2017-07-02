@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="289,405" bgColorEnabled="true">
+  <displayList>
+    <image id="n1_wqje" name="n1" src="jaxj3e" xy="0,-1"/>
+    <image id="n2_wqje" name="n2" src="wqje3v" xy="13,88" size="41,8"/>
+    <image id="n3_wqje" name="n3" src="wqje3v" xy="57,88" size="41,8"/>
+    <image id="n4_wqje" name="n4" src="wqje3v" xy="101,88" size="41,8"/>
+    <image id="n5_wqje" name="n5" src="wqje3v" xy="145,88" size="41,8"/>
+    <image id="n6_wqje" name="n6" src="wqje3v" xy="189,88" size="41,8"/>
+    <image id="n7_wqje" name="n7" src="wqje3v" xy="234,88" size="41,8"/>
+    <image id="n8_wqje" name="n8" src="wqje43" xy="115,26" size="20,20"/>
+    <image id="n9_wqje" name="n9" src="wqje42" xy="137,25" size="20,20"/>
+    <image id="n10_wqje" name="n10" src="wqje41" xy="158,31" size="20,14"/>
+    <image id="n11_wqje" name="n11" src="wqje4c" xy="229,34" size="48,54"/>
+    <image id="n12_wqje" name="n12" src="wqje4b" xy="13,36" size="48,54" flip="hz"/>
+    <image id="n13_wqje" name="n13" src="wqje4d" xy="210,284" size="32,32"/>
+    <image id="n14_wqje" name="n14" src="wqje4d" xy="210,248" size="32,32"/>
+    <image id="n15_wqje" name="n15" src="wqje4d" xy="42,284" size="32,32"/>
+    <image id="n16_wqje" name="n16" src="wqje4d" xy="42,320" size="32,32"/>
+    <image id="n17_wqje" name="n17" src="wqje4d" xy="126,320" size="32,32"/>
+    <image id="n18_wqje" name="n18" src="wqje4d" xy="168,356" size="32,32"/>
+    <image id="n19_wqje" name="n19" src="wqje4d" xy="168,284" size="32,32"/>
+    <image id="n20_wqje" name="n20" src="wqje4d" xy="126,284" size="32,32"/>
+    <image id="n21_wqje" name="n21" src="wqje4d" xy="84,248" size="32,32"/>
+    <image id="n22_wqje" name="n22" src="wqje4d" xy="42,356" size="32,32"/>
+    <image id="n23_wqje" name="n23" src="wqje4d" xy="126,356" size="32,32"/>
+    <image id="n24_wqje" name="n24" src="wqje4d" xy="210,356" size="32,32"/>
+    <image id="n25_wqje" name="n25" src="wqje4d" xy="168,248" size="32,32"/>
+    <image id="n26_wqje" name="n26" src="wqje4d" xy="126,248" size="32,32"/>
+    <image id="n27_wqje" name="n27" src="wqje4d" xy="168,320" size="32,32"/>
+    <image id="n28_wqje" name="n28" src="wqje4d" xy="84,356" size="32,32"/>
+    <image id="n29_wqje" name="n29" src="wqje4d" xy="84,320" size="32,32"/>
+    <image id="n30_wqje" name="n30" src="wqje4d" xy="84,284" size="32,32"/>
+    <image id="n31_wqje" name="n31" src="wqje4d" xy="42,248" size="32,32"/>
+    <image id="n32_wqje" name="n32" src="wqje4d" xy="210,320" size="32,32"/>
+    <image id="n33_wqje" name="n33" src="wqje4d" xy="237,212" size="32,32"/>
+    <image id="n34_wqje" name="n34" src="wqje4d" xy="97,212" size="32,32"/>
+    <image id="n35_wqje" name="n35" src="wqje4d" xy="202,212" size="32,32"/>
+    <image id="n36_wqje" name="n36" src="wqje4d" xy="167,212" size="32,32"/>
+    <image id="n37_wqje" name="n37" src="wqje4d" xy="27,212" size="32,32"/>
+    <image id="n39_wqje" name="n39" src="wqje4d" xy="132,212" size="32,32"/>
+    <image id="n42_wqje" name="n42" src="wqje4d" xy="62,212" size="32,32"/>
+    <image id="n44_wqje" name="n44" src="wqje3y" xy="130,252" size="24,24"/>
+    <image id="n45_wqje" name="n45" src="wqje3z" xy="172,252" size="24,24"/>
+    <image id="n46_wqje" name="n46" src="wqje3w" xy="46,252" size="24,24"/>
+    <image id="n47_wqje" name="n47" src="wqje3w" xy="32,216" size="24,24"/>
+    <image id="n48_wqje" name="n48" src="wqje3x" xy="136,216" size="24,24"/>
+    <image id="n49_wqje" name="n49" src="wqje3x" xy="101,216" size="24,24"/>
+    <image id="n50_wqje" name="n50" src="wqje3x" xy="66,216" size="24,24"/>
+    <text id="n51_wqje" name="n51" xy="13,99" size="43,62" fontSize="12" color="#0000ff" bold="true" italic="true" text="前移*3&#xA;普攻&#xA;普攻&#xA;普攻"/>
+    <text id="n52_wqje" name="n52" xy="231,101" size="43,47" fontSize="12" color="#ff0000" bold="true" italic="true" text="移动**&#xA;魔法**&#xA;防御**"/>
+    <image id="n54_wqje" name="n54" src="wqje4d" xy="181,175" size="32,32"/>
+    <image id="n55_wqje" name="n55" src="wqje4d" xy="141,175" size="32,32"/>
+    <image id="n56_wqje" name="n56" src="wqje4d" xy="101,175" size="32,32"/>
+    <image id="n57_wqje" name="n57" src="wqje4d" xy="61,175" size="32,32"/>
+    <component id="n58_wqje" name="n58" src="wqje4i" xy="88,251" size="25,25"/>
+  </displayList>
+</component>

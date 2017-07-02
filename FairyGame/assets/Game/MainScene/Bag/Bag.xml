@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="200,250" initName="Bag">
+  <displayList>
+    <image id="n2_kxi1" name="n2" src="kxi13h" xy="0,0" size="200,253"/>
+    <component id="n8_kxi1" name="n8" src="kxi13o" xy="54,36" size="20,20"/>
+    <component id="n10_kxi1" name="n10" src="kxi13o" xy="100,36" size="20,20"/>
+    <component id="n11_kxi1" name="n11" src="kxi13o" xy="77,36" size="20,20"/>
+    <component id="n12_kxi1" name="n12" src="kxi13o" xy="8,36" size="20,20"/>
+    <component id="n13_kxi1" name="n13" src="kxi13o" xy="31,36" size="20,20"/>
+    <component id="n14_kxi1" name="n14" src="kxi13o" xy="169,36" size="20,20"/>
+    <component id="n15_kxi1" name="n15" src="kxi13o" xy="146,36" size="20,20"/>
+    <component id="n16_kxi1" name="n16" src="kxi13o" xy="123,36" size="20,20"/>
+    <component id="n17_kxi1" name="n17" src="kxi13o" xy="100,82" size="20,20"/>
+    <component id="n18_kxi1" name="n18" src="kxi13o" xy="123,128" size="20,20"/>
+    <component id="n19_kxi1" name="n19" src="kxi13o" xy="169,105" size="20,20"/>
+    <component id="n20_kxi1" name="n20" src="kxi13o" xy="123,59" size="20,20"/>
+    <component id="n21_kxi1" name="n21" src="kxi13o" xy="146,59" size="20,20"/>
+    <component id="n23_kxi1" name="n23" src="kxi13o" xy="123,197" size="20,20"/>
+    <component id="n24_kxi1" name="n24" src="kxi13o" xy="146,151" size="20,20"/>
+    <component id="n25_kxi1" name="n25" src="kxi13o" xy="77,105" size="20,20"/>
+    <component id="n26_kxi1" name="n26" src="kxi13o" xy="146,128" size="20,20"/>
+    <component id="n27_kxi1" name="n27" src="kxi13o" xy="146,105" size="20,20"/>
+    <component id="n28_kxi1" name="n28" src="kxi13o" xy="31,59" size="20,20"/>
+    <component id="n29_kxi1" name="n29" src="kxi13o" xy="169,59" size="20,20"/>
+    <component id="n30_kxi1" name="n30" src="kxi13o" xy="169,197" size="20,20"/>
+    <component id="n31_kxi1" name="n31" src="kxi13o" xy="77,197" size="20,20"/>
+    <component id="n32_kxi1" name="n32" src="kxi13o" xy="100,174" size="20,20"/>
+    <component id="n33_kxi1" name="n33" src="kxi13o" xy="123,82" size="20,20"/>
+    <component id="n34_kxi1" name="n34" src="kxi13o" xy="169,128" size="20,20"/>
+    <component id="n35_kxi1" name="n35" src="kxi13o" xy="8,151" size="20,20"/>
+    <component id="n36_kxi1" name="n36" src="kxi13o" xy="100,59" size="20,20"/>
+    <component id="n37_kxi1" name="n37" src="kxi13o" xy="8,105" size="20,20"/>
+    <component id="n39_kxi1" name="n39" src="kxi13o" xy="31,197" size="20,20"/>
+    <component id="n40_kxi1" name="n40" src="kxi13o" xy="54,174" size="20,20"/>
+    <component id="n41_kxi1" name="n41" src="kxi13o" xy="169,82" size="20,20"/>
+    <component id="n43_kxi1" name="n43" src="kxi13o" xy="54,128" size="20,20"/>
+    <component id="n44_kxi1" name="n44" src="kxi13o" xy="54,59" size="20,20"/>
+    <component id="n45_kxi1" name="n45" src="kxi13o" xy="31,82" size="20,20"/>
+    <component id="n47_kxi1" name="n47" src="kxi13o" xy="100,197" size="20,20"/>
+    <component id="n48_kxi1" name="n48" src="kxi13o" xy="123,174" size="20,20"/>
+    <component id="n49_kxi1" name="n49" src="kxi13o" xy="100,105" size="20,20"/>
+    <component id="n50_kxi1" name="n50" src="kxi13o" xy="31,151" size="20,20"/>
+    <component id="n51_kxi1" name="n51" src="kxi13o" xy="100,128" size="20,20"/>
+    <component id="n52_kxi1" name="n52" src="kxi13o" xy="8,59" size="20,20"/>
+    <component id="n53_kxi1" name="n53" src="kxi13o" xy="8,82" size="20,20"/>
+    <component id="n55_kxi1" name="n55" src="kxi13o" xy="146,174" size="20,20"/>
+    <component id="n56_kxi1" name="n56" src="kxi13o" xy="77,174" size="20,20"/>
+    <component id="n57_kxi1" name="n57" src="kxi13o" xy="54,105" size="20,20"/>
+    <component id="n58_kxi1" name="n58" src="kxi13o" xy="54,151" size="20,20"/>
+    <component id="n59_kxi1" name="n59" src="kxi13o" xy="8,174" size="20,20"/>
+    <component id="n60_kxi1" name="n60" src="kxi13o" xy="8,197" size="20,20"/>
+    <component id="n61_kxi1" name="n61" src="kxi13o" xy="31,105" size="20,20"/>
+    <component id="n63_kxi1" name="n63" src="kxi13o" xy="169,174" size="20,20"/>
+    <component id="n64_kxi1" name="n64" src="kxi13o" xy="169,151" size="20,20"/>
+    <component id="n65_kxi1" name="n65" src="kxi13o" xy="31,128" size="20,20"/>
+    <component id="n66_kxi1" name="n66" src="kxi13o" xy="77,151" size="20,20"/>
+    <component id="n67_kxi1" name="n67" src="kxi13o" xy="123,105" size="20,20"/>
+    <component id="n68_kxi1" name="n68" src="kxi13o" xy="77,59" size="20,20"/>
+    <component id="n69_kxi1" name="n69" src="kxi13o" xy="54,82" size="20,20"/>
+    <component id="n71_kxi1" name="n71" src="kxi13o" xy="54,197" size="20,20"/>
+    <component id="n72_kxi1" name="n72" src="kxi13o" xy="31,174" size="20,20"/>
+    <component id="n73_kxi1" name="n73" src="kxi13o" xy="146,82" size="20,20"/>
+    <component id="n74_kxi1" name="n74" src="kxi13o" xy="100,151" size="20,20"/>
+    <component id="n75_kxi1" name="n75" src="kxi13o" xy="77,128" size="20,20"/>
+    <component id="n76_kxi1" name="n76" src="kxi13o" xy="8,128" size="20,20"/>
+    <component id="n77_kxi1" name="n77" src="kxi13o" xy="77,82" size="20,20"/>
+    <component id="n79_kxi1" name="n79" src="kxi13o" xy="146,197" size="20,20"/>
+    <component id="n80_kxi1" name="n80" src="kxi13o" xy="123,151" size="20,20"/>
+    <component id="n81_kxi1" name="n81" src="kxi13q" xy="133,218" size="56,15">
+      <Button title="整理"/>
+    </component>
+    <component id="n82_kxi1" name="n82" src="kxi13r" xy="187,26" size="8,8"/>
+  </displayList>
+</component>
