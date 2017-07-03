@@ -43,12 +43,12 @@
     <image id="n44_wqje" name="n44" src="wqje3y" xy="130,252" size="24,24"/>
     <image id="n45_wqje" name="n45" src="wqje3z" xy="172,252" size="24,24"/>
     <image id="n46_wqje" name="n46" src="wqje3w" xy="46,252" size="24,24"/>
-    <image id="n47_wqje" name="n47" src="wqje3w" xy="32,216" size="24,24"/>
+    <image id="n47_wqje" name="n47" src="wqje3w" xy="31,216" size="24,24"/>
     <image id="n48_wqje" name="n48" src="wqje3x" xy="136,216" size="24,24"/>
     <image id="n49_wqje" name="n49" src="wqje3x" xy="101,216" size="24,24"/>
     <image id="n50_wqje" name="n50" src="wqje3x" xy="66,216" size="24,24"/>
-    <text id="n51_wqje" name="n51" xy="13,99" size="43,62" fontSize="12" color="#0000ff" bold="true" italic="true" text="前移*3&#xA;普攻&#xA;普攻&#xA;普攻"/>
-    <text id="n52_wqje" name="n52" xy="231,101" size="43,47" fontSize="12" color="#ff0000" bold="true" italic="true" text="移动**&#xA;魔法**&#xA;防御**"/>
+    <text id="n51_wqje" name="n51" xy="13,99" size="45,61" fontSize="12" color="#0000ff" bold="true" italic="true" text="前移*3&#xA;普攻&#xA;普攻&#xA;普攻"/>
+    <text id="n52_wqje" name="n52" xy="231,101" size="45,46" fontSize="12" color="#ff0000" bold="true" italic="true" text="移动**&#xA;魔法**&#xA;防御**"/>
     <image id="n54_wqje" name="n54" src="wqje4d" xy="181,175" size="32,32"/>
     <image id="n55_wqje" name="n55" src="wqje4d" xy="141,175" size="32,32"/>
     <image id="n56_wqje" name="n56" src="wqje4d" xy="101,175" size="32,32"/>

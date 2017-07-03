@@ -18,7 +18,7 @@
     <component id="kxi13s" name="MainScene.xml" path="/MainScene/" exported="true"/>
     <component id="wqje3t" name="FightScene.xml" path="/FightScene/"/>
     <image id="wqje3v" name="Road.png" path="/"/>
-    <image id="wqje3w" name="Move.png" path="/"/>
+    <image id="wqje3w" name="SequenceMove_up_down_over.png" path="/FightScene/Component/"/>
     <image id="wqje3x" name="Attack_up_down_over.png" path="/FightScene/Component/"/>
     <image id="wqje3y" name="Defance.png" path="/"/>
     <image id="wqje3z" name="Magic.png" path="/"/>
@@ -35,12 +35,18 @@
     <image id="wqje4a" name="Time_8.png" path="/"/>
     <image id="wqje4b" name="Player2.png" path="/"/>
     <image id="wqje4c" name="Player1.png" path="/"/>
-    <image id="wqje4d" name="Action.png" path="/"/>
+    <image id="wqje4d" name="Role_up_down_over.png" path="/FightScene/Component/"/>
     <image id="wqje4e" name="Player3.png" path="/"/>
     <image id="wqje4f" name="Player4.png" path="/"/>
     <image id="wqje4g" name="Player5.png" path="/"/>
     <movieclip id="wqje4h" name="Time.jta" path="/"/>
     <component id="wqje4i" name="Attack.xml" path="/FightScene/Component/"/>
+    <component id="lfql4j" name="Role.xml" path="/FightScene/Component/"/>
+    <image id="lfql4k" name="484.png" path="/"/>
+    <image id="lfql4l" name="492.png" path="/"/>
+    <image id="lfql4m" name="RoleSelected_down_selectedover.png" path="/FightScene/Component/"/>
+    <image id="lfql4n" name="483.png" path="/"/>
+    <component id="lfql4p" name="SequenceMove.xml" path="/FightScene/Component/"/>
   </resources>
   <publish name="Game" genCode="true"/>
 </packageDescription>
