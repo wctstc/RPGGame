@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <packageDescription id="tag2fqnd" jpegQuality="80" compressPNG="true">
   <resources>
-    <image id="jaxj2i" name="MainSceneButton_up_down_over.png" path="/MainScene/" exported="true"/>
-    <image id="jaxj35" name="MainSceneMenu_up_down_over.png" path="/MainScene/" exported="true"/>
-    <component id="jaxj3a" name="MainSceneMenu.xml" path="/MainScene/" exported="true"/>
-    <component id="jaxj3d" name="MainSceneButton.xml" path="/MainScene/" exported="true"/>
-    <image id="jaxj3e" name="MainScene_background.png" path="/MainScene/" exported="true"/>
+    <image id="jaxj2i" name="picMainScenePlayer.png" path="/MainScene/" exported="true"/>
+    <image id="jaxj35" name="picMainSceneMenu.png" path="/MainScene/" exported="true"/>
+    <component id="jaxj3a" name="btnMainSceneMenu.xml" path="/MainScene/" exported="true"/>
+    <component id="jaxj3d" name="btnMainScenePlayer.xml" path="/MainScene/" exported="true"/>
+    <image id="jaxj3e" name="picMainScene.png" path="/MainScene/" exported="true"/>
     <component id="kxi13g" name="Bag.xml" path="/MainScene/Bag/" exported="true"/>
     <image id="kxi13h" name="Bag_background.png" path="/MainScene/Bag/" exported="true" scale9grid="97,66,194,120"/>
     <image id="kxi13i" name="BagCellup_down_over.png" path="/MainScene/Bag/" exported="true"/>
@@ -15,38 +15,39 @@
     <component id="kxi13o" name="BagCell.xml" path="/MainScene/Bag/" exported="true"/>
     <component id="kxi13q" name="BagButton.xml" path="/MainScene/Bag/" exported="true"/>
     <component id="kxi13r" name="BagClose.xml" path="/MainScene/Bag/" exported="true"/>
-    <component id="kxi13s" name="MainScene.xml" path="/MainScene/" exported="true"/>
-    <component id="wqje3t" name="FightScene.xml" path="/FightScene/"/>
-    <image id="wqje3v" name="Road.png" path="/"/>
-    <image id="wqje3w" name="SequenceMove_up_down_over.png" path="/FightScene/Component/"/>
-    <image id="wqje3x" name="Attack_up_down_over.png" path="/FightScene/Component/"/>
-    <image id="wqje3y" name="Defance.png" path="/"/>
-    <image id="wqje3z" name="Magic.png" path="/"/>
-    <image id="wqje40" name="Time_9.png" path="/"/>
-    <image id="wqje41" name="Time_s.png" path="/"/>
-    <image id="wqje42" name="Time_0.png" path="/"/>
-    <image id="wqje43" name="Time_1.png" path="/"/>
-    <image id="wqje44" name="Time_2.png" path="/"/>
-    <image id="wqje45" name="Time_3.png" path="/"/>
-    <image id="wqje46" name="Time_4.png" path="/"/>
-    <image id="wqje47" name="Time_5.png" path="/"/>
-    <image id="wqje48" name="Time_6.png" path="/"/>
-    <image id="wqje49" name="Time_7.png" path="/"/>
-    <image id="wqje4a" name="Time_8.png" path="/"/>
-    <image id="wqje4b" name="Player2.png" path="/"/>
-    <image id="wqje4c" name="Player1.png" path="/"/>
-    <image id="wqje4d" name="Role_up_down_over.png" path="/FightScene/Component/"/>
-    <image id="wqje4e" name="Player3.png" path="/"/>
-    <image id="wqje4f" name="Player4.png" path="/"/>
-    <image id="wqje4g" name="Player5.png" path="/"/>
-    <movieclip id="wqje4h" name="Time.jta" path="/"/>
-    <component id="wqje4i" name="Attack.xml" path="/FightScene/Component/"/>
-    <component id="lfql4j" name="Role.xml" path="/FightScene/Component/"/>
-    <image id="lfql4k" name="484.png" path="/"/>
-    <image id="lfql4l" name="492.png" path="/"/>
-    <image id="lfql4m" name="RoleSelected_down_selectedover.png" path="/FightScene/Component/"/>
-    <image id="lfql4n" name="483.png" path="/"/>
-    <component id="lfql4p" name="SequenceMove.xml" path="/FightScene/Component/"/>
+    <component id="kxi13s" name="btnMainScene.xml" path="/MainScene/" exported="true"/>
+    <component id="wqje3t" name="cmpFightScene.xml" path="/FightScene/" exported="true"/>
+    <image id="wqje3v" name="picRoad.png" path="/FightScene/" exported="true"/>
+    <image id="wqje3w" name="picMove.png" path="/FightScene/Component/" exported="true"/>
+    <image id="wqje3x" name="picAttack.png" path="/FightScene/Component/" exported="true"/>
+    <image id="wqje3y" name="picDefance.png" path="/FightScene/Component/" exported="true"/>
+    <image id="wqje3z" name="picMagic.png" path="/FightScene/Component/" exported="true"/>
+    <image id="wqje40" name="picTime_frame_0.png" path="/FightScene/" exported="true"/>
+    <image id="wqje41" name="picTime_s.png" path="/FightScene/" exported="true"/>
+    <image id="wqje42" name="picTime_frame_9.png" path="/FightScene/" exported="true"/>
+    <image id="wqje43" name="picTime_frame_8.png" path="/FightScene/" exported="true"/>
+    <image id="wqje44" name="picTime_frame_7.png" path="/FightScene/" exported="true"/>
+    <image id="wqje45" name="picTime_frame_6.png" path="/FightScene/" exported="true"/>
+    <image id="wqje46" name="picTime_frame_5.png" path="/FightScene/" exported="true"/>
+    <image id="wqje47" name="picTime_frame_4.png" path="/FightScene/" exported="true"/>
+    <image id="wqje48" name="picTime_frame_3.png" path="/FightScene/" exported="true"/>
+    <image id="wqje49" name="picTime_frame_2.png" path="/FightScene/" exported="true"/>
+    <image id="wqje4a" name="picTime_frame_1.png" path="/FightScene/" exported="true"/>
+    <image id="wqje4b" name="picPlayer2.png" path="/" exported="true"/>
+    <image id="wqje4c" name="picPlayer1.png" path="/" exported="true"/>
+    <image id="wqje4d" name="picSlot.png" path="/FightScene/Component/" exported="true"/>
+    <image id="wqje4e" name="picPlayer3.png" path="/" exported="true"/>
+    <image id="wqje4f" name="picPlayer4.png" path="/" exported="true"/>
+    <image id="wqje4g" name="picPlayer5.png" path="/" exported="true"/>
+    <component id="wqje4i" name="btnAttack.xml" path="/FightScene/Component/" exported="true"/>
+    <image id="lfql4k" name="picAcitonSelected.png" path="/FightScene/Component/" exported="true"/>
+    <image id="lfql4l" name="picSequenceSelected.png" path="/FightScene/Component/" exported="true"/>
+    <image id="lfql4m" name="picRoleSelected.png" path="/FightScene/Component/" exported="true"/>
+    <component id="aowj4q" name="cmpSlot.xml" path="/FightScene/Component/" exported="true"/>
+    <movieclip id="aowj4u" name="actTime.jta" path="/FightScene/" exported="true"/>
+    <component id="aowj4v" name="btnRole.xml" path="/FightScene/Component/" exported="true"/>
+    <component id="aowj4z" name="btnSequence.xml" path="/FightScene/Component/" exported="true"/>
+    <component id="aowj50" name="btnAction.xml" path="/FightScene/Component/" exported="true"/>
   </resources>
   <publish name="Game" genCode="true"/>
 </packageDescription>

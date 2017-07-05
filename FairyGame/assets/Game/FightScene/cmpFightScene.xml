@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="289,405" bgColorEnabled="true">
+  <displayList>
+    <image id="n1_wqje" name="Background" src="jaxj3e" xy="0,0"/>
+    <image id="n2_wqje" name="Road1" src="wqje3v" xy="13,88" size="41,8"/>
+    <image id="n3_wqje" name="Road2" src="wqje3v" xy="57,88" size="41,8"/>
+    <image id="n4_wqje" name="Road3" src="wqje3v" xy="101,88" size="41,8"/>
+    <image id="n5_wqje" name="Road4" src="wqje3v" xy="145,88" size="41,8"/>
+    <image id="n6_wqje" name="Road5" src="wqje3v" xy="189,88" size="41,8"/>
+    <image id="n7_wqje" name="Road6" src="wqje3v" xy="234,88" size="41,8"/>
+    <image id="n11_wqje" name="PlayerTmp" src="wqje4c" xy="229,34" size="48,54" visible="false"/>
+    <image id="n12_wqje" name="EnemyTmp" src="wqje4b" xy="13,36" size="48,54" visible="false" flip="hz"/>
+    <component id="n31_wqje" name="ActionSlot1" src="aowj4q" xy="44,279" size="32,32"/>
+    <image id="n21_wqje" name="ActionSlot2" src="wqje4d" xy="86,279" size="32,32"/>
+    <image id="n26_wqje" name="ActionSlot3" src="wqje4d" xy="128,279" size="32,32"/>
+    <image id="n25_wqje" name="ActionSlot4" src="wqje4d" xy="170,279" size="32,32"/>
+    <image id="n14_wqje" name="ActionSlot5" src="wqje4d" xy="212,279" size="32,32"/>
+    <image id="n15_wqje" name="ActionSlot6" src="wqje4d" xy="44,321" size="32,32"/>
+    <image id="n30_wqje" name="ActionSlot7" src="wqje4d" xy="86,321" size="32,32"/>
+    <image id="n20_wqje" name="ActionSlot8" src="wqje4d" xy="128,321" size="32,32"/>
+    <image id="n19_wqje" name="ActionSlot9" src="wqje4d" xy="170,321" size="32,32"/>
+    <image id="n13_wqje" name="ActionSlot10" src="wqje4d" xy="212,321" size="32,32"/>
+    <component id="n37_wqje" name="SequenceSlot1" src="aowj4q" xy="27,212" size="32,32"/>
+    <component id="n42_wqje" name="SequenceSlot2" src="aowj4q" xy="62,212" size="32,32"/>
+    <component id="n34_wqje" name="SequenceSlot3" src="aowj4q" xy="97,212" size="32,32"/>
+    <component id="n39_wqje" name="SequenceSlot4" src="aowj4q" xy="132,212" size="32,32"/>
+    <component id="n36_wqje" name="SequenceSlot5" src="aowj4q" xy="167,212" size="32,32"/>
+    <component id="n35_wqje" name="SequenceSlot6" src="aowj4q" xy="202,212" size="32,32"/>
+    <component id="n33_wqje" name="SequenceSlot7" src="aowj4q" xy="237,212" size="32,32"/>
+    <text id="n51_wqje" name="PlayerActionTmp" xy="13,99" size="45,61" visible="false" fontSize="12" color="#0000ff" bold="true" italic="true" text="前移*3&#xA;普攻&#xA;普攻&#xA;普攻"/>
+    <text id="n52_wqje" name="EnemyActionTmp" xy="231,101" size="45,46" visible="false" fontSize="12" color="#ff0000" bold="true" italic="true" text="移动**&#xA;魔法**&#xA;防御**"/>
+    <movieclip id="n59_aowj" name="TimeNumber" src="aowj4u" xy="121,14" size="18,24"/>
+    <image id="n60_aowj" name="TimeSecond" src="wqje41" xy="139,18" size="18,20"/>
+    <component id="n61_aowj" name="RoleSlot1" src="aowj4q" xy="65,171"/>
+    <component id="n65_aowj" name="RoleSlot2" src="aowj4q" xy="105,171"/>
+    <component id="n64_aowj" name="RoleSlot3" src="aowj4q" xy="145,171"/>
+    <component id="n63_aowj" name="RoleSlot4" src="aowj4q" xy="185,171"/>
+    <component id="n66_aowj" name="Role1Tmp" src="aowj4v" xy="65,171" size="32,32" visible="false">
+      <Button icon="ui://tag2fqndwqje4b"/>
+    </component>
+    <component id="n67_aowj" name="Role2Tmp" src="aowj4v" xy="105,171" size="32,32" visible="false">
+      <Button icon="ui://tag2fqndwqje4f"/>
+    </component>
+    <component id="n69_aowj" name="SequenceAttackTmp" src="aowj4z" xy="27,212" size="32,32" visible="false">
+      <Button icon="ui://tag2fqndwqje3w"/>
+    </component>
+    <component id="n72_aowj" name="ActionMoveTmp" src="aowj50" xy="44,279" size="32,32" visible="false">
+      <Button icon="ui://tag2fqndwqje3w"/>
+    </component>
+    <component id="n73_aowj" name="ActionAttackTmp" src="aowj50" xy="86,279" size="32,32" visible="false">
+      <Button icon="ui://tag2fqndwqje3x"/>
+    </component>
+    <component id="n74_aowj" name="ActionDefanceTmp" src="aowj50" xy="128,279" size="32,32" visible="false">
+      <Button icon="ui://tag2fqndwqje3y"/>
+    </component>
+    <component id="n75_aowj" name="ActionMagicTmp" src="aowj50" xy="170,279" size="32,32" visible="false">
+      <Button icon="ui://tag2fqndwqje3z"/>
+    </component>
+  </displayList>
+</component>

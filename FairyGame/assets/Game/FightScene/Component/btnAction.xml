@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="80,80" extention="Button">
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="1"/>
+  <displayList>
+    <loader id="n4" name="icon" xy="0,0" pivot="0.5,0.5" size="80,80" scale="0.75,0.75" align="center" vAlign="middle" fill="scaleFree">
+      <relation target="" sidePair="width-width%,height-height%"/>
+      <relation target="" sidePair="center-center%,middle-middle%"/>
+    </loader>
+    <image id="n2" name="n1" src="lfql4k" xy="-13,-13" pivot="0.5,0.5" size="104,104" touchable="false">
+      <gearDisplay controller="button" pages="1,2,3"/>
+      <relation target="" sidePair="width-width%,height-height%"/>
+      <relation target="" sidePair="center-center%,middle-middle%"/>
+    </image>
+  </displayList>
+  <Button/>
+</component>
