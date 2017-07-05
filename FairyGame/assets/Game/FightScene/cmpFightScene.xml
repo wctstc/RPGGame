@@ -9,7 +9,7 @@
     <image id="n6_wqje" name="Road5" src="wqje3v" xy="189,88" size="41,8"/>
     <image id="n7_wqje" name="Road6" src="wqje3v" xy="234,88" size="41,8"/>
     <image id="n11_wqje" name="PlayerTmp" src="wqje4c" xy="229,34" size="48,54" visible="false"/>
-    <image id="n12_wqje" name="EnemyTmp" src="wqje4b" xy="13,36" size="48,54" visible="false" flip="hz"/>
+    <image id="n12_wqje" name="EnemyTmp" src="wqje4b" xy="12,36" size="48,54" visible="false" flip="hz"/>
     <component id="n31_wqje" name="ActionSlot1" src="aowj4q" xy="44,279" size="32,32"/>
     <image id="n21_wqje" name="ActionSlot2" src="wqje4d" xy="86,279" size="32,32"/>
     <image id="n26_wqje" name="ActionSlot3" src="wqje4d" xy="128,279" size="32,32"/>

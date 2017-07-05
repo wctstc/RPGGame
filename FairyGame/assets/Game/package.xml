@@ -49,5 +49,7 @@
     <component id="aowj4z" name="btnSequence.xml" path="/FightScene/Component/" exported="true"/>
     <component id="aowj50" name="btnAction.xml" path="/FightScene/Component/" exported="true"/>
   </resources>
-  <publish name="Game" genCode="true"/>
+  <publish name="Game" genCode="true">
+    <atlas name="默认" index="0"/>
+  </publish>
 </packageDescription>
