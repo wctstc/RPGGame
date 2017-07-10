@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="289,405">
+  <displayList>
+    <image id="n0_codd" name="Background" src="jaxj3e" xy="0,0"/>
+    <image id="n6_codd" name="Road1" src="codd51" xy="27,364" size="50,20" skew="-45,-45"/>
+    <image id="n4_codd" name="Road2" src="codd51" xy="66,324" size="50,20" skew="-45,-45"/>
+    <image id="n1_codd" name="Road3" src="codd51" xy="106,284" size="50,20" skew="-45,-45"/>
+    <image id="n2_codd" name="Road4" src="codd51" xy="146,244" size="50,20" skew="-45,-45"/>
+    <image id="n5_codd" name="Road5" src="codd51" xy="186,204" size="50,20" skew="-45,-45"/>
+    <image id="n3_codd" name="Road6" src="codd51" xy="226,165" size="50,20" skew="-45,-45"/>
+    <movieclip id="n8_codd" name="Time" src="aowj4u" xy="122,16" size="18,24"/>
+    <image id="n7_codd" name="TimeSecond" src="wqje41" xy="141,19" size="18,20"/>
+    <image id="n9_codd" name="EnemyRole" src="wqje4c" xy="217,63" size="72,81"/>
+    <image id="n10_codd" name="PlayerRole" src="wqje4g" xy="9,285" size="68,79" flip="hz"/>
+    <text id="n12_codd" name="EnemyText" xy="45,82" size="70,90" fontSize="12" autoSize="none" text=""/>
+    <text id="n11_codd" name="PlayerText" xy="176,273" size="70,90" fontSize="12" autoSize="none" text=""/>
+  </displayList>
+</component>

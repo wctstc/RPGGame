@@ -48,6 +48,11 @@
     <component id="aowj4v" name="btnRole.xml" path="/FightScene/Component/" exported="true"/>
     <component id="aowj4z" name="btnSequence.xml" path="/FightScene/Component/" exported="true"/>
     <component id="aowj50" name="btnAction.xml" path="/FightScene/Component/" exported="true"/>
+    <image id="codd51" name="picRoad.png" path="/FightActionScene/" exported="true"/>
+    <component id="codd52" name="cmpFightActionScene.xml" path="/FightActionScene/" exported="true"/>
+    <image id="codd53" name="picAttack.png" path="/FightActionScene/" exported="true"/>
+    <image id="codd54" name="picDefance.png" path="/FightActionScene/" exported="true"/>
+    <image id="codd55" name="picMagic.png" path="/FightActionScene/" exported="true"/>
   </resources>
   <publish name="Game" genCode="true">
     <atlas name="默认" index="0"/>
