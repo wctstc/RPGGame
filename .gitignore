@@ -24,4 +24,13 @@ RPGGame/RPGGame/*.sav
 
 
 # Unity Workspace Unity¹¤³Ì
-UnityGame/*
+UnityGame/UnityGame/Temp/*
+UnityGame/UnityGame/Library/metadata*
+UnityGame/UnityGame/Library/ShaderCache/*
+UnityGame/UnityGame/Assets/FairyGUI/*
+UnityGame/UnityGame/Assets/Resources/FairyGUI/*
+UnityGame/UnityGame/Assets/Script/FairyGUI/*
+UnityGame/UnityGame/Assets/StreamingAssets/*
+UnityGame/UnityGame/Assets/*.meta
+
+
