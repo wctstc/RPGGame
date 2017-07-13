@@ -15,7 +15,7 @@
     <component id="kxi13o" name="BagCell.xml" path="/MainScene/Bag/" exported="true"/>
     <component id="kxi13q" name="BagButton.xml" path="/MainScene/Bag/" exported="true"/>
     <component id="kxi13r" name="BagClose.xml" path="/MainScene/Bag/" exported="true"/>
-    <component id="kxi13s" name="btnMainScene.xml" path="/MainScene/" exported="true"/>
+    <component id="kxi13s" name="cmpMainScene.xml" path="/MainScene/" exported="true"/>
     <component id="wqje3t" name="cmpFightScene.xml" path="/FightScene/" exported="true"/>
     <image id="wqje3v" name="picRoad.png" path="/FightScene/" exported="true"/>
     <image id="wqje3w" name="picMove.png" path="/FightScene/Component/" exported="true"/>
@@ -53,8 +53,9 @@
     <image id="codd53" name="picAttack.png" path="/FightActionScene/" exported="true"/>
     <image id="codd54" name="picDefance.png" path="/FightActionScene/" exported="true"/>
     <image id="codd55" name="picMagic.png" path="/FightActionScene/" exported="true"/>
+    <image id="mwoj56" name="picMove.png" path="/FightActionScene/" exported="true"/>
   </resources>
-  <publish name="Game" genCode="true">
+  <publish name="Game">
     <atlas name="默认" index="0"/>
   </publish>
 </packageDescription>
