@@ -33,4 +33,5 @@ UnityGame/UnityGame/Assets/Script/FairyGUI/*
 UnityGame/UnityGame/Assets/StreamingAssets/*
 UnityGame/UnityGame/Assets/*.meta
 
-
+UnityGame/UnityGame/Assets/3rdParty/Tolua/Source/Generate/UnityEngine*
+UnityGame/UnityGame/Assets/3rdParty/Tolua/Source/Generate/FairyGUI*

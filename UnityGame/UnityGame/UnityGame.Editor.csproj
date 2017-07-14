@@ -116,13 +116,16 @@
       <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
-      <HintPath>Assets\Plugins\DOTween.dll</HintPath>
+      <HintPath>Assets\3rdParty\FairyGUI\Plugins\DOTween.dll</HintPath>
     </Reference>
     <Reference Include="FairyGUI">
-      <HintPath>Assets\Plugins\FairyGUI.dll</HintPath>
+      <HintPath>Assets\3rdParty\FairyGUI\Plugins\FairyGUI.dll</HintPath>
     </Reference>
     <Reference Include="FairyGUI.Editor">
-      <HintPath>Assets\Plugins\Editor\FairyGUI.Editor.dll</HintPath>
+      <HintPath>Assets\3rdParty\FairyGUI\Plugins\Editor\FairyGUI.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Debugger">
+      <HintPath>Assets\3rdParty\Tolua\Plugins\Debugger.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -132,17 +135,26 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\FairyGUI\Examples\Editor\BuildAssetBundles.cs" />
+    <Compile Include="Assets\3rdParty\Tolua\Editor\Custom\CustomSettings.cs" />
+    <Compile Include="Assets\3rdParty\Tolua\ToLua\Editor\Extend\ToLua_LuaInterface_EventObject.cs" />
+    <Compile Include="Assets\3rdParty\Tolua\ToLua\Editor\Extend\ToLua_System_Delegate.cs" />
+    <Compile Include="Assets\3rdParty\Tolua\ToLua\Editor\Extend\ToLua_System_Enum.cs" />
+    <Compile Include="Assets\3rdParty\Tolua\ToLua\Editor\Extend\ToLua_System_Object.cs" />
+    <Compile Include="Assets\3rdParty\Tolua\ToLua\Editor\Extend\ToLua_System_String.cs" />
+    <Compile Include="Assets\3rdParty\Tolua\ToLua\Editor\Extend\ToLua_UnityEngine_GameObject.cs" />
+    <Compile Include="Assets\3rdParty\Tolua\ToLua\Editor\Extend\ToLua_UnityEngine_Input.cs" />
+    <Compile Include="Assets\3rdParty\Tolua\ToLua\Editor\Extend\ToLua_UnityEngine_Object.cs" />
+    <Compile Include="Assets\3rdParty\Tolua\ToLua\Editor\ToLuaExport.cs" />
+    <Compile Include="Assets\3rdParty\Tolua\ToLua\Editor\ToLuaMenu.cs" />
+    <Compile Include="Assets\3rdParty\Tolua\ToLua\Editor\ToLuaTree.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\FairyGUI\Examples\Resources\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
-    <None Include="Assets\FairyGUI\Examples\Resources\RenderTexture\FullScreen.shader" />
-    <None Include="Assets\FairyGUI\ReadMe - 1.8.3.txt" />
-    <None Include="Assets\FairyGUI\Resources\Shaders\AddOn\FairyGUI-BlurFilter.shader" />
-    <None Include="Assets\FairyGUI\Resources\Shaders\FairyGUI-BMFont.shader" />
-    <None Include="Assets\FairyGUI\Resources\Shaders\FairyGUI-Image.shader" />
-    <None Include="Assets\FairyGUI\Resources\Shaders\FairyGUI-Text-Brighter.shader" />
-    <None Include="Assets\FairyGUI\Resources\Shaders\FairyGUI-Text.shader" />
+    <None Include="Assets\3rdParty\FairyGUI\Resources\Shaders\AddOn\FairyGUI-BlurFilter.shader" />
+    <None Include="Assets\3rdParty\FairyGUI\Resources\Shaders\FairyGUI-BMFont.shader" />
+    <None Include="Assets\3rdParty\FairyGUI\Resources\Shaders\FairyGUI-Image.shader" />
+    <None Include="Assets\3rdParty\FairyGUI\Resources\Shaders\FairyGUI-Text-Brighter.shader" />
+    <None Include="Assets\3rdParty\FairyGUI\Resources\Shaders\FairyGUI-Text.shader" />
+    <None Include="Assets\3rdParty\Tolua\ToLua\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
